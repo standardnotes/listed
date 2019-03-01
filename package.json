@@ -1,0 +1,7 @@
+{
+  "name": "listed",
+  "dependencies": {
+    "sn-stylekit": "^1.0.1198"
+  },
+  "devDependencies": {}
+}

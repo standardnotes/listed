@@ -1,0 +1,7 @@
+SimpleCaptcha
+=============
+# Generate migration and copy view partial
+  rails generate simple_captcha [template_format]
+  template_format               Sets template format to be generated
+                                Available options: erb, haml
+                                Default: erb

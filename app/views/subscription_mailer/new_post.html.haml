@@ -1,0 +1,35 @@
+%span.preheader{"style" => "display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;"}
+  #{@post.text.html_safe.slice(0, 100) + "..."}
+
+%p
+  A blog you're subscribed to,
+  %a.unstyled{"href" => "#{@post.author.url}"} #{@post.author.title},
+  published a new post:
+
+%h3
+  %a.unstyled{"href" => "#{@post_url}"}
+    #{@post.title}
+.post-content
+  .post-body
+    %p #{@rendered_text}
+
+%hr
+
+.post-footer
+  %p
+    %i
+      The full post text is displayed above.
+      %span
+        %a{"href" => "#{@post_url}"} Read on website.
+
+  - if @post.author.email && @post.author.email.length > 0
+    %p
+      %i
+        You can reply to the author by replying directly to this email.
+
+.links-footer{"style" => "margin-bottom: 20px;"}
+  - if @weekly_url
+    %a{"href" => "#{@weekly_url}"} Receive Weekly Updates Instead
+  %a{"href" => "#{@unsubscribe_url}"} Unsubscribe
+
+.bottom-margin-space

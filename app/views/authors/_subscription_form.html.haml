@@ -1,0 +1,15 @@
+- if @subscriber && @subscriber.subscribed_to_author(author)
+  - if flash[:subscription_success] || !@subscriber.subscription_for_author(author).verified
+    .sublabel.success
+      %span
+        Success. Please check your email to confirm your subscription.
+  - else
+    .sublabel You're subscribed to this blog.
+- else
+  = form_tag subscribe_author_url(author) do
+    = label_tag "Subscribe to @#{author.username}'s posts:"
+    .sublabel
+      You'll only receive email when
+      = author.title
+      publishes a new post
+    = email_field_tag "email", "", :placeholder => "Your email"

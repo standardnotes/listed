@@ -1,0 +1,35 @@
+#single-post-show
+  - if !@post.unlisted
+    = render "authors/author_header", :author => @post.author, :post_header => true, :condensed => false, :hide_word_count => true
+  .mt-40
+    = render "posts/post", :post => @post
+
+  - if !@post.unlisted
+    %hr
+    #single-post-footer
+      - if !@post.author.newsletter_disabled
+        .form-box.centered#subscription-form
+          = render "authors/subscription_form", :author => @post.author
+      %p.more-from
+        More from
+        %a.author-name{"href" => "/@#{@post.author.username}"}
+          = @post.author.title + ":"
+
+        .previous-next-container
+          - if @previous
+            .previous
+              = render "posts/post", :post => @previous, truncate: true
+          - if @next
+            .next
+              = render "posts/post", :post => @next, truncate: true
+
+
+        .posts
+          - if @author_posts && @author_posts.length > 0
+            - @author_posts.each do |tied_post|
+              .more-from-link
+                %a.block{"href" => "#{tied_post.author_relative_url}"}
+                  %strong
+                    = tied_post.title
+                  .faded
+                    %i=tied_post.created_at.strftime("%B %e, %Y")

@@ -1,0 +1,234 @@
+// Place all the styles related to the authors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#settings {
+
+  .urls {
+    p {
+      margin-bottom: 0;
+    }
+
+    .header {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .url {
+      a {
+        color: rgba(black, 0.5);
+        font-size: 12px;
+      }
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
+
+  .form-section {
+    display: block;
+    margin-bottom: 20px;
+
+    &.low-margin {
+      margin-bottom: 5px;
+    }
+
+    .label {
+      display: block;
+    }
+
+    .field {
+      display: block;
+      width: 200px;
+      min-height: 30px;
+      padding-left: 6px;
+    }
+
+    .inline {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+
+    .bio {
+      height: 100px;
+    }
+  }
+}
+
+#author-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  h2 {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+  }
+
+  .header-image-container {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .header-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .name {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    display: inline-block;
+    padding-right: 10px;
+  }
+
+  .username {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-style: italic;
+    opacity: 0.5;
+    font-weight: normal;
+    display: inline-block;
+    border-left: 1px solid gray;
+    padding-left: 10px;
+  }
+
+  .bio {
+    margin-top: 2px;
+    margin-bottom: 4px;
+    opacity: 0.5;
+    max-width: 450px;
+  }
+
+  .item {
+    display: inline-block;
+    font-size: 15px;
+    color: rgba(black, 0.3);
+    padding-right: 3px;
+    text-align: center;
+    margin: 0;
+    &:not(.first) {
+      padding-left: 8px;
+      border-left: 1px solid rgba(black, 0.1);
+    }
+
+    &.link:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.pinned-posts {
+  display: flex;
+  flex-wrap: wrap;
+
+  .pinned-post {
+    margin-right: 20px;
+    margin-top: 16px;
+    border: 1px solid rgba(black, 0.1);
+    padding: 14px;
+    padding-bottom: 0;
+    border-radius: 8px;
+    max-width: 450px;
+    max-height: 200px;
+    overflow: scroll;
+
+    .author {
+      color: black;
+      font-style: italic;
+      color: rgba(black, 0.5);
+    }
+
+    .text {
+      color: black;
+      cursor: pointer;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.form-box {
+  margin-top: 16px;
+  border: 1px solid rgba(black, 0.1);
+  padding: 14px;
+  border-radius: 8px;
+  max-width: 450px;
+  font-size: 15px;
+
+  &.blue {
+    background-color: $blue-color;
+  }
+
+  &.full {
+    input {
+      width: 100%;
+    }
+  }
+
+  .sublabel {
+    color: rgba(black, 0.4);
+    font-size: 12px;
+  }
+
+  &.centered {
+    margin-left: auto;
+    margin-right: auto;
+    form {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  input, button {
+    padding-left: 8px;
+    height: 30px;
+    min-width: 240px;
+    border-radius: 4px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+  }
+}
+
+form {
+
+  &.no-border {
+    padding: 0;
+    border: none;
+  }
+}
+
+#subscription-form {
+  input {
+    margin-top: 12px;
+    width: inherit;
+  }
+}
+
+#author-profile {
+  padding-top: 50px;
+
+  #author-posts {
+    .author-post {
+      &:not(:last-child)  {
+        margin-bottom: 70px;
+      }
+    }
+
+    .navigation {
+      .older {
+        float: left;
+      }
+      .newer {
+        float: right;
+      }
+    }
+  }
+}

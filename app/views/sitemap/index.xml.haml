@@ -1,0 +1,14 @@
+!!! XML
+%urlset{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
+
+  %url
+    %loc= root_url
+    %changefreq daily
+    %priority 1.0
+
+  - for post in @posts
+    %url
+      %loc= post.author_relative_url
+      %lastmod=post.updated_at.strftime('%Y-%m-%d')
+      %changefreq weekly
+      %priority 0.75

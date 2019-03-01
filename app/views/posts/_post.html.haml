@@ -1,0 +1,15 @@
+.post-content
+  .post-header
+    - if post.unlisted
+      %h2.post-title= post.title
+    - else
+      %h2.post-title= link_to post.title, post.author_relative_url, :class => "post-title"
+    %i.post-date=post.created_at.strftime("%B %e, %Y")
+  .post-body
+    - if local_assigns[:truncate] == true
+      = post.rendered_text(500)
+    - else
+      = post.rendered_text
+  - if local_assigns[:truncate] == true
+    %a.block.read-more-link{"href" => "#{post.author_relative_url}"}
+      Read more...

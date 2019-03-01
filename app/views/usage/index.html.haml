@@ -1,0 +1,50 @@
+%p
+  %em Listed
+  is a new kind of publishing platform that focuses on simplicity of use, content ownership,
+  a more direct line of communication between author and reader, and author sustainability.
+
+%ul
+  %li Ideal for creating a public journal, or sharing domain-specific knowledge.
+  %li Allows you to easily create an email newsletter delivered automatically to your readers.
+  %li Automatically notifies your subscribers of new posts via email and RSS.
+  %li Allows authors to sustain their work by receiving tips.
+  %li Supports custom domains and full customization via CSS.
+  %li
+    Publishes directly from the convenience of
+    = succeed "." do
+      %a{:href => "https://standardnotes.org"} Standard Notes
+
+
+.mt-40
+  - usage = request.path.include? "usage"
+  %h3 New Author?
+  - if !@secret_url
+    = form_tag({controller: "authors", action: "create", method: "post"}, {:class => "no-border"})
+    %button.black.mt-20{"type" => "submit"} Generate Author Link
+  - else
+    %p
+      Install the extension code below in the
+      %a{"href" => "https://standardnotes.org", "target" => "_blank"} Standard Notes
+      app via the "Import Extension" option in the Extensions menu in the lower left corner.
+      Then, publish to your blog using the Actions menu.
+    .sn-component
+      .notification.info.dashed
+        .wrap.info.center-text.selectable= @secret_url
+    %p
+      %strong Note:
+      This code serves as your access credentials to Listed. After importing it, you are advised to store it somewhere safe.
+
+  -if usage
+    .mt-50
+      = render "usage/how_to"
+
+.active-authors.mt-40
+  %h3 Recent Authors
+  - @active_authors.each do |author|
+    .author
+      %a{"href" => "#{author.url}"}
+        - if author.featured
+          %span ✪
+        = author.title
+      - if author.bio
+        .bio= author.bio

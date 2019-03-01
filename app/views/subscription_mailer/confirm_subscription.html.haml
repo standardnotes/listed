@@ -1,0 +1,11 @@
+%p
+  Please confirm your subscription to
+  %a{"href" => "#{@author_url}"}= @author.title
+  on Listed.
+
+%p
+  %a{"href" => "#{@confirm_url}"} Confirm Subscription
+
+%p
+  Or, click this link:
+  %a{"href" => "#{@confirm_url}"}= @confirm_url

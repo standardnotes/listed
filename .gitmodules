@@ -1,0 +1,3 @@
+[submodule "vendor/simple-captcha"]
+	path = vendor/simple-captcha
+	url = git@github.com:mobitar/simple-captcha.git

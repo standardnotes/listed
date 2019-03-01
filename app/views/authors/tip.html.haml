@@ -1,0 +1,22 @@
+#tip
+  %p
+    The world is made good when good ideas are supported. You can tip or thank
+    %strong #{@display_author.display_name}
+    to encourage the author to continue doing their best work.
+    Tipping is telling the author:
+    %i keep doing what you're doing,
+    or,
+    %i I want to see more of this in the world.
+
+  %p
+    The author has specified the following payment credentials.
+
+    Once you've made a contribution to <strong>#{@display_author.display_name}</strong>, be sure to sign their
+    %a{"href" => "#{new_author_guestbook_entry_path(@display_author)}"} guestbook
+    to let them know!
+
+  %p
+    - @display_author.credentials.each do |credential|
+      %p
+        %strong #{credential.key}:
+        #{credential.value}

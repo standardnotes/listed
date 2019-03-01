@@ -1,0 +1,2 @@
+module UsageHelper
+end

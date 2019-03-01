@@ -1,0 +1,6 @@
+%h3 Hey #{@author.display_name},
+
+%p
+  Please verify your email address by clicking the link below.
+
+%a{"href" => "#{@verification_link}"}= @verification_link

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+
+    <% if @post %>
+      <% @title = @post.title %>
+      <% @desc = strip_tags(@post.rendered_text).slice(0, 200) + "..." %>
+      <% @canonical = @post.canonical %>
+      <% @meta_image = @post.image_url if @post.image_url %>
+      <% @twitter_style = "summary_large_image" if @post.image_url %>
+    <% elsif !@title && !@desc %>
+      <% @title = "Listed" %>
+      <% @desc = "Listed allows you to create an online publication with automatic email newsletters delivered to your readers, directly from Standard Notes. It's ideal for creating a public journal, or sharing domain-specific knowledge."%>
+    <% end %>
+
+    <title><%= @title %></title>
+    <meta content="<%= @desc %>" name="description"/>
+
+    <% if @canonical %>
+      <link rel="canonical" href="<%= @canonical %>"/>
+    <% end %>
+
+    <link href="<%= @fav_icon %>" rel="shortcut icon" />
+    <!-- Apple -->
+    <meta content="<%= @title %>" name="apple-mobile-web-app-title"/>
+    <meta content="<%= @title %>" name="application-name"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Twitter -->
+    <meta content="<%= @desc %>" name="twitter:description"/>
+    <meta content="<%= @title %>" name="twitter:title"/>
+    <meta content="@standardnotes" name="twitter:site"/>
+
+    <meta content="<%= @twitter_style ? @twitter_style : 'summary' %>" name="twitter:card"/>
+    <meta name="twitter:image" content="<%= @meta_image %>">
+
+    <!-- Facebook -->
+    <meta name="og:image" content="<%= @meta_image %>">
+    <meta content="<%= @title %>" name="og:title"/>
+    <meta content="<%= @title %>" name="og:description"/>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if @display_author %>
+      <%= auto_discovery_link_tag( :rss, @display_author.url + "/feed.rss" ) %>
+    <% end %>
+
+    <% if @styles %>
+      <style type="text/css">
+        <%= @styles.text.html_safe %>
+      </style>
+    <% end %>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//matomo.standardnotes.org/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '6']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Piwik Code -->
+
+  </head>
+
+  <body>
+    <div id="main-container">
+      <% if !@hide_header %>
+        <%= render "shared/header" %>
+      <% end %>
+      <div id="content-container">
+        <%= yield %>
+      </div>
+      <%= render "shared/footer" %>
+    </div>
+  </body>
+</html>

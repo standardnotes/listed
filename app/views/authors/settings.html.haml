@@ -1,0 +1,138 @@
+#settings
+  %h3 Settings
+
+  .urls
+    %p.header Your public blog is accessible via:
+    - @author.accessible_via.each do |url|
+      %p.url
+        %a{"href" => url, "target" => "_blank"}= url
+
+  .mt-20.form-box.full
+    = form_for(@author) do |f|
+      .form-section
+        = f.label "Username", :class => "label"
+        = f.text_field :username, :class => "field"
+      .form-section
+        = f.label "Display Name", :class => "label"
+        = f.text_field :display_name, :class => "field"
+      .form-section
+        = f.label "Bio", :class => "label"
+        = f.text_area :bio, :class => "field bio"
+      .form-section
+        = f.label "Link", :class => "label"
+        = f.text_field :link, :class => "field"
+      .form-section
+        = f.label "Twitter Username", :class => "label"
+        = f.text_field :twitter, :class => "field"
+      .form-section
+        = f.label "Email", :class => "label"
+        %div{"style" => "font-size: 14px; opacity: 0.5; margin-bottom: 5px;"}
+          Allows subscribers to reply to your posts, as well as notifies you when someone subscribes to your blog.
+        = f.text_field :email, :class => "field", :placeholder => "Enter your email"
+
+      .form-section
+        = f.label "Meta Image URL", :class => "label"
+        %div{"style" => "font-size: 14px; opacity: 0.5; margin-bottom: 5px;"}
+          The image that will be used when generating link previews in Twitter, Slack, Facebook, etc.
+        = f.text_field :meta_image_url, :class => "field", :placeholder => "Meta Image URL"
+
+      .form-section
+        = f.label "Header Image URL", :class => "label"
+        %div{"style" => "font-size: 14px; opacity: 0.5; margin-bottom: 5px;"}
+          The image that will be displayed on top of your profile.
+        = f.text_field :header_image_url, :class => "field", :placeholder => "Header Image URL"
+
+      .form-section
+        = f.check_box :guestbook_disabled, :class => "field inline"
+        = f.label :guestbook_disabled, "Disable guestbook", :class => "label inline"
+
+      .form-section
+        = f.check_box :newsletter_disabled, :class => "field inline"
+        = f.label :newsletter_disabled, "Disable email subscription and newsletter functionality", :class => "label inline"
+
+      .form-section
+        = f.check_box :hide_from_homepage, :class => "field inline"
+        = f.label :hide_from_homepage, "Hide profile from homepage 'Recent Authors'", :class => "label inline"
+
+      = hidden_field_tag :secret, @author.secret
+      .form-section
+        = f.submit "Save"
+
+  %hr.mt-30
+    .mt-30.form-box.full
+      %strong Payment Details
+      %p
+        Listed allows authors to receive tips and donations in a platform-agnostic way.
+        Readers can pay authors by clicking the 'Thank' option on the author profile. This will display
+        the various ways you have indicated you can receive payments.
+
+      %p
+        Once a reader sends you a tip or donation, they are advised, but not required to, fill out your guestbook to notify you that they
+        have made a payment.
+
+      %p
+        Below, you can add any custom payment "credential".
+        For example, you can specify a key of "Bitcoin", and the value will be your BTC address. Or, you can specify a key of "PayPal",
+        and the value will be your PayPal payment link.
+
+      %p
+        %strong Current Credentials
+        - @author.credentials.each do |credential|
+          %p
+            %a{"href" => "#{edit_author_credential_path(@author, credential, :secret => @author.secret)}", "target" => "_blank"}
+              %strong #{credential.key}:
+            #{credential.value}
+        %p
+          %a{"href" => "#{new_author_credential_path(@author, :secret => @author.secret)}", "target" => "_blank"} Add New Credential
+
+        %p
+          %i To edit a credential, click it.
+
+  %hr.mt-30
+
+  .mt-30.form-box.full
+    %strong Custom Domain
+    %p
+      Custom domains are available for Standard Notes
+      %a{"href" => "https://standardnotes.org/extended", "target" => "_blank"} Extended
+      members with an active one year or five year plan.
+      Domains include an HTTPS certificate, and require only a simple DNS record on your end.
+
+    %p
+      Before submitting this form, please create an "A" record with your DNS provider with
+      value #{ENV["CUSTOM_DOMAIN_IP"]}.
+
+    - if @author.domain
+      - if !@author.domain.approved
+        %strong We've received your domain request and will send you an email when your integration is ready (typically 24-48 hours).
+      - elsif @author.domain.approved && @author.domain.active
+        %strong
+          Your blog is live at
+          %a{"href" => "#{@author.url}", "target" => "_blank"} #{@author.url}!
+      - elsif !@author.domain.active
+        %strong Your domain is not currently active. Ensure your Extended subscription is not expired.
+
+    - else
+      = form_tag url_for(:controller => 'authors', :action => 'domain_request'), :method => 'post' do |f|
+
+        .form-section.mt-20
+          = label_tag "extended_email", "Extended email address", :class => "label"
+          %div{"style" => "font-size: 14px; opacity: 0.5; margin-bottom: 5px;"}
+            The email address used for your Extended account
+          = text_field_tag :extended_email, nil, :placeholder => "Extended email", :class => "field", :type => "email", :required => true
+
+        .form-section.mt-20
+          = label_tag "domain", "Your domain", :class => "label"
+          %div{"style" => "font-size: 14px; opacity: 0.5; margin-bottom: 5px;"}
+            The domain you want to use for your Listed blog.
+          = text_field_tag :domain, nil, :placeholder => "Your domain", :class => "field", :required => true
+
+
+        = hidden_field_tag :secret, @author.secret
+        .form-section
+          = submit_tag "Submit"
+
+  %hr.mt-30
+
+  .mt-30
+    = render "usage/how_to"
