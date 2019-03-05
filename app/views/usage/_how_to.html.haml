@@ -1,33 +1,38 @@
 %h3 Getting Started
 %h4 Setting up your blog:
-%p Setting up your blog in Standard Notes is easy
-%p 1. Visit the <a href="https://listed.standardnotes.org/" target="_blank">Listed</a> homepage
-%p 2. Under New Author? click on Generate Author Link
-%p 3. Follow the instructions on screen to import the Listed extension into your Standard Notes account. You'll then be 
-ready to start publishing!
-%p Your blog will be available at <code>https://listed.standardnotes.org/@YOURUSERNAME</code> 
-and <code>https://listed.to/@YOURUSERNAME</code>. 
-<a href="https://standardnotes.org/extensions" target="_blank">Extended</a> subscribers to Standard Notes can also 
-set up a custom domain.
+%p 
+  Setting up your blog in Standard Notes is easy
+%ol
+  %li Visit the <a href="https://listed.standardnotes.org/" target="_blank">Listed</a> homepage
+  %li Under New Author? click on Generate Author Link
+  %li Follow the instructions on screen to import the Listed extension into your Standard Notes account
+  %li Your blog will now be available at:
+  %ul
+    %li https://listed.standardnotes.org/@USERNAME and
+    %li https://listed.to/@USERNAME
+
+%p
+<a href="https://standardnotes.org/extensions" target="_blank">Extended</a> subscribers
+to Standard Notes can also set up a custom domain.
 
 %h4 Publishing content:
-%p Once the Listed extension is imported into your Standard Notes account, you can publish any note under Actions. 
-You might also want to create a Tag in Standard Notes called Blog and keep your notes for your blog in there. 
-It's up to you!
-%p Publishing content is easy:
-%p 1. Add a note and write some inspiring words
-%p 2. Under Actions in the note (available on the web app or desktop app) click on "Publish to Blog" and your 
-post will go live
-%p If you've made some typos or want to edit the post, make your changes and click on "Update Published Post" 
-under Actions. You can also unpublish the post too by clicking on "Unpublish".
-%p 3. If you have the email and newsletter functionality enabled, you can email your subscribers once you're happy 
-with your post. Click on Actions and you will see an option to "Email Subscribers"
+%p
+  You can publish any note you've written. You might also want to create a Tag in
+  Standard Notes called Blog and keep your blog notes in there. It's up to you! Publishing content is easy:
+%ol
+  %li Under Actions in the note you want to publish, click on "Publish to Blog" and your post will go live
+  %li To edit the post, make your changes and click on "Update Published Post" under Actions
+  %li You can also unpublish the post too by clicking on "Unpublish"
+  %li To email your subscribers, click on Actions and you will see an option to "Email Subscribers"
+%p
+  Note that Actions is only available on the web app or desktop app of Standard Notes
 
 %h3 Settings
-%p There are a number of options in Settings for you to customise your blog. Settings can be found from any note 
-in the Standard Notes web app or desktop app by clicking on Actions and then Settings.
+%p
+  There are a number of options in Settings for you to customise your blog. Settings can be found 
+  from any note in the Standard Notes web app or desktop app by clicking on Actions and then Settings.
 
-%h4 About your blog:
+%h4 Adding details about your blog:
 %p In Settings you can:
 %ul
   %li Change your blog Username, Display Name and Bio
@@ -36,17 +41,23 @@ in the Standard Notes web app or desktop app by clicking on Actions and then Set
   %li Add a URL to an image you'd like to display when generating link previews in Twitter, Slack, Facebook, etc 
 
 %h4 Managing subscribers:
-%p Standard Notes enables your email newsletter sign up be default. Whenever you publish a post to your blog, 
-you'll see an option to Email Subscribers under the Actions drop down.
-%p Settings has the following features for you to manage:
-%p 1. Set an email that subscribers can email you at. This email is also used to notify you when you have a new 
-subscriber. To disable this feature, just leave the text box empty.
-%p 2. Disable the subscription and newsletter features completely by selecting "Disable email subscription and 
-newsletter functionality"  
+%p
+  Standard Notes enables your email newsletter sign up be default. Whenever you publish a 
+  post to your blog, you'll see an option to Email Subscribers under the Actions drop down.
+%p
+  Settings has the following features for you to manage:
+%ol
+  %li
+    Set an email that subscribers can email you at. This email is also used to 
+    notify you when you have a new subscriber. To disable this feature, just leave the text box empty.
+  %li 
+    Disable the subscription and newsletter features completely by selecting 
+    "Disable email subscription and newsletter functionality"  
 
 %h4 Managing your guestbook:
-%p Standard Notes enables your guestbook be default. You can disable the Guestbook by selecting 
-"Disable guestbook" in Settings
+%p 
+  Standard Notes enables your guestbook be default. You can disable the Guestbook 
+  by selecting "Disable guestbook" in Settings
 
 %h3 Advanced Usage
 %h4 How to style your blog with custom CSS:
@@ -107,19 +118,24 @@ newsletter functionality"
         Your story...
 
 %h4 How to hide the body of all stories from your main feed:
-%p You can hide the body content of all your stories in your main feed so that your main feed only displays titles
-%p 1. If you haven't done this already, create a new note in Standard Notes, and call 
-it <code>listed_styles.css</code> (name doesn't matter).
+%p
+  You can hide the body content of all your stories in your main feed so that your main feed only displays titles
+%p 
+  1. If you haven't done this already, create a new note in Standard 
+  Notes, and call it <code>listed_styles.css</code> (name doesn't matter).
 %p 2. Add the following CSS to your CSS note
 .post-content
   %pre
     %code
       :preserve
+        ---
+        metatype: css
+        ---
 
-      .post-body {
-        display: none;
-      }
+        .post-body {
+          display: none;
+        }
 
-      #single-post-show .post-body {
-        display: inline;
-      }
+        #single-post-show .post-body {
+          display: inline;
+        }
