@@ -54,3 +54,20 @@
         ---
 
         Your story...
+
+%h4 How to hide the body of all stories from your main feed:
+%p You can hide the body content of all your stories in your main feed so that your main feed only displays titles
+%p 1. If you havent done this already, create a new note in Standard Notes, and call it <code>listed_styles.css</code> (name doesn't matter).
+%p 2. Add the following CSS to your CSS note
+.post-content
+  %pre
+    %code
+      :preserve
+
+      .post-body {
+        display: none;
+      }
+
+      #single-post-show .post-body {
+        display: inline;
+      }
