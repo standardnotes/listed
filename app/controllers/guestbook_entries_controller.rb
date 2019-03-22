@@ -1,5 +1,7 @@
 class GuestbookEntriesController < ApplicationController
 
+  include SimpleCaptcha::ControllerHelpers
+
   before_action {
     if params[:author_id]
       @author = Author.find(params[:author_id])
@@ -20,13 +22,19 @@ class GuestbookEntriesController < ApplicationController
 
   def create
     @entry = @author.guestbook_entries.new(entry_params)
-    @entry.save
 
-    if @author.email && @author.email_verified
-      AuthorsMailer.new_guestbook_entry(@entry.id).deliver_later
+    if simple_captcha_valid?
+      @entry.save
+
+      if @author.email && @author.email_verified
+        AuthorsMailer.new_guestbook_entry(@entry.id).deliver_later
+      end
+
+      redirect_to_guestbook({:sent => true})
+    else
+      @captcha_error = true
+      render :new
     end
-
-    redirect_to_guestbook({:sent => true})
   end
 
   def destroy
