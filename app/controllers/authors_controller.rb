@@ -4,15 +4,13 @@ class AuthorsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:extension]
 
   before_action {
-    if params[:id]
+    domain = Domain.find_by(domain: request.host)
+    if domain
+      @display_author = domain.author
+    elsif params[:id]
       @display_author = Author.find(params[:id])
     elsif request.path.include? "@"
       @display_author = Author.find_author_from_path(request.path)
-    else
-      domain = Domain.find_by(domain: request.host)
-      if domain
-        @display_author = domain.author
-      end
     end
 
     if @display_author

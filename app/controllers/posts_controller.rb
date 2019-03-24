@@ -23,6 +23,12 @@ class PostsController < ApplicationController
     elsif params[:post_token]
       @post = Post.find_by_token(params[:post_token])
     end
+
+    domain = Domain.find_by(domain: request.host)
+    if domain && @post&.author != domain.author
+      not_found
+      return
+    end
   end
 
   def show
