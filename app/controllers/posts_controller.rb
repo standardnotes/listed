@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     end
 
     domain = Domain.find_by(domain: request.host)
-    if domain && @post&.author != domain.author
+    if domain && @post && @post.author != domain.author
       not_found
       return
     end
