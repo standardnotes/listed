@@ -20,6 +20,8 @@ gem 'turbolinks', '~> 5'
 
 gem 'dotenv-rails', '~> 2.1.1'
 
+gem 'sanitize'
+
 gem 'rouge'
 
 gem 'haml-rails'

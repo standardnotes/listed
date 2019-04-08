@@ -30,7 +30,8 @@ class Post < ApplicationRecord
     options = {
       filter_html:     false,
       hard_wrap:       true,
-      link_attributes: { rel: 'nofollow', target: "_blank" },
+      # Use sanitize's 'add_attributes' instead
+      # link_attributes: { rel: 'nofollow noopener', target: "_blank" },
       space_after_headers: true,
       fenced_code_blocks: true,
       prettify: true
@@ -50,7 +51,16 @@ class Post < ApplicationRecord
     renderer = CustomRender.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
-    return markdown.render(limit ? (input[0, limit] + "...") : input).html_safe
+    text = markdown.render(limit ? (input[0, limit] + "...") : input)
+
+    sanitized = Sanitize.fragment(text, Sanitize::Config.merge(Sanitize::Config::RELAXED,
+      :elements => Sanitize::Config::RELAXED[:elements] + ['center'],
+      :add_attributes => {
+        'a' => {'rel' => 'noopener', 'target' => "_blank"}
+      }
+    ))
+
+    return sanitized.html_safe
   end
 
   def path

@@ -51,7 +51,13 @@ class PostsController < ApplicationController
     end
 
     if @post.metatype
-      render plain: @post.text, content_type: metatype_to_contenttype(@post.metatype)
+      if @post.metatype == "html"
+        text = @post.rendered_text
+      else
+        text = @post.text
+      end
+
+      render plain: text, content_type: metatype_to_contenttype(@post.metatype)
       return
     end
 
@@ -107,6 +113,7 @@ class PostsController < ApplicationController
       post.update({:canonical => nil, :metatype => nil})
     end
 
+    # posts with a metatype are always unlisted
     unlisted = params[:unlisted] == "true" || post.metatype != nil
 
     post.title = content["title"]

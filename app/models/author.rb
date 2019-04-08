@@ -124,7 +124,16 @@ class Author < ApplicationRecord
   end
 
   def styles
-    self.posts.where(:metatype => "css", :published => true).first
+    post = self.posts.where(:metatype => "css", :published => true).first
+    return if !post
+    css = post.text
+    config = Sanitize::Config.merge(Sanitize::Config::RELAXED,
+      :css => {
+        :protocols => Sanitize::Config::RELAXED[:css][:protocols] + ['data'],
+        :at_rules => ['import']
+      }
+    )
+    Sanitize::CSS.stylesheet(css, config).html_safe
   end
 
   def personal_link
