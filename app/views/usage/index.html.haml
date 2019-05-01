@@ -1,19 +1,22 @@
 %p
-  %em Listed
-  is a new kind of publishing platform that focuses on simplicity of use, content ownership,
-  a more direct line of communication between author and reader, and author sustainability.
+  %i Welcome to your new public journal.
 
-%ul
-  %li Ideal for creating a public journal, or sharing domain-specific knowledge.
-  %li Allows you to easily create an email newsletter delivered automatically to your readers.
-  %li Automatically notifies your subscribers of new posts via email and RSS.
-  %li Allows authors to sustain their work by receiving tips.
-  %li Supports custom domains and full customization via CSS.
+%p
+  Listed is a free blogging platform that allows you to create a public journal published directly from your notes.
+  This unique approach to keeping a public blog on the internet using just a
+  %a{"href" => "https://standardnotes.org", "target" => "_blank"} notes app
+  yields two surprising effects:
+
+%ol
+  %li You discover a better form of your writing. You worry less about how others will perceive your words, and more about feeling fulfilled that you shared your experience in its truest form. Honest writing, in our experience, is better writing.
+
   %li
-    Publishes directly from the convenience of
-    = succeed "." do
-      %a{:href => "https://standardnotes.org"} Standard Notes
+    The privacy of writing in the
+    %a{"href" => "https://standardnotes.org", "target" => "_blank"} Standard Notes
+    app combined with the ease of publishing on Listed encourages free flow and expansion of thought. You’ll probably publish on Listed more than you do any other platform. It’s not uncommon that Listed authors publish a new journal entry to their blog every day.
 
+%p
+  %a{"href" => "https://listed.standardnotes.org/@Listed/5063/what-will-you-write-about", "target" => "_blank"} Learn more about Listed →
 
 .mt-40
   - usage = request.path.include? "usage"
@@ -22,11 +25,19 @@
     = form_tag({controller: "authors", action: "create", method: "post"}, {:class => "no-border"})
     %button.black.mt-20{"type" => "submit"} Generate Author Link
   - else
-    %p
-      Install the extension code below in the
-      %a{"href" => "https://standardnotes.org", "target" => "_blank"} Standard Notes
-      app via the "Import Extension" option in the Extensions menu in the lower left corner.
-      Then, publish to your blog using the Actions menu.
+    %p Your author account is now ready. Follow these steps to get started with publishing.
+    %ol
+      %li
+        Open the
+        %a{"href" => "https://standardnotes.org", "target" => "_blank"} Standard Notes web or desktop app.
+      %li In the lower left corner of the app, click <strong>Extensions</strong>.
+      %li In the lower right corner, click <strong>Import Extension</strong>.
+      %li Paste in the code below in the input box that appears, then press enter on your keyboard.
+      %li
+        Create a new note, or publish an existing note, by clicking <strong>Actions</strong> in the note editor pane, and choosing
+        <strong>Publish to Blog</strong>.
+      %li That's it! Your public journal is now live and ready to go! Be sure to explore the <strong>Settings</strong> option to customize your blog's settings.
+
     .sn-component
       .sk-notification.info.dashed
         .info-contrast.wrap.center-text.selectable= @secret_url
