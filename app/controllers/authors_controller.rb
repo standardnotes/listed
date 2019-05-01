@@ -28,6 +28,11 @@ class AuthorsController < ApplicationController
     redirect_to_authenticated_usage(@author, secret)
   end
 
+  def settings
+    @guestbook_entries = @author.guestbook_entries
+    @posts = @author.posts
+  end
+
   def show
     if !@display_author
       not_found

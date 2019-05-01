@@ -25,11 +25,6 @@ class GuestbookEntriesController < ApplicationController
 
     if simple_captcha_valid?
       @entry.save
-
-      if @author.email && @author.email_verified
-        AuthorsMailer.new_guestbook_entry(@entry.id).deliver_later
-      end
-
       redirect_to_guestbook({:sent => true})
     else
       @captcha_error = true
@@ -39,19 +34,24 @@ class GuestbookEntriesController < ApplicationController
 
   def destroy
     @entry.destroy
-    redirect_to_guestbook
+    redirect_to :back
   end
 
   def approve
     @entry.public = true
     @entry.save
-    redirect_to_guestbook
+    redirect_to :back
   end
 
   def unapprove
     @entry.public = false
     @entry.save
-    redirect_to_guestbook
+    redirect_to :back
+  end
+
+  def delete
+    @entry.delete
+    redirect_to :back
   end
 
   def redirect_to_guestbook(params = {})

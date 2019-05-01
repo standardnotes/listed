@@ -16,11 +16,11 @@ class AuthorsMailer < ApplicationMailer
     mail(to: author.email, subject: "Verify your Listed author email.")
   end
 
-  def new_guestbook_entry(entry_id)
-    @entry = GuestbookEntry.find(entry_id)
-    @author = @entry.author
-    return if @author.email_verified == false
-    mail(to: @author.email, subject: "Someone has signed your guestbook!")
-  end
+  # def new_guestbook_entry(entry_id)
+  #   @entry = GuestbookEntry.find(entry_id)
+  #   @author = @entry.author
+  #   return if @author.email_verified == false
+  #   mail(to: @author.email, subject: "Someone has signed your guestbook!")
+  # end
 
 end

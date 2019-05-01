@@ -10,4 +10,8 @@ class GuestbookEntry < ApplicationRecord
   def unapproval_url
     "#{ENV['HOST']}/authors/#{self.author.id}/guestbook/#{self.id}/unapprove?token=#{self.token}"
   end
+
+  def deletion_url
+    "#{ENV['HOST']}/authors/#{self.author.id}/guestbook/#{self.id}/delete?token=#{self.token}"
+  end
 end

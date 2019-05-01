@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       member do
         get "approve"
         get "unapprove"
+        get "delete"
       end
     end
 
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
       member do
         post "unpublish"
         post "newsletter"
+        get "delete"
       end
     end
 

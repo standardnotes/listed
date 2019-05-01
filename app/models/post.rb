@@ -9,6 +9,14 @@ class Post < ApplicationRecord
 
   belongs_to :author
 
+  def url
+    if self.unlisted
+      self.tokenized_url
+    else
+      self.author_relative_url
+    end
+  end
+
   def tokenized_url
     "#{self.author.get_host}/#{self.token}"
   end

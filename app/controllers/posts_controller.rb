@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     }[metatype]
   end
 
-  before_action :find_post, except: [:unpublish]
+  before_action :find_post, except: [:unpublish, :delete]
 
   def find_post
     if params[:id]
@@ -167,6 +167,24 @@ class PostsController < ApplicationController
     post.save
 
     post.author.update_word_count
+  end
+
+  def delete
+    if !@author
+      render :json => {:error => "Unable to load extension."}
+      return
+    end
+
+    post = Post.find(params[:id])
+    if post.author != @author
+      render :json => {:error => "Unauthorized"}
+      return
+    end
+
+    post.delete
+
+    @author.update_word_count
+    redirect_to :back
   end
 
   def post_params

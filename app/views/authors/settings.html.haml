@@ -1,4 +1,4 @@
-#settings
+#settings.sn-component
   %h3 Settings
 
   .urls
@@ -131,6 +131,46 @@
         = hidden_field_tag :secret, @author.secret
         .form-section
           = submit_tag "Submit"
+
+
+  %hr.mt-30
+
+  %h3 All Posts
+  .guestbook.sk-panel.static
+    - if @posts.length == 0
+      %p No posts yet.
+    - @posts.each do |post|
+      .sk-notification.contrast
+        %p.sk-p Title: #{post.title}
+        %p.sk-p
+          Link:
+          %a{"href" => "#{post.url}", "target" => "_blank"} #{post.url}
+        %p.sk-p Private: #{post.unlisted}
+        %i.sk-p Created at: #{post.created_at}
+
+        .sk-horizontal-group
+          %p.sk-p= link_to "Delete", delete_author_post_path(id: post.id, author_id: @author.id, secret: @author.secret)
+
+  %hr.mt-30
+
+  %h3 Guestbook Entries
+  .guestbook.sk-panel.static
+    - if @guestbook_entries.length == 0
+      %p No guestbook entries yet.
+    - @guestbook_entries.each do |entry|
+      .sk-notification.contrast
+        %p.sk-p Text: #{entry.text}
+        %i.sk-p Date: #{entry.created_at}
+        %p.sk-p Author email: #{entry.signer_email}
+        %p.sk-p Donation info: #{entry.donation_info}
+
+        .sk-horizontal-group
+          - if !entry.public
+            %a.sk-p{"href" => "#{entry.approval_url}"} Make public
+          - if entry.public
+            %a.sk-p{"href" => "#{entry.unapproval_url}"} Make private
+          %a.sk-p{"href" => "#{entry.deletion_url}"} Delete
+
 
   %hr.mt-30
 
