@@ -145,7 +145,7 @@
         %p.sk-p
           Link:
           %a{"href" => "#{post.url}", "target" => "_blank"} #{post.url}
-        %p.sk-p Private: #{post.unlisted}
+        %p.sk-p Visibility:  #{post.unlisted ? "Private" : "Public"}
         %i.sk-p Created at: #{post.created_at}
 
         .sk-horizontal-group
