@@ -6,7 +6,7 @@ Listed is unopinionated about fonts, widths, and colors, and instead defers to t
 
 ## Usage
 
-Generate an author code on [listed.standardnotes.org](https://listed.standardnotes.org) to get started.
+Generate an author code on [listed.to](https://listed.to) to get started.
 
 ### Customization
 

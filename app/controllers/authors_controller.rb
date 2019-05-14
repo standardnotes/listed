@@ -211,7 +211,7 @@ class AuthorsController < ApplicationController
     }
     )
 
-    description = "Publishes to listed.standardnotes.org."
+    description = "Publishes to listed.to."
     render :json => {
       :identifier => "org.standardnotes.listed",
       :name => name,
