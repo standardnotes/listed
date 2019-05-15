@@ -26,7 +26,6 @@ h2 {
     border-radius: 4px;
     padding: 30px;
     margin-bottom: 30px;
-    padding-top: 0;
   }
 
   .previous {
@@ -42,10 +41,6 @@ h2 {
   margin-bottom: 15px;
 }
 
-
-.read-more-link {
-  font-weight: bold;
-}
 
 #single-post-show {
   margin-top: 40px;
@@ -81,6 +76,20 @@ h2 {
   color: black;
   position: relative;
   overflow: visible;
+
+  // post-content and post-preview (next/previous from author) share each other's template.
+  &.post-preview {
+    margin-top: 0;
+
+    .read-more-link {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    .post-preview-body {
+      margin-top: 8px;
+    }
+  }
 
   .post-body {
     $base-header-font: 1.3rem;

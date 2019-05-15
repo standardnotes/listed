@@ -29,6 +29,16 @@ class Post < ApplicationRecord
     end
   end
 
+  def preview_text
+    # Render to remove Markdown syntax
+    result = self.rendered_text
+    # Remove HTML syntax
+    result = ActionView::Base.full_sanitizer.sanitize(result)
+
+    limit = 500
+    return result[0, 500] + "..."
+  end
+
   def rendered_text(limit = nil)
     return get_rendered_text(self.text, limit)
   end

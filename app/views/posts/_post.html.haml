@@ -1,4 +1,4 @@
-.post-content
+.post-content{:class => "#{local_assigns[:truncate] == true ? 'post-preview' : ''}"}
   .post-header
     - if post.unlisted
       %h2.post-title= post.title
@@ -7,7 +7,8 @@
     %i.post-date=post.created_at.strftime("%B %e, %Y")
   .post-body
     - if local_assigns[:truncate] == true
-      = post.rendered_text(500)
+      .post-preview-body
+        = post.preview_text
     - else
       = post.rendered_text
   - if local_assigns[:truncate] == true
