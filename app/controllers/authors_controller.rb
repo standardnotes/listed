@@ -218,6 +218,7 @@ class AuthorsController < ApplicationController
       :content_type => "Extension",
       :url => request.original_url,
       :description => description,
+      :deletion_warning => "WARNING: Uninstalling Listed will result in loss of access to your blog. Ensure your Listed author key is backed up before uninstalling.",
       :supported_types => supported_types,
       :actions => actions
     }
