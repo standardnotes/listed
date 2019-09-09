@@ -179,6 +179,11 @@ class Author < ApplicationRecord
     AuthorsMailer.domain_approved(self).deliver_later
   end
 
+  def invalid_domain
+    AuthorsMailer.domain_invalid(self).deliver_later
+    self.domain.delete
+  end
+
   def self.build_all_domains
     domains = Domain.where(:active => true, :approved => true).map { |d| d.domain }
     if ENV['ALT_HOST']

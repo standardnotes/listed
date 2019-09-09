@@ -51,6 +51,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem 'mailcatcher'
+  gem 'rb-readline'
 
   # Deployment tools
   gem 'capistrano'

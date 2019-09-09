@@ -2,6 +2,7 @@ class AdminMailer < ApplicationMailer
 
   def new_domain_request(author)
     @username = author.username
+    @id = author.id
     @domain = author.domain.domain
     @email = author.domain.extended_email
 
