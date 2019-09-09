@@ -18,11 +18,11 @@ class Post < ApplicationRecord
   end
 
   def tokenized_url
-    "#{self.author.get_host}/#{self.token}"
+    "#{self.author.get_host}/p/#{self.token}"
   end
 
   def author_relative_url
-    if self.author.has_custom_domain
+    if self.author && self.author.has_custom_domain
       "https://#{self.author.custom_domain}#{self.path}"
     else
       "#{ENV['HOST']}#{self.path}"
@@ -83,6 +83,8 @@ class Post < ApplicationRecord
   end
 
   def path
+    return nil if !self.author
+    
     if self.title
       prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.has_username ? "" : "/posts")
       if author.has_username

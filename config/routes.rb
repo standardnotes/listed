@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   get '/help' => "help#index"
 
   get "/:post_token" => "posts#show"
+  get "/p/:post_token" => "posts#show"
 
   root "usage#index"
 
