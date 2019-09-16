@@ -43,7 +43,9 @@ Rails.application.routes.draw do
   constraints CustomDomainConstraint do
     get 'feed' => 'authors#feed', :format => 'rss'
     get 'tip' => 'authors#tip'
+    get "/p/:post_token" => "posts#show"
     get ':id/:slug' => 'posts#show'
+    get "/:post_token" => "posts#show"
     post "subscribe" => "authors#subscribe"
     root to: 'authors#show'
   end
