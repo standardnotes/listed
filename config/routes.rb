@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     get 'tip' => 'authors#tip'
     get "/p/:post_token" => "posts#show"
     get ':id/:slug' => 'posts#show'
+    get ':id' => 'posts#show', constraint: { id: /^[0-9]*$/ }
     get "/:post_token" => "posts#show"
     post "subscribe" => "authors#subscribe"
     root to: 'authors#show'
