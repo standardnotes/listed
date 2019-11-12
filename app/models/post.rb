@@ -84,7 +84,7 @@ class Post < ApplicationRecord
 
   def path
     return nil if !self.author
-    
+
     if self.title
       prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.has_username ? "" : "/posts")
       if author.has_username
@@ -120,8 +120,12 @@ class Post < ApplicationRecord
       # Don't continue unless the node is a link.
       return unless node_name == 'a'
 
-      node_url = URI.parse(node['href'])
-      author_url = URI.parse(self.author_relative_url)
+      begin
+        node_url = URI.parse(node['href'])
+        author_url = URI.parse(self.author_relative_url)
+      rescue => e
+        return
+      end
 
       return if node_url.host.nil? or author_url.host.nil?
 
