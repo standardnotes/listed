@@ -1,3 +1,5 @@
+require 'uri'
+
 class CustomRender < Redcarpet::Render::HTML
   require 'rouge'
   require 'rouge/plugins/redcarpet'
@@ -74,9 +76,7 @@ class Post < ApplicationRecord
     sanitized = Sanitize.fragment(text, Sanitize::Config.merge(Sanitize::Config::RELAXED,
       :elements => Sanitize::Config::RELAXED[:elements] + ['center', 'iframe'],
       :attributes => {'iframe' => ['src', 'width', 'height', 'frameborder', 'allow']},
-      :add_attributes => {
-        'a' => {'rel' => 'noopener', 'target' => "_blank"}
-      }
+      :transformers => link_transformer
     ))
 
     return sanitized.html_safe
@@ -107,6 +107,35 @@ class Post < ApplicationRecord
 
   def can_send_email
     self.unlisted == false && self.email_sent_date == nil
+  end
+
+  def link_transformer
+    lambda do |env|
+      node = env[:node]
+      node_name = env[:node_name]
+
+      # Don't continue if the node is not an element.
+      return if !node.element?
+
+      # Don't continue unless the node is a link.
+      return unless node_name == 'a'
+
+      node_url = URI.parse(node['href'])
+      author_url = URI.parse(self.author_relative_url)
+
+      return if node_url.host.nil? or author_url.host.nil?
+
+      # External links should have the "rel" and "target" attributes set.
+      Sanitize.node!(node, {
+        :elements => ['a'],
+        :attributes => {'a' => ['href']},
+        :add_attributes => {
+          'a' => {'rel' => "noopener", 'target' => "_blank"}
+        }
+      }) unless node_url.host.include? author_url.host
+
+      {:node_whitelist => [node]}
+    end
   end
 
 end
