@@ -1,18 +1,18 @@
 class Author < ApplicationRecord
 
-  has_many :subscriptions
-  has_many :subscribers, :through => :subscriptions
+  has_many :subscriptions, :dependent => :destroy
+  has_many :subscribers, :through => :subscriptions, :dependent => :destroy
 
-  has_many :credentials
+  has_many :credentials, :dependent => :destroy
 
   validates :username, uniqueness: true, :allow_nil => true, :allow_blank => true, :format => { with: /\A[\w]+\z/ , :message => 'Only letters, numbers, and underscores are allowed.' }
   validates :email, uniqueness: true, :allow_nil => true, :allow_blank => true
 
-  has_many :posts
+  has_many :posts, :dependent => :destroy
 
-  has_one :domain
+  has_one :domain, :dependent => :destroy
 
-  has_many :guestbook_entries
+  has_many :guestbook_entries, :dependent => :destroy
 
   def public_guestbook_entries
     self.guestbook_entries.where(:public => true)

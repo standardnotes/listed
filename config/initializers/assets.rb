@@ -13,3 +13,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('node_modules', 'sn-stylekit', 'dist')
 
 Rails.application.config.assets.precompile += %w( stylekit.css )
+Rails.application.config.assets.precompile += %w( stylekit.js )

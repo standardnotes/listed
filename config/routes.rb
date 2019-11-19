@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get "verify_email"
       post "subscribe", :as => "subscribe"
       post "domain_request"
+      post "delete_all_data"
     end
 
     resources :guestbook_entries, :path => :guestbook do

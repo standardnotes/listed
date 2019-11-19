@@ -7,14 +7,18 @@ class ApplicationController < ActionController::Base
       @subscriber = Subscriber.find_by_id(session[:subscriber_id])
     end
 
-    if params[:secret]
-      author_id = params[:author_id] || params[:id]
-      if author_id
-        author = Author.find(author_id)
-        if params[:secret] == author.secret
-          @author = author
+    begin
+      if params[:secret]
+        author_id = params[:author_id] || params[:id]
+        if author_id
+          author = Author.find(author_id)
+          if params[:secret] == author.secret
+            @author = author
+          end
         end
       end
+    rescue => e
+      not_found
     end
   }
 
