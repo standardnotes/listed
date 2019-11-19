@@ -176,10 +176,10 @@
   .mt-30.form-box.full
     %strong Delete Blog
     %p
-      Your data on this site will be deleted.
+      Delete your Listed blog and all accompanying data.
     - if flash[:error_delete_all_data]
       .alert{ :class => "alert error" }
-        %strong 
+        %strong
           = flash[:error_delete_all_data]
     = form_tag url_for(:controller => 'authors', :action => 'delete_all_data'), :method => 'post', :id => 'delete-blog-form' do |f|
       = hidden_field_tag :secret, @author.secret
