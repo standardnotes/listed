@@ -99,8 +99,10 @@ class PostsController < ApplicationController
     content = item["content"]
     raw_text = content["text"]
 
+    require "safe_yaml/load"
+
     has_frontmatter = raw_text.scan(/\A---(.|\n)*---/).size == 1
-    if has_frontmatter && (yaml_hash = YAML.load(raw_text)) && yaml_hash.is_a?(Hash)
+    if has_frontmatter && (yaml_hash = SafeYAML.load(raw_text)) && yaml_hash.is_a?(Hash)
       frontmatter = ActionController::Parameters.new(yaml_hash)
       text = raw_text.match(/^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m).post_match
       post.update_attributes(frontmatter.permit(

@@ -176,6 +176,7 @@ GEM
     rouge (3.3.0)
     ruby_parser (3.13.1)
       sexp_processor (~> 4.9)
+    safe_yaml (1.0.5)
     sanitize (5.0.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
@@ -272,6 +273,7 @@ DEPENDENCIES
   rb-readline
   redcarpet
   rouge
+  safe_yaml
   sanitize
   sass-rails (~> 5.0)
   simple_captcha2!

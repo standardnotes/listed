@@ -18,6 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'turbolinks', '~> 5'
 
+gem "safe_yaml"
+
 gem 'dotenv-rails', '~> 2.1.1'
 
 gem 'sanitize'
