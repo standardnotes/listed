@@ -18,7 +18,9 @@ class GuestbookEntriesController < ApplicationController
   def create
     @entry = @author.guestbook_entries.new(entry_params)
     @entry.unread = true
-
+    if @entry.text.contains_url? || @entry.donation_info&.contains_url?
+      @entry.spam = true
+    end
     if simple_captcha_valid?
       @entry.save
       redirect_to_guestbook(sent: true)

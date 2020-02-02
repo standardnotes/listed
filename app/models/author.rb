@@ -205,9 +205,9 @@ class Author < ApplicationRecord
   end
 
   def self.email_unread_guestbook_entries
-    authors = GuestbookEntry.where(unread: true).map(&:author).uniq
+    authors = GuestbookEntry.where(unread: true, spam: false).map(&:author).uniq
     authors.each do |author|
-      entries = author.guestbook_entries.where(unread: true)
+      entries = author.guestbook_entries.where(unread: true, spam: false)
       next if entries.empty? || author.email_verified == false
 
       entries.each do |entry|
