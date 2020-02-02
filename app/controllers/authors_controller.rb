@@ -9,7 +9,7 @@ class AuthorsController < ApplicationController
       @display_author = domain.author
     elsif params[:id]
       @display_author = Author.find(params[:id])
-    elsif request.path.include? "@"
+    elsif request.path.include? '@'
       @display_author = Author.find_author_from_path(request.path)
     end
 
@@ -32,7 +32,7 @@ class AuthorsController < ApplicationController
     @guestbook_entries = @author.guestbook_entries
     @posts = @author.posts
   end
-
+  
   def show
     if !@display_author
       not_found
@@ -43,21 +43,18 @@ class AuthorsController < ApplicationController
     @desc = @display_author.bio || "Via Standard Notes."
 
     limit = 20
-    all_posts = posts = @display_author.listed_posts(nil, false)
-    if params[:a]
-      posts = posts.where('id > ?', params[:a] || 0)
-    elsif params[:b]
-      posts = posts.where('id < ?', params[:b] || 0).order("id DESC")
-    else
-      posts = posts.order("created_at DESC")
-    end
-
-    count = posts.count
+    all_posts = @display_author.listed_posts(nil, false)
+    posts =
+      if params[:a]
+        all_posts.where('id > ?', params[:a] || 0)
+      elsif params[:b]
+        all_posts.where('id < ?', params[:b] || 0).order("id DESC")
+      else
+        all_posts.order("created_at DESC")
+      end
 
     @posts = posts.limit(limit).sort { |a, b|  b.id <=> a.id }
-
     @newer_than = all_posts.count > limit && all_posts.last.id > @posts.first.id && @posts.first.id
-
     @older_than = all_posts.count > limit && all_posts.first.id < @posts.last.id && @posts.last.id
   end
 
@@ -75,8 +72,7 @@ class AuthorsController < ApplicationController
     end
  end
 
-  def subscribe
-
+  def email_subscribe
     email = params[:email]
     @subscriber = Subscriber.find_or_create_by(email: email)
     session[:subscriber_id] = @subscriber.id
@@ -86,9 +82,6 @@ class AuthorsController < ApplicationController
       subscription.save
       redirect_to subscription_validate_path({:subscription_id => subscription.id})
     end
-
-    # flash[:subscription_success] = true
-    # redirect_back(fallback_location: author_url(@display_author))
   end
 
   def redirect_to_authenticated_usage(author, secret)

@@ -1,38 +1,44 @@
-#author-header
-  - if author.header_image_url && author.header_image_url.size > 0 && !post_header
-    .header-image-container
-      %img.header-image{"src" => "#{author.header_image_url}"}
+- post = local_assigns[:post]
+- author = @author || @display_author || (post && post.author)
+- pages = author && author.pages
+#page-header
   .left
-    %h2.name
-      %a.author-name{"href" => "/#{author.url_segment}"}
-        = author.title
-
-    -if !condensed && author.handle != author.title && author.has_username
-      %p.username= author.handle
-
-    %p.bio= author.bio
-
-    -if !condensed
-      - if !hide_word_count
-        %p.item.first.author-word-count
-          = number_with_delimiter(author.word_count, :delimiter => ',')
-          words
-      - if author.personal_link
-        %a.item.link.author-link{"class" => "#{hide_word_count ? 'first' : ''}", "href" => "#{author.personal_link}", "target" => "_blank"}
-          = author.link
-      - if author.twitter && author.twitter.size > 0
-        %a.item.link.author-twitter{"href" => "https://twitter.com/#{author.twitter}", "target" => "_blank"}= "@#{author.twitter}"
-
-    - if author.credentials.length > 0
-      %a.item.link.author-tip{"href" => "#{author.url}/tip", "class" => "#{(hide_word_count && !author.personal_link && (!author.twitter || author.twitter.size == 0)) ? 'first' : ''}"}
-        Thank
-
-    - if !author.guestbook_disabled
-      %a.item.link{"href" => "#{author_guestbook_entries_path(author)}", "class" => "#{(hide_word_count && !author.personal_link && (!author.twitter || author.twitter.size == 0)) ? 'first' : ''}"}
-        Guestbook
-
-
+    .website-name
+      %a{"href" => "#{ENV['HOST']}",
+      class: "#{author ? 'dimmed' : ''}"} Listed
+    - if author
+      .author-name.path-item
+        %a{"href" => "/#{author.url_segment}"}= author.title
+    - if local_assigns[:post] && post.page
+      .author-name.path-item
+        %a{"href" => "#{post.author_relative_url}"}= post.title
   .right
-    - if !post_header && !author.newsletter_disabled
-      #subscription-form.form-box
-        = render "authors/subscription_form", :author => author
+    - if pages
+      .pages-menu
+        - pages.each do |page|
+          %a.page-link{"href" => "#{page.author_relative_url}"}= page.title
+        - if author.credentials.length > 0
+          %a.page-link{"href" => "#{author.url}/tip"} Thank
+        - if !author.guestbook_disabled
+          %a.page-link{"href" => "#{author_guestbook_entries_path(author)}"} Guestbook
+        - if !author.newsletter_disabled
+          %a.page-link{"href" => "#{author.url}/subscribe"} Subscribe
+
+- if author && !post
+  .header-author-info
+    .bio= author.bio
+    .word-count.item.first
+      = number_with_delimiter(author.word_count, :delimiter => ',')
+      words
+    - if author.personal_link
+      %a.item.link.author-link{ "href" => "#{author.personal_link}", 
+      "target" => "_blank"}= author.link
+    - if author.twitter && author.twitter.size > 0
+      %a.item.link.author-twitter{"href" => "https://twitter.com/#{author.twitter}", 
+        "target" => "_blank"}= "@#{author.twitter}"
+
+- if author && !post && author.header_image_url && author.header_image_url.size > 0
+  .header-image-container
+    %img.header-image{"src" => "#{author.header_image_url}"}
+
+#page-header-hr

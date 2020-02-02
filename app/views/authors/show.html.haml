@@ -1,11 +1,7 @@
 #author-profile
-  = render "authors/author_header", :author => @display_author, :condensed => false, :post_header => false, :hide_word_count => false
-
-  %hr.left.author-hr
-
   #author-posts
     - @posts.each do |post|
-      .author-post
+      .author-post.single-post-show
         = render "posts/post", :post => post
     .navigation
       - if @older_than

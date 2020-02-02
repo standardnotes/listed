@@ -1,15 +1,16 @@
-- if params[:sent]
-  %p
-    %strong
-      Thanks! Your message has been sent to the author. They'll need to confirm it before it appears in the public guestbook.
+.single-post-show
+  - if params[:sent]
+    %p
+      %strong
+        Thanks! Your message has been sent to the author. They'll need to confirm it before it appears in the public guestbook.
 
-%h3
-  %a{"href" => "#{@author.url}"} #{@author.title}'s
-  Guestbook
+  %h3
+    %a{"href" => "#{@author.url}"} #{@author.title}'s
+    Guestbook
 
-- @entries.each do |entry|
-  %p
-    %i — #{entry.text}
+  - @entries.each do |entry|
+    %p
+      %i — #{entry.text}
 
 
-%a{"href" => "#{new_author_guestbook_entry_path(@author)}"} Sign #{@author.title}'s guestbook
+  %a{"href" => "#{new_author_guestbook_entry_path(@author)}"} Sign #{@author.title}'s guestbook

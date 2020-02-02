@@ -1,39 +1,46 @@
 class Author < ApplicationRecord
-
   has_many :subscriptions, :dependent => :destroy
   has_many :subscribers, :through => :subscriptions, :dependent => :destroy
-
   has_many :credentials, :dependent => :destroy
-
-  validates :username, uniqueness: true, :allow_nil => true, :allow_blank => true, :format => { with: /\A[\w]+\z/ , :message => 'Only letters, numbers, and underscores are allowed.' }
+  validates :username, uniqueness: true, :allow_nil => true, :allow_blank => true, 
+    :format => { 
+      with: /\A[\w]+\z/ , 
+      :message => 'Only letters, numbers, and underscores are allowed.' 
+    }
   validates :email, uniqueness: true, :allow_nil => true, :allow_blank => true
-
   has_many :posts, :dependent => :destroy
-
   has_one :domain, :dependent => :destroy
-
   has_many :guestbook_entries, :dependent => :destroy
 
   def public_guestbook_entries
-    self.guestbook_entries.where(:public => true)
+    guestbook_entries.where(public: true)
   end
 
   def verified_subscriptions
-    self.subscriptions.where(:verified => true)
+    subscriptions.where(verified: true)
   end
 
   def listed_posts(exclude_posts = nil, sort = true)
-    if exclude_posts
-      posts = self.posts.where(:unlisted => false, :hidden => false, :published => true).where("id NOT IN (?)", exclude_posts.compact)
-    else
-      posts = self.posts.where(:unlisted => false, :hidden => false, :published => true)
-    end
+    results = posts
+              .where(
+                unlisted: false,
+                hidden: [false, nil],
+                published: true,
+                page: [false, nil]
+              )
+    results = results.where('id NOT IN (?)', exclude_posts.compact) if exclude_posts
+    results.order('created_at DESC') if sort
+    results
+  end
 
-    if sort
-      posts.order("created_at DESC")
-    end
-
+  def pages
     posts
+      .where(
+        unlisted: false,
+        hidden: false,
+        published: true,
+        page: true
+      )
   end
 
   def title
@@ -82,6 +89,10 @@ class Author < ApplicationRecord
     else
       "#{ENV['HOST']}/#{url_segment}"
     end
+  end
+
+  def rss_url
+    "#{url}/feed"
   end
 
   def custom_domain

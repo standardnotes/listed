@@ -85,9 +85,11 @@ class Post < ApplicationRecord
   def path
     return nil if !self.author
 
-    if self.title
+    if title
       prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.has_username ? "" : "/posts")
-      if author.has_username
+      if page
+        "#{prefix}/#{title.parameterize}"
+      elsif author.has_username
         "#{prefix}/#{self.id}/#{self.title.parameterize}"
       else
         "#{prefix}/#{self.id}"

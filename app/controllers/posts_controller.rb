@@ -1,7 +1,15 @@
 class PostsController < ApplicationController
 
+  require "safe_yaml/load"
+  FRONT_MATTER_WRAPPER_PATTERN = /\A---(.|\n)*---/
+  FRONT_MATTER_CONTENT_PATTERN = /^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m
+
   # Allow API acess for actions inside "only"
-  skip_before_filter :verify_authenticity_token, :only => [:create, :unpublish, :newsletter]
+  skip_before_filter :verify_authenticity_token, :only => [
+    :create, 
+    :unpublish, 
+    :newsletter
+  ]
 
   def metatype_to_contenttype(metatype)
     return {
@@ -13,15 +21,35 @@ class PostsController < ApplicationController
 
   before_action :find_post, except: [:unpublish, :delete]
 
+  def find_page(author, title)
+    title = title.gsub('-', ' ')
+    author.pages.where('lower(title) = ?', title.downcase).first
+  end
+
   def find_post
+    author =
+      if params[:author_id]
+        Author.find(params[:author_id])
+      else
+        Author.find_author_from_path(request.path)
+      end
+    unless author
+      domain = Domain.find_by(domain: request.host)
+      author = domain&.author
+    end
     if params[:id]
-      @post = Post.find_by_id(params[:id])
+      if params[:id].is_integer?
+        @post = Post.find_by_id(params[:id])
+      else
+        @post = find_page(author, params[:id])
+      end
       if @post && @post.unlisted == true
         not_found
         return
       end
     elsif params[:post_token]
-      @post = Post.find_by_token(params[:post_token])
+      @post = Post.find_by_token(params[:post_token]) ||
+              find_page(author, params[:post_token])
     end
 
     domain = Domain.find_by(domain: request.host)
@@ -34,7 +62,7 @@ class PostsController < ApplicationController
   def show
     if !@post || !@post.published
       author = Author.find_author_from_path(request.path)
-      # go to author page
+      # Go to author page
       if author
         redirect_to author.url
       else
@@ -82,16 +110,8 @@ class PostsController < ApplicationController
     end
 
     if !post
-      is_new = true
       post = @author.posts.new(post_params)
     else
-      # If published previously as unlisted, but now publishing as listed,
-      # we want to count this as a new post.
-      if params[:unlisted] != "true" && post.unlisted == true
-        is_new = true
-      else
-        is_new = false
-      end
       post.update(post_params)
     end
 
@@ -99,27 +119,35 @@ class PostsController < ApplicationController
     content = item["content"]
     raw_text = content["text"]
 
-    require "safe_yaml/load"
-
-    has_frontmatter = raw_text.scan(/\A---(.|\n)*---/).size == 1
+    has_frontmatter = raw_text.scan(FRONT_MATTER_WRAPPER_PATTERN).size == 1
+    front_params = [
+      :canonical,
+      :metatype,
+      :image_url,
+      :hidden,
+      :pinned,
+      :page
+    ]
     if has_frontmatter && (yaml_hash = SafeYAML.load(raw_text)) && yaml_hash.is_a?(Hash)
       frontmatter = ActionController::Parameters.new(yaml_hash)
-      text = raw_text.match(/^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m).post_match
+      post_text = raw_text.match(FRONT_MATTER_CONTENT_PATTERN).post_match
       post.update_attributes(frontmatter.permit(
-        :created_at, :canonical, :metatype,
-        :image_url, :hidden, :pinned
+        :created_at,
+        *front_params
       ))
     else
-      text = raw_text
-      # clear meta fields
-      post.update({:canonical => nil, :metatype => nil})
+      post_text = raw_text
+      front_params.each do |param|
+        post[param] = nil
+      end
+      post.save
     end
 
-    # posts with a metatype are always unlisted
+    # Posts with a metatype are always unlisted
     unlisted = params[:unlisted] == "true" || post.metatype != nil
 
     post.title = content["title"]
-    post.text = text
+    post.text = post_text
 
     post.word_count = post.text.split.size
     post.unlisted = unlisted
@@ -146,8 +174,13 @@ class PostsController < ApplicationController
       post.save
 
       @author.subscriptions.each do |subscription|
-        if subscription.verified == true && subscription.frequency == 'daily' && subscription.unsubscribed == false
-          SubscriptionMailer.new_post(post, subscription.subscriber).deliver_later
+        if subscription.verified == true && 
+          subscription.frequency == 'daily' && 
+          subscription.unsubscribed == false
+          SubscriptionMailer.new_post(
+            post, 
+            subscription.subscriber
+          ).deliver_later
         end
       end
     end

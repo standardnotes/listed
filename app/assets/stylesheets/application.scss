@@ -15,6 +15,8 @@ $blue-color: #086dd6;
  *= require_self
  */
 
+@import "vars";
+@import "queries";
 @import "stylekit.css";
 @import "posts";
 @import "guestbook_entry";
@@ -35,13 +37,24 @@ html, body {
  color: black;
  font-size: 18px;
  height: 100%;
+//  overflow-x: hidden;
 }
 
 body {
   padding: 1rem 6rem 4px 6rem;
-  max-width: 1400px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@include MQ-Xsmall() {
+  body {
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+h2 {
+  font-size: 1.4rem;
 }
 
 .block {
@@ -89,7 +102,6 @@ hr {
   }
 
   &:before {
-    // margin-top: 26px;
     font-family: Georgia,Cambria,"Times New Roman",Times,serif;
     font-weight: 400;
     font-style: italic;
@@ -117,31 +129,6 @@ h1, h2, h3 {
   -webkit-margin-after: 4px;
 }
 
-@media screen and (max-width: 42em) {
-  body {
-
-  }
-}
-
-@media screen and (min-width: 64em) {
-  body {
-
-  }
-}
-
-@media screen and (min-width: 42em) and (max-width: 64em) {
-  body {
-    padding: 2rem 4rem;
-  }
-}
-
-@media screen and (max-width: 42em) {
-  body {
-    padding: 0px 1.2rem;
-    font-size: 17px;
-  }
-}
-
 #main-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -158,17 +145,6 @@ h1, h2, h3 {
     -ms-flex: 1;
         flex: 1;
 
-}
-
-
-#header {
-  width: 100%;
-  border-bottom: 1px solid rgba(black, 0.08);
-  padding-bottom: 10px;
-  a {
-    color: black;
-    font-size: 14px;
-  }
 }
 
 #footer {
