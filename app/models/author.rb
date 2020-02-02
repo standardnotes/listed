@@ -130,31 +130,50 @@ class Author < ApplicationRecord
   end
 
   def update_word_count
-    # just access word_count
-    self.word_count
+    # Just access word_count
+    word_count
   end
 
   def styles
-    post = self.posts.where(:metatype => "css", :published => true).first
-    return if !post
+    post = posts.where(metatype: 'css', published: true).first
+    return unless post
+
     css = post.text
-    config = Sanitize::Config.merge(Sanitize::Config::RELAXED,
-      :css => {
-        :protocols => Sanitize::Config::RELAXED[:css][:protocols] + ['data'],
-        :at_rules => ['import']
+    config = Sanitize::Config.merge(
+      Sanitize::Config::RELAXED,
+      css: {
+        protocols: Sanitize::Config::RELAXED[:css][:protocols] + ['data'],
+        at_rules: ['import'],
+        properties: Sanitize::Config::RELAXED[:css][:properties] + [
+          '--dimmed-text-color',
+          '--dimmed-border-color',
+          '--background-color',
+          '--body-text-color',
+          '--post-title-color',
+          '--post-date-color',
+          '--post-text-color',
+          '--page-menu-link-color',
+          '--header-author-name',
+          '--header-listed-name',
+          '--more-from-border-color',
+          '--bio-color',
+          '--wordcount-color',
+          '--website-color',
+          '--twitter-color',
+          '--link-color',
+          '--header-border-color'
+        ]
       }
     )
     Sanitize::CSS.stylesheet(css, config).html_safe
   end
 
   def personal_link
-    return nil if !self.link || self.link.length == 0
+    return nil if !link || link.empty?
 
-    if self.link.include? "http"
-      return self.link
-    else
-      return "http://#{self.link}"
-    end
+    return link if link.include? "http"
+
+    "http://#{link}"
   end
 
   def self.active_authors

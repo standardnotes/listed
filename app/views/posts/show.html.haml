@@ -10,7 +10,7 @@
         %p.more-from
           More from
           %a.author-name{"href" => "/@#{@post.author.username}"}
-            = @post.author.title + ":"
+            %strong= @post.author.title
 
           .previous-next-container
             - if @previous

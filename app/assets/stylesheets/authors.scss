@@ -55,16 +55,20 @@
         font-weight: bold;
         color: var(--body-text-color);
         &.dimmed {
-          color: var(--dimmed-text-color);
+          color: var(--header-listed-name);
         }
       }
+    }
+
+    .author-name a {
+      color: var(--header-author-name);
     }
   }
 
   .right {
     .pages-menu {
       .page-link {
-        color: var(--body-text-color);
+        color: var(--page-menu-link-color);
         font-size: 0.9rem;
         font-weight: bold;
         &:not(:last-child) {
@@ -92,15 +96,28 @@
   }
   margin-top: -0.25rem;
   margin-bottom: 0.6rem;
+  
   .bio {
     font-size: 0.8rem;
+    color: var(--bio-color);
+  }
+
+  .word-count {
+    color: var(--wordcount-color);
+  }
+
+  .author-link {
+    color: var(--website-color);
+  }
+
+  .author-twitter {
+    color: var(--twitter-color);
   }
 
   .item {
     padding-right: 3px;
     display: inline-block;
     font-size: 0.7rem;
-    color: rgba(black, 0.3);
     text-align: center;
     &:not(.first) {
       padding-left: 8px;
@@ -190,13 +207,13 @@
     overflow: scroll;
 
     .author {
-      color: black;
+      color: var(--body-text-color);
       font-style: italic;
-      color: rgba(black, 0.5);
+      color: var(--body-text-color);
     }
 
     .text {
-      color: black;
+      color: var(--body-text-color);
       cursor: pointer;
       &:hover {
         text-decoration: none;
@@ -207,15 +224,11 @@
 
 .form-box {
   margin-top: 0.8rem;
-  border: 1px solid rgba(black, 0.1);
+  border: 1px solid var(--dimmed-border-color);
   padding: 14px;
   border-radius: 0px;
   max-width: 400px;
   font-size: 15px;
-
-  &.blue {
-    background-color: $blue-color;
-  }
 
   &.full {
     input {

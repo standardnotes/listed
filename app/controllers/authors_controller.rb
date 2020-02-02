@@ -236,7 +236,7 @@ class AuthorsController < ApplicationController
     @author.newsletter_disabled = a_params[:newsletter_disabled]
 
     if @author.save
-      redirect_to "/@#{@author.username}"
+      redirect_to @author.url
     else
       redirect_to :back
     end
