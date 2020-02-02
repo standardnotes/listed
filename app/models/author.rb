@@ -5,7 +5,7 @@ class Author < ApplicationRecord
   validates :username, uniqueness: true, :allow_nil => true, :allow_blank => true, 
     :format => { 
       with: /\A[\w]+\z/ , 
-      :message => 'Only letters, numbers, and underscores are allowed.' 
+      :message => 'Only letters, numbers, and underscores are allowed.'
     }
   validates :email, uniqueness: true, :allow_nil => true, :allow_blank => true
   has_many :posts, :dependent => :destroy
@@ -182,7 +182,6 @@ class Author < ApplicationRecord
     self.domain.active = true
     self.domain.approved = true
     self.domain.save
-
     Author.build_all_domains
   end
 
@@ -197,17 +196,28 @@ class Author < ApplicationRecord
 
   def self.build_all_domains
     domains = Domain.where(:active => true, :approved => true).map { |d| d.domain }
-    if ENV['ALT_HOST']
-      domains.unshift("#{ENV['ALT_HOST']}")
-    end
-
+    domains.unshift("#{ENV['ALT_HOST']}") if ENV['ALT_HOST']
     domains.unshift("#{ENV['HOST']}")
-
     puts "Building domains: #{domains}"
-
     File.open("config/domains.yml", "w+") do |f|
       f.write(domains.to_yaml)
     end
   end
 
+  def self.email_unread_guestbook_entries
+    authors = GuestbookEntry.where(unread: true).map(&:author).uniq
+    authors.each do |author|
+      entries = author.guestbook_entries.where(unread: true)
+      next if entries.empty? || author.email_verified == false
+
+      entries.each do |entry|
+        entry.unread = false
+        entry.save
+      end
+      AuthorsMailer.unread_guestbook_entries(
+        author.id,
+        entries.map(&:id)
+      ).deliver_later
+    end
+  end
 end

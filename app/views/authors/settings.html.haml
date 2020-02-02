@@ -41,15 +41,12 @@
         %div{"style" => "font-size: 14px; opacity: 0.5; margin-bottom: 5px;"}
           The image that will be displayed on top of your profile.
         = f.text_field :header_image_url, :class => "field", :placeholder => "Header Image URL"
-
       .form-section
         = f.check_box :guestbook_disabled, :class => "field inline"
         = f.label :guestbook_disabled, "Disable guestbook", :class => "label inline"
-
       .form-section
         = f.check_box :newsletter_disabled, :class => "field inline"
-        = f.label :newsletter_disabled, "Disable email subscription and newsletter functionality", :class => "label inline"
-
+        = f.label :newsletter_disabled, "Disable email subscription and newsletter", :class => "label inline"
       .form-section
         = f.check_box :hide_from_homepage, :class => "field inline"
         = f.label :hide_from_homepage, "Hide profile from homepage 'Recent Authors'", :class => "label inline"
@@ -58,37 +55,34 @@
       .form-section
         = f.submit "Save"
 
-  %hr.mt-30
-    .mt-30.form-box.full
-      %strong Payment Details
-      %p
-        Listed allows authors to receive tips and donations in a platform-agnostic way.
-        Readers can pay authors by clicking the 'Thank' option on the author profile. This will display
-        the various ways you have indicated you can receive payments.
+  .mt-30.form-box.full
+    %strong Payment Details
+    %p
+      Listed allows authors to receive tips and donations in a platform-agnostic way.
+      Readers can pay authors by clicking the 'Thank' option on the author profile. This will display
+      the various ways you have indicated you can receive payments.
 
-      %p
-        Once a reader sends you a tip or donation, they are advised, but not required to, fill out your guestbook to notify you that they
-        have made a payment.
+    %p
+      Once a reader sends you a tip or donation, they are advised, but not required to, fill out your guestbook to notify you that they
+      have made a payment.
 
-      %p
-        Below, you can add any custom payment "credential".
-        For example, you can specify a key of "Bitcoin", and the value will be your BTC address. Or, you can specify a key of "PayPal",
-        and the value will be your PayPal payment link.
+    %p
+      Below, you can add any custom payment "credential".
+      For example, you can specify a key of "Bitcoin", and the value will be your BTC address. Or, you can specify a key of "PayPal",
+      and the value will be your PayPal payment link.
 
-      %p
-        %strong Current Credentials
-        - @author.credentials.each do |credential|
-          %p
-            %a{"href" => "#{edit_author_credential_path(@author, credential, :secret => @author.secret)}", "target" => "_blank"}
-              %strong #{credential.key}:
-            #{credential.value}
+    %p
+      %strong Current Credentials
+      - @author.credentials.each do |credential|
         %p
-          %a{"href" => "#{new_author_credential_path(@author, :secret => @author.secret)}", "target" => "_blank"} Add New Credential
+          %a{"href" => "#{edit_author_credential_path(@author, credential, :secret => @author.secret)}", "target" => "_blank"}
+            %strong #{credential.key}:
+          #{credential.value}
+      %p
+        %a{"href" => "#{new_author_credential_path(@author, :secret => @author.secret)}", "target" => "_blank"} Add New Credential
 
-        %p
-          %i To edit a credential, click it.
-
-  %hr.mt-30
+      %p
+        %i To edit a credential, click it.
 
   .mt-30.form-box.full
     %strong Custom Domain
@@ -135,41 +129,45 @@
 
   %hr.mt-30
 
-  %h3 All Posts
-  .guestbook.sk-panel.static
-    - if @posts.length == 0
-      %p No posts yet.
-    - @posts.each do |post|
-      .sk-notification.contrast
-        %p.sk-p Title: #{post.title}
-        %p.sk-p
-          Link:
-          %a{"href" => "#{post.url}", "target" => "_blank"} #{post.url}
-        %p.sk-p Visibility:  #{post.unlisted ? "Private" : "Public"}
-        %i.sk-p Created at: #{post.created_at}
-
-        .sk-horizontal-group
-          %p.sk-p= link_to "Delete", delete_author_post_path(id: post.id, author_id: @author.id, secret: @author.secret)
-
-  %hr.mt-30
-
   %h3 Guestbook Entries
   .guestbook.sk-panel.static
     - if @guestbook_entries.length == 0
       %p No guestbook entries yet.
     - @guestbook_entries.each do |entry|
       .sk-notification.contrast
-        %p.sk-p Text: #{entry.text}
-        %i.sk-p Date: #{entry.created_at}
-        %p.sk-p Author email: #{entry.signer_email}
-        %p.sk-p Donation info: #{entry.donation_info}
-
-        .sk-horizontal-group
+        %p.sk-p 
+          %strong #{entry.text}
+        %i.sk-p #{entry.created_at.to_formatted_s(:long)}
+        - if entry.signer_email && entry.signer_email.length > 0
+          %p.sk-p Author email: #{entry.signer_email}
+        - if entry.donation_info && entry.donation_info.length > 0
+          %p.sk-p Donation info: #{entry.donation_info}
+        .sk-horizontal-group.mt-10
           - if !entry.public
-            %a.sk-p{"href" => "#{entry.approval_url}"} Make public
+            %a.sk-p{"href" => "#{entry.approval_url}"} Publish
           - if entry.public
-            %a.sk-p{"href" => "#{entry.unapproval_url}"} Make private
+            %a.sk-p{"href" => "#{entry.unapproval_url}"} Unpublish
+          %a.sk-p{"href" => "#{entry.spam_url}"} Report Spam
           %a.sk-p{"href" => "#{entry.deletion_url}"} Delete
+
+  %hr.mt-30
+
+  %h3 All Posts
+  .guestbook.sk-panel.static
+    - if @posts.length == 0
+      %p No posts yet.
+    - @posts.each do |post|
+      .sk-notification.contrast
+        %p.sk-p
+          %strong
+            %a{"href" => "#{post.url}", "target" => "_blank"} #{post.title}
+        %p.sk-p 
+          %strong #{post.unlisted ? "Private" : "Public"}
+        %i.sk-p #{post.created_at.to_formatted_s(:long)}
+        .sk-horizontal-group
+          %p.sk-p
+            = link_to("Delete", delete_author_post_path(id: post.id, 
+            author_id: @author.id, secret: @author.secret))
 
   %hr.mt-30
 

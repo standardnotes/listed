@@ -37,7 +37,6 @@ html, body {
  color: black;
  font-size: 18px;
  height: 100%;
-//  overflow-x: hidden;
 }
 
 body {
@@ -50,6 +49,12 @@ body {
 @include MQ-Xsmall() {
   body {
     padding: 1.5rem 1.5rem;
+  }
+}
+
+@include MQ-Small() {
+  body {
+    padding: 1.5rem 2rem;
   }
 }
 

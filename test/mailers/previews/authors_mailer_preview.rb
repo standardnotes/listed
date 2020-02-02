@@ -1,9 +1,11 @@
 # Preview all emails at http://localhost:3000/rails/mailers/authors_mailer
 class AuthorsMailerPreview < ActionMailer::Preview
-
-  def new_guestbook_entry
-    @entry = GuestbookEntry.last
-    AuthorsMailer.new_guestbook_entry(@entry.id)
+  def unread_guestbook_entries
+    @author = Author.first
+    @entries = @author.guestbook_entries
+    AuthorsMailer.unread_guestbook_entries(
+      @author.id,
+      @entries.map(&:id)
+    )
   end
-
 end

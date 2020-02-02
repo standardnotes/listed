@@ -19,7 +19,7 @@
           %a.page-link{"href" => "#{page.author_relative_url}"}= page.title
         - if author.credentials.length > 0
           %a.page-link{"href" => "#{author.url}/tip"} Thank
-        - if !author.guestbook_disabled
+        - unless author.guestbook_disabled
           %a.page-link{"href" => "#{author_guestbook_entries_path(author)}"} Guestbook
         - if !author.newsletter_disabled
           %a.page-link{"href" => "#{author.url}/subscribe"} Subscribe

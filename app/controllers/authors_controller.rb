@@ -29,12 +29,12 @@ class AuthorsController < ApplicationController
   end
 
   def settings
-    @guestbook_entries = @author.guestbook_entries
+    @guestbook_entries = @author.guestbook_entries.where(spam: false)
     @posts = @author.posts
   end
-  
+
   def show
-    if !@display_author
+    unless @display_author
       not_found
       return
     end
@@ -61,14 +61,14 @@ class AuthorsController < ApplicationController
   def feed
     @author = @display_author
 
-    if !@author
+    unless @author
       render :json => {}, :status => 404
       return
     end
 
     @posts = @display_author.listed_posts(nil)
     respond_to do |format|
-     format.rss { render :layout => false }
+      format.rss { render :layout => false }
     end
  end
 

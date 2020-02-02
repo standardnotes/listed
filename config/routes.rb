@@ -10,11 +10,12 @@ Rails.application.routes.draw do
       post 'delete_all_data'
     end
 
-    resources :guestbook_entries, :path => :guestbook do
+    resources :guestbook_entries, path: :guestbook do
       member do
         get 'approve'
         get 'unapprove'
         get 'delete'
+        get 'spam'
       end
     end
 

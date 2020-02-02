@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200201203629) do
+ActiveRecord::Schema.define(version: 20200202152431) do
 
   create_table "authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "secret"
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(version: 20200201203629) do
     t.string   "token"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.boolean  "unread",                      default: false
+    t.boolean  "spam",                        default: false
+    t.index ["unread"], name: "index_guestbook_entries_on_unread", using: :btree
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -2,15 +2,10 @@ class GuestbookEntriesController < ApplicationController
 
   include SimpleCaptcha::ControllerHelpers
 
-  before_action {
-    if params[:author_id]
-      @author = Author.find(params[:author_id])
-    end
-
-    if params[:id]
-      @entry = GuestbookEntry.find(params[:id])
-    end
-  }
+  before_action do
+    @author = Author.find(params[:author_id]) if params[:author_id]
+    @entry = GuestbookEntry.find(params[:id]) if params[:id]
+  end
 
   def index
     @entries = @author.public_guestbook_entries
@@ -22,10 +17,11 @@ class GuestbookEntriesController < ApplicationController
 
   def create
     @entry = @author.guestbook_entries.new(entry_params)
+    @entry.unread = true
 
     if simple_captcha_valid?
       @entry.save
-      redirect_to_guestbook({:sent => true})
+      redirect_to_guestbook(sent: true)
     else
       @captcha_error = true
       render :new
@@ -49,6 +45,12 @@ class GuestbookEntriesController < ApplicationController
     redirect_to :back
   end
 
+  def spam
+    @entry.spam = true
+    @entry.save
+    redirect_to :back
+  end
+
   def delete
     @entry.delete
     redirect_to :back
@@ -59,7 +61,10 @@ class GuestbookEntriesController < ApplicationController
   end
 
   def entry_params
-    params.require(:guestbook_entry).permit(:text, :signer_email, :donation_info)
+    params.require(:guestbook_entry).permit(
+      :text,
+      :signer_email,
+      :donation_info
+    )
   end
-
 end
