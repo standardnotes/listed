@@ -205,7 +205,7 @@ class PostsController < ApplicationController
   end
 
   def delete
-    if !@author
+    unless @author
       render :json => {:error => "Unable to load extension."}
       return
     end

@@ -1,5 +1,4 @@
 class GuestbookEntriesController < ApplicationController
-
   include SimpleCaptcha::ControllerHelpers
 
   before_action do
@@ -34,30 +33,30 @@ class GuestbookEntriesController < ApplicationController
 
   def destroy
     @entry.destroy
-    redirect_to :back
+    redirect_back fallback_location: @author.url
   end
 
   def approve
     @entry.public = true
     @entry.save
-    redirect_to :back
+    redirect_back fallback_location: @entry.author.url
   end
 
   def unapprove
     @entry.public = false
     @entry.save
-    redirect_to :back
+    redirect_back fallback_location: @entry.author.url
   end
 
   def spam
     @entry.spam = true
     @entry.save
-    redirect_to :back
+    redirect_back fallback_location: @entry.author.url
   end
 
   def delete
     @entry.delete
-    redirect_to :back
+    redirect_back fallback_location: @author.url
   end
 
   def redirect_to_guestbook(params = {})
