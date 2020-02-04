@@ -1,19 +1,20 @@
 - post = local_assigns[:post]
 - author = @author || @display_author || (post && post.author)
+- private_post = post && post.unlisted
 - pages = author && author.pages
 #page-header
   .left
     .website-name
       %a{"href" => "#{ENV['HOST']}",
       class: "#{author ? 'dimmed' : ''}"} Listed
-    - if author
+    - if author && !private_post
       .author-name.path-item
         %a{"href" => "/#{author.url_segment}"}= author.title
     - if local_assigns[:post] && post.page
       .author-name.path-item
         %a{"href" => "#{post.author_relative_url}"}= post.title
   .right
-    - if pages
+    - if pages && !private_post
       .pages-menu
         - pages.each do |page|
           %a.page-link{"href" => "#{page.author_relative_url}"}= page.title
