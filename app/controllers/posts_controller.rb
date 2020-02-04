@@ -6,8 +6,8 @@ class PostsController < ApplicationController
 
   # Allow API acess for actions inside "only"
   skip_before_filter :verify_authenticity_token, :only => [
-    :create, 
-    :unpublish, 
+    :create,
+    :unpublish,
     :newsletter
   ]
 
@@ -22,6 +22,8 @@ class PostsController < ApplicationController
   before_action :find_post, except: [:unpublish, :delete]
 
   def find_page(author, title)
+    return unless author
+    
     title = title.gsub('-', ' ')
     author.pages.where('lower(title) = ?', title.downcase).first
   end
