@@ -237,7 +237,7 @@
   }
 
   .sublabel {
-    color: rgba(black, 0.4);
+    color: rgba(var(--body-text-color), 0.4);
     font-size: 12px;
   }
 
