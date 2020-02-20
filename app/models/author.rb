@@ -2,7 +2,7 @@ class Author < ApplicationRecord
   has_many :subscriptions, :dependent => :destroy
   has_many :subscribers, :through => :subscriptions, :dependent => :destroy
   has_many :credentials, :dependent => :destroy
-  validates :username, uniqueness: true, :allow_nil => true, :allow_blank => true, 
+  validates :username, uniqueness: {:case_sensitive => false}, :allow_nil => true, :allow_blank => true, 
     :format => { 
       with: /\A[\w]+\z/ , 
       :message => 'Only letters, numbers, and underscores are allowed.'
