@@ -23,7 +23,8 @@ class SubscriptionMailer < ApplicationMailer
     @author = subscription.author
     @posts = @author.posts
                     .where('created_at > ?', subscription.last_mailing || 0)
-                    .where(unlisted: false, page: [false, nil])
+                    .where(unlisted: false)
+                    .where.not(email_sent_date: nil)
                     .order('created_at DESC')
     return if @posts.empty?
 
