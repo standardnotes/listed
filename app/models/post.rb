@@ -8,14 +8,25 @@ end
 
 class Post < ApplicationRecord
   include Tokenable
-
   belongs_to :author
 
+  def next
+    posts = author.listed_posts
+    index = posts.index(self)
+    posts[index - 1] if index&.positive?
+  end
+
+  def previous
+    posts = author.listed_posts
+    index = posts.index(self)
+    posts[index + 1] if index
+  end
+
   def url
-    if self.unlisted
-      self.tokenized_url
+    if unlisted
+      tokenized_url
     else
-      self.author_relative_url
+      author_relative_url
     end
   end
 
@@ -97,18 +108,6 @@ class Post < ApplicationRecord
     else
       "/#{author.url_segment}/#{self.id}/"
     end
-  end
-
-  def next
-    posts = author.listed_posts
-    index = posts.index(self)
-    posts[index - 1] if index
-  end
-
-  def previous
-    posts = author.listed_posts
-    index = posts.index(self)
-    posts[index + 1] if index
   end
 
   def can_send_email

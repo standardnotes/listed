@@ -29,7 +29,7 @@ class Author < ApplicationRecord
                 page: [false, nil]
               )
     results = results.where('id NOT IN (?)', exclude_posts.compact) if exclude_posts
-    results.order('created_at DESC') if sort
+    results = results.order('created_at DESC') if sort
     results
   end
 
