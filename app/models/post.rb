@@ -120,30 +120,35 @@ class Post < ApplicationRecord
       node_name = env[:node_name]
 
       # Don't continue if the node is not an element.
-      return if !node.element?
+      return unless node.element?
 
       # Don't continue unless the node is a link.
       return unless node_name == 'a'
 
       begin
         node_url = URI.parse(node['href'])
-        author_url = URI.parse(self.author_relative_url)
+        author_url = URI.parse(author_relative_url)
       rescue => e
         return
       end
 
-      return if node_url.host.nil? or author_url.host.nil?
+      return if node_url.host.nil? || author_url.host.nil?
+      # Do not process links which have images embedded
+      return if node.children&.first&.name == 'img'
 
       # External links should have the "rel" and "target" attributes set.
-      Sanitize.node!(node, {
-        :elements => ['a'],
-        :attributes => {'a' => ['href']},
-        :add_attributes => {
-          'a' => {'rel' => "noopener", 'target' => "_blank"}
+      Sanitize.node!(
+        node,
+        {
+          elements: ['a', 'a img'],
+          attributes: {'a' => ['href']},
+          add_attributes: {
+            'a' => {'rel' => "noopener", 'target' => "_blank"}
+          }
         }
-      }) unless node_url.host.include? author_url.host
+      ) unless node_url.host.include? author_url.host
 
-      {:node_whitelist => [node]}
+      { node_whitelist: [node] }
     end
   end
 
