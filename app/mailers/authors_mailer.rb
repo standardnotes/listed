@@ -3,7 +3,7 @@ class AuthorsMailer < ApplicationMailer
     return if author.email_verified == false
 
     mail(
-      to: author.email, 
+      to: author.email,
       subject: 'Congratulations! You are now a featured author on Listed.'
     )
   end

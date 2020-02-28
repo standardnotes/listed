@@ -1,5 +1,4 @@
 class SubscriptionMailer < ApplicationMailer
-
   def confirm_subscription(subscription)
     @author = subscription.author
     @author_url = @author.url
@@ -22,10 +21,13 @@ class SubscriptionMailer < ApplicationMailer
   def weekly_digest(sub_id)
     subscription = Subscription.find(sub_id)
     @author = subscription.author
-    @posts = subscription.author.posts.where("created_at > ?", subscription.last_mailing || 0).where(:unlisted => false).order("created_at DESC")
-    if @posts.length == 0
-      return
-    elsif @posts.length == 1
+    @posts = @author.posts
+                    .where('created_at > ?', subscription.last_mailing || 0)
+                    .where(unlisted: false, page: [false, nil])
+                    .order('created_at DESC')
+    return if @posts.empty?
+
+    if @posts.length == 1
       title = "\"#{@posts.first.title}\" | This week from #{subscription.author.title}"
     else
       title = "\"#{@posts.first.title}\" and #{@posts.length - 1} other posts from #{subscription.author.title}"
@@ -38,7 +40,7 @@ class SubscriptionMailer < ApplicationMailer
   def new_subscription(subscription)
     @author = subscription.author
     return if @author.email_verified == false
+
     mail(to: subscription.author.email, subject: "New subscriber to #{subscription.author.title}")
   end
-
 end
