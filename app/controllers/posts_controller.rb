@@ -77,7 +77,7 @@ class PostsController < ApplicationController
     @previous = @post.previous
 
     if !@post.unlisted
-      @author_posts = @post.author.listed_posts([@post, @next, @previous]).order("id DESC")
+      @author_posts = @post.author.listed_posts([@post, @next, @previous]).order("created_at DESC")
     end
 
     if @post.metatype

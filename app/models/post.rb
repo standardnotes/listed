@@ -48,8 +48,8 @@ class Post < ApplicationRecord
   def get_rendered_text(input, limit = nil)
     return nil if input == nil
     options = {
-      filter_html:     false,
-      hard_wrap:       true,
+      filter_html: false,
+      hard_wrap: true,
       # Use sanitize's 'add_attributes' instead
       # link_attributes: { rel: 'nofollow noopener', target: "_blank" },
       space_after_headers: true,
@@ -58,8 +58,8 @@ class Post < ApplicationRecord
     }
 
     extensions = {
-      autolink:           true,
-      superscript:        true,
+      autolink: true,
+      superscript: true,
       disable_indented_code_blocks: true,
       fenced_code_blocks: true,
       lax_spacing: true,
@@ -100,11 +100,15 @@ class Post < ApplicationRecord
   end
 
   def next
-    self.author.listed_posts.where("id > ?", self.id).first
+    posts = author.listed_posts
+    index = posts.index(self)
+    posts[index - 1] if index
   end
 
   def previous
-    self.author.listed_posts.where("id < ?", self.id).last
+    posts = author.listed_posts
+    index = posts.index(self)
+    posts[index + 1] if index
   end
 
   def can_send_email

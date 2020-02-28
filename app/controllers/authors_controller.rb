@@ -39,23 +39,33 @@ class AuthorsController < ApplicationController
       return
     end
 
-    @title = "#{@display_author.title}"
-    @desc = @display_author.bio || "Via Standard Notes."
+    @title = @display_author.title
+    @desc = @display_author.bio || 'Via Standard Notes.'
 
-    limit = 20
+    limit = 15
     all_posts = @display_author.listed_posts(nil, false)
     posts =
       if params[:a]
-        all_posts.where('id > ?', params[:a] || 0)
+        all_posts
+          .where('created_at > ?', Time.at(params[:a].to_i).to_datetime || 0)
       elsif params[:b]
-        all_posts.where('id < ?', params[:b] || 0).order("id DESC")
+        all_posts
+          .where('created_at < ?', Time.at(params[:b].to_i).to_datetime || 0)
+          .order('created_at DESC')
       else
-        all_posts.order("created_at DESC")
+        all_posts
+          .order('created_at DESC')
       end
 
-    @posts = posts.limit(limit).sort { |a, b|  b.id <=> a.id }
-    @newer_than = all_posts.count > limit && all_posts.last.id > @posts.first.id && @posts.first.id
-    @older_than = all_posts.count > limit && all_posts.first.id < @posts.last.id && @posts.last.id
+    @posts = posts.limit(limit).sort { |a, b| b.created_at <=> a.created_at }
+    @newer_than =
+      if all_posts.count > limit && all_posts.last.created_at > @posts.first.created_at
+        @posts.first.created_at.to_i
+      end
+    @older_than =
+      if all_posts.count > limit && all_posts.first.created_at < @posts.last.created_at
+        @posts.last.created_at.to_i
+      end
   end
 
   def feed
