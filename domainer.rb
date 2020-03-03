@@ -99,7 +99,7 @@ def renew_certificate_for_domain(domain)
 
   cmd = "mkdir -p /tmp/letsencrypt-auto" \
         "&& sudo /opt/letsencrypt/letsencrypt-auto --debug certonly " \
-        "--server https://acme-v01.api.letsencrypt.org/directory " \
+        "--server https://acme-v02.api.letsencrypt.org/directory " \
         "-a webroot --webroot-path=/tmp/letsencrypt-auto " \
         "--cert-name #{domain} --keep-until-expiring " \
         "#{domains_text}"
