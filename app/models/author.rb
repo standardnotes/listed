@@ -43,6 +43,10 @@ class Author < ApplicationRecord
       )
   end
 
+  def code
+    Base64.strict_encode64("#{get_host}/authors/#{id}/extension/?secret=#{secret}&type=sn")
+  end
+
   def title
     if self.display_name && self.display_name.length > 0
       return self.display_name
