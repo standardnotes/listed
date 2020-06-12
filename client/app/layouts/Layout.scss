@@ -1,0 +1,109 @@
+@font-face {
+    font-family: "Merriweather";
+    src: url("../assets/fonts/Merriweather-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../assets/fonts/Roboto-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    font-family: var(--text-default-font);
+    color: var(--text-default-color);
+}
+
+body {
+    padding: 54px 16px 0px 16px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include Desktop() {
+        padding: 66px 148px 0px 148px;
+    }
+}
+
+h1 {
+    font-family: var(--text-headline-font);
+    font-size: 32px;
+    line-height: 44px;
+
+    @include Desktop() {
+        font-size: 48px;
+        line-height: 64px;
+    }
+}
+
+h2 {
+    font-family: var(--text-headline-font);
+    font-size: 28px;
+    line-height: 42px;
+
+    @include Desktop() {
+        font-size: 36px;
+        line-height: 52px;
+    }
+}
+
+h3 {
+    font-family: var(--text-headline-font);
+    font-size: 24px;
+    line-height: 32px;
+
+    @include Desktop() {
+        font-size: 36px;
+        line-height: 52px;
+    }
+}
+
+h4 {
+    font-family: var(--text-headline-font);
+    font-size: 22px;
+    line-height: 38px;
+}
+
+h5 {
+    font-family: var(--text-headline-font);
+    font-size: 18px;
+    line-height: 24px;
+}
+
+p {
+    &.p1 {
+        font-size: 17px;
+        line-height: 28px;
+
+        @include Desktop() {
+            font-size: 19px;
+            line-height: 30px;
+        }
+    }
+
+    &.p2 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    &.p3 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
