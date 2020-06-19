@@ -1,0 +1,4 @@
+/node_modules/
+/tmp/
+.vscode
+/public/assets/

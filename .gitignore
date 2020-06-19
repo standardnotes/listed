@@ -47,3 +47,6 @@ dump.rdb
 # Ignore user uploads
 /public/uploads/*
 !/public/uploads/.keep
+
+# Container MySQL data
+/data/

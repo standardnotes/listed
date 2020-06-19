@@ -49,3 +49,13 @@ You can change the date that appears on your post, or set a [canonical URL](http
     ---
 
     Your story...`
+
+## Contributing
+
+To run the application locally you have to install Docker and type the following:
+```
+cp .env.sample .env
+docker-compose up -d
+```
+
+Now the application should be running on http://localhost:3000
