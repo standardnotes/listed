@@ -14,10 +14,10 @@ default: &default
   encoding: utf8mb4
   collation: utf8mb4_unicode_ci
   pool: 5
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  database: <%= ENV['DB_DATABASE'] %>
-  host: <%= ENV['DB_HOST'] %>
+  username: "<%= ENV['DB_USERNAME'] %>"
+  password: "<%= ENV['DB_PASSWORD'] %>"
+  database: "<%= ENV['DB_DATABASE'] %>"
+  host: "<%= ENV['DB_HOST'] %>"
   port: <%= ENV['DB_PORT'] %>
 
 development:
