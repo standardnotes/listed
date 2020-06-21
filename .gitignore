@@ -50,3 +50,7 @@ dump.rdb
 
 # Container MySQL data
 /data/
+
+/public/packs
+/public/packs-test
+/node_modules
