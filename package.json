@@ -14,6 +14,7 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
+    "start": "bin/webpack-dev-server & rails s",
     "build:dev": "rm -rf public/packs/development && RAILS_ENV=development NODE_ENV=development bin/webpack",
     "build:dev:watch": "RAILS_ENV=development NODE_ENV=development bin/webpack --watch",
     "build:production": "RAILS_ENV=production NODE_ENV=production bin/webpack -p",

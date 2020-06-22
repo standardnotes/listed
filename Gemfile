@@ -20,8 +20,8 @@ gem 'whenever'
 gem 'redcarpet'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'simple_captcha2', :path => 'vendor/simple-captcha', require: 'simple_captcha'
-gem "react_on_rails", "11.3"
-gem "webpacker", "~> 4"
+gem 'react_on_rails', '11.3'
+gem 'webpacker', '~> 4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
