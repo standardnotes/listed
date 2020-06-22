@@ -52,5 +52,4 @@ dump.rdb
 /data/
 
 /public/packs
-/public/packs-test
 /node_modules
