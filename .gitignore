@@ -49,5 +49,4 @@ dump.rdb
 !/public/uploads/.keep
 
 /public/packs
-/public/packs-test
 /node_modules

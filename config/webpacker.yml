@@ -46,6 +46,8 @@ default: &default
 development:
   <<: *default
   compile: true
+
+  public_output_path: packs/development
   check_yarn_integrity: true
 
   dev_server:
