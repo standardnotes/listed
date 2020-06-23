@@ -1,14 +1,32 @@
-FROM ruby:2.6.5-alpine
+FROM ruby:2.6.5-slim-stretch
 
-RUN apk add --update --no-cache \
-    alpine-sdk \
-    mariadb-dev \
-    git \
-    nodejs \
-    nodejs-npm \
-    tzdata
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+ARG RAILS_ENV=production
 
 WORKDIR /listed
+
+RUN apt-get update \
+    && apt-get install -y git build-essential libmariadb-dev curl \
+    && apt-get -y autoclean
+
+RUN mkdir -p /usr/local/nvm
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 10.20.1
+ENV NVM_INSTALL_PATH $NVM_DIR/versions/node/v$NODE_VERSION
+ENV WEBPACKER_NODE_MODULES_BIN_PATH=value
+
+RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+
+RUN source $NVM_DIR/nvm.sh \
+   && nvm install $NODE_VERSION \
+   && nvm alias default $NODE_VERSION \
+   && nvm use default
+
+ENV NODE_PATH $NVM_INSTALL_PATH/lib/node_modules
+ENV PATH $NVM_INSTALL_PATH/bin:$PATH
+
+RUN npm install -g yarn
 
 COPY package.json package-lock.json Gemfile Gemfile.lock /listed/
 
