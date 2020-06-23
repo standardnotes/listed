@@ -2,8 +2,6 @@ FROM ruby:2.6.5-slim-stretch
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-ARG RAILS_ENV=production
-
 WORKDIR /listed
 
 RUN apt-get update \
