@@ -26,11 +26,11 @@ ENV PATH $NVM_INSTALL_PATH/bin:$PATH
 
 RUN npm install -g yarn
 
-COPY package.json package-lock.json Gemfile Gemfile.lock /listed/
+COPY package.json yarn.lock Gemfile Gemfile.lock /listed/
 
 COPY vendor /listed/vendor
 
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
 RUN gem install bundler && bundle install
 
