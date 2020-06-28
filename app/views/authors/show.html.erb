@@ -1,0 +1,6 @@
+<%= react_component("AuthorShow", props: {
+    posts: @posts.as_json(methods: [:author_relative_url, :preview_text, :rendered_text]),
+    olderThan: @older_than,
+    newerThan: @newer_than,
+    displayAuthorUrl: @display_author_url
+}) %>
