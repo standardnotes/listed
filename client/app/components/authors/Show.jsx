@@ -5,7 +5,7 @@ export default ({ posts, olderThan, newerThan, displayAuthorUrl }) => {
     return (
         <div id="author-profile">
             <div id="author-posts">
-                {posts.map((post) => (
+                {posts.map(post => (
                     <div key={post.id} className="author-post single-post-show">
                         <Post post={post}></Post>
                     </div>
