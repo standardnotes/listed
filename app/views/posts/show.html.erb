@@ -1,5 +1,5 @@
 <% subscribed_to_author = @subscriber && @subscriber.subscribed_to_author(@post.author) %>
-<% subscription_for_author = @subscriber.subscription_for_author(@post.author) %>
+<% subscription_for_author = @subscriber && @subscriber.subscription_for_author(@post.author) %>
 
 <%= react_component("PostShow", props: {
     post: @post.as_json(methods: [:author_relative_url, :preview_text, :rendered_text], include: { author: { methods: :title } }),
