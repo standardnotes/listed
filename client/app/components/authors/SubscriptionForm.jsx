@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-export default ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author, authenticityToken }) => {
+const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author, authenticityToken }) => {
+    const [ email, setEmail ] = useState("");
+
     const emailSubscribe = event => {
         event.preventDefault();
 
@@ -10,6 +12,9 @@ export default ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess
                 headers: {
                     "X-CSRF-Token": authenticityToken,
                 },
+                data: {
+                    email: email
+                }
             })
             .then(response => {
                 window.location.href = response.request.responseURL;
@@ -19,26 +24,28 @@ export default ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess
     return (
         <div>
             {subscribedToAuthor ? (
-                (subscriptionSuccess || !subscriptionForAuthor.verified) ? (
+                subscriptionSuccess || !subscriptionForAuthor.verified ? (
                     <div className="sublabel succes">
                         <span>Success. Please check your email to confirm your subscription.</span>
                     </div>
                 ) : (
-                    <div className="sublabel">
-                        You're subscribed to this blog.
-                    </div>
+                    <div className="sublabel">You're subscribed to this blog.</div>
                 )
             ) : (
-                <form onSubmit={e => emailSubscribe(e)}>
-                    <label>
-                        Subscribe to @{author.username}'s posts
-                    </label>
-                    <div className="sublabel">
-                        You'll only receive email when {author.title} publishes a new post
-                    </div>
-                    <input type="email" id="email" placeholder="Your email"></input>
+                <form onSubmit={(e) => emailSubscribe(e)}>
+                    <label>Subscribe to @{author.username}'s posts</label>
+                    <div className="sublabel">You'll only receive email when {author.title} publishes a new post</div>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Your email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    ></input>
                 </form>
             )}
         </div>
     );
 };
+
+export default (props) => <SubscriptionForm {...props} />;

@@ -41,7 +41,7 @@ const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCap
                         required="required"
                         placeholder="Enter the image value (case sensitive)"
                         value={captcha}
-                        onChange={(e) => setCaptcha(e.target.value)}
+                        onChange={e => setCaptcha(e.target.value)}
                     ></input>
                     <div className="mt-10">
                         <input type="submit" value="Verify Subscription"></input>
