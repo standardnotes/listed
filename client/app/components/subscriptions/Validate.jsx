@@ -30,19 +30,23 @@ const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCap
             </p>
             <div id="captcha-form" className="form-box">
                 <form onSubmit={(e) => submitValidate(e)}>
-                    <img src={simpleCaptchaImageUrl} alt="captcha"></img>
-                    <input
-                        type="text"
-                        name="captcha"
-                        id="captcha"
-                        autoComplete="off"
-                        autoCorrect="off"
-                        autoCapitalize="off"
-                        required="required"
-                        placeholder="Enter the image value (case sensitive)"
-                        value={captcha}
-                        onChange={e => setCaptcha(e.target.value)}
-                    ></input>
+                    <div className="simple_captcha_image">
+                        <img src={simpleCaptchaImageUrl} alt="captcha"></img>
+                    </div>
+                    <div className="simple_capctha_field">
+                        <input
+                            type="text"
+                            name="captcha"
+                            id="captcha"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            autoCapitalize="off"
+                            required="required"
+                            placeholder="Enter the image value (case sensitive)"
+                            value={captcha}
+                            onChange={e => setCaptcha(e.target.value)}
+                        ></input>
+                    </div>
                     <div className="mt-10">
                         <input type="submit" value="Verify Subscription"></input>
                     </div>

@@ -1,0 +1,9 @@
+<% sent = params[:sent] %>
+<% new_author_guestbook_entry_url = new_author_guestbook_entry_path(@author) %>
+
+<%= react_component("Guestbook", props: {
+    sent: sent,
+    author: @author.as_json(methods: [:title, :url]),
+    entries: @entries,
+    newAuthorGuestbookEntryUrl: new_author_guestbook_entry_url
+}) %>
