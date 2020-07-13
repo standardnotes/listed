@@ -1,0 +1,6 @@
+<% new_author_guestbook_entry_url = new_author_guestbook_entry_path(@display_author) %>
+
+<%= react_component("AuthorTip", props: {
+    displayAuthor: @display_author.as_json(methods: :title, include: :credentials),
+    newAuthorGuestbookEntryUrl: new_author_guestbook_entry_url
+}) %>
