@@ -1,5 +1,12 @@
 <%= react_component("SubscriptionValidate", props: {
-    subscription: @subscription.as_json(include: { author: { methods: :title } }),
+    subscription: @subscription.as_json(
+        only: :id,
+        include: { 
+            author: { 
+                methods: :title 
+            }
+        }
+    ),
     authenticityToken: form_authenticity_token,
     simpleCaptchaKey: simple_captcha_key,
     simpleCaptchaImageUrl: simple_captcha_image_url(simple_captcha_key)

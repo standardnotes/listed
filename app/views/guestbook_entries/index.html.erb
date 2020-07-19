@@ -3,7 +3,12 @@
 
 <%= react_component("Guestbook", props: {
     sent: sent,
-    author: @author.as_json(methods: [:title, :url]),
-    entries: @entries,
+    author: @author.as_json(
+        only: [],
+        methods: [:title, :url]
+    ),
+    entries: @entries.as_json(
+        only: [:id, :text]
+    ),
     newAuthorGuestbookEntryUrl: new_author_guestbook_entry_url
 }) %>

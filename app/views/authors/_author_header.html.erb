@@ -7,9 +7,23 @@
 
 <%= react_component("AuthorHeader", props: {
     homeUrl: home_url,
-    post: post.as_json(methods: :author_relative_url),
-    author: author.as_json(methods: [:title, :url_segment, :url, :word_count, :personal_link], include: :credentials),
+    post: post.as_json(
+        only: [:title, :page],
+        methods: :author_relative_url
+    ),
+    author: author.as_json(
+        only: [:guestbook_disabled, :newsletter_disabled, :bio, :personal_link, :twitter, :header_image_url],
+        methods: [:title, :url_segment, :url, :word_count, :personal_link],
+        include: {
+            credentials: {
+                only: :id
+            }
+        }
+    ),
     privatePost: private_post,
-    pages: pages.as_json(methods: [:author_relative_url]),
+    pages: pages.as_json(
+        only: [:id, :title],
+        methods: [:author_relative_url]
+    ),
     authorGuestbookEntriesUrl: author_guestbook_entries_url
 }) %>

@@ -1,5 +1,8 @@
 <%= react_component("GuestbookNew", props: {
-    author: @author.as_json(methods: :title),
+    author: @author.as_json(
+        only: :id,
+        methods: :title
+    ),
     authenticityToken: form_authenticity_token,
     simpleCaptchaKey: simple_captcha_key,
     simpleCaptchaImageUrl: simple_captcha_image_url(simple_captcha_key)

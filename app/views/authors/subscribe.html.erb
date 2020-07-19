@@ -2,7 +2,10 @@
 <% subscription_for_author = @subscriber && @subscriber.subscription_for_author(@display_author) %>
 
 <%= react_component("AuthorSubscribe", props: {
-    displayAuthor: @display_author.as_json(methods: [:title, :rss_url]),
+    displayAuthor: @display_author.as_json(
+        only: [:id, :username],
+        methods: [:title, :rss_url]
+    ),
     subscribedToAuthor: subscribed_to_author,
     subscriptionForAuthor: subscription_for_author,
     subscriptionSuccess: flash[:subscription_success],
