@@ -1,3 +1,5 @@
+<% show_simple_captcha %>
+
 <%= react_component("SubscriptionValidate", props: {
     subscription: @subscription.as_json(
         only: :id,

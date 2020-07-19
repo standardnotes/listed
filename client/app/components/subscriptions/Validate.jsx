@@ -26,7 +26,7 @@ const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCap
         <div>
             <p>
                 Please complete the captcha below to finalize your subscription to{" "}
-                <strong>{subscription.author.title}</strong>
+                <strong>{subscription.author.title}</strong>.
             </p>
             <div id="captcha-form" className="form-box">
                 <form onSubmit={(e) => submitValidate(e)}>
