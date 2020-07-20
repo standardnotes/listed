@@ -33,7 +33,7 @@ const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCap
                     <div className="simple_captcha_image">
                         <img src={simpleCaptchaImageUrl} alt="captcha"></img>
                     </div>
-                    <div className="simple_capctha_field">
+                    <div className="simple_captcha_field">
                         <input
                             type="text"
                             name="captcha"
