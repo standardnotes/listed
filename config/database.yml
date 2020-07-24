@@ -16,7 +16,7 @@ default: &default
   pool: <%= ENV['DB_POOL_SIZE'] %>
   wait_timeout: <%= ENV['DB_WAIT_TIMEOUT'] %>
   username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  password: "<%= ENV['DB_PASSWORD'] %>"
   database: <%= ENV['DB_DATABASE'] %>
   host: <%= ENV['DB_HOST'] %>
   port: <%= ENV['DB_PORT'] %>
