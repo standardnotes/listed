@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
-    const [ captcha, setCaptcha ] = useState("");
+    const [captcha, setCaptcha] = useState("");
 
     const submitValidate = event => {
         event.preventDefault();
@@ -29,7 +29,7 @@ const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCap
                 <strong>{subscription.author.title}</strong>.
             </p>
             <div id="captcha-form" className="form-box">
-                <form onSubmit={(e) => submitValidate(e)}>
+                <form onSubmit={e => submitValidate(e)}>
                     <div className="simple_captcha_image">
                         <img src={simpleCaptchaImageUrl} alt="captcha"></img>
                     </div>

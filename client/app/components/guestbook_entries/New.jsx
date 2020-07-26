@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
-    const [ captchaError, setCaptchaError ] = useState(false);
-    const [ text, setText ] = useState("");
-    const [ signerEmail, setSignerEmail ] = useState("");
-    const [ donationInfo, setDonationInfo ] = useState("");
-    const [ captcha, setCaptcha ] = useState("");
+    const [captchaError, setCaptchaError] = useState(false);
+    const [text, setText] = useState("");
+    const [signerEmail, setSignerEmail] = useState("");
+    const [donationInfo, setDonationInfo] = useState("");
+    const [captcha, setCaptcha] = useState("");
 
     const submitEntry = event => {
         event.preventDefault();

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author, authenticityToken }) => {
-    const [ email, setEmail ] = useState("");
+    const [email, setEmail] = useState("");
 
     const emailSubscribe = event => {
         event.preventDefault();
@@ -32,7 +32,7 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
                     <div className="sublabel">You're subscribed to this blog.</div>
                 )
             ) : (
-                <form onSubmit={(e) => emailSubscribe(e)}>
+                <form onSubmit={e => emailSubscribe(e)}>
                     <label>Subscribe to @{author.username}'s posts</label>
                     <div className="sublabel">You'll only receive email when {author.title} publishes a new post</div>
                     <input
