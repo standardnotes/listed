@@ -3,9 +3,11 @@ import axios from "axios";
 
 const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
     const [captchaError, setCaptchaError] = useState(false);
-    const [text, setText] = useState("");
-    const [signerEmail, setSignerEmail] = useState("");
-    const [donationInfo, setDonationInfo] = useState("");
+    const [guestbookEntry, setGuestbookEntry] = useState({
+        text: "",
+        signer_email: "",
+        donation_info: ""
+    });
     const [captcha, setCaptcha] = useState("");
 
     const submitEntry = event => {
@@ -18,11 +20,7 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                     "X-CSRF-Token": authenticityToken,
                 },
                 data: {
-                    guestbook_entry: {
-                        text: text,
-                        signer_email: signerEmail,
-                        donation_info: donationInfo
-                    },
+                    guestbook_entry: guestbookEntry,
                     captcha: captcha,
                     captcha_key: simpleCaptchaKey
                 }
@@ -35,6 +33,12 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                 }
             });
     };
+
+    const editGuestbookEntry = (key, value) => (
+        setGuestbookEntry(prevState => (
+            { ...prevState, [key]: value }
+        ))
+    );
 
     return(
         <div>
@@ -51,8 +55,8 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                         </label>
                         <textarea
                             className="field text-input tall"
-                            value={text}
-                            onChange={e => setText(e.target.value)}
+                            value={guestbookEntry.text}
+                            onChange={e => editGuestbookEntry("text", e.target.value)}
                         ></textarea>
                     </div>
                     <div className="form-section mt-10">
@@ -61,8 +65,8 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                         </label>
                         <input
                             className="field text-input"
-                            value={signerEmail}
-                            onChange={e => setSignerEmail(e.target.value)}
+                            value={guestbookEntry.signer_email}
+                            onChange={e => editGuestbookEntry("signer_email", e.target.value)}
                         ></input>
                     </div>
                     <div className="form-section mt-10">
@@ -74,8 +78,8 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                         </div>
                         <textarea
                             className="field text-input mid-tall"
-                            value={donationInfo}
-                            onChange={e => setDonationInfo(e.target.value)}
+                            value={guestbookEntry.donation_info}
+                            onChange={e => editGuestbookEntry("donation_info", e.target.value)}
                         ></textarea>
                     </div>
                     <div className="form-section mt-10">
