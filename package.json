@@ -7,11 +7,13 @@
     "@rails/webpacker": "4.2.2",
     "axios": "^0.19.2",
     "js-yaml": "^3.14.0",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-on-rails": "11.3.0",
     "react-router": "^5.2.0",
     "sn-stylekit": "2.0.19",
+    "turbolinks": "^5.2.0",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"

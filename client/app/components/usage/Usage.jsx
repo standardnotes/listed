@@ -3,7 +3,7 @@ import axios from 'axios';
 import HowTo from './HowTo';
 
 export default ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
-    const generateAuthorLink = (event) => {
+    const generateAuthorLink = event => {
         event.preventDefault();
 
         axios
@@ -12,7 +12,7 @@ export default ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
                     "X-CSRF-Token": authenticityToken,
                 },
             })
-            .then((response) => {
+            .then(response => {
                 window.location.href = response.request.responseURL;
             });
     };
@@ -69,7 +69,7 @@ export default ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
             <div className="mt-40">
                 <h3>New Author?</h3>
                 {!secretUrl ? (
-                    <form onSubmit={(e) => generateAuthorLink(e)}>
+                    <form onSubmit={e => generateAuthorLink(e)}>
                         <button className="black mt-20" type="submit">
                             Generate Author Link
                         </button>

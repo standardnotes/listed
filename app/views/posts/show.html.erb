@@ -1,0 +1,31 @@
+<% subscribed_to_author = @subscriber && @subscriber.subscribed_to_author(@post.author) %>
+<% subscription_for_author = @subscriber && @subscriber.subscription_for_author(@post.author) %>
+
+<%= react_component("PostShow", props: {
+    post: @post.as_json(
+        only: [:title, :unlisted, :page, :created_at],
+        methods: [:author_relative_url, :preview_text, :rendered_text],
+        include: { 
+            author: { 
+                only: [:id, :username, :newsletter_disabled],
+                methods: :title 
+            }
+        }
+    ),
+    previous: @previous.as_json(
+        only: [:title, :unlisted, :page, :created_at],
+        methods: [:author_relative_url, :preview_text, :rendered_text]
+    ),
+    next: @next.as_json(
+        only: [:title, :unlisted, :page, :created_at],
+        methods: [:author_relative_url, :preview_text, :rendered_text]
+    ),
+    authorPosts: @author_posts.as_json(
+        only: [:id, :title, :created_at],
+        methods: :author_relative_url
+    ),
+    subscribedToAuthor: subscribed_to_author,
+    subscriptionForAuthor: subscription_for_author,
+    subscriptionSuccess: flash[:subscription_success],
+    authenticityToken: form_authenticity_token
+}) %>

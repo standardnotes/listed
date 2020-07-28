@@ -25,9 +25,6 @@ class GuestbookEntriesController < ApplicationController
     if simple_captcha_valid?
       @entry.save
       redirect_to_guestbook(sent: true)
-    else
-      @captcha_error = true
-      render :new
     end
   end
 

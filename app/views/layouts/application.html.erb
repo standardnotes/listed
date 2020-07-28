@@ -44,7 +44,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'stylekit', 'data-turbolinks-track': 'reload' %>
 
-    <%= javascript_pack_tag('clientRegistration', 'data-turbolinks-track': true, defer: true) %>
+    <%= javascript_pack_tag('clientRegistration', 'data-turbolinks-track': 'reload', defer: true) %>
 
     <% if @display_author %>
       <%= auto_discovery_link_tag( :rss, @display_author.url + "/feed.rss" ) %>

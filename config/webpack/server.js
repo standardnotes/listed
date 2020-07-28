@@ -6,7 +6,7 @@ const webpack = require("webpack");
 environment.plugins.insert(
     "DefinePlugin",
     new webpack.DefinePlugin({
-        TRACE_TURBOLINKS: true,
+        TRACE_TURBOLINKS: devBuild === "development",
         "process.env": {
             NODE_ENV: devBuild,
         },

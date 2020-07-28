@@ -1,9 +1,0 @@
-%p
-  Please complete the captcha below to finalize your subscription to
-  %strong #{@subscription.author.title}.
-
-#captcha-form.form-box
-  = form_tag url_for(:controller => 'subscriptions', :action => 'submit_validate'), :method => 'post' do |f|
-    = show_simple_captcha
-    .mt-10
-      = submit_tag "Verify Subscription"

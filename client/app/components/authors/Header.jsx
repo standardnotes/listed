@@ -24,7 +24,7 @@ export default ({ homeUrl, post, author, privatePost, pages, authorGuestbookEntr
                 <div className="right">
                     {pages && !privatePost && (
                         <div className="pages-menu">
-                            {pages.map((page) => (
+                            {pages.map(page => (
                                 <a key={page.id} href={page.author_relative_url} className="page-link">
                                     {page.title}
                                 </a>
