@@ -1,5 +1,6 @@
 import ReactOnRails from "react-on-rails";
 import AuthorHeader from "../components/authors/Header";
+import AuthorSettings from "../components/authors/Settings";
 import AuthorShow from "../components/authors/Show";
 import AuthorSubscribe from "../components/authors/Subscribe";
 import AuthorTip from "../components/authors/Tip";
@@ -15,6 +16,7 @@ import Usage from "../components/usage/Usage";
 
 ReactOnRails.register({
     AuthorHeader,
+    AuthorSettings,
     AuthorShow,
     AuthorSubscribe,
     AuthorTip,

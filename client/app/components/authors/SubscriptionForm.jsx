@@ -48,4 +48,4 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
     );
 };
 
-export default (props) => <SubscriptionForm {...props} />;
+export default props => <SubscriptionForm {...props} />;

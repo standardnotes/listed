@@ -56,4 +56,4 @@ const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCap
     );
 };
 
-export default (props) => <Validate {...props} />;
+export default props => <Validate {...props} />;

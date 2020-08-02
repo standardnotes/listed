@@ -228,6 +228,7 @@ class AuthorsController < ApplicationController
   end
 
   def update
+    @author = @display_author
     @author.username = a_params[:username]
     @author.display_name = a_params[:display_name]
     @author.bio = a_params[:bio]
@@ -246,7 +247,7 @@ class AuthorsController < ApplicationController
     @author.newsletter_disabled = a_params[:newsletter_disabled]
 
     if @author.save
-      redirect_to @author.url
+      redirect_to @author.url, :status => 303
     else
       redirect_to :back
     end

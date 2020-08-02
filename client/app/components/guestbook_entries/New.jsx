@@ -114,4 +114,4 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
     );
 };
 
-export default (props) => <New {...props} />;
+export default props => <New {...props} />;

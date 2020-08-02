@@ -1,0 +1,20 @@
+<%= react_component("AuthorSettings", props: {
+    author: @author.as_json(
+        only: [
+            :id,
+            :username,
+            :display_name,
+            :bio,
+            :link,
+            :twitter,
+            :email,
+            :meta_image_url,
+            :header_image_url,
+            :guestbook_disabled,
+            :newsletter_disabled, 
+            :hide_from_homepage
+        ],
+        methods: [:accessible_via]
+    ),
+    authenticityToken: form_authenticity_token
+}) %>
