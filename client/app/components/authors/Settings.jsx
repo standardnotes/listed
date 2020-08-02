@@ -1,5 +1,6 @@
 import React from "react";
 import EditAuthor from "./settings/EditAuthor";
+import PaymentDetails from "./settings/PaymentDetails";
 
 export default ({ author, authenticityToken }) => {
     return (
@@ -18,6 +19,7 @@ export default ({ author, authenticityToken }) => {
                 ))}
             </div>
             <EditAuthor author={author} authenticityToken={authenticityToken} />
+            <PaymentDetails author={author} />
         </div>
     );
 };

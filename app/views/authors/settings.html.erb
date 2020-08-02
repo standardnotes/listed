@@ -12,9 +12,11 @@
             :header_image_url,
             :guestbook_disabled,
             :newsletter_disabled, 
-            :hide_from_homepage
+            :hide_from_homepage,
+            :secret
         ],
-        methods: [:accessible_via]
+        methods: [:accessible_via],
+        include: :credentials
     ),
     authenticityToken: form_authenticity_token
 }) %>
