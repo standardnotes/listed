@@ -55,16 +55,18 @@ const Edit = ({ author, authenticityToken, authorCredentialUrl, credential }) =>
             <div className="mt-20 form-box full">
                 <form onSubmit={e => submitEditedCredential(e)}>
                     <div className="form-section">
-                        <label className="label">Key</label>
+                        <label htmlFor="credential-key" className="label">Key</label>
                         <input
+                            id="credential-key"
                             className="field text-input"
                             value={editedCredential.key}
                             onChange={e => editCredential("key", e.target.value)}
                         ></input>
                     </div>
                     <div className="form-section mt-10">
-                        <label className="label">Value</label>
+                        <label htmlFor="credential-value" className="label">Value</label>
                         <input
+                            id="credential-value"
                             className="field text-input"
                             value={editedCredential.value}
                             onChange={e => editCredential("value", e.target.value)}
