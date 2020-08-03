@@ -15,8 +15,16 @@
             :hide_from_homepage,
             :secret
         ],
-        methods: [:accessible_via],
-        include: :credentials
+        methods: [:accessible_via, :url],
+        include: {
+            credentials: {
+                only: [:id, :key, :value]
+            },
+            domain: {
+                only: [:approved, :active]
+            }
+        }
     ),
-    authenticityToken: form_authenticity_token
+    authenticityToken: form_authenticity_token,
+    customDomainIP: ENV["CUSTOM_DOMAIN_IP"]
 }) %>

@@ -254,6 +254,8 @@ class AuthorsController < ApplicationController
   end
 
   def domain_request
+    @author = @display_author
+
     if !@author.domain
       @author.domain = Domain.new
     end

@@ -1,8 +1,9 @@
 import React from "react";
 import EditAuthor from "./settings/EditAuthor";
 import PaymentDetails from "./settings/PaymentDetails";
+import CustomDomain from "./settings/CustomDomain";
 
-export default ({ author, authenticityToken }) => {
+export default ({ author, authenticityToken, customDomainIP }) => {
     return (
         <div id="settings" className="sn-component single-post-show">
             <h3>Settings</h3>
@@ -20,6 +21,7 @@ export default ({ author, authenticityToken }) => {
             </div>
             <EditAuthor author={author} authenticityToken={authenticityToken} />
             <PaymentDetails author={author} />
+            <CustomDomain author={author} authenticityToken={authenticityToken} customDomainIP={customDomainIP} />
         </div>
     );
 };
