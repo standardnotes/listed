@@ -26,5 +26,21 @@
         }
     ),
     authenticityToken: form_authenticity_token,
-    customDomainIP: ENV["CUSTOM_DOMAIN_IP"]
+    customDomainIP: ENV["CUSTOM_DOMAIN_IP"],
+    guestbookEntries: @guestbook_entries.as_json(
+        only: [
+            :id,
+            :text,
+            :created_at,
+            :signer_email,
+            :donation_info,
+            :public
+        ],
+        methods: [
+            :approval_url,
+            :unapproval_url,
+            :spam_url,
+            :deletion_url
+        ],
+    )
 }) %>
