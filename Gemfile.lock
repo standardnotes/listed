@@ -64,6 +64,9 @@ GEM
     aws-sdk-elasticloadbalancingv2 (1.47.0)
       aws-sdk-core (~> 3, >= 3.99.0)
       aws-sigv4 (~> 1.1)
+    aws-sdk-route53 (1.40.0)
+      aws-sdk-core (~> 3, >= 3.99.0)
+      aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.1)
       aws-eventstream (~> 1, >= 1.0.2)
     bindex (0.8.1)
@@ -130,6 +133,11 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    lograge (0.11.2)
+      actionpack (>= 4)
+      activesupport (>= 4)
+      railties (>= 4)
+      request_store (~> 1.0)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -205,6 +213,8 @@ GEM
       rainbow (~> 3.0)
     redcarpet (3.5.0)
     redis (4.1.3)
+    request_store (1.5.0)
+      rack (>= 1.4)
     rouge (3.16.0)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
@@ -273,6 +283,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-acm (~> 1.34)
   aws-sdk-elasticloadbalancingv2 (~> 1.47)
+  aws-sdk-route53 (~> 1.40)
   byebug
   capistrano
   capistrano-bundler
@@ -286,6 +297,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.1.1)
   haml-rails
   listen (~> 3.0.5)
+  lograge (~> 0.11.2)
   mini_racer
   mysql2
   puma (~> 4.3)

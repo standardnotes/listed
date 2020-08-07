@@ -56,3 +56,7 @@ gem "rails-letsencrypt", "~> 0.9.0"
 gem "aws-sdk-acm", "~> 1.34"
 
 gem "aws-sdk-elasticloadbalancingv2", "~> 1.47"
+
+gem "lograge", "~> 0.11.2"
+
+gem "aws-sdk-route53", "~> 1.40"

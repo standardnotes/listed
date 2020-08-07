@@ -12,7 +12,8 @@ class CreateLetsencryptCertificates < ActiveRecord::Migration[5.0]
       t.datetime :renew_after
       t.string   :verification_path
       t.string   :verification_string
-      t.string   :arn
+      t.string   :aws_arn
+      t.string   :aws_hosted_zone_id
 
       t.index    :domain
       t.index    :renew_after
