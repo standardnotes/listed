@@ -3,8 +3,9 @@ import EditAuthor from "./settings/EditAuthor";
 import PaymentDetails from "./settings/PaymentDetails";
 import CustomDomain from "./settings/CustomDomain";
 import GuestbookEntries from "./settings/GuestbookEntries";
+import AllPosts from "./settings/AllPosts";
 
-export default ({ author, authenticityToken, customDomainIP, guestbookEntries }) => {
+export default ({ author, authenticityToken, customDomainIP, guestbookEntries, posts }) => {
     return (
         <div id="settings" className="sn-component single-post-show">
             <h3>Settings</h3>
@@ -25,6 +26,8 @@ export default ({ author, authenticityToken, customDomainIP, guestbookEntries })
             <CustomDomain author={author} authenticityToken={authenticityToken} customDomainIP={customDomainIP} />
             <hr className="mt-30" />
             <GuestbookEntries guestbookEntries={guestbookEntries} />
+            <hr className="mt-30" />
+            <AllPosts posts={posts} author={author} />
         </div>
     );
 };

@@ -9,7 +9,7 @@ export default ({ guestbookEntries }) => {
             .then(response => {
                 window.location.href = response.request.responseURL;
             })
-    }
+    };
 
     return(
         <div>

@@ -42,5 +42,14 @@
             :spam_url,
             :deletion_url
         ],
+    ),
+    posts: @posts.as_json(
+        only: [
+            :id,
+            :title,
+            :unlisted,
+            :created_at
+        ],
+        methods: :url
     )
 }) %>
