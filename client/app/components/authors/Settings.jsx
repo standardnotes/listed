@@ -4,8 +4,9 @@ import PaymentDetails from "./settings/PaymentDetails";
 import CustomDomain from "./settings/CustomDomain";
 import GuestbookEntries from "./settings/GuestbookEntries";
 import AllPosts from "./settings/AllPosts";
+import DeleteBlog from "./settings/DeleteBlog";
 
-export default ({ author, authenticityToken, customDomainIP, guestbookEntries, posts }) => {
+export default ({ author, authenticityToken, customDomainIP, guestbookEntries, posts, deleteAllDataError }) => {
     return (
         <div id="settings" className="sn-component single-post-show">
             <h3>Settings</h3>
@@ -28,6 +29,8 @@ export default ({ author, authenticityToken, customDomainIP, guestbookEntries, p
             <GuestbookEntries guestbookEntries={guestbookEntries} />
             <hr className="mt-30" />
             <AllPosts posts={posts} author={author} />
+            <hr className="mt-30" />
+            <DeleteBlog deleteAllDataError={deleteAllDataError} author={author} authenticityToken={authenticityToken} />
         </div>
     );
 };
