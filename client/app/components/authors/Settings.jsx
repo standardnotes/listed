@@ -5,6 +5,7 @@ import CustomDomain from "./settings/CustomDomain";
 import GuestbookEntries from "./settings/GuestbookEntries";
 import AllPosts from "./settings/AllPosts";
 import DeleteBlog from "./settings/DeleteBlog";
+import HowTo from "../usage/HowTo";
 
 export default ({ author, authenticityToken, customDomainIP, guestbookEntries, posts, deleteAllDataError }) => {
     return (
@@ -31,6 +32,8 @@ export default ({ author, authenticityToken, customDomainIP, guestbookEntries, p
             <AllPosts posts={posts} author={author} />
             <hr className="mt-30" />
             <DeleteBlog deleteAllDataError={deleteAllDataError} author={author} authenticityToken={authenticityToken} />
+            <hr className="mt-30" />
+            <HowTo />
         </div>
     );
 };
