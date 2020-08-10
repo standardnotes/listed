@@ -161,8 +161,8 @@ const EditAuthor = ({ author, authenticityToken }) => {
                         id="author-guestbook-disabled"
                         type="checkbox"
                         className="field inline"
-                        value={editedAuthor.guestbook_disabled}
-                        onChange={e => editAuthor("guestbook_disabled", e.target.checked)}
+                        defaultChecked={editedAuthor.guestbook_disabled}
+                        onClick={e => editAuthor("guestbook_disabled", e.target.checked)}
                     ></input>
                     <label htmlFor="author-guestbook-disabled" className="label inline">
                         Disable guestbook
@@ -173,8 +173,8 @@ const EditAuthor = ({ author, authenticityToken }) => {
                         id="author-newsletter-disabled"
                         type="checkbox"
                         className="field inline"
-                        value={editedAuthor.newsletter_disabled}
-                        onChange={e => editAuthor("newsletter_disabled", e.target.checked)}
+                        defaultChecked={editedAuthor.newsletter_disabled}
+                        onClick={e => editAuthor("newsletter_disabled", e.target.checked)}
                     ></input>
                     <label htmlFor="author-newsletter-disabled" className="label inline">
                         Disable email subscription and newsletter
@@ -185,8 +185,8 @@ const EditAuthor = ({ author, authenticityToken }) => {
                         id="author-hide-from-homepage"
                         type="checkbox"
                         className="field inline"
-                        value={editedAuthor.hide_from_homepage}
-                        onChange={e => editAuthor("hide_from_homepage", e.target.checked)}
+                        defaultChecked={editedAuthor.hide_from_homepage}
+                        onClick={e => editAuthor("hide_from_homepage", e.target.checked)}
                     ></input>
                     <label htmlFor="author-hide-from-homepage" className="label inline">
                         Hide profile from homepage 'Recent Authors'
