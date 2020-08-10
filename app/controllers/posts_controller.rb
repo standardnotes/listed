@@ -99,7 +99,7 @@ class PostsController < ApplicationController
     posts = Post.where(:unlisted => false).all
     days = []
     posts.group_by{|x| x.created_at.strftime("%B %e, %Y")}.each do |day, posts|
-      days.push({:day => day, :posts => posts.reverse})
+      days.push({:day => day, :posts => posts.as_json(only: [:id, :title], methods: :tokenized_url).reverse})
     end
     @days = days.reverse
   end

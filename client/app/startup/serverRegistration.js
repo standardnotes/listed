@@ -7,6 +7,7 @@ import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
 import PostShow from "../components/posts/Show";
+import Posts from "../components/posts/Posts";
 import SharedFooter from "../components/shared/Footer";
 import SubscriptionConfirm from "../components/subscriptions/Confirm";
 import SubscriptionValidate from "../components/subscriptions/Validate";
@@ -23,6 +24,7 @@ ReactOnRails.register({
     GuestbookNew,
     Help,
     PostShow,
+    Posts,
     SharedFooter,
     SubscriptionConfirm,
     SubscriptionValidate,
