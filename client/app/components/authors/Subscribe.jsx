@@ -8,7 +8,7 @@ export default ({ displayAuthor, subscribedToAuthor, subscriptionForAuthor, subs
                 You can follow along with
                 <strong> {displayAuthor.title} </strong>
                 by subscribing to updates via email, or via their{" "}
-                <a href={displayAuthor.rss_url}>RSS feed</a>.
+                <a href={displayAuthor.rss_url} data-turbolinks="false">RSS feed</a>.
             </p>
             <div id="subscription-form" className="form-box">
                 <SubscriptionForm
