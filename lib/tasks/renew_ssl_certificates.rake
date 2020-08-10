@@ -12,6 +12,11 @@ namespace :ssl do
     Rake::Task['letsencrypt:renew'].invoke
 
     renewable_certificates.each do |certificate|
+      unless certificate.certificate?
+        Rails.logger.info "Certificate for domain #{certificate.domain} is not issued"
+        next
+      end
+
       response = acm.import_certificate({
         certificate_arn: certificate.aws_arn,
         certificate: certificate.certificate,
