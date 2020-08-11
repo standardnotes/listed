@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   get '/:post_token' => 'posts#show'
   get '/p/:post_token' => 'posts#show'
 
-  root 'usage#index'
+  get "/healthcheck" => "health_check#index"
 
+  root 'usage#index'
 end
