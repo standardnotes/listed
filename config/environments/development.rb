@@ -45,6 +45,7 @@ Rails.application.configure do
   config.assets.debug = true
 
   # Suppress logger output for asset requests.
+  config.assets.logger = false
   config.assets.quiet = true
 
   # config.active_job.queue_adapter = :inline
