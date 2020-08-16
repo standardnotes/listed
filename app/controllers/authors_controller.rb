@@ -228,7 +228,6 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    @author = @display_author
     @author.username = a_params[:username]
     @author.display_name = a_params[:display_name]
     @author.bio = a_params[:bio]
@@ -254,8 +253,6 @@ class AuthorsController < ApplicationController
   end
 
   def domain_request
-    @author = @display_author
-
     if !@author.domain
       @author.domain = Domain.new
     end

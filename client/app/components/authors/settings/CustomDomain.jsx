@@ -9,7 +9,7 @@ const CustomDomain = ({ author, authenticityToken, customDomainIP }) => {
         event.preventDefault();
 
         axios
-            .post(`/authors/${author.id}/domain_request`, null, {
+            .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
                 headers: {
                     "X-CSRF-Token": authenticityToken,
                 },

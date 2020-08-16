@@ -34,7 +34,7 @@ const EditAuthor = ({ author, authenticityToken }) => {
         event.preventDefault();
 
         axios
-            .put(`/authors/${author.id}`, null, {
+            .put(`/authors/${author.id}?secret=${author.secret}`, null, {
                 headers: {
                     "X-CSRF-Token": authenticityToken,
                 },
