@@ -4,7 +4,7 @@
         methods: :title
     ),
     posts: @posts.as_json(
-        only: [:title, :created_at],
+        only: [:id, :title, :created_at],
         methods: [:author_relative_url, :rendered_text]
     ),
     unsubscribeUrl: @unsubscribe_url

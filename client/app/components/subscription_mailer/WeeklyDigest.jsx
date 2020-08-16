@@ -8,7 +8,7 @@ export default ({ author, posts, unsubscribeUrl }) => {
         <div>
             <p>{author.title} published some new posts this week:</p>
             {posts.map(post => (
-                <div>
+                <div key={post.id}>
                     <h3>
                         <a className="unstyled" href={post.author_relative_url}>
                             {post.title}
