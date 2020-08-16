@@ -12,6 +12,7 @@ import SharedFooter from "../components/shared/Footer";
 import SubscriptionConfirm from "../components/subscriptions/Confirm";
 import SubscriptionMailerConfirmSubscription from "../components/subscription_mailer/ConfirmSubscription";
 import SubscriptionMailerNewPost from "../components/subscription_mailer/NewPost";
+import SubscriptionMailerNewSubscription from "../components/subscription_mailer/NewSubscription";
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import SubscriptionUnsubscribe from "../components/subscriptions/Unsubscribe";
 import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequency";
@@ -31,6 +32,7 @@ ReactOnRails.register({
     SubscriptionConfirm,
     SubscriptionMailerConfirmSubscription,
     SubscriptionMailerNewPost,
+    SubscriptionMailerNewSubscription,
     SubscriptionValidate,
     SubscriptionUnsubscribe,
     SubscriptionUpdateFrequency,
