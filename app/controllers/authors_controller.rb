@@ -281,7 +281,6 @@ class AuthorsController < ApplicationController
       @author.destroy
       redirect_to :root
     rescue => e
-      logger.debug "Delete all data error: #{e}"
       puts e.message
       redirect_to :back, :flash => { 
         :error_delete_all_data => 'Unable to delete your data. Please try again later.' 
