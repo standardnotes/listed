@@ -10,6 +10,7 @@ import PostShow from "../components/posts/Show";
 import Posts from "../components/posts/Posts";
 import SharedFooter from "../components/shared/Footer";
 import SubscriptionConfirm from "../components/subscriptions/Confirm";
+import SubscriptionMailerConfirmSubscription from "../components/subscription_mailer/ConfirmSubscription";
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import SubscriptionUnsubscribe from "../components/subscriptions/Unsubscribe";
 import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequency";
@@ -27,6 +28,7 @@ ReactOnRails.register({
     Posts,
     SharedFooter,
     SubscriptionConfirm,
+    SubscriptionMailerConfirmSubscription,
     SubscriptionValidate,
     SubscriptionUnsubscribe,
     SubscriptionUpdateFrequency,
