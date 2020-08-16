@@ -9,6 +9,10 @@ class AuthorsMailerPreview < ActionMailer::Preview
     AuthorsMailer.domain_invalid(Author.first)
   end
 
+  def featured
+    AuthorsMailer.featured(Author.first)
+  end
+
   def unread_guestbook_entries
     @author = Author.first
     @entries = @author.guestbook_entries
