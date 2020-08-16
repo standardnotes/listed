@@ -5,6 +5,10 @@ class AuthorsMailerPreview < ActionMailer::Preview
     AuthorsMailer.domain_approved(Author.first)
   end
 
+  def domain_invalid
+    AuthorsMailer.domain_invalid(Author.first)
+  end
+
   def unread_guestbook_entries
     @author = Author.first
     @entries = @author.guestbook_entries

@@ -4,6 +4,7 @@ import AuthorShow from "../components/authors/Show";
 import AuthorSubscribe from "../components/authors/Subscribe";
 import AuthorTip from "../components/authors/Tip";
 import AuthorsMailerDomainApproved from "../components/authors_mailer/DomainApproved";
+import AuthorsMailerDomainInvalid from "../components/authors_mailer/DomainInvalid";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -26,6 +27,7 @@ ReactOnRails.register({
     AuthorSubscribe,
     AuthorTip,
     AuthorsMailerDomainApproved,
+    AuthorsMailerDomainInvalid,
     Guestbook,
     GuestbookNew,
     Help,
