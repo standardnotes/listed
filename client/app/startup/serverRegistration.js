@@ -13,6 +13,7 @@ import SubscriptionConfirm from "../components/subscriptions/Confirm";
 import SubscriptionMailerConfirmSubscription from "../components/subscription_mailer/ConfirmSubscription";
 import SubscriptionMailerNewPost from "../components/subscription_mailer/NewPost";
 import SubscriptionMailerNewSubscription from "../components/subscription_mailer/NewSubscription";
+import SubscriptionMailerWeeklyDigest from "../components/subscription_mailer/WeeklyDigest";
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import SubscriptionUnsubscribe from "../components/subscriptions/Unsubscribe";
 import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequency";
@@ -33,6 +34,7 @@ ReactOnRails.register({
     SubscriptionMailerConfirmSubscription,
     SubscriptionMailerNewPost,
     SubscriptionMailerNewSubscription,
+    SubscriptionMailerWeeklyDigest,
     SubscriptionValidate,
     SubscriptionUnsubscribe,
     SubscriptionUpdateFrequency,

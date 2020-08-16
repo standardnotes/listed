@@ -1,0 +1,11 @@
+<%= react_component("SubscriptionMailerWeeklyDigest", props: {
+    author: @author.as_json(
+        only: :email,
+        methods: :title
+    ),
+    posts: @posts.as_json(
+        only: [:title, :created_at],
+        methods: [:author_relative_url, :rendered_text]
+    ),
+    unsubscribeUrl: @unsubscribe_url
+}) %>

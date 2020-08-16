@@ -14,4 +14,8 @@ class SubscriptionMailerPreview < ActionMailer::Preview
     SubscriptionMailer.new_subscription(Subscription.last)
   end
 
+  def weekly_digest
+    SubscriptionMailer.weekly_digest(Subscription.last.id)
+  end
+
 end
