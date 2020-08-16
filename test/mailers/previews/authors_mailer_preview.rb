@@ -1,5 +1,10 @@
 # Preview all emails at http://localhost:3000/rails/mailers/authors_mailer
 class AuthorsMailerPreview < ActionMailer::Preview
+
+  def domain_approved
+    AuthorsMailer.domain_approved(Author.first)
+  end
+
   def unread_guestbook_entries
     @author = Author.first
     @entries = @author.guestbook_entries
@@ -8,4 +13,5 @@ class AuthorsMailerPreview < ActionMailer::Preview
       @entries.map(&:id)
     )
   end
+
 end
