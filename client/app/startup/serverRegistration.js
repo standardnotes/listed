@@ -6,6 +6,7 @@ import AuthorTip from "../components/authors/Tip";
 import AuthorsMailerDomainApproved from "../components/authors_mailer/DomainApproved";
 import AuthorsMailerDomainInvalid from "../components/authors_mailer/DomainInvalid";
 import AuthorsMailerFeatured from "../components/authors_mailer/Featured";
+import AuthorsMailerUnreadGuestbookEntries from "../components/authors_mailer/UnreadGuestbookEntries";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -17,9 +18,9 @@ import SubscriptionMailerConfirmSubscription from "../components/subscription_ma
 import SubscriptionMailerNewPost from "../components/subscription_mailer/NewPost";
 import SubscriptionMailerNewSubscription from "../components/subscription_mailer/NewSubscription";
 import SubscriptionMailerWeeklyDigest from "../components/subscription_mailer/WeeklyDigest";
-import SubscriptionValidate from "../components/subscriptions/Validate";
 import SubscriptionUnsubscribe from "../components/subscriptions/Unsubscribe";
 import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequency";
+import SubscriptionValidate from "../components/subscriptions/Validate";
 import Usage from "../components/usage/Usage";
 
 ReactOnRails.register({
@@ -30,6 +31,7 @@ ReactOnRails.register({
     AuthorsMailerDomainApproved,
     AuthorsMailerDomainInvalid,
     AuthorsMailerFeatured,
+    AuthorsMailerUnreadGuestbookEntries,
     Guestbook,
     GuestbookNew,
     Help,
@@ -41,8 +43,8 @@ ReactOnRails.register({
     SubscriptionMailerNewPost,
     SubscriptionMailerNewSubscription,
     SubscriptionMailerWeeklyDigest,
-    SubscriptionValidate,
     SubscriptionUnsubscribe,
     SubscriptionUpdateFrequency,
+    SubscriptionValidate,
     Usage
 });
