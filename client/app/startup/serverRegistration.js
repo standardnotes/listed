@@ -7,6 +7,7 @@ import AuthorsMailerDomainApproved from "../components/authors_mailer/DomainAppr
 import AuthorsMailerDomainInvalid from "../components/authors_mailer/DomainInvalid";
 import AuthorsMailerFeatured from "../components/authors_mailer/Featured";
 import AuthorsMailerUnreadGuestbookEntries from "../components/authors_mailer/UnreadGuestbookEntries";
+import AuthorsMailerVerifyEmail from "../components/authors_mailer/VerifyEmail";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -32,6 +33,7 @@ ReactOnRails.register({
     AuthorsMailerDomainInvalid,
     AuthorsMailerFeatured,
     AuthorsMailerUnreadGuestbookEntries,
+    AuthorsMailerVerifyEmail,
     Guestbook,
     GuestbookNew,
     Help,
