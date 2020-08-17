@@ -1,7 +1,7 @@
 LetsEncrypt.config do |config|
   # Using Let's Encrypt staging server or not
   # Default only `Rails.env.production? == true` will use Let's Encrypt production server.
-  config.use_staging = Rails.env.production?
+  config.use_staging = !Rails.env.production?
 
   # Set the private key path
   # Default is locate at config/letsencrypt.key
