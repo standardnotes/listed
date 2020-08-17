@@ -3,9 +3,11 @@ import axios from "axios";
 
 const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
     const [captchaError, setCaptchaError] = useState(false);
-    const [text, setText] = useState("");
-    const [signerEmail, setSignerEmail] = useState("");
-    const [donationInfo, setDonationInfo] = useState("");
+    const [guestbookEntry, setGuestbookEntry] = useState({
+        text: "",
+        signer_email: "",
+        donation_info: ""
+    });
     const [captcha, setCaptcha] = useState("");
 
     const submitEntry = event => {
@@ -18,11 +20,7 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                     "X-CSRF-Token": authenticityToken,
                 },
                 data: {
-                    guestbook_entry: {
-                        text: text,
-                        signer_email: signerEmail,
-                        donation_info: donationInfo
-                    },
+                    guestbook_entry: guestbookEntry,
                     captcha: captcha,
                     captcha_key: simpleCaptchaKey
                 }
@@ -36,6 +34,12 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
             });
     };
 
+    const editGuestbookEntry = (key, value) => (
+        setGuestbookEntry(prevState => (
+            { ...prevState, [key]: value }
+        ))
+    );
+
     return(
         <div>
             <p>
@@ -46,40 +50,43 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
             <div className="mt-20 form-box full guestbook-entry-form">
                 <form onSubmit={e => submitEntry(e)}>
                     <div className="form-section">
-                        <label className="label">
+                        <label htmlFor="guestbook-entry-text" className="label">
                             Your message
                         </label>
                         <textarea
+                            id="guestbook-entry-text"
                             className="field text-input tall"
-                            value={text}
-                            onChange={e => setText(e.target.value)}
+                            value={guestbookEntry.text}
+                            onChange={e => editGuestbookEntry("text", e.target.value)}
                         ></textarea>
                     </div>
                     <div className="form-section mt-10">
-                        <label className="label">
+                        <label htmlFor="guestbook-entry-signer-email" className="label">
                             Your email (optional)
                         </label>
                         <input
+                            id="guestbook-entry-signer-email"
                             className="field text-input"
-                            value={signerEmail}
-                            onChange={e => setSignerEmail(e.target.value)}
+                            value={guestbookEntry.signer_email}
+                            onChange={e => editGuestbookEntry("signer_email", e.target.value)}
                         ></input>
                     </div>
                     <div className="form-section mt-10">
-                        <label className="label">
+                        <label htmlFor="guestbook-entry-donation-info" className="label">
                             Donation info (optional)
                         </label>
                         <div style={{ fontSize: "14px", opacity: 0.5, marginBottom: "5px" }}>
                             If you've made a contribution, feel free to let the author know the method you've used, and the amount.
                         </div>
                         <textarea
+                            id="guestbook-entry-donation-info"
                             className="field text-input mid-tall"
-                            value={donationInfo}
-                            onChange={e => setDonationInfo(e.target.value)}
+                            value={guestbookEntry.donation_info}
+                            onChange={e => editGuestbookEntry("donation_info", e.target.value)}
                         ></textarea>
                     </div>
                     <div className="form-section mt-10">
-                        <label className="label">
+                        <label htmlFor="captcha" className="label">
                             Please complete the captcha below
                         </label>
                         <div className="simple_captcha_image">
@@ -114,4 +121,4 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
     );
 };
 
-export default (props) => <New {...props} />;
+export default props => <New {...props} />;

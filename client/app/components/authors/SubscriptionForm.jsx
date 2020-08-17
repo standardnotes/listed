@@ -33,7 +33,7 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
                 )
             ) : (
                 <form onSubmit={e => emailSubscribe(e)}>
-                    <label>Subscribe to @{author.username}'s posts</label>
+                    <label htmlFor="email">Subscribe to @{author.username}'s posts</label>
                     <div className="sublabel">You'll only receive email when {author.title} publishes a new post</div>
                     <input
                         type="email"
@@ -48,4 +48,4 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
     );
 };
 
-export default (props) => <SubscriptionForm {...props} />;
+export default props => <SubscriptionForm {...props} />;
