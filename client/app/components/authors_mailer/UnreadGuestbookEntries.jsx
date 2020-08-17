@@ -11,7 +11,7 @@ export default ({ author, entries }) => {
             {entries.map(entry => (
                 <div key={entry.id}>
                     <p>
-                        <strong>On {moment(entry.created_at).format("MMMM D, YYYY hh:mm")}:</strong>
+                        <strong>On {moment.utc(entry.created_at).format("MMMM D, YYYY HH:mm")}:</strong>
                     </p>
                     <p>
                         <i>{entry.text}</i>

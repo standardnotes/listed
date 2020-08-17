@@ -15,7 +15,7 @@ export default ({ author, posts, unsubscribeUrl }) => {
                         </a>
                     </h3>
                     <div className="post-content">
-                        <i>{moment(post.created_at).format("MMMM D, YYYY")}</i>
+                        <i>{moment.utc(post.created_at).format("MMMM D, YYYY")}</i>
                         <div className="post-body" dangerouslySetInnerHTML={renderedText(post)}></div>
                     </div>
                 </div>
