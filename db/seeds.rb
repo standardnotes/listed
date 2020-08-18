@@ -1,11 +1,11 @@
 domains = ENV['LETSENCRYPT_CERT_DOMAINS'] || ''
 
 domains.split(',').each do |domain|
-  if LetsEncrypt::Certificate.exists?(domain: domain)
+  if LetsEncrypt.certificate_model.exists?(domain: domain)
     Rails.logger.info "Hosted zone #{domain} already exists"
   else
-    cert = LetsEncrypt::Certificate.create(domain: domain)
-    cert.verify
+    cert = LetsEncrypt.certificate_model.create(domain: domain, key: ENV['LETSENCRYPT_PRIVATE_KEY'])
+    cert.get
 
     route53 = Aws::Route53::Client.new
 
