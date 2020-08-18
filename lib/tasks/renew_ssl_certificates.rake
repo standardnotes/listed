@@ -4,18 +4,18 @@ namespace :ssl do
   desc 'Renews the letsencrypt certificates,
     re-imports them to AWS Certificate Manager and adds to the Load Balancer HTTPS listener'
   task :renew, [:aws_elb_listener_arn] => [:environment] do |_t, args|
-    renewable_certificates = LetsEncrypt.certificate_model.renewable
+    certificates = LetsEncrypt.certificate_model.find(:all)
 
-    Rails.logger.info "Found #{renewable_certificates.length} renewable certificates"
+    Rails.logger.info "Found #{certificates.length} certificates"
 
     acm = Aws::ACM::Client.new
     elb = Aws::ElasticLoadBalancingV2::Client.new
 
     Rake::Task['letsencrypt:renew'].invoke
 
-    renewable_certificates.each do |certificate|
-      unless certificate.certificate.present?
-        Rails.logger.info "Certificate for domain #{certificate.domain} is not issued"
+    certificates.each do |certificate|
+      unless certificate.active?
+        Rails.logger.info "Certificate for domain #{certificate.domain} is not active"
         next
       end
 
