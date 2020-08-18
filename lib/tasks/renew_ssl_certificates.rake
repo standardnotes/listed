@@ -4,7 +4,7 @@ namespace :ssl do
   desc 'Renews the letsencrypt certificates,
     re-imports them to AWS Certificate Manager and adds to the Load Balancer HTTPS listener'
   task :renew, [:aws_elb_listener_arn] => [:environment] do |_t, args|
-    certificates = LetsEncrypt.certificate_model.find(:all)
+    certificates = LetsEncrypt.certificate_model.all
 
     Rails.logger.info "Found #{certificates.length} certificates"
 
