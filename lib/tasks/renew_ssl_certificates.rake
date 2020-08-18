@@ -6,12 +6,12 @@ namespace :ssl do
   task :renew, [:aws_elb_listener_arn] => [:environment] do |_t, args|
     renewable_certificates = LetsEncrypt.certificate_model.renewable
 
+    Rails.logger.info "Found #{renewable_certificates.length} renewable certificates"
+
     acm = Aws::ACM::Client.new
     elb = Aws::ElasticLoadBalancingV2::Client.new
 
     Rake::Task['letsencrypt:renew'].invoke
-
-    Rails.logger.info "Setting up #{renewable_certificates.length} renewed certificates"
 
     renewable_certificates.each do |certificate|
       unless certificate.certificate.present?
