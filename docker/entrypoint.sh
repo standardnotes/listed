@@ -10,8 +10,8 @@ case "$1" in
     echo "Prestart Step 3/4 - Seeding database"
     bundle exec rails db:seed
     echo "Prestart Step 4/4 - Renew SSL certificates"
-    if [[ -z "$SSL_CERT_AWS_ELB_LISTENER_ARN" ]]; then
-      bundle exec rake ssl:renew $SSL_CERT_AWS_ELB_LISTENER_ARN
+    if [[ -z "$LETSENCRYPT_AWS_NETWORK_LOAD_BALANCER_LISTENER_ARN" ]]; then
+      bundle exec rake ssl:renew $LETSENCRYPT_AWS_NETWORK_LOAD_BALANCER_LISTENER_ARN
     else
       echo "Skipped renewing SSL certificates - AWS_ELB_LISTENER_ARN environment variable not set"
     fi
