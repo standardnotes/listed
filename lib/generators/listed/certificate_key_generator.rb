@@ -24,7 +24,7 @@ module Listed
 
         key = OpenSSL::PKey::RSA.new(2048)
         File.open(key_path, 'w') { |f| f.write(key.to_s) }
-        Rails.logger.info "Created new private key for Let's Encrypt"
+        Rails.logger.info "Created new private key for Let's Encrypt with 2048 bit length"
 
         # rubocop:disable Metrics/LineLength
         say "Your privated key is saved in #{key_path}, make sure setup configure for your rails.", :yellow
