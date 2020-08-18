@@ -45,8 +45,7 @@ namespace :ssl do
         listener_arn: args[:aws_elb_listener_arn],
         certificates: [
           {
-            certificate_arn: certificate.aws_arn,
-            is_default: false
+            certificate_arn: certificate.aws_arn
           }
         ]
       })
