@@ -13,7 +13,7 @@ case "$1" in
     if [[ -z "$LETSENCRYPT_AWS_NETWORK_LOAD_BALANCER_LISTENER_ARN" ]]; then
       bundle exec rake ssl:renew $LETSENCRYPT_AWS_NETWORK_LOAD_BALANCER_LISTENER_ARN
     else
-      echo "Skipped renewing SSL certificates - AWS_ELB_LISTENER_ARN environment variable not set"
+      echo "Skipped renewing SSL certificates - LETSENCRYPT_AWS_NETWORK_LOAD_BALANCER_LISTENER_ARN environment variable not set"
     fi
     echo "Starting Server..."
     bundle exec rails server -b 0.0.0.0
