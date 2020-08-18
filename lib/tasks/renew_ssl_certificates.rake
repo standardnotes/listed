@@ -6,8 +6,6 @@ namespace :ssl do
   task :renew, [:aws_elb_listener_arn] => [:environment] do |_t, args|
     renewable_certificates = LetsEncrypt.certificate_model.renewable
 
-    Rails.logger.info "Found #{renewable_certificates.length} renewable certificates"
-
     acm = Aws::ACM::Client.new
     elb = Aws::ElasticLoadBalancingV2::Client.new
 
@@ -16,7 +14,7 @@ namespace :ssl do
     Rails.logger.info "Setting up #{renewable_certificates.length} renewed certificates"
 
     renewable_certificates.each do |certificate|
-      unless certificate.certificate?
+      unless certificate.certificate.present?
         Rails.logger.info "Certificate for domain #{certificate.domain} is not issued"
         next
       end
@@ -29,7 +27,7 @@ namespace :ssl do
         certificate_chain: certificate.intermediaries
       }
 
-      if certificate.aws_arn?
+      if certificate.aws_arn.present?
         Rails.logger.info "Certificate for #{certificate.domain} already exists. Updating."
         import_parameters['certificate_arn'] = certificate.aws_arn
       end
