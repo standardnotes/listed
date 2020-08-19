@@ -36,8 +36,8 @@ class Author < ApplicationRecord
   def pages
     posts
       .where(
-        unlisted: false,
-        hidden: false,
+        unlisted: [false, nil],
+        hidden: [false, nil],
         published: true,
         page: true
       )
