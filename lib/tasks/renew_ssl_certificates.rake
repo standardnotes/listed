@@ -101,9 +101,9 @@ namespace :ssl do
                 evaluate_target_health: true,
                 hosted_zone_id: ENV['LETSENCRYPT_AWS_NETWORK_LOAD_BALANCER_HOSTED_ZONE_ID']
               },
-              name: domain,
+              name: certificate.domain,
               region: 'us-east-1',
-              set_identifier: "#{domain}-route",
+              set_identifier: "#{certificate.domain}-route",
               type: 'A'
             }
           }
