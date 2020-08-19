@@ -17,7 +17,7 @@ jobs:
         name: standardnotes/listed
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "letsencrypt,${{ github.sha }}"
+        tags: "letsencrypt"
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -36,7 +36,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: listed-dev
-        image: "standardnotes/listed:${{ github.sha }}"
+        image: "standardnotes/listed:letsencrypt"
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
