@@ -9,11 +9,6 @@ namespace :ssl do
     Rails.logger.info "Found #{certificates.length} certificates"
 
     certificates.each do |certificate|
-      unless certificate.active?
-        Rails.logger.info "Certificate for domain #{certificate.domain} is not active"
-        next
-      end
-
       unless certificate.renewable?
         Rails.logger.info "Certificate for domain #{certificate.domain} is not renewable before #{certificate.renew_after}"
         next
@@ -32,6 +27,11 @@ namespace :ssl do
 
       Rails.logger.info "Renewing certificate for domain #{certificate.domain}"
       certificate.renew
+
+      unless certificate.active?
+        Rails.logger.info "Certificate for domain #{certificate.domain} is not active"
+        next
+      end
 
       import_certificate_to_aws(certificate)
 
