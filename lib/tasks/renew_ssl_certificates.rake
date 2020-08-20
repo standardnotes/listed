@@ -65,6 +65,8 @@ namespace :ssl do
         }
       ]
     })
+
+    Rails.logger.info "Certificate added to load balancer listener for #{certificate.domain}"
   end
 
   def import_certificate_to_aws(certificate)
