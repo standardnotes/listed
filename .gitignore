@@ -53,3 +53,7 @@ dump.rdb
 
 /public/packs
 /node_modules
+
+# letsencrypt
+
+config/letsencrypt.key

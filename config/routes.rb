@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "/healthcheck" => "health_check#index"
+
+  mount LetsEncrypt::Engine => '/.well-known'
+
   resources :authors do
     member do
       get 'settings'
@@ -70,8 +74,6 @@ Rails.application.routes.draw do
 
   get '/:post_token' => 'posts#show'
   get '/p/:post_token' => 'posts#show'
-
-  get "/healthcheck" => "health_check#index"
 
   root 'usage#index'
 end

@@ -9,7 +9,7 @@ module Listed
       allow do
         origins '*'
         resource '*',
-          headers: :any, 
+          headers: :any,
           methods: [:get, :post, :put, :patch, :delete, :options],
           expose: ['Access-Token', 'Client', 'UID']
       end

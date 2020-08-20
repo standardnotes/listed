@@ -257,6 +257,11 @@ class AuthorsController < ApplicationController
       @author.domain = Domain.new
     end
 
+    certificate = SSLCertificate.new
+    certificate.domain = params[:domain]
+    certificate.key = ENV['LETSENCRYPT_PRIVATE_KEY']
+    certificate.save
+
     @author.domain.domain = params[:domain]
     @author.domain.extended_email = params[:extended_email]
     @author.domain.save
@@ -282,8 +287,8 @@ class AuthorsController < ApplicationController
       redirect_to :root
     rescue => e
       puts e.message
-      redirect_to :back, :flash => { 
-        :error_delete_all_data => 'Unable to delete your data. Please try again later.' 
+      redirect_to :back, :flash => {
+        :error_delete_all_data => 'Unable to delete your data. Please try again later.'
       }
     end
   end
