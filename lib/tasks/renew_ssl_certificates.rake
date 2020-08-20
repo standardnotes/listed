@@ -10,24 +10,26 @@ namespace :ssl do
       Rails.logger.info "Found #{certificates.length} certificates"
 
       certificates.each do |certificate|
-        unless certificate.renewable?
-          Rails.logger.info "Certificate for domain #{certificate.domain} is not renewable before #{certificate.renew_after}"
-          next
+        Rails.logger.tagged(certificate.domain) do
+          unless certificate.renewable?
+            Rails.logger.info "Certificate is not renewable before #{certificate.renew_after}"
+            next
+          end
+
+          unless certificate.aws_hosted_zone_id.present?
+            Rails.logger.info 'Setting up Route 53 records'
+            create_aws_hosted_zone(certificate)
+          end
+
+          Rails.logger.info 'Renewing certificate'
+          certificate.renew
+
+          next unless validate_domain(certificate)
+
+          import_certificate_to_aws(certificate)
+
+          add_certificate_to_load_balancer(certificate, args[:aws_elb_listener_arn])
         end
-
-        unless certificate.aws_hosted_zone_id.present?
-          Rails.logger.info "Setting up Route 53 records for domain #{certificate.domain}"
-          create_aws_hosted_zone(certificate)
-        end
-
-        Rails.logger.info "Renewing certificate for domain #{certificate.domain}"
-        certificate.renew
-
-        next unless validate_domain(certificate)
-
-        import_certificate_to_aws(certificate)
-
-        add_certificate_to_load_balancer(certificate, args[:aws_elb_listener_arn])
       end
     end
   end
@@ -36,12 +38,12 @@ namespace :ssl do
     existing_domain = Domain.find_by_domain(certificate.domain)
 
     unless existing_domain
-      Rails.logger.info "There is no already existing domain entry for: #{certificate.domain}. Skipped domain validation."
+      Rails.logger.info 'There is no domain entry. Skipped domain validation.'
       return false
     end
 
     unless certificate.active?
-      Rails.logger.info "Certificate for domain #{certificate.domain} is not active"
+      Rails.logger.info 'Certificate is not active'
       existing_domain.author.invalid_domain
       return false
     end
@@ -54,7 +56,7 @@ namespace :ssl do
   end
 
   def add_certificate_to_load_balancer(certificate, load_balancer_listener_arn)
-    Rails.logger.info "Adding certificate to load balancer listener for #{certificate.domain}"
+    Rails.logger.info 'Adding certificate to load balancer listener'
 
     elb = Aws::ElasticLoadBalancingV2::Client.new
     elb.add_listener_certificates({
@@ -66,11 +68,11 @@ namespace :ssl do
       ]
     })
 
-    Rails.logger.info "Certificate added to load balancer listener for #{certificate.domain}"
+    Rails.logger.info 'Certificate added to load balancer listener'
   end
 
   def import_certificate_to_aws(certificate)
-    Rails.logger.info "Importing certificate for #{certificate.domain}"
+    Rails.logger.info 'Importing certificate to AWS'
 
     import_parameters = {
       certificate: certificate.certificate,
@@ -79,14 +81,14 @@ namespace :ssl do
     }
 
     if certificate.aws_arn.present?
-      Rails.logger.info "Certificate for #{certificate.domain} already exists. Updating."
+      Rails.logger.info 'Certificate already exists. Updating.'
       import_parameters['certificate_arn'] = certificate.aws_arn
     end
 
     acm = Aws::ACM::Client.new
     response = acm.import_certificate(import_parameters)
 
-    Rails.logger.info "Certificate imported for #{certificate.domain} - ARN: #{response.certificate_arn}"
+    Rails.logger.info 'Certificate imported'
 
     certificate.aws_arn = response.certificate_arn
     certificate.save
@@ -101,7 +103,7 @@ namespace :ssl do
     })
 
     hosted_zone_id = response.hosted_zone.id.gsub('/hostedzone/', '')
-    Rails.logger.info "Hosted zone #{certificate.domain} created with id: #{hosted_zone_id}"
+    Rails.logger.info "Hosted zone created with id: #{hosted_zone_id}"
 
     certificate.aws_hosted_zone_id = hosted_zone_id
     certificate.save
