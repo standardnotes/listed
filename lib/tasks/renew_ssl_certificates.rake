@@ -15,12 +15,6 @@ namespace :ssl do
           next
         end
 
-        unless certificate.key.present?
-          Rails.logger.info "Setting default private key on certificate for domain #{certificate.domain}"
-          certificate.key = ENV['LETSENCRYPT_PRIVATE_KEY']
-          certificate.save
-        end
-
         unless certificate.aws_hosted_zone_id.present?
           Rails.logger.info "Setting up Route 53 records for domain #{certificate.domain}"
           create_aws_hosted_zone(certificate)
