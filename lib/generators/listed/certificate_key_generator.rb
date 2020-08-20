@@ -13,7 +13,7 @@ module Listed
 
       def generate_key
         # rubocop:disable Metrics/LineLength
-        key_path = ask("Where you to save private key [#{LetsEncrypt.private_key_path}]:", path: true)
+        key_path = ask("Where do you want to save the private key [#{LetsEncrypt.private_key_path}]:", path: true)
         # rubocop:enable Metrics/LineLength
         key_path = LetsEncrypt.private_key_path if key_path.blank?
 
