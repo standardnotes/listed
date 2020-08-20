@@ -98,7 +98,7 @@ GEM
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crass (1.0.6)
-    ddtrace (0.38.0)
+    ddtrace (0.39.0)
       msgpack
     dogstatsd-ruby (4.8.1)
     dotenv (2.1.2)
@@ -292,7 +292,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano-sidekiq
-  ddtrace (~> 0.38.0)
+  ddtrace (~> 0.39.0)
   dogstatsd-ruby (~> 4.8)
   dotenv-rails (~> 2.1.1)
   haml-rails
