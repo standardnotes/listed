@@ -28,15 +28,33 @@ namespace :ssl do
       Rails.logger.info "Renewing certificate for domain #{certificate.domain}"
       certificate.renew
 
-      unless certificate.active?
-        Rails.logger.info "Certificate for domain #{certificate.domain} is not active"
-        next
-      end
+      next unless validate_domain(certificate)
 
       import_certificate_to_aws(certificate)
 
       add_certificate_to_load_balancer(certificate, args[:aws_elb_listener_arn])
     end
+  end
+
+  def validate_domain(certificate)
+    existing_domain = Domain.find_by_domain(certificate.domain)
+
+    unless existing_domain
+      Rails.logger.info "There is no already existing domain entry for: #{certificate.domain}. Skipped domain validation."
+      return false
+    end
+
+    unless certificate.active?
+      Rails.logger.info "Certificate for domain #{certificate.domain} is not active"
+      existing_domain.author.invalid_domain
+      return false
+    end
+
+    existing_domain.author.approve_domain
+
+    existing_domain.author.notify_domain
+
+    true
   end
 
   def add_certificate_to_load_balancer(certificate, load_balancer_listener_arn)
