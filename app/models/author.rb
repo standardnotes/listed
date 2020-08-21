@@ -212,7 +212,7 @@ class Author < ApplicationRecord
   end
 
   def invalid_domain
-    AuthorsMailer.domain_invalid(self).deliver_later
+    AuthorsMailer.domain_invalid(self.domain.extended_email).deliver_later
     self.domain.delete
   end
 
