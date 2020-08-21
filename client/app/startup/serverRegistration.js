@@ -1,6 +1,7 @@
 import ReactOnRails from "react-on-rails";
 import AdminMailerNewDomainRequest from "../components/admin_mailer/NewDomainRequest";
 import AuthorHeader from "../components/authors/Header";
+import AuthorSettings from "../components/authors/Settings";
 import AuthorShow from "../components/authors/Show";
 import AuthorSubscribe from "../components/authors/Subscribe";
 import AuthorTip from "../components/authors/Tip";
@@ -9,6 +10,8 @@ import AuthorsMailerDomainInvalid from "../components/authors_mailer/DomainInval
 import AuthorsMailerFeatured from "../components/authors_mailer/Featured";
 import AuthorsMailerUnreadGuestbookEntries from "../components/authors_mailer/UnreadGuestbookEntries";
 import AuthorsMailerVerifyEmail from "../components/authors_mailer/VerifyEmail";
+import CredentialsEdit from "../components/credentials/Edit";
+import CredentialsNew from "../components/credentials/New";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -28,6 +31,7 @@ import Usage from "../components/usage/Usage";
 ReactOnRails.register({
     AdminMailerNewDomainRequest,
     AuthorHeader,
+    AuthorSettings,
     AuthorShow,
     AuthorSubscribe,
     AuthorTip,
@@ -36,6 +40,8 @@ ReactOnRails.register({
     AuthorsMailerFeatured,
     AuthorsMailerUnreadGuestbookEntries,
     AuthorsMailerVerifyEmail,
+    CredentialsEdit,
+    CredentialsNew,
     Guestbook,
     GuestbookNew,
     Help,

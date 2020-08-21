@@ -246,7 +246,7 @@ class AuthorsController < ApplicationController
     @author.newsletter_disabled = a_params[:newsletter_disabled]
 
     if @author.save
-      redirect_to @author.url
+      redirect_to @author.url, :status => 303
     else
       redirect_to :back
     end
@@ -256,6 +256,12 @@ class AuthorsController < ApplicationController
     if !@author.domain
       @author.domain = Domain.new
     end
+
+    certificate = SSLCertificate.find_by_domain(params[:domain])
+    certificate ||= SSLCertificate.new
+    certificate.domain = params[:domain]
+    certificate.key = ENV['LETSENCRYPT_PRIVATE_KEY']
+    certificate.save
 
     @author.domain.domain = params[:domain]
     @author.domain.extended_email = params[:extended_email]
@@ -279,11 +285,11 @@ class AuthorsController < ApplicationController
   def delete_all_data
     begin
       @author.destroy
-      redirect_to :root_url
+      redirect_to :root
     rescue => e
       puts e.message
-      redirect_to :back, :flash => { 
-        :error_delete_all_data => 'Unable to delete your data. Please try again later.' 
+      redirect_to :back, :flash => {
+        :error_delete_all_data => 'Unable to delete your data. Please try again later.'
       }
     end
   end

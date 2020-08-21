@@ -1,0 +1,56 @@
+<%= react_component("AuthorSettings", props: {
+    author: @author.as_json(
+        only: [
+            :id,
+            :username,
+            :display_name,
+            :bio,
+            :link,
+            :twitter,
+            :email,
+            :meta_image_url,
+            :header_image_url,
+            :guestbook_disabled,
+            :newsletter_disabled, 
+            :hide_from_homepage,
+            :secret
+        ],
+        methods: [:accessible_via, :url],
+        include: {
+            credentials: {
+                only: [:id, :key, :value]
+            },
+            domain: {
+                only: [:approved, :active]
+            }
+        }
+    ),
+    authenticityToken: form_authenticity_token,
+    customDomainIP: ENV["CUSTOM_DOMAIN_IP"],
+    guestbookEntries: @guestbook_entries.as_json(
+        only: [
+            :id,
+            :text,
+            :created_at,
+            :signer_email,
+            :donation_info,
+            :public
+        ],
+        methods: [
+            :approval_url,
+            :unapproval_url,
+            :spam_url,
+            :deletion_url
+        ],
+    ),
+    posts: @posts.as_json(
+        only: [
+            :id,
+            :title,
+            :unlisted,
+            :created_at
+        ],
+        methods: :url
+    ),
+    deleteAllDataError: flash[:error_delete_all_data]
+}) %>

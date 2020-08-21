@@ -49,4 +49,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mini_racer', platforms: :ruby
 
 gem "dogstatsd-ruby", "~> 4.8"
-gem "ddtrace", "~> 0.38.0"
+gem "ddtrace", "~> 0.39.0"
+
+gem "rails-letsencrypt", "~> 0.9.0"
+
+gem "aws-sdk-acm", "~> 1.34"
+
+gem "aws-sdk-elasticloadbalancingv2", "~> 1.47"
+
+gem "lograge", "~> 0.11.2"
+
+gem "aws-sdk-route53", "~> 1.40"
