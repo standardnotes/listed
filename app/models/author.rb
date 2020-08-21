@@ -212,7 +212,8 @@ class Author < ApplicationRecord
   end
 
   def invalid_domain
-    AuthorsMailer.domain_invalid(self.domain.extended_email).deliver_later
+    email_duplicate = self.domain.extended_email.dup
+    AuthorsMailer.domain_invalid(email_duplicate).deliver_later
     self.domain.delete
   end
 
