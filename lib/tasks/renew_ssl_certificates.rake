@@ -31,7 +31,7 @@ namespace :ssl do
 
             add_certificate_to_load_balancer(certificate, args[:aws_elb_listener_arn])
           rescue StandardError => e
-            Rails.logger.warning "Processing error: #{e.message}"
+            Rails.logger.warn "Processing error: #{e.message}"
             next
           end
         end
