@@ -1,5 +1,5 @@
 class SSLCertificate < LetsEncrypt::Certificate
-  before_create -> { self.key = OpenSSL::PKey::RSA.new(2048).to_s }
+  before_create -> { self.key = ENV['LETSENCRYPT_PRIVATE_KEY'] }
 
   def renewable?
     !renew_after.present? || renew_after <= Time.zone.now

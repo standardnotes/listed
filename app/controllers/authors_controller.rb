@@ -257,7 +257,9 @@ class AuthorsController < ApplicationController
       @author.domain = Domain.new
     end
 
-    SSLCertificate.find_or_create_by(domain: params[:domain], key: ENV['LETSENCRYPT_PRIVATE_KEY'])
+    certificate = SSLCertificate.find_or_create_by(domain: params[:domain])
+    certificate.key = ENV['LETSENCRYPT_PRIVATE_KEY']
+    certificate.save
 
     @author.domain.domain = params[:domain]
     @author.domain.extended_email = params[:extended_email]
