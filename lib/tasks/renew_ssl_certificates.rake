@@ -48,8 +48,9 @@ namespace :ssl do
     end
 
     unless certificate.active?
-      Rails.logger.info 'Certificate is not active'
+      Rails.logger.info 'Certificate is not active. Removing certificate.'
       existing_domain.author.invalid_domain
+      certificate.delete
       return false
     end
 
