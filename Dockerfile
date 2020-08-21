@@ -5,7 +5,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 WORKDIR /listed
 
 RUN apt-get update \
-    && apt-get install -y git build-essential libmariadb-dev curl \
+    && apt-get install -y git build-essential libmariadb-dev curl imagemagick \
     && apt-get -y autoclean
 
 RUN mkdir -p /usr/local/nvm
