@@ -11,24 +11,29 @@ namespace :ssl do
 
       certificates.each do |certificate|
         Rails.logger.tagged(certificate.domain) do
-          unless certificate.renewable?
-            Rails.logger.info "Certificate is not renewable before #{certificate.renew_after}"
+          begin
+            unless certificate.renewable?
+              Rails.logger.info "Certificate is not renewable before #{certificate.renew_after}"
+              next
+            end
+
+            unless certificate.aws_hosted_zone_id.present?
+              Rails.logger.info 'Setting up Route 53 records'
+              create_aws_hosted_zone(certificate)
+            end
+
+            Rails.logger.info 'Renewing certificate'
+            certificate.renew
+
+            next unless validate_domain(certificate)
+
+            import_certificate_to_aws(certificate)
+
+            add_certificate_to_load_balancer(certificate, args[:aws_elb_listener_arn])
+          rescue StandardError => e
+            Rails.logger.warning "Processing error: #{e.message}"
             next
           end
-
-          unless certificate.aws_hosted_zone_id.present?
-            Rails.logger.info 'Setting up Route 53 records'
-            create_aws_hosted_zone(certificate)
-          end
-
-          Rails.logger.info 'Renewing certificate'
-          certificate.renew
-
-          next unless validate_domain(certificate)
-
-          import_certificate_to_aws(certificate)
-
-          add_certificate_to_load_balancer(certificate, args[:aws_elb_listener_arn])
         end
       end
     end
