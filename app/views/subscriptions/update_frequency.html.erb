@@ -2,7 +2,8 @@
     subscription: @subscription.as_json(
         only: [],
         include: { 
-            author: { 
+            author: {
+                only: [],
                 methods: :title 
             }
         }
