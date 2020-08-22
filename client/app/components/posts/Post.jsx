@@ -22,7 +22,7 @@ export default ({ truncate, post }) => {
                 )}
                 {post.page || (
                     <div className="post-date">
-                        {moment(post.created_at).format("MMMM D, YYYY")}
+                        {moment.utc(post.created_at).format("MMMM D, YYYY")}
                     </div>
                 )}
             </div>

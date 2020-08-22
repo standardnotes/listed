@@ -50,7 +50,7 @@ export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscri
                                                 <a href={tiedPost.author_relative_url}>
                                                     <strong>{tiedPost.title}</strong>
                                                     <div className="faded">
-                                                        <i>{moment(tiedPost.created_at).format("MMMM D, YYYY")}</i>
+                                                        <i>{moment.utc(tiedPost.created_at).format("MMMM D, YYYY")}</i>
                                                     </div>
                                                 </a>
                                             </div>
