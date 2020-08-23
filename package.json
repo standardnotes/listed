@@ -12,6 +12,7 @@
     "react-dom": "^16.13.1",
     "react-on-rails": "11.3.0",
     "react-router": "^5.2.0",
+    "sass-resources-loader": "^2.1.0",
     "sn-stylekit": "2.0.19",
     "turbolinks": "^5.2.0",
     "webpack": "^4.43.0",
