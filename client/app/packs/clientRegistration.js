@@ -19,6 +19,8 @@ import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequ
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import Usage from "../components/usage/Usage";
 
+import "../assets/styles/application.scss";
+
 Turbolinks.start();
 
 ReactOnRails.register({
