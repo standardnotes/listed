@@ -13,6 +13,19 @@ case "$COMMAND" in
     bundle exec rails server -b 0.0.0.0
     ;;
 
+  'start-local' )
+    echo "Prestart Step 1/4 - Removing server lock"
+    rm -f /listed/tmp/pids/server.pid
+    echo "Prestart Step 2/4 - Installing dependencies"
+    yarn install --frozen-lockfile
+    echo "Prestart Step 3/4 - Compiling assets"
+    bundle exec rake assets:precompile
+    echo "Prestart Step 4/4 - Migrating database"
+    bundle exec rake db:migrate:ignore_concurrent
+    echo "Starting Server..."
+    bundle exec rails server -b 0.0.0.0
+    ;;
+
   'renew-certificates' )
     echo "Prestart Step 1/2 - Removing server lock"
     rm -f /listed/tmp/pids/server.pid

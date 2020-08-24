@@ -3,6 +3,7 @@ services:
   app:
     build:
       context: .
+    command: start-local
     env_file: .env
     restart: unless-stopped
     environment:
