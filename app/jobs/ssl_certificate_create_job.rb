@@ -1,7 +1,6 @@
 class SslCertificateCreateJob < ApplicationJob
   def perform(domain)
-    certificate = LetsEncrypt.certificate_model.find_or_create_by(domain: domain)
-    certificate.key = ENV['LETSENCRYPT_PRIVATE_KEY']
+    certificate = SSLCertificate.find_or_create_by(domain: domain)
     certificate.save
   end
 end
