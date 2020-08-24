@@ -257,15 +257,17 @@ class AuthorsController < ApplicationController
       @author.domain = Domain.new
     end
 
-    # LetsEncrypt.certificate_model.find_or_create_by(domain: params[:domain])
-    # certificate.key = ENV['LETSENCRYPT_PRIVATE_KEY']
-    # certificate.save
-
     @author.domain.domain = params[:domain]
     @author.domain.extended_email = params[:extended_email]
     @author.domain.save
 
     AdminMailer.new_domain_request(@author).deliver_later
+
+    certificate = LetsEncrypt.certificate_model.find_by_domain(domain: params[:domain])
+    certificate ||= LetsEncrypt.certificate_model.new
+    certificate.domain = params[:domain]
+    certificate.key = ENV['LETSENCRYPT_PRIVATE_KEY']
+    certificate.save
 
     redirect_to :back
   end
