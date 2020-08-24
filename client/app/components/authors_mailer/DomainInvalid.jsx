@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+export default ({ customDomainIP }) => {
     return (
         <div>
             <p>
