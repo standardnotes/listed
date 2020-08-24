@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200202152431) do
+ActiveRecord::Schema.define(version: 20200806085900) do
 
   create_table "authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "secret"
@@ -65,6 +65,23 @@ ActiveRecord::Schema.define(version: 20200202152431) do
     t.boolean  "unread",                      default: false
     t.boolean  "spam",                        default: false
     t.index ["unread"], name: "index_guestbook_entries_on_unread", using: :btree
+  end
+
+  create_table "letsencrypt_certificates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "domain"
+    t.text     "certificate",         limit: 65535
+    t.text     "intermediaries",      limit: 65535
+    t.text     "key",                 limit: 65535
+    t.datetime "expires_at"
+    t.datetime "renew_after"
+    t.string   "verification_path"
+    t.string   "verification_string"
+    t.string   "aws_arn"
+    t.string   "aws_hosted_zone_id"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["domain"], name: "index_letsencrypt_certificates_on_domain", using: :btree
+    t.index ["renew_after"], name: "index_letsencrypt_certificates_on_renew_after", using: :btree
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
