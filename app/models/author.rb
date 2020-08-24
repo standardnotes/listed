@@ -2,9 +2,9 @@ class Author < ApplicationRecord
   has_many :subscriptions, :dependent => :destroy
   has_many :subscribers, :through => :subscriptions, :dependent => :destroy
   has_many :credentials, :dependent => :destroy
-  validates :username, uniqueness: {:case_sensitive => false}, :allow_nil => true, :allow_blank => true, 
-    :format => { 
-      with: /\A[\w]+\z/ , 
+  validates :username, uniqueness: {:case_sensitive => false}, :allow_nil => true, :allow_blank => true,
+    :format => {
+      with: /\A[\w]+\z/ ,
       :message => 'Only letters, numbers, and underscores are allowed.'
     }
   validates :email, uniqueness: true, :allow_nil => true, :allow_blank => true
@@ -205,7 +205,6 @@ class Author < ApplicationRecord
     self.domain.active = true
     self.domain.approved = true
     self.domain.save
-    Author.build_all_domains
   end
 
   def notify_domain
@@ -213,18 +212,8 @@ class Author < ApplicationRecord
   end
 
   def invalid_domain
-    AuthorsMailer.domain_invalid(self).deliver_later
+    AuthorsMailer.domain_invalid(self.domain.extended_email).deliver_now
     self.domain.delete
-  end
-
-  def self.build_all_domains
-    domains = Domain.where(:active => true, :approved => true).map { |d| d.domain }
-    domains.unshift("#{ENV['ALT_HOST']}") if ENV['ALT_HOST']
-    domains.unshift("#{ENV['HOST']}")
-    puts "Building domains: #{domains}"
-    File.open("config/domains.yml", "w+") do |f|
-      f.write(domains.to_yaml)
-    end
   end
 
   def self.email_unread_guestbook_entries

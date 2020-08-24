@@ -11,7 +11,11 @@ class SubscriptionMailerPreview < ActionMailer::Preview
   end
 
   def new_subscription
-    AuthorsMailer.new_subscription(Subscription.last)
+    SubscriptionMailer.new_subscription(Subscription.last)
+  end
+
+  def weekly_digest
+    SubscriptionMailer.weekly_digest(Subscription.last.id)
   end
 
 end

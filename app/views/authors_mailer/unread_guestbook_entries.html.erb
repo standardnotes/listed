@@ -1,0 +1,9 @@
+<%= react_component("AuthorsMailerUnreadGuestbookEntries", props: {
+    author: @author.as_json(
+        only: :display_name
+    ),
+    entries: @entries.as_json(
+        only: [:id, :created_at, :text, :donation_info, :signer_email],
+        methods: [:approval_url, :unapproval_url, :spam_url]
+    )
+}) %>

@@ -7,10 +7,9 @@ end
 
 gem 'rails', '~> 5.0.2'
 gem 'mysql2'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'turbolinks', '~> 5'
 gem 'safe_yaml'
 gem 'dotenv-rails', '~> 2.1.1'
 gem 'sanitize'
@@ -20,6 +19,8 @@ gem 'whenever'
 gem 'redcarpet'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'simple_captcha2', :path => 'vendor/simple-captcha', require: 'simple_captcha'
+gem 'react_on_rails', '11.3'
+gem 'webpacker', '~> 4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -45,5 +46,17 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'mini_racer', platforms: :ruby
+
 gem "dogstatsd-ruby", "~> 4.8"
-gem "ddtrace", "~> 0.38.0"
+gem "ddtrace", "~> 0.39.0"
+
+gem "rails-letsencrypt", "~> 0.9.0"
+
+gem "aws-sdk-acm", "~> 1.34"
+
+gem "aws-sdk-elasticloadbalancingv2", "~> 1.47"
+
+gem "lograge", "~> 0.11.2"
+
+gem "aws-sdk-route53", "~> 1.40"

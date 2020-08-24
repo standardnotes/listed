@@ -1,0 +1,11 @@
+<%= react_component("SubscriptionUpdateFrequency", props: {
+    subscription: @subscription.as_json(
+        only: [],
+        include: { 
+            author: {
+                only: [],
+                methods: :title 
+            }
+        }
+    )
+}) %>

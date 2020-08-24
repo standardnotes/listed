@@ -246,7 +246,7 @@ class AuthorsController < ApplicationController
     @author.newsletter_disabled = a_params[:newsletter_disabled]
 
     if @author.save
-      redirect_to @author.url
+      redirect_to @author.url, :status => 303
     else
       redirect_to :back
     end
@@ -262,6 +262,8 @@ class AuthorsController < ApplicationController
     @author.domain.save
 
     AdminMailer.new_domain_request(@author).deliver_later
+
+    SslCertificateCreateJob.perform_later(params[:domain])
 
     redirect_to :back
   end
@@ -279,11 +281,11 @@ class AuthorsController < ApplicationController
   def delete_all_data
     begin
       @author.destroy
-      redirect_to :root_url
+      redirect_to :root
     rescue => e
       puts e.message
-      redirect_to :back, :flash => { 
-        :error_delete_all_data => 'Unable to delete your data. Please try again later.' 
+      redirect_to :back, :flash => {
+        :error_delete_all_data => 'Unable to delete your data. Please try again later.'
       }
     end
   end

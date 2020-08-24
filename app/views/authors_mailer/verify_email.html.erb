@@ -1,0 +1,6 @@
+<%= react_component("AuthorsMailerVerifyEmail", props: {
+    author: @author.as_json(
+        only: :display_name
+    ),
+    verificationLink: @verification_link
+}) %>

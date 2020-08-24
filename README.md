@@ -49,3 +49,30 @@ You can change the date that appears on your post, or set a [canonical URL](http
     ---
 
     Your story...`
+
+## Contributing
+
+### How to run application locally
+
+To run the application locally, after cloning the repo follow these steps:
+```
+yarn install --frozen-lockfile
+bundle exec rails db:migrate
+bundle exec rails db:seed
+gem install bundler && bundle install
+yarn build:dev
+yarn start:dev
+```
+
+Now the application should be running on http://localhost:3000 and webpack-dev-server should be watching source files and recompiling as you make changes in your code to allow live reloading.
+
+
+### How to run locally with Docker
+
+To run the application locally you have to install Docker and type the following:
+```
+cp .env.sample .env
+docker-compose up -d
+```
+
+Now the application should be running on http://localhost:3000

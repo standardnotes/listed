@@ -1,8 +1,0 @@
-#subscribe-page.single-post-show
-  %p
-    You can follow along with
-    %strong #{@display_author.title}
-    by subscribing to updates via email, or via their 
-    %a{href: "#{@display_author.rss_url}"} RSS feed.
-  #subscription-form.form-box
-    = render "authors/subscription_form", :author => @display_author

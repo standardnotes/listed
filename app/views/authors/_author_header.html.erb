@@ -1,0 +1,29 @@
+<% home_url = root_path %>
+<% post = local_assigns[:post] %>
+<% author = @author || @display_author || (post && post.author) %>
+<% private_post = post && post.unlisted %>
+<% pages = author && author.pages %>
+<% author_guestbook_entries_url = author && author_guestbook_entries_path(author) %>
+
+<%= react_component("AuthorHeader", props: {
+    homeUrl: home_url,
+    post: post.as_json(
+        only: [:title, :page],
+        methods: :author_relative_url
+    ),
+    author: author.as_json(
+        only: [:guestbook_disabled, :newsletter_disabled, :bio, :personal_link, :twitter, :header_image_url],
+        methods: [:title, :url_segment, :url, :word_count, :personal_link],
+        include: {
+            credentials: {
+                only: :id
+            }
+        }
+    ),
+    privatePost: private_post,
+    pages: pages.as_json(
+        only: [:id, :title],
+        methods: [:author_relative_url]
+    ),
+    authorGuestbookEntriesUrl: author_guestbook_entries_url
+}) %>

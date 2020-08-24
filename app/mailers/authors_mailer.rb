@@ -13,8 +13,8 @@ class AuthorsMailer < ApplicationMailer
     mail(to: author.domain.extended_email, subject: 'Your custom domain is live!')
   end
 
-  def domain_invalid(author)
-    mail(to: author.domain.extended_email, subject: 'Invalid Listed Domain')
+  def domain_invalid(email)
+    mail(to: email, subject: 'Invalid Listed Domain')
   end
 
   def verify_email(author)

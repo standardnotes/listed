@@ -1,0 +1,16 @@
+<%= react_component("SubscriptionMailerNewPost", props: {
+    hiddenText: @post.text.html_safe.slice(0, 100) + "...",
+    post: @post.as_json(
+        only: :title,
+        methods: :url,
+        include: {
+            author: {
+                only: :email,
+                methods: [:url, :title]
+            }
+        }
+    ),
+    renderedText: @rendered_text,
+    weeklyUrl: @weekly_url,
+    unsubscribeUrl: @unsubscribe_url
+}) %>
