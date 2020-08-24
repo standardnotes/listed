@@ -48,7 +48,7 @@ development:
   compile: true
 
   public_output_path: packs/development
-  check_yarn_integrity: true
+  check_yarn_integrity: false
 
   dev_server:
     https: false
