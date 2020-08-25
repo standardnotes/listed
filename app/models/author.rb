@@ -208,7 +208,7 @@ class Author < ApplicationRecord
   end
 
   def notify_domain
-    AuthorsMailer.domain_approved(self).deliver_later
+    AuthorsMailer.domain_approved(self).deliver_now
   end
 
   def invalid_domain
