@@ -36,7 +36,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: listed-prod
-        image: "standardnotes/web:${{ github.sha }}"
+        image: "standardnotes/listed:${{ github.sha }}"
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -57,4 +57,4 @@ jobs:
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       with:
-        args: '{ \"channel\": \"${{ secrets.SLACK_NOTIFICATION_CHANNEL }}\", \"blocks\": [{\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Successfully deployed <https://listed-prod.standardnotes.org|[PROD] Listed>\"}}, {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Changes: <https://github.com/standardnotes/listed/commit/${{ github.sha }}|${{ github.sha }}>\"}, \"accessory\": {\"type\": \"image\", \"image_url\": \"https://website-dev.standardnotes.org/assets/icon.png\", \"alt_text\": \"Standard Notes\"}}, { \"type\": \"section\", \"fields\": [{\"type\": \"mrkdwn\", \"text\": \"<https://github.com/standardnotes/listed/actions/runs/${{ github.run_id }}|Build details>\"}]}]}'
+        args: '{ \"channel\": \"${{ secrets.SLACK_NOTIFICATION_CHANNEL }}\", \"blocks\": [{\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Successfully deployed <https://listed.standardnotes.org|[PROD] Listed>\"}}, {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Changes: <https://github.com/standardnotes/listed/commit/${{ github.sha }}|${{ github.sha }}>\"}, \"accessory\": {\"type\": \"image\", \"image_url\": \"https://website-dev.standardnotes.org/assets/icon.png\", \"alt_text\": \"Standard Notes\"}}, { \"type\": \"section\", \"fields\": [{\"type\": \"mrkdwn\", \"text\": \"<https://github.com/standardnotes/listed/actions/runs/${{ github.run_id }}|Build details>\"}]}]}'
