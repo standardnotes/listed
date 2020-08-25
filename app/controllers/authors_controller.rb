@@ -253,6 +253,13 @@ class AuthorsController < ApplicationController
   end
 
   def domain_request
+    existing_domain = Domain.find_by_domain(params[:domain])
+    if existing_domain
+      render :json => { message: "Domain #{params[:domain]} is already taken." }, :status => :conflict
+
+      return
+    end
+
     if !@author.domain
       @author.domain = Domain.new
     end

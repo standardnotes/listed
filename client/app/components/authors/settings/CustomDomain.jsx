@@ -21,6 +21,9 @@ const CustomDomain = ({ author, authenticityToken, customDomainIP }) => {
             .then(response => {
                 window.location.href = response.request.responseURL;
             })
+            .catch(error => {
+                alert(error.response.data.message);
+            })
     };
 
     return (
