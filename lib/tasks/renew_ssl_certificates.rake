@@ -12,7 +12,7 @@ namespace :ssl do
       certificates.each do |certificate|
         Rails.logger.tagged(certificate.domain) do
           begin
-            if certificate.renew_after.present? && certificate.renew_after > Time.zone.now
+            unless certificate.renewable?
               Rails.logger.info "Certificate is not renewable before #{certificate.renew_after}"
               next
             end
