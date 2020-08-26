@@ -5,27 +5,23 @@ COMMAND=$1 && shift 1
 
 case "$COMMAND" in
   'start' )
-    echo "Prestart Step 1/3 - Removing server lock"
+    echo "Prestart Step 1/2 - Removing server lock"
     rm -f /listed/tmp/pids/server.pid
-    echo "Prestart Step 2/3 - Migrating database"
+    echo "Prestart Step 2/2 - Migrating database"
     bundle exec rake db:migrate:ignore_concurrent
-    echo "Prestart Step 3/3 - Seeding database"
-    bundle exec rails db:seed
     echo "Starting Server..."
     bundle exec rails server -b 0.0.0.0
     ;;
 
   'start-local' )
-    echo "Prestart Step 1/5 - Removing server lock"
+    echo "Prestart Step 1/4 - Removing server lock"
     rm -f /listed/tmp/pids/server.pid
-    echo "Prestart Step 2/5 - Installing dependencies"
+    echo "Prestart Step 2/4 - Installing dependencies"
     yarn install --frozen-lockfile
-    echo "Prestart Step 3/5 - Compiling assets"
+    echo "Prestart Step 3/4 - Compiling assets"
     bundle exec rake assets:precompile
-    echo "Prestart Step 4/5 - Migrating database"
+    echo "Prestart Step 4/4 - Migrating database"
     bundle exec rake db:migrate:ignore_concurrent
-    echo "Prestart Step 5/5 - Seeding database"
-    bundle exec rails db:seed
     echo "Starting Server..."
     bundle exec rails server -b 0.0.0.0
     ;;
