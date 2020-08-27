@@ -10,7 +10,7 @@ LetsEncrypt.config do |config|
   # Use environment variable to set private key
   # If enable, the API Client will use `LETSENCRYPT_PRIVATE_KEY` as private key
   # Default is false
-  config.use_env_key = true
+  config.use_env_key = false
 
   # Should sync certificate into redis
   # When using ngx_mruby to dynamic load certificate, this will be helpful
