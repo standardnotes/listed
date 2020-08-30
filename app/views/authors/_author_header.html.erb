@@ -12,7 +12,7 @@
         methods: :author_relative_url
     ),
     author: author.as_json(
-        only: [:guestbook_disabled, :newsletter_disabled, :bio, :personal_link, :twitter, :header_image_url],
+        only: [:guestbook_disabled, :newsletter_disabled, :bio, :link, :twitter, :header_image_url],
         methods: [:title, :url_segment, :url, :word_count, :personal_link],
         include: {
             credentials: {
