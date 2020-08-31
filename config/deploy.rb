@@ -51,7 +51,7 @@ end
 before 'deploy:compile_assets', 'deploy:npm_install'
 
 set :ssh_options, {
-  keys: %W( #{ENV.fetch('LISTED_SSH_KEY_PATH')} ),
+  keys: ENV.fetch('LISTED_SSH_KEY_PATH'),
   forward_agent: false,
   auth_methods: %w(publickey)
 }
