@@ -25,7 +25,9 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
     - name: Write deployment key
-      run: echo $SSH_KEY > ${{ secrets.LISTED_SSH_KEY_PATH }}
+      run: |
+        echo $SSH_KEY > ${{ secrets.LISTED_SSH_KEY_PATH }}
+        chmod 600 ${{ secrets.LISTED_SSH_KEY_PATH }}
       env:
         SSH_KEY: ${{secrets.LISTED_SSH_KEY}}
     - name: Add public IP to AWS security group
