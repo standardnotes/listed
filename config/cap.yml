@@ -5,6 +5,6 @@ default: &default
 
 staging:
   <<: *default
-  server: user: <%= ENV.fetch('LISTED_SSH_SERVER') %>
-  deploy_to: user: <%= ENV.fetch('LISTED_SSH_DEPLOY_TO') %>
+  server: <%= ENV.fetch('LISTED_SSH_SERVER') %>
+  deploy_to: <%= ENV.fetch('LISTED_SSH_DEPLOY_TO') %>
   branch: develop
