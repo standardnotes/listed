@@ -25,13 +25,13 @@ jobs:
     - name: Install dependecies
       run: bundle install
     - name: Write deployment key
-      run: echo $SSH_KEY > {{ secrets.LISTED_SSH_KEY_PATH }}
+      run: echo $SSH_KEY > ${{ secrets.LISTED_SSH_KEY_PATH }}
       env:
         SSH_KEY: ${{secrets.LISTED_SSH_KEY}}
     - name: Deploy with Capistrano
       run: bundle exec cap staging deploy
       env:
-        LISTED_SSH_KEY_PATH: {{ secrets.LISTED_SSH_KEY_PATH }}
-        LISTED_SSH_USER: {{ secrets.LISTED_SSH_USER }}
-        LISTED_SSH_SERVER: {{ secrets.LISTED_SSH_SERVER }}
-        LISTED_SSH_DEPLOY_TO: {{ secrets.LISTED_SSH_DEPLOY_TO }}
+        LISTED_SSH_KEY_PATH: ${{ secrets.LISTED_SSH_KEY_PATH }}
+        LISTED_SSH_USER: ${{ secrets.LISTED_SSH_USER }}
+        LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER }}
+        LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO }}
