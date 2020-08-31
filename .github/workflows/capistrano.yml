@@ -14,16 +14,16 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6
-    - name: Restore Bundler cache
-      id: cache
-      uses: actions/cache@v1
+    - uses: actions/cache@v2
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-bundle-${{ hashFiles('**/Gemfile.lock') }}
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-bundle-
-    - name: Install dependecies
-      run: bundle install
+          ${{ runner.os }}-gems-
+    - name: Bundle install
+      run: |
+      bundle config path vendor/bundle
+      bundle install --jobs 4 --retry 3
     - name: Write deployment key
       run: echo $SSH_KEY > ${{ secrets.LISTED_SSH_KEY_PATH }}
       env:
