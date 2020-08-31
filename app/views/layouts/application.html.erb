@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <%= csrf_meta_tags %>
 
@@ -78,7 +78,7 @@
   </head>
 
   <body>
-    <div id="main-container">
+    <main id="main-container">
       <% if !@hide_header %>
         <%= render "shared/header" %>
       <% end %>
@@ -87,5 +87,5 @@
       </div>
       <%= render "shared/footer" %>
     </div>
-  </body>
+  </main>
 </html>

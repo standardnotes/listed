@@ -27,7 +27,41 @@
     font-style: normal;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    font-family: $font-family-default;
+    background-color: $bg-color-default;
+    color: $text-color-default;
+    height: 100%;
+}
+
+body {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:not(.button) {
+    color: $text-color-accent;
+    font-weight: bold;
+    text-decoration: none;
+    background-image: linear-gradient(#{$bg-color-accent-opacity-16}, #{$bg-color-accent-opacity-16});
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 100% 4px;
+
+    &:hover {
+        color: $text-color-default;
+        background-image: linear-gradient(#{$bg-color-black-opacity-16}, #{$bg-color-black-opacity-16});
+    }
+}
+
 .h1 {
+    margin: 0;
     font-family: $font-family-headline;
     font-size: $font-size-32;
     line-height: $line-height-44;
@@ -39,6 +73,7 @@
 }
 
 .h2 {
+    margin: 0;
     font-family: $font-family-headline;
     font-size: $font-size-28;
     line-height: $line-height-42;
@@ -50,6 +85,7 @@
 }
 
 .h3 {
+    margin: 0;
     font-family: $font-family-headline;
     font-size: $font-size-24;
     line-height: $line-height-32;
@@ -61,18 +97,21 @@
 }
 
 .h4 {
+    margin: 0;
     font-family: $font-family-headline;
     font-size: $font-size-22;
     line-height: $line-height-28;
 }
 
 .h5 {
+    margin: 0;
     font-family: $font-family-headline;
     font-size: $font-size-18;
     line-height: $line-height-24;
 }
 
 .p1 {
+    margin: 0;
     font-size: $font-size-17;
     line-height: $line-height-28;
 
@@ -83,64 +122,64 @@
 }
 
 .p2 {
+    margin: 0;
     font-size: $font-size-16;
     line-height: $line-height-24;
 }
 
 .p3 {
+    margin: 0;
     font-size: $font-size-14;
     line-height: $line-height-20;
 }
 
-* {
-    box-sizing: border-box;
+.button {
+    font-size: $font-size-16;
+    line-height: $line-height-24;
+    font-weight: bold;
+    padding: $spacing-6 $spacing-12;
+    border-radius: $border-radius-4;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
 }
 
-html,
-body {
-    margin: 0;
-    font-family: sans-serif;
-    line-height: 1.5;
-    color: var(--body-text-color);
-    background-color: var(--background-color);
-    font-size: 18px;
-    height: 100%;
-}
+.button--primary {
+    color: $text-color-white;
+    background-image: 
+        linear-gradient(to top, $bg-color-black 50%, $bg-color-accent 50%);
+    background-size: 100% 200%;
+    background-position: top;
+    transition: background-position 0.3s ease-in-out;
 
-body {
-    padding: 1rem 6rem 4px 6rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@include MQ-Xsmall() {
-    body {
-        padding: 1.5rem 1.5rem;
+    &:hover {
+        background-position: bottom;
     }
 }
 
-@include MQ-Small() {
-    body {
-        padding: 1.5rem 2rem;
+.button--no-fill {
+    color: $text-color-accent;
+    background-image: 
+        linear-gradient(to top, $bg-color-accent-opacity-8 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: top;
+    transition: background-position 0.3s ease-in-out;
+
+    @include Desktop() {
+        &:hover {
+            background-position: bottom;
+        }
     }
 }
 
-h2 {
-    font-size: 1.4rem;
+.button--active {
+    color: $text-color-accent;
+    background-color: $bg-color-accent-opacity-8;
 }
 
 .block {
     display: block;
-}
-
-a {
-    color: var(--link-color);
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
 }
 
 .faded {
@@ -195,14 +234,6 @@ blockquote {
     padding-left: 20px;
     opacity: 0.8;
     margin-left: 0;
-}
-
-h1,
-h2,
-h3 {
-    margin-top: 0;
-    margin-bottom: 4px;
-    -webkit-margin-after: 4px;
 }
 
 #main-container {
