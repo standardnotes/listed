@@ -7,11 +7,11 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-server CAP_CONFIG['staging']['server'], user: CAP_CONFIG['staging']['user'], roles: %w{app db web}
+server ENV.fetch('LISTED_SSH_SERVER'), user: ENV.fetch('LISTED_SSH_USER'), roles: %w{app db web}
 
-set :branch, CAP_CONFIG['staging']['branch']
+set :branch, develop
 
-set :deploy_to, CAP_CONFIG['staging']['deploy_to']
+set :deploy_to, ENV.fetch('LISTED_SSH_DEPLOY_TO')
 
 # role-based syntax
 # ==================

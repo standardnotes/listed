@@ -1,9 +1,8 @@
-CAP_CONFIG = YAML.load_file("config/cap.yml")
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
 set :application, 'listed'
-set :repo_url, CAP_CONFIG["default"]["repo_url"]
+set :repo_url, 'https://github.com/standardnotes/listed'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -52,7 +51,7 @@ end
 before 'deploy:compile_assets', 'deploy:npm_install'
 
 set :ssh_options, {
-  keys: %W( #{CAP_CONFIG['default']['key_path']} ),
+  keys: %W( #{ENV.fetch('LISTED_SSH_KEY_PATH')} ),
   forward_agent: false,
   auth_methods: %w(publickey)
 }
