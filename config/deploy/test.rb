@@ -9,7 +9,7 @@
 
 server ENV.fetch('LISTED_SSH_SERVER'), user: ENV.fetch('LISTED_SSH_USER'), roles: %w{app db web}
 
-set :branch, develop
+set :branch, 'test'
 
 set :deploy_to, ENV.fetch('LISTED_SSH_DEPLOY_TO')
 
