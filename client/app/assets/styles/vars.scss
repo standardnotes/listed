@@ -19,6 +19,11 @@
 };
 
 $bg-color-default: #F8F9FC;
+$bg-color-accent: #00208F;
+$bg-color-accent-opacity-8: rgba(0, 32, 143, 0.08);
+$bg-color-accent-opacity-16: rgba(0, 32, 143, 0.16);
+$bg-color-black: #181818;
+$bg-color-black-opacity-16: rgba(24, 24, 24, 0.16);
 
 $font-family-default: "Roboto";
 $font-family-headline: "Merriweather";
@@ -36,8 +41,13 @@ $font-size-28: 28px;
 $font-size-32: 32px;
 $font-size-36: 36px;
 $font-size-48: 48px;
+$font-size-120: 120px;
 
-$text-color-default: black;
+$text-color-default: #181818;
+$text-color-white: white;
+$text-color-accent: #00208F;
+$text-color-accent-dimmed: rgba(0, 32, 143, 0.56);
+$text-color-default-dimmed: rgba(24, 24, 24, 0.16);
 
 $line-height-15: 15px;
 $line-height-20: 20px;
@@ -50,3 +60,23 @@ $line-height-42: 42px;
 $line-height-44: 44px;
 $line-height-52: 52px;
 $line-height-64: 64px;
+
+$spacing-4: 4px;
+$spacing-6: 6px;
+$spacing-8: 8px;
+$spacing-10: 10px;
+$spacing-12: 12px;
+$spacing-14: 14px;
+$spacing-16: 16px;
+$spacing-18: 18px;
+$spacing-20: 20px;
+$spacing-24: 24px;
+$spacing-26: 26px;
+$spacing-32: 32px;
+$spacing-56: 56px;
+$spacing-60: 60px;
+$spacing-86: 86px;
+$spacing-90: 90px;
+$spacing-148: 148px;
+
+$border-radius-4: 4px;

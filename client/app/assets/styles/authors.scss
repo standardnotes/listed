@@ -16,69 +16,6 @@
   }
 }
 
-#page-header {
-  width: 100%;
-  padding-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @include MQ-Xsmall() {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .left {
-    * {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .path-item {
-      &,
-      a {
-        font-weight: bold;
-        font-size: 1rem;
-        color: var(--body-text-color);
-      }
-      &:before {
-        padding-right: 0rem;
-        padding-top: 0.3rem;
-        font-size: 0.8rem;
-        font-weight: bold;
-        content: "┋";
-      }
-    }
-    .website-name {
-      margin-right: 0.1rem;
-      a {
-        font-size: 1rem;
-        font-weight: bold;
-        color: var(--body-text-color);
-        &.dimmed {
-          color: var(--header-listed-name);
-        }
-      }
-    }
-
-    .author-name a {
-      color: var(--header-author-name);
-    }
-  }
-
-  .right {
-    .pages-menu {
-      .page-link {
-        color: var(--page-menu-link-color);
-        font-size: 0.9rem;
-        font-weight: bold;
-        &:not(:last-child) {
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-}
-
 #page-header-hr {
   width: 100vw;
   position: relative;
@@ -87,58 +24,6 @@
   height: 1px;
   background-color: var(--header-border-color);
   left: 50%;
-}
-
-.header-author-info {
-  @include MQ-Xsmall() {
-    text-align: center;
-    margin-top: 0.3rem;
-  }
-  margin-top: -0.25rem;
-  margin-bottom: 0.6rem;
-  
-  .bio {
-    font-size: 0.8rem;
-    color: var(--bio-color);
-  }
-
-  .word-count {
-    color: var(--wordcount-color);
-  }
-
-  .author-link {
-    color: var(--website-color);
-  }
-
-  .author-twitter {
-    color: var(--twitter-color);
-  }
-
-  .item {
-    padding-right: 3px;
-    display: inline-block;
-    font-size: 0.7rem;
-    text-align: center;
-    &:not(.first) {
-      padding-left: 8px;
-      border-left: 1px solid rgba(black, 0.1);
-    }
-    &.link:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-.header-image-container {
-  width: 100%;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-}
-
-.header-image {
-  display: block;
-  width: 100%;
-  height: auto;
 }
 
 #settings {
