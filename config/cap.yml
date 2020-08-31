@@ -1,0 +1,10 @@
+default: &default
+  key_path: <%= ENV.fetch('LISTED_SSH_KEY_PATH') %>
+  repo_url: https://github.com/standardnotes/listed
+  user: <%= ENV.fetch('LISTED_SSH_USER') %>
+
+staging:
+  <<: *default
+  server: user: <%= ENV.fetch('LISTED_SSH_SERVER') %>
+  deploy_to: user: <%= ENV.fetch('LISTED_SSH_DEPLOY_TO') %>
+  branch: develop

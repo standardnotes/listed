@@ -15,7 +15,6 @@
 !/log/.keep
 /tmp
 
-/config/cap.yml
 /config/domains.yml
 
 /app/assets/templates/generated/
