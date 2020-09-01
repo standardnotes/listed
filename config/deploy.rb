@@ -38,17 +38,17 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # set :rvm_ruby_version, '2.3.0'
 
 namespace :deploy do
-  task :npm_install do
+  task :yarn_install do
     on roles(:app) do
       within release_path do
         # string commands dont work, have to use special *%w syntax
-        execute *%w[ npm install ]
+        execute *%w[ yarn install --frozen-lockfile ]
       end
     end
   end
 end
 
-before 'deploy:compile_assets', 'deploy:npm_install'
+before 'deploy:compile_assets', 'deploy:yarn_install'
 
 set :ssh_options, {
   keys: ENV.fetch('LISTED_SSH_KEY_PATH'),
