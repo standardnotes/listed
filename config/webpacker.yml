@@ -68,6 +68,13 @@ development:
     watch_options:
       ignored: '**/node_modules/**'
 
+staging:
+  <<: *default
+
+  compile: false
+  extract_css: false
+  cache_manifest: true
+
 production:
   <<: *default
 
