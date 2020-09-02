@@ -5,8 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  deploy:
-
+  docker_publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,32 +18,46 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         tags: "stable,${{ github.sha }}"
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+    - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: Bundle install
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+    - name: Setup SSH
+      uses: MrSquaare/ssh-setup-action@v1
+      with:
+        host: ${{ secrets.LISTED_SSH_SERVER }}
+        private-key: ${{ secrets.LISTED_SSH_KEY }}
+    - name: Add public IP to AWS security group
+      uses: sohelamin/aws-security-group-add-ip-action@master
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-
-    - name: Download task definition
-      run: |
-        aws ecs describe-task-definition --task-definition listed-prod --query taskDefinition > task-definition.json
-
-    - name: Fill in the new image ID in the Amazon ECS task definition
-      id: task-def
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with:
-        task-definition: task-definition.json
-        container-name: listed-prod
-        image: "standardnotes/listed:${{ github.sha }}"
-
-    - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      with:
-        task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: listed-prod
-        cluster: prod
-        wait-for-service-stability: true
+        aws-region: 'us-east-1'
+        aws-security-group-id: ${{ secrets.AWS_SECURITY_GROUP_ID_PROD }}
+        port: '22'
+        description: 'GitHub Action'
+    - name: Deploy with Capistrano
+      run: bundle exec cap production deploy
+      env:
+        LISTED_SSH_KEY_PATH: $HOME/.ssh/id_rsa
+        LISTED_SSH_USER: ${{ secrets.LISTED_SSH_USER }}
+        LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER }}
+        LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO }}
 
   notify_slack:
     needs: deploy

@@ -35,6 +35,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+staging:
+  <<: *default
 
 production:
   <<: *default

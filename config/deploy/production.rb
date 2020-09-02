@@ -13,6 +13,8 @@ set :branch, 'master'
 
 set :deploy_to, ENV.fetch('LISTED_SSH_DEPLOY_TO')
 
+set :rails_env, 'production'
+
 # role-based syntax
 # ==================
 
