@@ -2,21 +2,21 @@ name: Dev
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ develop, domainer_renewal ]
 
 jobs:
-  docker_publish:
-    runs-on: ubuntu-latest
+  # docker_publish:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: standardnotes/listed
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "latest,${{ github.sha }}"
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Publish to Registry
+  #     uses: elgohr/Publish-Docker-Github-Action@master
+  #     with:
+  #       name: standardnotes/listed
+  #       username: ${{ secrets.DOCKER_USERNAME }}
+  #       password: ${{ secrets.DOCKER_PASSWORD }}
+  #       tags: "latest,${{ github.sha }}"
 
   deploy:
     runs-on: ubuntu-latest
@@ -59,15 +59,15 @@ jobs:
         LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER }}
         LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO }}
 
-  notify_slack:
-    needs: deploy
+  # notify_slack:
+  #   needs: deploy
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Notify slack
-      uses: pullreminders/slack-action@master
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      with:
-        args: '{ \"channel\": \"${{ secrets.SLACK_NOTIFICATION_CHANNEL }}\", \"blocks\": [{\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Successfully deployed <https://listed-dev.standardnotes.org|[DEV] Listed>\"}}, {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Changes: <https://github.com/standardnotes/listed/commit/${{ github.sha }}|${{ github.sha }}>\"}, \"accessory\": {\"type\": \"image\", \"image_url\": \"https://website-dev.standardnotes.org/assets/icon.png\", \"alt_text\": \"Standard Notes\"}}, { \"type\": \"section\", \"fields\": [{\"type\": \"mrkdwn\", \"text\": \"<https://github.com/standardnotes/listed/actions/runs/${{ github.run_id }}|Build details>\"}]}]}'
+  #   steps:
+  #   - name: Notify slack
+  #     uses: pullreminders/slack-action@master
+  #     env:
+  #       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  #     with:
+  #       args: '{ \"channel\": \"${{ secrets.SLACK_NOTIFICATION_CHANNEL }}\", \"blocks\": [{\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Successfully deployed <https://listed-dev.standardnotes.org|[DEV] Listed>\"}}, {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Changes: <https://github.com/standardnotes/listed/commit/${{ github.sha }}|${{ github.sha }}>\"}, \"accessory\": {\"type\": \"image\", \"image_url\": \"https://website-dev.standardnotes.org/assets/icon.png\", \"alt_text\": \"Standard Notes\"}}, { \"type\": \"section\", \"fields\": [{\"type\": \"mrkdwn\", \"text\": \"<https://github.com/standardnotes/listed/actions/runs/${{ github.run_id }}|Build details>\"}]}]}'
