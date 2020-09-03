@@ -34,6 +34,14 @@ namespace :ssl do
 
           Rails.logger.info 'Renewing certificate'
           certificate.renew
+
+          Rails.logger.info 'Creating fullchain certificate file'
+          file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{domain}/fullchain.pem"
+          File.open(file_path, 'w+') { |file| file.write(certificate.bundle) }
+
+          Rails.logger.info 'Creating privkey certificate file'
+          file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{domain}/privkey.pem"
+          File.open(file_path, 'w+') { |file| file.write(certificate.key) }
         rescue StandardError => e
           Rails.logger.warn "Processing error: #{e.message}"
           next
