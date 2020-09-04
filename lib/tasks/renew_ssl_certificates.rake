@@ -11,6 +11,8 @@ namespace :ssl do
 
       Rails.logger.info "Found #{certificates.length} certificates"
 
+      restart_nginx
+
       renew_certificates(certificates)
 
       domains = certificates.map(&:domain)
