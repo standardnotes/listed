@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'fileutils'
+
 namespace :ssl do
   desc 'Renews the letsencrypt certificates,
     re-imports them to AWS Certificate Manager and adds to the Load Balancer HTTPS listener'
@@ -134,12 +136,15 @@ namespace :ssl do
   end
 
   def dump_certificate_to_files(certificate)
+    certificate_directory = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{certificate.domain}"
+    FileUtils.mkdir_p certificate_directory unless File.exists?(certificate_directory)
+
     Rails.logger.info 'Creating fullchain certificate file'
-    file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{certificate.domain}/fullchain.pem"
+    file_path = "#{certificate_directory}/fullchain.pem"
     File.open(file_path, 'w+') { |file| file.write(certificate.bundle) }
 
     Rails.logger.info 'Creating privkey certificate file'
-    file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{certificate.domain}/privkey.pem"
+    file_path = "#{certificate_directory}/privkey.pem"
     File.open(file_path, 'w+') { |file| file.write(certificate.key) }
   end
 
