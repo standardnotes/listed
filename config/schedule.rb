@@ -1,3 +1,7 @@
+require File.expand_path(File.dirname(__FILE__) + "/environment")
+
+set :output, Rails.root.join('log', 'cron').to_s
+
 job_type :rake_verbose, "cd :path && :environment_variable=:environment :bundle_command rake :task :output"
 
 every 1.week do
