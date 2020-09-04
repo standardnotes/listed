@@ -27,6 +27,8 @@ namespace :ssl do
     certificates.each do |certificate|
       Rails.logger.tagged(certificate.domain) do
         begin
+          dump_certificate_to_files(certificate) unless certificate_files_exist(certificate)
+
           unless certificate.renewable?
             Rails.logger.info "Certificate is not renewable before #{certificate.renew_after}"
             next
@@ -35,13 +37,7 @@ namespace :ssl do
           Rails.logger.info 'Renewing certificate'
           certificate.renew
 
-          Rails.logger.info 'Creating fullchain certificate file'
-          file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{domain}/fullchain.pem"
-          File.open(file_path, 'w+') { |file| file.write(certificate.bundle) }
-
-          Rails.logger.info 'Creating privkey certificate file'
-          file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{domain}/privkey.pem"
-          File.open(file_path, 'w+') { |file| file.write(certificate.key) }
+          dump_certificate_to_files(certificate)
         rescue StandardError => e
           Rails.logger.warn "Processing error: #{e.message}"
           next
@@ -137,9 +133,24 @@ namespace :ssl do
     end
   end
 
+  def dump_certificate_to_files(certificate)
+    Rails.logger.info 'Creating fullchain certificate file'
+    file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{certificate.domain}/fullchain.pem"
+    File.open(file_path, 'w+') { |file| file.write(certificate.bundle) }
+
+    Rails.logger.info 'Creating privkey certificate file'
+    file_path = "#{ENV['CERTIFICATES_FOLDER_PATH']}/#{certificate.domain}/privkey.pem"
+    File.open(file_path, 'w+') { |file| file.write(certificate.key) }
+  end
+
+  def certificate_files_exist(certificate)
+    File.file?("#{ENV['CERTIFICATES_FOLDER_PATH']}/#{certificate.domain}/fullchain.pem") &&
+      File.file?("#{ENV['CERTIFICATES_FOLDER_PATH']}/#{certificate.domain}/privkey.pem")
+  end
+
   def restart_nginx
     Rails.logger.info 'Restarting nginx...'
-    system('sudo kill $(cat /opt/nginx/logs/nginx.pid) && sudo /opt/nginx/sbin/nginx')
+    system('if [ -f "/opt/nginx/logs/nginx.pid" ]; then sudo kill $(cat /opt/nginx/logs/nginx.pid); fi && sudo /opt/nginx/sbin/nginx')
     Rails.logger.info 'Restarted nginx'
   end
 end
