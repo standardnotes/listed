@@ -69,9 +69,11 @@ namespace :ssl do
           next
         end
 
-        existing_domain.author.approve_domain
+        unless existing_domain.approved
+          existing_domain.author.approve_domain
 
-        existing_domain.author.notify_domain
+          existing_domain.author.notify_domain
+        end
       end
     end
   end
