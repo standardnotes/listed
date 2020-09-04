@@ -13,11 +13,11 @@ namespace :ssl do
 
       renew_certificates(certificates)
 
-      domains = certificates.map(&:domain)
+      active_domains = certificates.select(&:active?).map(&:domain)
 
-      create_nginx_domain_config_files(domains)
+      create_nginx_domain_config_files(active_domains)
 
-      update_main_nginx_config_file(domains)
+      update_main_nginx_config_file(active_domains)
 
       restart_nginx
 
