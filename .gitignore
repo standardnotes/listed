@@ -56,4 +56,3 @@ dump.rdb
 
 # letsencrypt
 config/letsencrypt.key
-certificates/*.pem
