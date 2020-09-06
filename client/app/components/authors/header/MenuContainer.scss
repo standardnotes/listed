@@ -17,6 +17,10 @@
         &:not(:last-child) {
             margin-bottom: $spacing-26;
         }
+
+        &.button--primary {
+            margin-bottom: $spacing-14;
+        }
     }
 
     &.pages-menu--mobile-visible {
