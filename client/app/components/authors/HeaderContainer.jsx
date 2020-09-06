@@ -3,7 +3,7 @@ import { IcListed, IcMenu, IcClose } from "../../assets/icons";
 import { MenuContainer, AuthorInfo } from "./header";
 import "./HeaderContainer.scss";
 
-const HeaderContainer = ({ homeUrl, post, author, privatePost, pages, authorGuestbookEntriesUrl, currentPath }) => {
+const HeaderContainer = ({ homeUrl, author, post, privatePost, pages, authorGuestbookEntriesUrl, currentPath }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const renderMenu = isDesktopMenu => (
