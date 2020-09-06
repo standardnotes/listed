@@ -254,48 +254,6 @@ blockquote {
     flex: 1;
 }
 
-#footer {
-    font-size: 12px;
-    color: gray;
-    margin-top: 30px;
-    margin-bottom: 15px;
-
-    .left {
-        float: left;
-
-        .listed {
-            color: var(--body-text-color);
-            display: inline-block;
-            padding-right: 8px;
-        }
-        .via {
-            color: gray;
-            display: inline-block;
-        }
-
-        .links {
-            display: inline;
-            border-left: 1px solid var(--body-text-color);
-            padding-left: 8px;
-
-            a {
-                margin-right: 5px;
-            }
-        }
-
-        * {
-            display: inline-block;
-        }
-    }
-
-    a {
-        color: var(--body-text-color);
-    }
-    .right {
-        float: right;
-    }
-}
-
 .mt-5 {
     margin-top: 5px !important;
 }
