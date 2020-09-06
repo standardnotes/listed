@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.scss";
 
-export default () => {
+const Footer = () => {
     return (
         <div id="footer">
             <p className="p3">Listed Blogging Platform</p>
@@ -10,4 +10,5 @@ export default () => {
         </div>
     );
 };
-      
+
+export default Footer;

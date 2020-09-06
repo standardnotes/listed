@@ -3,7 +3,7 @@ import axios from 'axios';
 import HowTo from './HowTo';
 import "./Usage.scss";
 
-export default ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
+const Usage = ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
     const generateAuthorLink = event => {
         event.preventDefault();
 
@@ -58,7 +58,8 @@ export default ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
             <button className="button button--primary">
                 Start writing
             </button>
-            <div className="mt-40">
+            
+            {/* <div className="mt-40">
                 <h3>New Author?</h3>
                 {!secretUrl ? (
                     <form onSubmit={e => generateAuthorLink(e)}>
@@ -123,7 +124,9 @@ export default ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
                         )}
                     </div>
                 )}
-            </div>
+            </div> */}
         </div>
     );
 };
+
+export default Usage;
