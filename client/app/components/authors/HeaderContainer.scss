@@ -14,7 +14,7 @@
     align-items: center;
 
     @include Desktop() {
-        padding: $spacing-10 $spacing-148;
+        padding: $spacing-10 $spacing-11-vw;
     }
 }
 
@@ -39,23 +39,28 @@
 
 .author-name__container {
     display: flex;
-    align-items: center;
 
     &::before {
         content: "|";
         color: $text-color-default-dimmed;
-        margin: 0 $spacing-14 0 $spacing-12;
+        margin: $spacing-14 $spacing-14 0 $spacing-12;
         font-size: $font-size-28;
         line-height: 0;
 
         @include Desktop() {
-            margin: 0 $spacing-18 0 $spacing-16;
+            margin: $spacing-16 $spacing-18 0 $spacing-16;
         }
     }
-}
 
-.author-name {
-    color: $text-color-primary;
+    .author-name {
+        display: flex;
+        align-items: center;
+        color: $text-color-primary;
+    
+        @include Desktop() {
+            margin-right: $spacing-16;
+        }
+    }
 }
 
 .right {
