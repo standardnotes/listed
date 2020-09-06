@@ -47,10 +47,12 @@ const AuthorInfo = ({ author }) => {
                     </p>
                 </div>
             </div>
-            <p className="p3 word-count" suppressHydrationWarning>
-                {author.word_count.toLocaleString()} words
-            </p>
-            <img src={IcArrowLong} alt="Down arrow" className="arrow-icon" />
+            <button className="word-count__button">
+                <p className="p3 word-count" suppressHydrationWarning>
+                    {author.word_count.toLocaleString()} words
+                </p>
+                <img src={IcArrowLong} alt="Down arrow" className="word-count__icon" />
+            </button>
         </div>      
     );
 };

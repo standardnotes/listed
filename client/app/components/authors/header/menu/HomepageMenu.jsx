@@ -1,13 +1,12 @@
 import React from "react";
-import "./Menu.scss";
 
-const Menu = ({ isMobileMenuOpen, isDesktopMenu }) => {
+const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
     const navClassName = () => {
         if (isDesktopMenu) {
-            return "pages-menu--desktop";
+            return "pages-menu pages-menu--desktop";
         }
 
-        return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
+        return `pages-menu pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
     }
 
     return(
@@ -35,4 +34,4 @@ const Menu = ({ isMobileMenuOpen, isDesktopMenu }) => {
     );
 };
 
-export default Menu;
+export default HomepageMenu;

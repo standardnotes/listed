@@ -1,30 +1,20 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
 import { IcListed, IcMenu, IcClose } from "../../assets/icons";
-import Menu from "./header/Menu";
-import AuthorMenu from "./header/AuthorMenu";
-import AuthorInfo from "./header/AuthorInfo";
-import "./Header.scss";
+import { MenuContainer, AuthorInfo } from "./header";
+import "./HeaderContainer.scss";
 
-const Header = ({ homeUrl, post, author, privatePost, pages, authorGuestbookEntriesUrl, currentPath }) => {
+const HeaderContainer = ({ homeUrl, post, author, privatePost, pages, authorGuestbookEntriesUrl, currentPath }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const renderMenu = isDesktopMenu => (
-        <div className="pages-menu__container">
-            {!author && (
-                <Menu isMobileMenuOpen={isMobileMenuOpen} isDesktopMenu={isDesktopMenu} />
-            )}
-            {pages && !privatePost && (
-                <AuthorMenu
-                    isMobileMenuOpen={isMobileMenuOpen}
-                    isDesktopMenu={isDesktopMenu}
-                    author={author}
-                    pages={pages}
-                    authorGuestbookEntriesUrl={authorGuestbookEntriesUrl}
-                    currentPath={currentPath}
-                />
-            )}
-        </div>
+        <MenuContainer
+            isMobileMenuOpen={isMobileMenuOpen}
+            isDesktopMenu={isDesktopMenu}
+            author={author}
+            pages={pages}
+            authorGuestbookEntriesUrl={authorGuestbookEntriesUrl}
+            currentPath={currentPath}
+        />
     );
 
     return (
@@ -41,11 +31,6 @@ const Header = ({ homeUrl, post, author, privatePost, pages, authorGuestbookEntr
                             <div className="h4 author-name path-item">
                                 {author.title}
                             </div>
-                        </div>
-                    )}
-                    {post && post.page && (
-                        <div className="author-name path-item">
-                            <a href={post.author_relative_url}>{post.title}</a>
                         </div>
                     )}
                 </div>
@@ -67,4 +52,4 @@ const Header = ({ homeUrl, post, author, privatePost, pages, authorGuestbookEntr
     );
 };
 
-export default props => <Header {...props} />;
+export default props => <HeaderContainer {...props} />;

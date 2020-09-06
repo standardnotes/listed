@@ -46,17 +46,17 @@ body {
 }
 
 a:not(.button) {
-    color: $text-color-accent;
+    color: $text-color-primary;
     font-weight: bold;
     text-decoration: none;
-    background-image: linear-gradient(#{$bg-color-accent-opacity-16}, #{$bg-color-accent-opacity-16});
+    background-image: linear-gradient(#{$bg-color-primary-opacity-16}, #{$bg-color-primary-opacity-16});
     background-position: bottom;
     background-repeat: repeat-x;
     background-size: 100% 4px;
 
     &:hover {
         color: $text-color-default;
-        background-image: linear-gradient(#{$bg-color-black-opacity-16}, #{$bg-color-black-opacity-16});
+        background-image: linear-gradient(#{$bg-color-primary-opacity-16}, #{$bg-color-black-opacity-16});
     }
 }
 
@@ -148,7 +148,7 @@ a:not(.button) {
 .button--primary {
     color: $text-color-white;
     background-image: 
-        linear-gradient(to top, $bg-color-black 50%, $bg-color-accent 50%);
+        linear-gradient(to top, $bg-color-black 50%, $bg-color-primary 50%);
     background-size: 100% 200%;
     background-position: top;
     transition: background-position 0.3s ease-in-out;
@@ -159,9 +159,9 @@ a:not(.button) {
 }
 
 .button--no-fill {
-    color: $text-color-accent;
+    color: $text-color-primary;
     background-image: 
-        linear-gradient(to top, $bg-color-accent-opacity-8 50%, transparent 50%);
+        linear-gradient(to top, $bg-color-primary-opacity-8 50%, transparent 50%);
     background-size: 100% 200%;
     background-position: top;
     transition: background-position 0.3s ease-in-out;
@@ -174,8 +174,8 @@ a:not(.button) {
 }
 
 .button--active {
-    color: $text-color-accent;
-    background-color: $bg-color-accent-opacity-8;
+    color: $text-color-primary;
+    background-color: $bg-color-primary-opacity-8;
 }
 
 .block {

@@ -1,7 +1,0 @@
-.pages-menu--desktop {
-    @include Desktop() {
-        .button:not(:last-child) {
-            margin-right: $spacing-20;
-        }
-    }
-}

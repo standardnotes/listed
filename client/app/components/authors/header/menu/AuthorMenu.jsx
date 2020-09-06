@@ -1,12 +1,11 @@
 import React from "react";
-import "./AuthorMenu.scss";
 
 const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentPath }) => {
     const isActiveMenuItem = path => path === currentPath;
 
     const navClassName = () => {
         if (isDesktopMenu) {
-            return "pages-menu--desktop";
+            return "pages-menu author-pages-menu--desktop pages-menu--desktop";
         }
 
         return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;

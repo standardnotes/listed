@@ -55,7 +55,7 @@
 }
 
 .author-name {
-    color: $text-color-accent;
+    color: $text-color-primary;
 }
 
 .right {
@@ -66,48 +66,9 @@
     height: 24px;
     width: 24px;
     padding: 0;
-    background-color: none;
+    background: none;
 
     @include Desktop() {
         display: none;
-    }
-}
-
-.pages-menu__container {
-    overflow: hidden;
-}
-
-.pages-menu--mobile {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: $spacing-16;
-    visibility: hidden;
-    margin-top: -100%;
-    transition: all 0.3s ease-in-out;
-
-    .button {
-        width: 100%;
-
-        &:not(:last-child) {
-            margin-bottom: $spacing-26;
-        }
-    }
-
-    &.pages-menu--mobile-visible {
-        visibility: visible;
-        margin-top: 0;
-    }
-    
-    @include Desktop() {
-        display: none;
-    }
-}
-
-.pages-menu--desktop {
-    display: none;
-
-    @include Desktop() {
-        display: flex;
     }
 }
