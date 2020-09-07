@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'uri'
 
 namespace :ssl do
   desc 'Renews the letsencrypt certificates,
@@ -14,6 +15,8 @@ namespace :ssl do
       renew_certificates(certificates)
 
       active_domains = certificates.select(&:active?).map(&:domain)
+      host_domain = URI.parse(ENV['HOST']).host
+      active_domains = active_domains.reject { |domain| domain == host_domain }
 
       create_nginx_domain_config_files(active_domains)
 
