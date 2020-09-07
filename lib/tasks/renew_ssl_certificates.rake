@@ -15,7 +15,7 @@ namespace :ssl do
       renew_certificates(certificates)
 
       active_domains = certificates.select(&:active?).map(&:domain)
-      host_domain = URI.parse(ENV['HOST']).host
+      host_domain = URI.parse(ENV['ALT_HOST']).host
       active_domains = active_domains.reject { |domain| domain == host_domain }
 
       create_nginx_domain_config_files(active_domains)
