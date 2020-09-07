@@ -1,9 +1,8 @@
-CAP_CONFIG = YAML.load_file("config/cap.yml")
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
 set :application, 'listed'
-set :repo_url, CAP_CONFIG["default"]["repo_url"]
+set :repo_url, 'https://github.com/standardnotes/listed'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -27,7 +26,7 @@ set :git_strategy, Capistrano::Git::SubmoduleStrategy
 
 # Default value for :linked_files is []
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
-set :linked_files, fetch(:linked_files, []).push('.env')
+# set :linked_files, fetch(:linked_files, []).push('.env')
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
@@ -39,20 +38,20 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # set :rvm_ruby_version, '2.3.0'
 
 namespace :deploy do
-  task :npm_install do
+  task :yarn_install do
     on roles(:app) do
       within release_path do
         # string commands dont work, have to use special *%w syntax
-        execute *%w[ npm install ]
+        execute *%w[ yarn install --frozen-lockfile ]
       end
     end
   end
 end
 
-before 'deploy:compile_assets', 'deploy:npm_install'
+before 'deploy:compile_assets', 'deploy:yarn_install'
 
 set :ssh_options, {
-  keys: %W( #{CAP_CONFIG['default']['key_path']} ),
+  keys: ENV.fetch('LISTED_SSH_KEY_PATH'),
   forward_agent: false,
   auth_methods: %w(publickey)
 }

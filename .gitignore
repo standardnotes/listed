@@ -55,5 +55,4 @@ dump.rdb
 /node_modules
 
 # letsencrypt
-
 config/letsencrypt.key

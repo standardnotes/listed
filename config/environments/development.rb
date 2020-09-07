@@ -10,11 +10,14 @@ Rails.application.configure do
   config.eager_load = false
 
   MAX_LOG_MEGABYTES = 50
-  config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(config.paths['log'].first, 1, MAX_LOG_MEGABYTES * 1024 * 1024))
+  logger = Logger.new(config.paths['log'].first, 1, MAX_LOG_MEGABYTES * 1024 * 1024)
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT))
+    logger = Logger.new(STDOUT)
   end
+
+  logger.formatter = Logger::Formatter.new
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
 
   # Show full error reports.
   config.consider_all_requests_local = true
