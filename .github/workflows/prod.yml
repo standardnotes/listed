@@ -40,8 +40,8 @@ jobs:
     - name: Setup SSH
       uses: MrSquaare/ssh-setup-action@v1
       with:
-        host: ${{ secrets.LISTED_SSH_SERVER }}
-        private-key: ${{ secrets.LISTED_SSH_KEY }}
+        host: ${{ secrets.LISTED_SSH_SERVER_PROD }}
+        private-key: ${{ secrets.LISTED_SSH_KEY_PROD }}
     - name: Add public IP to AWS security group
       uses: sohelamin/aws-security-group-add-ip-action@master
       with:
@@ -55,9 +55,9 @@ jobs:
       run: bundle exec cap production deploy
       env:
         LISTED_SSH_KEY_PATH: $HOME/.ssh/id_rsa
-        LISTED_SSH_USER: ${{ secrets.LISTED_SSH_USER }}
-        LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER }}
-        LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO }}
+        LISTED_SSH_USER: ${{ secrets.LISTED_SSH_USER_PROD }}
+        LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER_PROD }}
+        LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO_PROD }}
 
   notify_slack:
     needs: deploy
