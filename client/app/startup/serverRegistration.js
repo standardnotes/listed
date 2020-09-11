@@ -1,6 +1,6 @@
 import ReactOnRails from "react-on-rails";
 import AdminMailerNewDomainRequest from "../components/admin_mailer/NewDomainRequest";
-import AuthorHeader from "../components/authors/Header";
+import AuthorHeader from "../components/authors/HeaderContainer";
 import AuthorSettings from "../components/authors/Settings";
 import AuthorShow from "../components/authors/Show";
 import AuthorSubscribe from "../components/authors/Subscribe";

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <%= csrf_meta_tags %>
 
@@ -46,6 +46,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'stylekit', 'data-turbolinks-track': 'reload' %>
 
+    <%= stylesheet_pack_tag('clientRegistration', media: 'all', 'data-turbolinks-track': 'reload') %>
     <%= javascript_pack_tag('clientRegistration', 'data-turbolinks-track': 'reload', defer: true) %>
 
     <% if @display_author %>
@@ -77,7 +78,7 @@
   </head>
 
   <body>
-    <div id="main-container">
+    <main id="main-container">
       <% if !@hide_header %>
         <%= render "shared/header" %>
       <% end %>
@@ -86,5 +87,5 @@
       </div>
       <%= render "shared/footer" %>
     </div>
-  </body>
+  </main>
 </html>

@@ -1,19 +1,14 @@
-import React from 'react';
+import React from "react";
+import "./Footer.scss";
 
-export default ({ homeUrl }) => {
+const Footer = () => {
     return (
         <div id="footer">
-            <div className="left">
-                <a href={homeUrl} className="listed">
-                    <p>Listed</p>
-                </a>
-            </div>
-            <div className="right">
-                <a href="https://standardnotes.org">
-                    <p>via Standard Notes</p>
-                </a>
-            </div>
+            <p className="p3">Listed Blogging Platform</p>
+            <p className="p3">Copyright Ⓒ 2020</p>
+            <p className="p3">By Standard Notes</p>
         </div>
     );
 };
-      
+
+export default Footer;

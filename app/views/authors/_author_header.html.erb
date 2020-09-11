@@ -7,10 +7,7 @@
 
 <%= react_component("AuthorHeader", props: {
     homeUrl: home_url,
-    post: post.as_json(
-        only: [:title, :page],
-        methods: :author_relative_url
-    ),
+    post: !!post,
     author: author.as_json(
         only: [:guestbook_disabled, :newsletter_disabled, :bio, :link, :twitter, :header_image_url],
         methods: [:title, :url_segment, :url, :word_count, :personal_link],
@@ -25,5 +22,6 @@
         only: [:id, :title],
         methods: [:author_relative_url]
     ),
-    authorGuestbookEntriesUrl: author_guestbook_entries_url
+    authorGuestbookEntriesUrl: author_guestbook_entries_url,
+    currentPath: request.path
 }) %>

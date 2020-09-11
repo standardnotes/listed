@@ -1,0 +1,331 @@
+@import "queries";
+@import "posts";
+@import "guestbook_entry";
+@import "authors";
+@import "help";
+@import "usage";
+@import "subscriptions";
+
+@font-face {
+    font-family: "Merriweather";
+    src: url("../fonts/Merriweather-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    font-family: $font-family-default;
+    background-color: $bg-color-default;
+    color: $text-color-default;
+    height: 100%;
+}
+
+body {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:not(.button) {
+    color: $text-color-primary;
+    font-weight: bold;
+    text-decoration: none;
+    background-image: linear-gradient(#{$bg-color-primary-opacity-16}, #{$bg-color-primary-opacity-16});
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 100% 4px;
+
+    &:hover {
+        color: $text-color-default;
+        background-image: linear-gradient(#{$bg-color-primary-opacity-16}, #{$bg-color-black-opacity-16});
+    }
+}
+
+.h1 {
+    margin: 0;
+    font-family: $font-family-headline;
+    font-size: $font-size-32;
+    line-height: $line-height-44;
+
+    @include Desktop() {
+        font-size: $font-size-48;
+        line-height: $line-height-64;
+    }
+}
+
+.h2 {
+    margin: 0;
+    font-family: $font-family-headline;
+    font-size: $font-size-28;
+    line-height: $line-height-42;
+
+    @include Desktop() {
+        font-size: $font-size-36;
+        line-height: $line-height-52;
+    }
+}
+
+.h3 {
+    margin: 0;
+    font-family: $font-family-headline;
+    font-size: $font-size-24;
+    line-height: $line-height-32;
+
+    @include Desktop() {
+        font-size: $font-size-26;
+        line-height: $line-height-36;
+    }
+}
+
+.h4 {
+    margin: 0;
+    font-family: $font-family-headline;
+    font-size: $font-size-22;
+    line-height: $line-height-28;
+}
+
+.h5 {
+    margin: 0;
+    font-family: $font-family-headline;
+    font-size: $font-size-18;
+    line-height: $line-height-24;
+}
+
+.p1 {
+    margin: 0;
+    font-size: $font-size-17;
+    line-height: $line-height-28;
+
+    @include Desktop() {
+        font-size: 19px;
+        line-height: 30px;
+    }
+}
+
+.p2 {
+    margin: 0;
+    font-size: $font-size-16;
+    line-height: $line-height-24;
+}
+
+.p3 {
+    margin: 0;
+    font-size: $font-size-14;
+    line-height: $line-height-20;
+}
+
+.button {
+    font-size: $font-size-16;
+    line-height: $line-height-24;
+    font-weight: bold;
+    padding: $spacing-6 $spacing-12;
+    border-radius: $border-radius-4;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    text-align: center;
+}
+
+.button--primary {
+    color: $text-color-white;
+    background-image: 
+        linear-gradient(to top, $bg-color-black 50%, $bg-color-primary 50%);
+    background-size: 100% 200%;
+    background-position: top;
+    transition: background-position 0.3s ease-in-out;
+
+    &:hover {
+        background-position: bottom;
+    }
+}
+
+.button--no-fill {
+    color: $text-color-primary;
+    background-image: 
+        linear-gradient(to top, $bg-color-primary-opacity-8 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: top;
+    transition: background-position 0.3s ease-in-out;
+
+    @include Desktop() {
+        &:hover {
+            background-position: bottom;
+        }
+    }
+}
+
+.button--active {
+    color: $text-color-primary;
+    background-color: $bg-color-primary-opacity-8;
+}
+
+.block {
+    display: block;
+}
+
+.faded {
+    opacity: 0.3;
+}
+
+input,
+textarea {
+    border: 1px solid rgba(black, 0.1);
+    resize: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+textarea {
+    padding: 8px;
+}
+
+hr {
+    $hr-height: 35px;
+    display: block;
+    border: 0;
+    text-align: center;
+    box-sizing: content-box;
+    height: $hr-height;
+    padding-top: 10px;
+    border: 0 !important;
+
+    &.left {
+        text-align: left;
+    }
+
+    &:before {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        font-weight: 400;
+        font-style: italic;
+        font-size: 28px;
+        letter-spacing: 0.3em;
+        content: "...";
+        display: inline-block;
+        margin-right: 0.6em;
+        color: var(--body-text-color);
+        position: relative;
+        top: -$hr-height/2;
+    }
+}
+
+blockquote {
+    border-left: 2px solid #cdcdcd;
+    padding-left: 20px;
+    opacity: 0.8;
+    margin-left: 0;
+}
+
+#main-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+#content-container {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.mt-5 {
+    margin-top: 5px !important;
+}
+
+.mt-10 {
+    margin-top: 10px !important;
+}
+
+.mt-15 {
+    margin-top: 15px !important;
+}
+
+.mt-20 {
+    margin-top: 20px !important;
+}
+
+.mt-30 {
+    margin-top: 30px !important;
+}
+
+.mt-40 {
+    margin-top: 40px !important;
+}
+
+.mt-50 {
+    margin-top: 50px !important;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+
+    @mixin wide-button() {
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+        font-size: 16px;
+        min-width: 200px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &.black {
+        @include wide-button();
+        background-color: black;
+        color: white;
+    }
+
+    &.white {
+        @include wide-button();
+        background-color: white;
+        color: black;
+        border: 1px solid rgba(gray, 0.2);
+    }
+}
+
+.wrap {
+    word-wrap: break-word;
+}
+
+input.delete-blog {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+div.alert.error {
+    border-width: thin;
+    border-style: dotted;
+    text-align: center;
+    margin-bottom: 10px;
+    color: red;
+}

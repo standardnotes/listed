@@ -1,0 +1,20 @@
+#footer {
+    border-top: 1px solid $bg-color-black-opacity-16;
+    margin: $spacing-48 $spacing-16 0;
+    padding: $spacing-36 0;
+    text-align: center;
+
+    .p3:not(:last-child) {
+        margin-bottom: $spacing-16;
+    }
+
+    @include Desktop() {
+        display: flex;
+        justify-content: space-between;
+        margin: $spacing-56 $spacing-11-vw 0;
+
+        .p3 {
+            margin-bottom: 0;
+        }
+    }
+}
