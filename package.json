@@ -20,8 +20,8 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
-    "start:dev": "bin/webpack-dev-server & bundle exec rails server",
-    "start:production": "bundle exec rails server -b 0.0.0.0",
+    "start:dev": "bin/webpack-dev-server & bundle exec rails server -p 3009",
+    "start:production": "bundle exec rails server -b 0.0.0.0 -p 3009 -e production",
     "build:dev": "rm -rf public/packs/development && RAILS_ENV=development NODE_ENV=development bin/webpack",
     "build:dev:watch": "RAILS_ENV=development NODE_ENV=development bin/webpack --watch",
     "build:production": "RAILS_ENV=production NODE_ENV=production bin/webpack -p",

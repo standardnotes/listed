@@ -19,10 +19,10 @@ Rails.application.configure do
   config.log_level = :info
 
   MAX_LOG_MEGABYTES = 50
-  config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(config.paths['log'].first, 1, MAX_LOG_MEGABYTES * 1024 * 1024))
+  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(config.paths['log'].first, 1, MAX_LOG_MEGABYTES * 1024 * 1024))
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT))
+    config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
   end
 
   # Disable serving static files from the `/public` folder by default since
