@@ -3,7 +3,6 @@
 @import "guestbook_entry";
 @import "authors";
 @import "help";
-@import "usage";
 @import "subscriptions";
 
 @font-face {
@@ -34,7 +33,7 @@
 html,
 body {
     margin: 0;
-    font-family: $font-family-default;
+    font-family: $font-family-default, sans-serif;
     background-color: $bg-color-default;
     color: $text-color-default;
     height: 100%;
@@ -62,7 +61,7 @@ a:not(.button) {
 
 .h1 {
     margin: 0;
-    font-family: $font-family-headline;
+    font-family: $font-family-headline, serif;
     font-size: $font-size-32;
     line-height: $line-height-44;
 
@@ -74,7 +73,7 @@ a:not(.button) {
 
 .h2 {
     margin: 0;
-    font-family: $font-family-headline;
+    font-family: $font-family-headline, serif;
     font-size: $font-size-28;
     line-height: $line-height-42;
 
@@ -86,7 +85,7 @@ a:not(.button) {
 
 .h3 {
     margin: 0;
-    font-family: $font-family-headline;
+    font-family: $font-family-headline, serif;
     font-size: $font-size-24;
     line-height: $line-height-32;
 
@@ -98,14 +97,14 @@ a:not(.button) {
 
 .h4 {
     margin: 0;
-    font-family: $font-family-headline;
+    font-family: $font-family-headline, serif;
     font-size: $font-size-22;
     line-height: $line-height-28;
 }
 
 .h5 {
     margin: 0;
-    font-family: $font-family-headline;
+    font-family: $font-family-headline, serif;
     font-size: $font-size-18;
     line-height: $line-height-24;
 }
