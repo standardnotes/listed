@@ -1,17 +1,8 @@
 .usage__container {
-    padding: $spacing-24 $spacing-16;
-
-    .button {
-        width: 100%;
-        margin-top: $spacing-24;
-    }
+    padding: $spacing-24 $spacing-16 $spacing-48;
 
     @include Desktop() {
         padding: $spacing-56 $spacing-11-vw;
-
-        .button {
-            display: none;
-        }
     }
 }
 
@@ -67,5 +58,14 @@
         @include Desktop() {
             margin-top: 0;
         }
+    }
+}
+
+.usage__button--start-writing {
+    width: 100%;
+    margin-top: $spacing-24;
+
+    @include Desktop() {
+        display: none;
     }
 }

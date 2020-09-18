@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import HowTo from './HowTo';
+import ActiveAuthors from './active_authors/ActiveAuthors';
 import "./Usage.scss";
 
 const Usage = ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
@@ -55,9 +55,10 @@ const Usage = ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
                     </ol>
                 </div>
             </div>
-            <button className="button button--primary">
+            <button className="button button--primary usage__button--start-writing">
                 Start writing
             </button>
+            <ActiveAuthors activeAuthors={activeAuthors} />
             
             {/* <div className="mt-40">
                 <h3>New Author?</h3>
@@ -111,17 +112,6 @@ const Usage = ({ usage, secretUrl, authenticityToken, activeAuthors }) => {
                 {usage && (
                     <div className="mt-40">
                         <HowTo />
-                    </div>
-                )}
-            </div>
-            <div className="active-authors mt-40">
-                <h3>Recent Authors</h3>
-                {activeAuthors.map(author =>
-                    <div key={author.id} className="author">
-                        <a href={author.url}>{author.featured && <span>✪</span>} {author.title}</a>
-                        {author.bio && (
-                            <div className="bio">{author.bio}</div>
-                        )}
                     </div>
                 )}
             </div> */}

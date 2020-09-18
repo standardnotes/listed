@@ -10,6 +10,7 @@
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-inlinesvg": "^2.1.0",
     "react-on-rails": "11.3.0",
     "react-router": "^5.2.0",
     "sass-resources-loader": "^2.1.0",

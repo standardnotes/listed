@@ -1,4 +1,5 @@
 import React from "react";
+import SVG from "react-inlinesvg";
 import { IcArrowLong } from "../../../assets/icons";
 import "./AuthorInfo.scss";
 
@@ -51,7 +52,7 @@ const AuthorInfo = ({ author }) => {
                 <p className="p3 word-count" suppressHydrationWarning>
                     {author.word_count.toLocaleString()} words
                 </p>
-                <img src={IcArrowLong} alt="Down arrow" className="word-count__icon" />
+                <SVG src={IcArrowLong} alt="Down arrow" className="word-count__icon" />
             </button>
         </div>      
     );
