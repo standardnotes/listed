@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./MasonryLayout.scss";
 
 const MasonryLayout = ({ children }) => {
-    const margin = 24;
+    const MARGIN = 24;
+    const THREE_COLUMN_BREAKPOINT = 1312;
+
     const [containerVisible, setContainerVisible] = useState(false);
 
     const getCols = windowWidth => {
-        return (windowWidth < 1312) ? 3 : 4;
+        return (windowWidth < THREE_COLUMN_BREAKPOINT) ? 3 : 4;
     }
 
     const setupLayout = () => {
         const cols = getCols(window.innerWidth);
         const colHeights = new Array(cols).fill(0);
-        const colItems = new Array(cols).fill(0);
         const container = document.getElementById("masonry-layout-container");
         
         for (let i = 0; i < children.length; i++) {
@@ -20,8 +21,7 @@ const MasonryLayout = ({ children }) => {
             const child = container.children[i];
         
             child.style.order = colIndex + 1;;
-            colHeights[colIndex] += child.offsetHeight;
-            colItems[colIndex]++;
+            colHeights[colIndex] += child.offsetHeight + MARGIN;
         };
 
 
@@ -37,15 +37,11 @@ const MasonryLayout = ({ children }) => {
             }
         }
 
-        const maxHeight = Math.max(...colHeights);
-        const containerHeight = maxHeight + colItems[colHeights.indexOf(maxHeight)] * margin;
-
-        container.style.height = `${containerHeight}px`;
+        container.style.height = `${Math.max(...colHeights)}px`;
         setContainerVisible(true);
     }
 
     useEffect(() => {
-        setupLayout();
         window.addEventListener("resize", setupLayout);
         return () => window.removeEventListener("resize", setupLayout);
     }, []);
