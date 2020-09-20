@@ -1,9 +1,4 @@
-<% usage = request.path.include? "usage" %>
-
 <%= react_component("Usage", props: {
-    usage: usage,
-    secretUrl: @secret_url,
-    authenticityToken: form_authenticity_token,
     activeAuthors: @active_authors.as_json(
         only: [:id, :featured, :bio],
         methods: [:url, :title, :word_count]

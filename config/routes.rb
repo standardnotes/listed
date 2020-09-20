@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   end
 
   get '/usage' => 'usage#index'
+  get '/new_author' => 'usage#new_author'
 
   un_regex = /@.[^\/]*/
 
