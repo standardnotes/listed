@@ -50,6 +50,10 @@ const MasonryLayout = ({ children }) => {
         return () => window.removeEventListener("resize", setupLayout);
     }, []);
 
+    useEffect(() => {
+        setupLayout();
+    }, [children]);
+
     return(
         <div id="masonry-layout-container" className={`masonry-layout ${containerVisible ? "masonry-layout--visible" : ""}`}>
             {children}

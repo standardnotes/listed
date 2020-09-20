@@ -15,7 +15,6 @@
         color: $text-color-default;
         font-weight: normal;
         margin-top: $spacing-4;
-        margin-bottom: $spacing-8;
     }
 
     &:hover {
@@ -55,6 +54,7 @@
 }
 
 .active-author__word-count {
+    margin-top: $spacing-8;
     display: flex;
     color: $text-color-default;
     font-weight: normal;
@@ -78,5 +78,23 @@
     path {
         fill: $bg-color-black;
         transition: fill 0.3s ease-in-out;
+    }
+}
+
+.easter-egg__sign-up {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: $text-color-default;
+    margin-top: $spacing-8;
+}
+
+.easter-egg__icon--arrow {
+    height: 16px;
+    width: 16px;
+    margin-left: $spacing-8;
+
+    path {
+        fill: $bg-color-black;
     }
 }
