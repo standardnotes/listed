@@ -173,6 +173,13 @@ a:not(.button) {
     }
 }
 
+.card {
+    background-color: $bg-color-white;
+    padding: $spacing-16;
+    border-radius: $border-radius-4;
+    border: $border-default;
+}
+
 .button--active {
     color: $text-color-primary;
     background-color: $bg-color-primary-opacity-8;
