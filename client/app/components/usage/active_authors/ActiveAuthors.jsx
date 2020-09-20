@@ -7,7 +7,7 @@ const ActiveAuthors = ({ activeAuthors }) => {
     const [authors, setAuthors] = useState(activeAuthors);
 
     const getItems = isDesktop =>
-        authors.map(author => (
+        authors && authors.map(author => (
             <ActiveAuthorItem key={`${author.id}${isDesktop ? "-desktop" : "-mobile"}`} author={author} />
         ));
 
