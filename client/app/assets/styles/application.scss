@@ -178,6 +178,7 @@ a:not(.button) {
     padding: $spacing-16;
     border-radius: $border-radius-4;
     border: $border-default;
+    text-align: left;
 }
 
 .button--active {

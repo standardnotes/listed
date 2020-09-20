@@ -1,4 +1,5 @@
 import React from "react";
+import StartWriting from "../../../shared/StartWriting";
 
 const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
     const navClassName = () => {
@@ -27,9 +28,7 @@ const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
             >
                 100 Day Writing Challenge
             </a>
-            <button className="button button--primary">
-                Start writing
-            </button>
+            <StartWriting />
         </nav>
     );
 };
