@@ -93,4 +93,9 @@
     margin: auto;
     height: 24px;
     width: 24px;
+    transform: rotate(90deg);
+
+    path {
+        fill: $bg-color-primary;
+    }
 }
