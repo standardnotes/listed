@@ -6,10 +6,10 @@ import "./ActiveAuthors.scss";
 const ActiveAuthors = ({ activeAuthors }) => {
     const [authors, setAuthors] = useState(activeAuthors);
 
-    const getItems = (isDesktop) =>
-        authors.map(author =>
+    const getItems = isDesktop =>
+        authors.map(author => (
             <ActiveAuthorItem key={`${author.id}${isDesktop ? "-desktop" : "-mobile"}`} author={author} />
-        );
+        ));
 
     useEffect(() => {
         const easterEggIndex = parseInt(Math.random() * activeAuthors.length - 1);
@@ -20,19 +20,19 @@ const ActiveAuthors = ({ activeAuthors }) => {
             bio: "Share your experience in its truest form. Start writing now.",
             url: "#",
             featured: false,
-            easterEgg: true
+            easterEgg: true,
         };
- 
+
         const authorsPlusEasterEgg = [
             ...activeAuthors.slice(0, easterEggIndex),
             easterEgg,
-            ...activeAuthors.slice(easterEggIndex, activeAuthors.length - 1)
+            ...activeAuthors.slice(easterEggIndex, activeAuthors.length - 1),
         ];
 
         setAuthors(authorsPlusEasterEgg);
     }, []);
 
-    return(
+    return (
         <div className="active-authors">
             <div className="active-authors__headline">
                 <h3 className="h3">Listed authors</h3>

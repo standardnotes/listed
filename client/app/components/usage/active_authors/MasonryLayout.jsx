@@ -8,22 +8,21 @@ const MasonryLayout = ({ children }) => {
     const [containerVisible, setContainerVisible] = useState(false);
 
     const getCols = windowWidth => {
-        return (windowWidth < THREE_COLUMN_BREAKPOINT) ? 3 : 4;
-    }
+        return windowWidth < THREE_COLUMN_BREAKPOINT ? 3 : 4;
+    };
 
     const setupLayout = () => {
         const cols = getCols(window.innerWidth);
         const colHeights = new Array(cols).fill(0);
         const container = document.getElementById("masonry-layout-container");
-        
+
         for (let i = 0; i < children.length; i++) {
             const colIndex = colHeights.indexOf(Math.min(...colHeights));
             const child = container.children[i];
-        
-            child.style.order = colIndex + 1;;
-            colHeights[colIndex] += child.offsetHeight + MARGIN;
-        };
 
+            child.style.order = colIndex + 1;
+            colHeights[colIndex] += child.offsetHeight + MARGIN;
+        }
 
         for (let i = 0; i < cols - 1; i++) {
             const columnBreakId = `masonry-colum-break-${i}`;
@@ -39,7 +38,7 @@ const MasonryLayout = ({ children }) => {
 
         container.style.height = `${Math.max(...colHeights)}px`;
         setContainerVisible(true);
-    }
+    };
 
     useEffect(() => {
         window.addEventListener("resize", setupLayout);
@@ -50,8 +49,11 @@ const MasonryLayout = ({ children }) => {
         setupLayout();
     }, [children]);
 
-    return(
-        <div id="masonry-layout-container" className={`masonry-layout ${containerVisible ? "masonry-layout--visible" : ""}`}>
+    return (
+        <div
+            id="masonry-layout-container"
+            className={`masonry-layout ${containerVisible ? "masonry-layout--visible" : ""}`}
+        >
             {children}
         </div>
     );
