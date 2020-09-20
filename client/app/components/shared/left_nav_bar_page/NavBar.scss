@@ -1,0 +1,35 @@
+.left-nav-bar {
+    width: 252px;
+    height: 100%;
+    margin-right: $spacing-24;
+    position: sticky;
+    top: 36px;
+
+    .button {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.1s ease-in-out;
+
+        &:not(.button--active) {
+            color: $text-color-default;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: $spacing-8;
+        }
+    }
+
+    .button--active {
+        .left-nav-bar__icon {
+            path {
+                fill: $bg-color-primary;
+            }
+        }
+    }
+}
+
+.left-nav-bar__icon {
+    margin-right: $spacing-12;
+}

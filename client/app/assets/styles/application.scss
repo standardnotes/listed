@@ -143,6 +143,7 @@ a:not(.button) {
     text-decoration: none;
     outline: none;
     text-align: center;
+    font-family: $font-family-default;
 }
 
 .button--primary {
@@ -160,6 +161,7 @@ a:not(.button) {
 
 .button--no-fill {
     color: $text-color-primary;
+    background-color: transparent;
     background-image: 
         linear-gradient(to top, $bg-color-primary-opacity-8 50%, transparent 50%);
     background-size: 100% 200%;
@@ -179,6 +181,14 @@ a:not(.button) {
     border-radius: $border-radius-4;
     border: $border-default;
     text-align: left;
+}
+
+.page-container {
+    padding: $spacing-24 $spacing-16 $spacing-48;
+
+    @include Desktop() {
+        padding: $spacing-56 $spacing-11-vw;
+    }
 }
 
 .button--active {
