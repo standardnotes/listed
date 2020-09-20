@@ -6,9 +6,10 @@
     border: $border-default;
     background-image: none;
     transition: box-shadow 0.3s ease-in-out;
+    margin-bottom: $spacing-16;
 
-    &:not(:last-child) {
-        margin-bottom: $spacing-16;
+    &:last-child {
+        margin-bottom: 0;
     }
 
     .active-author__bio {
