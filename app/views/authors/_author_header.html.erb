@@ -1,4 +1,4 @@
-<% home_url = root_path %>
+<% home_url = ENV['HOST'] %>
 <% post = local_assigns[:post] %>
 <% author = @author || @display_author || (post && post.author) %>
 <% private_post = post && post.unlisted %>
