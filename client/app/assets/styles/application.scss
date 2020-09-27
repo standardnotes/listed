@@ -144,6 +144,10 @@ a:not(.button) {
     outline: none;
     text-align: center;
     font-family: $font-family-default;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .button--primary {

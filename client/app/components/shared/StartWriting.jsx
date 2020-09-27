@@ -18,7 +18,7 @@ const StartWriting = ({ className, children }) => {
     };
 
     return(
-        <button onClick={createNewAuthor} className={`${children ? "" : "button button--primary"} ${className}`}>
+        <button onClick={createNewAuthor} className={`${children ? "button" : "button button--primary"} ${className ? className : ""}`}>
             {children ? (
                 children
             ) : (

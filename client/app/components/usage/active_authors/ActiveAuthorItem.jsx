@@ -5,22 +5,8 @@ import { IcStarCircleFilled, IcTextRich, IcArrowLong } from "../../../assets/ico
 import "./ActiveAuthorItem.scss";
 
 const ActiveAuthorItem = ({ author }) => {
-    const createNewAuthor = event => {
-        event.preventDefault();
-
-        axios
-            .post("/authors", null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-            })
-            .then(response => {
-                window.location.href = response.request.responseURL;
-            });
-    };
-
     return(
-        <div className="author active-author">
+        <li className="author active-author">
             {author.easterEgg ? (
                 <StartWriting className="card">
                     <div className="active-author__title">
@@ -59,7 +45,7 @@ const ActiveAuthorItem = ({ author }) => {
                 </a>
                 </div>
             )}
-        </div>
+        </li>
     );
 };
 

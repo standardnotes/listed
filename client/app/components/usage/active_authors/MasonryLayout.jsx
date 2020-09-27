@@ -50,12 +50,12 @@ const MasonryLayout = ({ children }) => {
     }, [children]);
 
     return (
-        <div
+        <ul
             id="masonry-layout-container"
             className={`masonry-layout ${containerVisible ? "masonry-layout--visible" : ""}`}
         >
             {children}
-        </div>
+        </ul>
     );
 };
 
