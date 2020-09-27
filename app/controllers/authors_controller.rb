@@ -91,6 +91,8 @@ class AuthorsController < ApplicationController
       subscription = Subscription.new author: @display_author, subscriber: @subscriber
       subscription.save
       redirect_to subscription_validate_path({:subscription_id => subscription.id})
+    else
+      redirect_to :back
     end
   end
 
