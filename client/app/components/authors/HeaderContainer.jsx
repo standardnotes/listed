@@ -24,7 +24,7 @@ const HeaderContainer = ({ homeUrl, author, post, privatePost, pages, authorGues
                 <div className="left">
                     <div className="website-name">
                         <a href={homeUrl} className="listed-logo-link">
-                            <SVG src={IcListed} alt="Listed logo" className="listed-logo" />
+                            <SVG src={IcListed} className="listed-logo" />
                         </a>
                     </div>
                     {author && !privatePost && (
@@ -38,8 +38,8 @@ const HeaderContainer = ({ homeUrl, author, post, privatePost, pages, authorGues
                 <div className="right">
                     <button className="button button--menu-icon" aria-label="Menu" aria-controls="navigation">
                         {isMobileMenuOpen 
-                            ? <SVG src={IcClose} alt="Close menu icon" onClick={() => setIsMobileMenuOpen(false)} />
-                            : <SVG src={IcMenu} alt="Open menu icon" onClick={() => setIsMobileMenuOpen(true)} />
+                            ? <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
+                            : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />
                         }
                     </button>
                     {renderMenu(true)}

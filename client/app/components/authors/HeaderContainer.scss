@@ -31,6 +31,10 @@
     height: 28px;
     width: 28px;
 
+    path {
+        fill: $bg-color-primary;
+    }
+
     @include Desktop() {
         height: 36px;
         width: 36px;
