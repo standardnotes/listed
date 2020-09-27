@@ -36,7 +36,7 @@ const ActiveAuthors = ({ activeAuthors }) => {
         <div className="active-authors">
             <div className="active-authors__headline">
                 <h3 className="h3">Listed authors</h3>
-                <div className="active-authors__headline-separator"></div>
+                <div className="headline-separator"></div>
             </div>
             <MasonryLayout>
                 {getItems(true)}

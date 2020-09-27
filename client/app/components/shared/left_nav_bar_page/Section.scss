@@ -1,8 +1,41 @@
-.card.section {
-    padding: $spacing-36;
-    height: 500px;
-    
+.section__container {
+    list-style-type: none;
+
     &:not(:last-child) {
         margin-bottom: $spacing-24;
+    }
+}
+
+.card.section--desktop {
+    display: none;
+    padding: $spacing-36;
+
+    @include Desktop() {
+        display: block;
+    }
+}
+
+.section--mobile {
+    @include Desktop() {
+        display: none;
+    }
+}
+
+.section__headline {
+    display: flex;
+    align-items: center;
+}
+
+.section__collapse-icon {
+    margin-left: $spacing-16;
+}
+
+.section__content {
+    visibility: hidden;
+    max-height: 0;
+    transition: max-height 0.1s ease-in-out;
+
+    &.section__content--visible {
+        max-height: 100vh;
     }
 }

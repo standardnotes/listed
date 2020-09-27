@@ -1,4 +1,5 @@
 .left-nav-bar {
+    display: none;
     width: 252px;
     height: 100%;
     margin-right: $spacing-24;
@@ -27,6 +28,10 @@
                 fill: $bg-color-primary;
             }
         }
+    }
+
+    @include Desktop() {
+        display: block;
     }
 }
 

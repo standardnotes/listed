@@ -179,6 +179,11 @@ a:not(.button) {
     }
 }
 
+.button--active {
+    color: $text-color-primary;
+    background-color: $bg-color-primary-opacity-8;
+}
+
 .card {
     background-color: $bg-color-white;
     padding: $spacing-16;
@@ -195,9 +200,15 @@ a:not(.button) {
     }
 }
 
-.button--active {
-    color: $text-color-primary;
-    background-color: $bg-color-primary-opacity-8;
+.headline-separator {
+    height: 3px;
+    background-color: $bg-color-black-opacity-16;
+    flex: 1;
+    margin-left: $spacing-16;
+
+    @include Desktop() {
+        margin-left: $spacing-24;
+    }
 }
 
 .block {

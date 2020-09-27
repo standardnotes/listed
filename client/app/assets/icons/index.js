@@ -1,5 +1,7 @@
 import IcArrowLong from "./ic-arrow-long.svg";
 import IcBook from "./ic-book.svg";
+import IcChevronDown from "./ic-chevron-down.svg";
+import IcChevronUp from "./ic-chevron-up.svg";
 import IcClose from "./ic-close.svg";
 import IcCode from "./ic-code.svg";
 import IcEarth from "./ic-earth.svg";
@@ -12,6 +14,8 @@ import IcStarCircleFilled from "./ic-star-circle-filled.svg";
 export {
     IcArrowLong,
     IcBook,
+    IcChevronDown,
+    IcChevronUp,
     IcClose,
     IcCode,
     IcEarth,

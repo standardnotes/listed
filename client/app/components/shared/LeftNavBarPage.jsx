@@ -15,11 +15,11 @@ const LeftNavBarPage = ({ heading, subheading, sections }) => {
             </div>
             <div className="left-nav-bar-page__content">
                 <NavBar sections={sections} />
-                <div className="left-nav-bar-page__sections">
+                <ul className="left-nav-bar-page__sections">
                     {sections.map(section =>
                         <Section key={section.id} section={section} />
                     )}
-                </div>
+                </ul>
             </div>
         </div>
     );

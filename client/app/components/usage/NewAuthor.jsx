@@ -1,29 +1,38 @@
 import React from "react";
 import LeftNavBarPage from "../shared/LeftNavBarPage";
 import { IcCode, IcBook, IcEarth, IcLifebuoy } from "../../assets/icons";
-import "./NewAuthor.scss";
+import { GettingStarted, GifSection } from "./new_author";
+import Resources from "../shared/Resources";
 
 const NewAuthor = ({ secretUrl }) => {
     const sections = [
         {
             id: "getting-started",
             title: "Getting started",
-            icon: IcCode
+            icon: IcCode,
+            collapsed: false,
+            content: () => (<GettingStarted />)
         },
         {
             id: "publishing",
             title: "Publishing on Listed",
-            icon: IcEarth
+            icon: IcEarth,
+            collapsed: true,
+            content: () => (<GifSection />)
         },
         {
             id: "managing",
             title: "Managing your blog",
-            icon: IcBook
+            icon: IcBook,
+            collapsed: true,
+            content: () => (<GifSection />)
         },
         {
             id: "resources",
             title: "Resources",
-            icon: IcLifebuoy
+            icon: IcLifebuoy,
+            collapsed: true,
+            content: () => (<Resources />)
         }
     ];
 
