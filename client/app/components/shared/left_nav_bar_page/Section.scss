@@ -2,7 +2,11 @@
     list-style-type: none;
 
     &:not(:last-child) {
-        margin-bottom: $spacing-24;
+        margin-bottom: $spacing-36;
+
+        @include Desktop() {
+            margin-bottom: $spacing-24;
+        }
     }
 }
 
@@ -31,11 +35,12 @@
 }
 
 .section__content {
-    visibility: hidden;
     max-height: 0;
-    transition: max-height 0.1s ease-in-out;
+    visibility: hidden;
+    transition: all 0.1s ease-in-out;
+}
 
-    &.section__content--visible {
-        max-height: 100vh;
-    }
+.section__content--visible {
+    visibility: visible;
+    max-height: 100vh;
 }

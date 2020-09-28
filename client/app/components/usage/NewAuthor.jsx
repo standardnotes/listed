@@ -11,28 +11,28 @@ const NewAuthor = ({ secretUrl }) => {
             title: "Getting started",
             icon: IcCode,
             collapsed: false,
-            content: () => (<GettingStarted />)
+            renderContent: () => (<GettingStarted secretUrl={secretUrl} />)
         },
         {
             id: "publishing",
             title: "Publishing on Listed",
             icon: IcEarth,
             collapsed: true,
-            content: () => (<GifSection />)
+            renderContent: () => (<GifSection />)
         },
         {
             id: "managing",
             title: "Managing your blog",
             icon: IcBook,
             collapsed: true,
-            content: () => (<GifSection />)
+            renderContent: () => (<GifSection />)
         },
         {
             id: "resources",
             title: "Resources",
             icon: IcLifebuoy,
             collapsed: true,
-            content: () => (<Resources />)
+            renderContent: () => (<Resources />)
         }
     ];
 
