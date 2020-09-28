@@ -1,6 +1,5 @@
 .getting-started__list {
-    margin-top: $spacing-24;
-    padding: 0;
+    padding: $spacing-24 0 0;
     list-style-type: none;
     counter-reset: getting-started-counter;
 
@@ -49,11 +48,4 @@
 
 .callout--warning {
     display: table-cell;
-}
-
-.getting-started__gif {
-    margin-top: $spacing-24;
-    border-radius: $border-radius-4;
-    border: $border-default;
-    max-width: 100%;
 }

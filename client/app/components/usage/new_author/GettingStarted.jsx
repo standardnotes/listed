@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GettingStartedGif from "../../../assets/gifs/listed-getting-started.gif";
+import { GettingStartedGif } from "../../../assets/gifs";
 import "./GettingStarted.scss"
 
 const GettingStarted = ({ secretUrl }) => {
@@ -44,7 +44,7 @@ const GettingStarted = ({ secretUrl }) => {
                 </li>
                 <li className="p2">
                     <strong>Paste your author code</strong> in the input box that appears, then press enter.
-                    <img src={GettingStartedGif} className="getting-started__gif" />
+                    <img src={GettingStartedGif} className="new-author__gif" />
                 </li>
             </ol>
             <p className="p2">

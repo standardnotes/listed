@@ -3,6 +3,8 @@ import LeftNavBarPage from "../shared/LeftNavBarPage";
 import { IcCode, IcBook, IcEarth, IcLifebuoy } from "../../assets/icons";
 import { GettingStarted, GifSection } from "./new_author";
 import Resources from "../shared/Resources";
+import { PublishGif, SettingsGif } from "../../assets/gifs";
+import "./NewAuthor.scss";
 
 const NewAuthor = ({ secretUrl }) => {
     const sections = [
@@ -18,14 +20,24 @@ const NewAuthor = ({ secretUrl }) => {
             title: "Publishing on Listed",
             icon: IcEarth,
             collapsed: true,
-            renderContent: () => (<GifSection />)
+            renderContent: () => (
+                <GifSection
+                    text="Create a new note, or publish an existing note, by clicking Actions in the note editor pane, and choosing Publish to Blog."
+                    gifSource={PublishGif}
+                />
+            )
         },
         {
             id: "managing",
             title: "Managing your blog",
             icon: IcBook,
             collapsed: true,
-            renderContent: () => (<GifSection />)
+            renderContent: () => (
+                <GifSection
+                    text="Be sure to explore the Settings option to customize your blog's settings."
+                    gifSource={SettingsGif}
+                />
+            )
         },
         {
             id: "resources",
