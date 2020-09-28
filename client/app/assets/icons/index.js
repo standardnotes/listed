@@ -8,6 +8,7 @@ import IcEarth from "./ic-earth.svg";
 import IcLifebuoy from "./ic-lifebuoy.svg";
 import IcListed from "./ic-listed.svg";
 import IcMenu from "./ic-menu.svg";
+import IcOpenIn from "./ic-open-in.svg";
 import IcTextRich from "./ic-text-rich.svg";
 import IcStarCircleFilled from "./ic-star-circle-filled.svg";
 
@@ -22,6 +23,7 @@ export {
     IcLifebuoy,
     IcListed,
     IcMenu,
+    IcOpenIn,
     IcTextRich,
     IcStarCircleFilled,
 };
