@@ -35,12 +35,5 @@
 }
 
 .section__content {
-    max-height: 0;
-    visibility: hidden;
-    transition: all 0.1s ease-in-out;
-}
-
-.section__content--visible {
-    visibility: visible;
-    max-height: 100vh;
+    transition: all 0.2s ease-in-out;
 }
