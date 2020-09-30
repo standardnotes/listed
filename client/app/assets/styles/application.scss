@@ -143,6 +143,11 @@ a:not(.button) {
     text-decoration: none;
     outline: none;
     text-align: center;
+    font-family: $font-family-default;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .button--primary {
@@ -153,13 +158,16 @@ a:not(.button) {
     background-position: top;
     transition: background-position 0.3s ease-in-out;
 
-    &:hover {
-        background-position: bottom;
+    @include Desktop() {
+        &:hover {
+            background-position: bottom;
+        }
     }
 }
 
 .button--no-fill {
     color: $text-color-primary;
+    background-color: transparent;
     background-image: 
         linear-gradient(to top, $bg-color-primary-opacity-8 50%, transparent 50%);
     background-size: 100% 200%;
@@ -176,6 +184,51 @@ a:not(.button) {
 .button--active {
     color: $text-color-primary;
     background-color: $bg-color-primary-opacity-8;
+}
+
+.card {
+    background-color: $bg-color-white;
+    padding: $spacing-16;
+    border-radius: $border-radius-4;
+    border: $border-default;
+    text-align: left;
+}
+
+.page-container {
+    padding: $spacing-24 $spacing-16 $spacing-48;
+
+    @include Desktop() {
+        padding: $spacing-56 $spacing-11-vw;
+    }
+}
+
+.headline-separator {
+    height: 3px;
+    background-color: $bg-color-black-opacity-16;
+    flex: 1;
+    margin-left: $spacing-16;
+
+    @include Desktop() {
+        margin-left: $spacing-24;
+    }
+}
+
+.text-field {
+    padding: $spacing-6 0 $spacing-6 $spacing-12;
+    border-radius: $border-radius-4;
+    border: $border-default;
+    font-family: $font-family-default;
+    font-size: $font-size-16;
+    line-height: $line-height-24;
+}
+
+.callout--warning {
+    padding: $spacing-12;
+    border-radius: $border-radius-4;
+    border: $border-default;
+    border-left: $border-warning;
+    font-size: $font-size-16;
+    line-height: $line-height-24;
 }
 
 .block {

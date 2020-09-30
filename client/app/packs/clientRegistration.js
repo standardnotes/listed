@@ -18,6 +18,7 @@ import SubscriptionUnsubscribe from "../components/subscriptions/Unsubscribe";
 import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequency";
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import Usage from "../components/usage/Usage";
+import UsageNewAuthor from "../components/usage/NewAuthor";
 
 import "../assets/styles/application.scss";
 
@@ -41,7 +42,8 @@ ReactOnRails.register({
     SubscriptionUnsubscribe,
     SubscriptionUpdateFrequency,
     SubscriptionValidate,
-    Usage
+    Usage,
+    UsageNewAuthor
 });
 
 ReactOnRails.setOptions({

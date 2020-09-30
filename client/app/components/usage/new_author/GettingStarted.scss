@@ -1,0 +1,51 @@
+.getting-started__list {
+    padding: $spacing-24 0 0;
+    list-style-type: none;
+    counter-reset: getting-started-counter;
+
+    li {
+        counter-increment: getting-started-counter;
+
+        &::before {
+            content: counter(getting-started-counter)". ";
+            font-weight: bold;
+        }
+
+        margin-bottom: $spacing-24;
+    }
+}
+
+.getting-started__author-code {
+    margin: $spacing-8 0 $spacing-24;
+
+    .text-field {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .button {
+        width: 100%;
+        margin-top: $spacing-12;
+    }
+
+    @include Desktop() {
+        display: flex;
+        width: 100%;
+
+        .text-field {
+            flex-grow: 1;
+            width: auto;
+            margin-right: $spacing-12;
+        }
+
+        .button {
+            width: 150px;
+            margin-top: 0;
+        }
+    }
+}
+
+.callout--warning {
+    display: table-cell;
+}

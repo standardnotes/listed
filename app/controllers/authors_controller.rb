@@ -96,7 +96,7 @@ class AuthorsController < ApplicationController
 
   def redirect_to_authenticated_usage(author, secret)
     @secret_url = CGI.escape("#{author.get_host}/authors/#{author.id}/extension/?secret=#{secret}&type=sn")
-    redirect_to "/usage/?secret_url=#{@secret_url}"
+    redirect_to "/new_author?secret_url=#{@secret_url}"
   end
 
   def extension
