@@ -4,6 +4,7 @@ class GuestbookEntriesController < ApplicationController
   before_action do
     @author = Author.find(params[:author_id]) if params[:author_id]
     @entry = GuestbookEntry.find(params[:id]) if params[:id]
+    @styles = @author.styles
   end
 
   def index
