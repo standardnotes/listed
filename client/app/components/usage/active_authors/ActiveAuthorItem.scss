@@ -1,6 +1,5 @@
 .active-author {
     display: block;
-    transition: box-shadow 0.3s ease-in-out;
     margin-bottom: $spacing-16;
 
     a {
@@ -17,21 +16,25 @@
         margin-top: $spacing-4;
     }
 
-    &:hover {
-        box-shadow: $spacing-8 $spacing-8 0 $bg-color-primary;
-        background-image: none;
+    .card {
+        transition: box-shadow 0.3s ease-in-out;
 
-        .active-author__title {
-            color: $text-color-primary;
-        }
-
-        .active-author__icon--featured {
-            g {
-                opacity: 1;
+        &:hover {
+            box-shadow: $spacing-8 $spacing-8 0 $bg-color-primary;
+            background-image: none;
+    
+            .active-author__title {
+                color: $text-color-primary;
             }
-
-            path {
-                fill: $bg-color-primary;
+    
+            .active-author__icon--featured {
+                g {
+                    opacity: 1;
+                }
+    
+                path {
+                    fill: $bg-color-primary;
+                }
             }
         }
     }
