@@ -1,4 +1,4 @@
-<% home_url = root_path %>
+<% home_url = ENV['HOST'] %>
 
 <%= react_component("SharedFooter", props: {
     homeUrl: home_url
