@@ -18,7 +18,7 @@ export default ({ posts, olderThan, newerThan, displayAuthorUrl }) => {
                     )}
                     {newerThan && (
                         <div className="newer">
-                            <a href={`${displayAuthorUrl}?b=${newerThan}`}> Newer →</a>
+                            <a href={`${displayAuthorUrl}?a=${newerThan}`}> Newer →</a>
                         </div>
                     )}
                 </div>
