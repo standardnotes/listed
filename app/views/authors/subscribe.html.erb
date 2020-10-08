@@ -1,5 +1,7 @@
 <% subscribed_to_author = @subscriber && @subscriber.subscribed_to_author(@display_author) %>
-<% subscription_for_author = @subscriber && @subscriber.subscription_for_author(@display_author) %>
+<% subscription_for_author = @subscriber && @subscriber.subscription_for_author(@display_author).as_json(
+    only: [:verified, :verification_sent_at]
+) %>
 
 <%= react_component("AuthorSubscribe", props: {
     displayAuthor: @display_author.as_json(
