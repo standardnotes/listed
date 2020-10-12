@@ -1,0 +1,42 @@
+#author-profile {
+    padding: 0 $spacing-16;
+
+    .older {
+        margin: $spacing-48 0;
+        display: flex;
+        justify-content: center;
+
+        button {
+            color: var(--link-color);
+            display: flex;
+
+            svg {
+                margin-left: $spacing-4;
+
+                path {
+                    fill: var(--link-color);
+                }
+            }
+        }
+    
+        @include Desktop() {
+            margin: $spacing-56 0;
+        }
+    }
+
+    @include Desktop() {
+        padding: 0 $spacing-11-vw;
+    }
+}
+
+.author-post {
+    padding: $spacing-48 0;
+
+    &:not(:last-child) {
+        border-bottom: $border-default;
+    }
+
+    @include Desktop() {
+        padding: $spacing-56 $spacing-136;
+    }
+}

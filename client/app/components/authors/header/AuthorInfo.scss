@@ -2,6 +2,7 @@
     padding: $spacing-24 $spacing-16;
     text-align: center;
     border-bottom: 3px solid var(--header-border-color);
+    overflow: hidden;
 
     .author-link {
         color: var(--website-color);
@@ -15,8 +16,59 @@
         color: var(--bio-color);
     }
 
+    .word-count__button {
+        padding: $spacing-16 0 0;
+        position: relative;
+        min-width: 60vw;
+    
+        &::before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            border-radius: 50%;
+            min-height: 60vw;
+            min-width: 60vw;
+            background-image: 
+                linear-gradient(to top, $color-primary-opacity-8 50%, $color-primary-opacity-8 50%);
+            transition: all 0.5s ease-in-out;
+        }
+    
+        @include Desktop() {
+            padding: $spacing-56 $spacing-22-vw;
+    
+            &:hover {
+                &::before {
+                    top: 0;
+                    opacity: 100%;
+                }
+            }
+        }
+    
+        .word-count {
+            color: var(--wordcount-color);
+            font-weight: bold;
+            margin-bottom: $spacing-8;
+        }
+        
+        .word-count__icon {
+            display: block;
+            margin: auto;
+            height: 24px;
+            width: 24px;
+            transform: rotate(90deg);
+        
+            path {
+                fill: var(--wordcount-color);
+            }
+        }
+    }
+
     @include Desktop() {
-        padding: $spacing-56 $spacing-11-vw;
+        padding: $spacing-56 $spacing-11-vw 0;
     }
 }
 
@@ -98,28 +150,5 @@
         content: "|";
         color: $color-black-opacity-16;
         padding: 0 $spacing-12;
-    }
-}
-
-.word-count__button {
-    padding: $spacing-16 0 0;
-    background-color: transparent;
-}
-
-.p3.word-count {
-    color: var(--wordcount-color);
-    font-weight: bold;
-    margin-bottom: $spacing-8;
-}
-
-.word-count__icon {
-    display: block;
-    margin: auto;
-    height: 24px;
-    width: 24px;
-    transform: rotate(90deg);
-
-    path {
-        fill: var(--wordcount-color);
     }
 }

@@ -1,5 +1,4 @@
 @import "queries";
-@import "posts";
 @import "guestbook_entry";
 @import "authors";
 @import "help";
@@ -57,6 +56,10 @@ a:not(.button) {
         color: var(--body-text);
         background-image: linear-gradient(#{$color-primary-opacity-16}, #{$color-black-opacity-16});
     }
+}
+
+p {
+    margin: 0;
 }
 
 .h1 {
@@ -144,6 +147,11 @@ a:not(.button) {
     outline: none;
     text-align: center;
     font-family: $font-family-default;
+    background-color: transparent;
+    
+    svg path {
+        fill: $color-primary;
+    }
 
     &:focus {
         outline: none;
