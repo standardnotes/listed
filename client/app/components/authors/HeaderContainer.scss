@@ -32,7 +32,7 @@
     width: 28px;
 
     path {
-        fill: $bg-color-primary;
+        fill: var(--header-listed-name);
     }
 
     @include Desktop() {
@@ -46,7 +46,7 @@
 
     &::before {
         content: "|";
-        color: $text-color-default-dimmed;
+        color: $color-black-opacity-16;
         margin: $spacing-14 $spacing-14 0 $spacing-12;
         font-size: $font-size-28;
         line-height: 0;
@@ -59,10 +59,14 @@
     .author-name {
         display: flex;
         align-items: center;
-        color: $text-color-primary;
     
         @include Desktop() {
             margin-right: $spacing-16;
+        }
+
+        a {
+            color: var(--header-author-name);
+            background: none;
         }
     }
 }

@@ -11,7 +11,7 @@
     }
 
     .active-author__bio {
-        color: $text-color-default;
+        color: $color-black;
         font-weight: normal;
         margin-top: $spacing-4;
     }
@@ -20,11 +20,11 @@
         transition: box-shadow 0.3s ease-in-out;
 
         &:hover {
-            box-shadow: $spacing-8 $spacing-8 0 $bg-color-primary;
+            box-shadow: $spacing-8 $spacing-8 0 $color-primary;
             background-image: none;
     
             .active-author__title {
-                color: $text-color-primary;
+                color: $color-primary;
             }
     
             .active-author__icon--featured {
@@ -33,7 +33,7 @@
                 }
     
                 path {
-                    fill: $bg-color-primary;
+                    fill: $color-primary;
                 }
             }
         }
@@ -50,7 +50,7 @@
 }
 
 .active-author__title {
-    color: $text-color-default;
+    color: $color-black;
     display: flex;
     justify-content: space-between;
     transition: color 0.3s ease-in-out;
@@ -59,7 +59,7 @@
 .active-author__word-count {
     margin-top: $spacing-8;
     display: flex;
-    color: $text-color-default;
+    color: $color-black;
     font-weight: normal;
 }
 
@@ -79,7 +79,7 @@
     }
 
     path {
-        fill: $bg-color-black;
+        fill: $color-black;
         transition: fill 0.3s ease-in-out;
     }
 }
@@ -88,7 +88,7 @@
     display: flex;
     align-items: center;
     font-weight: bold;
-    color: $text-color-default;
+    color: $color-black;
     margin-top: $spacing-8;
 }
 
@@ -98,6 +98,6 @@
     margin-left: $spacing-8;
 
     path {
-        fill: $bg-color-black;
+        fill: $color-black;
     }
 }

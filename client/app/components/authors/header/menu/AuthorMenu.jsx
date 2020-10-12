@@ -1,4 +1,5 @@
 import React from "react";
+import "./AuthorMenu.scss";
 
 const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentPath }) => {
     const isActiveMenuItem = path => path === currentPath;

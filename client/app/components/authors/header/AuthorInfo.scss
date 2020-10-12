@@ -1,7 +1,19 @@
 .header-author-info {
     padding: $spacing-24 $spacing-16;
     text-align: center;
-    border-bottom: 3px solid $bg-color-primary;
+    border-bottom: 3px solid var(--header-border-color);
+
+    .author-link {
+        color: var(--website-color);
+    }
+
+    .author-twitter {
+        color: var(--twitter-color);
+    }
+
+    .bio {
+        color: var(--bio-color);
+    }
 
     @include Desktop() {
         padding: $spacing-56 $spacing-11-vw;
@@ -29,13 +41,24 @@
 .header-image-container {
     width: 100%;
     height: 240px;
-    background-color: $bg-color-primary-opacity-8;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: $spacing-24;
     border-radius: $border-radius-4;
     overflow: hidden;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--header-author-name);
+        opacity: 0.08;
+    }
 
     @include Desktop() {
         width: 252px;
@@ -54,7 +77,8 @@
 }
 
 .header-author-capital {
-    color: $text-color-primary-dimmed;
+    color: var(--header-author-name);
+    opacity: 0.56;
     font-size: $font-size-120;
     font-family: $font-family-headline;
 }
@@ -72,18 +96,18 @@
 
     .item:not(:last-of-type)::after {
         content: "|";
-        color: $text-color-default-dimmed;
+        color: $color-black-opacity-16;
         padding: 0 $spacing-12;
     }
 }
 
 .word-count__button {
     padding: $spacing-16 0 0;
-    background-color: $bg-color-default;
+    background-color: transparent;
 }
 
 .p3.word-count {
-    color: $text-color-primary;
+    color: var(--wordcount-color);
     font-weight: bold;
     margin-bottom: $spacing-8;
 }
@@ -96,6 +120,6 @@
     transform: rotate(90deg);
 
     path {
-        fill: $bg-color-primary;
+        fill: var(--wordcount-color);
     }
 }
