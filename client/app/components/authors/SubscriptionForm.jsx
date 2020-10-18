@@ -23,9 +23,9 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
 
     return (
         <div>
-            {subscribedToAuthor ? (
+            {(subscribedToAuthor && subscriptionForAuthor.verification_sent_at) ? (
                 subscriptionSuccess || !subscriptionForAuthor.verified ? (
-                    <div className="sublabel succes">
+                    <div className="sublabel success">
                         <span>Success. Please check your email to confirm your subscription.</span>
                     </div>
                 ) : (
