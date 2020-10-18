@@ -1,0 +1,19 @@
+.single-post-show {
+    padding: 0 $spacing-16;
+
+    @include Desktop() {
+        padding: 0 $spacing-11-vw;
+    }
+
+    hr {
+        margin-bottom: $spacing-24;
+    }
+}
+
+.post-content {
+    padding: $spacing-48 0;
+
+    @include Desktop() {
+        padding: $spacing-56 $spacing-136;
+    }
+}

@@ -37,7 +37,14 @@ const Post = ({ truncate, post }) => {
                     </a>
                 </div>
             ) : (
-                <div className="post-body p1" dangerouslySetInnerHTML={renderedText}></div>
+                <div>
+                    <div className="post-body p1" dangerouslySetInnerHTML={renderedText}></div>
+                    {post.page || (
+                        <p className="post-date p3">
+                            {`${moment.utc(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
+                        </p>
+                    )}
+                </div>
             )}
         </div>
     );

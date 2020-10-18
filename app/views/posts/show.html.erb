@@ -5,7 +5,7 @@
 
 <%= react_component("PostShow", props: {
     post: @post.as_json(
-        only: [:title, :unlisted, :page, :created_at],
+        only: [:title, :unlisted, :page, :created_at, :word_count],
         methods: [:author_relative_url, :preview_text, :rendered_text],
         include: { 
             author: { 
@@ -15,11 +15,11 @@
         }
     ),
     previous: @previous.as_json(
-        only: [:title, :unlisted, :page, :created_at],
+        only: [:title, :unlisted, :page, :created_at, :word_count],
         methods: [:author_relative_url, :preview_text, :rendered_text]
     ),
     next: @next.as_json(
-        only: [:title, :unlisted, :page, :created_at],
+        only: [:title, :unlisted, :page, :created_at, :word_count],
         methods: [:author_relative_url, :preview_text, :rendered_text]
     ),
     authorPosts: @author_posts.as_json(
@@ -28,6 +28,5 @@
     ),
     subscribedToAuthor: subscribed_to_author,
     subscriptionForAuthor: subscription_for_author,
-    subscriptionSuccess: flash[:subscription_success],
-    authenticityToken: form_authenticity_token
+    subscriptionSuccess: flash[:subscription_success]
 }) %>

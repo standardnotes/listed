@@ -286,31 +286,19 @@ textarea {
 }
 
 hr {
-    $hr-height: 35px;
     display: block;
     border: 0;
     text-align: center;
-    box-sizing: content-box;
-    height: $hr-height;
-    padding-top: 10px;
-    border: 0 !important;
-
-    &.left {
-        text-align: left;
-    }
+    margin: -$spacing-4 0;
 
     &:before {
-        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        font-family: $font-family-headline;
         font-weight: 400;
-        font-style: italic;
-        font-size: 28px;
-        letter-spacing: 0.3em;
+        font-size: $font-size-24;
+        letter-spacing: 12px;
         content: "...";
         display: inline-block;
-        margin-right: 0.6em;
         color: var(--body-text-color);
-        position: relative;
-        top: -$hr-height/2;
     }
 }
 

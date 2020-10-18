@@ -2,8 +2,9 @@ import React from "react";
 import Post from "../posts/Post";
 import SubscriptionForm from "../authors/SubscriptionForm";
 import moment from "moment";
+import "./Show.scss";
 
-export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, authenticityToken }) => {
+export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
     return (
         <div className="single-post-show">
             <Post post={post}></Post>
@@ -18,7 +19,6 @@ export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscri
                                     subscriptionForAuthor={subscriptionForAuthor}
                                     subscriptionSuccess={subscriptionSuccess}
                                     author={post.author}
-                                    authenticityToken={authenticityToken}
                                 >
                                 </SubscriptionForm>
                             </div>
