@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import Post from "../posts/Post";
 import getAuthToken from "../../utils/getAuthToken";
-import { IcChevronDown } from "../../assets/icons";
+import { IcChevronDown, IcArrowLong } from "../../assets/icons";
 import "./Show.scss";
 
 const Show = ({ posts, olderThan, displayAuthor }) => {
     const [visiblePosts, setVisiblePosts] = useState(posts);
     const [loadMorePostsDate, setLoadMorePostsDate] = useState(olderThan);
+    const [showScrollToTop, setShowScrollToTop] = useState(false);
 
     const loadMorePosts = () => {
         axios
@@ -28,6 +29,20 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
             })
     };
 
+    const updateScrollToTop = () => {
+        const scrollHeight = window.pageYOffset;
+        setShowScrollToTop(scrollHeight > 500);
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth"});
+    }
+    
+    useEffect(() => {
+        window.addEventListener("scroll", updateScrollToTop);
+        return () => window.removeEventListener("scroll", updateScrollToTop);
+    }, []);
+
     return (
         <div id="author-profile">
             <div id="author-posts">
@@ -36,9 +51,9 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
                         <Post post={post}></Post>
                     </div>
                 ))}
-                <div className="navigation">
-                    {loadMorePostsDate && (
-                        <div className="older">
+                {loadMorePostsDate && (
+                    <div className="navigation">
+                    <div className="older">
                             <button className="button" onClick={loadMorePosts}>
                                 Load more posts
                                 <SVG
@@ -47,9 +62,20 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
                                 />
                             </button>
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
+            <button
+                className={`button scroll-to-top__button ${showScrollToTop ? "scroll-to-top__button--visible" : ""}`}
+                onClick={scrollToTop}
+            >
+                <div className="scroll-to-top__container">
+                    <SVG
+                        src={IcArrowLong}
+                        className="scroll-to-top__icon"
+                    />
+                </div>
+            </button>
         </div>
     );
 };

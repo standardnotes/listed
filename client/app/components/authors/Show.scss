@@ -1,8 +1,9 @@
 #author-profile {
     padding: 0 $spacing-16;
+    background-color: $color-white;
 
     .older {
-        margin: $spacing-48 0;
+        padding: $spacing-48 0;
         display: flex;
         justify-content: center;
 
@@ -20,7 +21,7 @@
         }
     
         @include Desktop() {
-            margin: $spacing-56 0;
+            padding: $spacing-56 0;
         }
     }
 
@@ -38,5 +39,50 @@
 
     @include Desktop() {
         padding: $spacing-56 $spacing-136;
+    }
+}
+
+.button.scroll-to-top__button {
+    background-color: $color-white;
+    position: fixed;
+    bottom: $spacing-16;
+    right: $spacing-16;
+    padding: 0;
+    border-radius: 22px;
+    display: none;
+
+    .scroll-to-top__container {
+        width: 44px;
+        height: 44px;
+        border: $border-default;
+        border-radius: 22px;
+        background-color: $color-default;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.1s ease-in-out;
+    
+        .scroll-to-top__icon {
+            width: 24px;
+            height: 24px;
+            transform: rotate(-90deg);
+    
+            path {
+                fill: $color-black;
+            }
+        }
+
+        &:hover {
+            border: 1px solid $color-black;
+        }
+    }
+}
+
+.button.scroll-to-top__button--visible {
+    display: block;
+
+    .scroll-to-top__container {
+        opacity: 1;
     }
 }

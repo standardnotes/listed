@@ -38,9 +38,13 @@
     border: $border-default;
     border-radius: 14px;
     background-color: $color-primary-opacity-8;
-}
 
-.resources__hover-icon {
-    width: 16px;
-    height: 16px;
+    .resources__hover-icon {
+        width: 16px;
+        height: 16px;
+
+        path {
+            fill: $color-black;
+        }
+    }
 }

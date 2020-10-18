@@ -33,7 +33,7 @@
             min-height: 60vw;
             min-width: 60vw;
             background-image: 
-                linear-gradient(to top, $color-primary-opacity-8 50%, $color-primary-opacity-8 50%);
+                linear-gradient(to top, var(--wordcount-color) 50%, var(--wordcount-color) 50%);
             transition: all 0.5s ease-in-out;
         }
     
@@ -43,7 +43,7 @@
             &:hover {
                 &::before {
                     top: 0;
-                    opacity: 100%;
+                    opacity: 0.08;
                 }
             }
         }
