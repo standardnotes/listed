@@ -1,30 +1,14 @@
-:root {
-  --dimmed-text-color: rgb(170, 170, 170);
-  --dimmed-border-color: rgb(233, 233, 233);
-  --background-color: white;
-  --body-text-color: black;
-  --post-title-color: var(--body-text-color);
-  --post-date-color: var(--body-text-color);
-  --post-text-color: var(--body-text-color);
-  --page-menu-link-color: var(--body-text-color);
-  --header-author-name: var(--body-text-color);
-  --header-listed-name: var(--dimmed-text-color);
-  --more-from-border-color: var(--dimmed-border-color);
-  --bio-color: var(--body-text-color);
-  --wordcount-color: var(--dimmed-text-color);
-  --website-color: var(--dimmed-text-color);
-  --twitter-color: var(--dimmed-text-color);
-  --link-color: #086dd6;
-  --header-border-color: var(--dimmed-border-color);
-};
+$color-default: #F8F9FC;
 
-$bg-color-default: #F8F9FC;
-$bg-color-primary: #00208F;
-$bg-color-primary-opacity-8: rgba(0, 32, 143, 0.08);
-$bg-color-primary-opacity-16: rgba(0, 32, 143, 0.16);
-$bg-color-black: #181818;
-$bg-color-black-opacity-16: rgba(24, 24, 24, 0.16);
-$bg-color-white: #FFFFFF;
+$color-primary: rgb(0, 32, 143);
+$color-primary-opacity-8: rgba($color-primary, 0.08);
+$color-primary-opacity-16: rgba($color-primary, 0.16);
+$color-primary-opacity-56: rgba($color-primary, 0.56);
+
+$color-black: rgb(24, 24, 24);
+$color-black-opacity-16: rgba($color-black, 0.16);
+
+$color-white: #FFFFFF;
 
 $font-family-default: "Roboto";
 $font-family-headline: "Merriweather";
@@ -43,12 +27,6 @@ $font-size-32: 32px;
 $font-size-36: 36px;
 $font-size-48: 48px;
 $font-size-120: 120px;
-
-$text-color-default: #181818;
-$text-color-white: white;
-$text-color-primary: #00208F;
-$text-color-primary-dimmed: rgba(0, 32, 143, 0.56);
-$text-color-default-dimmed: rgba(24, 24, 24, 0.16);
 
 $line-height-15: 15px;
 $line-height-20: 20px;
@@ -81,10 +59,32 @@ $spacing-56: 56px;
 $spacing-60: 60px;
 $spacing-86: 86px;
 $spacing-90: 90px;
+$spacing-136: 136px;
 $spacing-148: 148px;
 
 $spacing-11-vw: 11vw;
+$spacing-22-vw: 22vw;
 
 $border-radius-4: 4px;
 $border-default: 1px solid rgba(24, 24, 24, 0.16);
 $border-warning: 3px solid #F28B52;
+
+:root {
+  --dimmed-text-color: #{$color-black-opacity-16};
+  --dimmed-border-color: #{$color-default};
+  --background-color: #{$color-default};
+  --body-text-color: #{$color-black};
+  --post-title-color: var(--body-text-color);
+  --post-date-color: var(--body-text-color);
+  --post-text-color: var(--body-text-color);
+  --page-menu-link-color: #{$color-primary};
+  --header-author-name: #{$color-primary};
+  --header-listed-name: #{$color-primary};
+  --more-from-border-color: var(--dimmed-border-color);
+  --bio-color: var(--body-text-color);
+  --wordcount-color: #{$color-primary};
+  --website-color: #{$color-primary};
+  --twitter-color: #{$color-primary};
+  --link-color: #{$color-primary};
+  --header-border-color: #{$color-primary};
+};

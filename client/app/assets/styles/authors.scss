@@ -1,21 +1,3 @@
-#author-profile {
-  #author-posts {
-    .author-post {
-      &:not(:last-child) {
-        margin-bottom: 70px;
-      }
-    }
-    .navigation {
-      .older {
-        float: left;
-      }
-      .newer {
-        float: right;
-      }
-    }
-  }
-}
-
 #page-header-hr {
   width: 100vw;
   position: relative;

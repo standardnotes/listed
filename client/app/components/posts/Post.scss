@@ -1,0 +1,17 @@
+.post-content {
+    .post-header .post-title {
+        color: var(--post-title-color);
+
+        a {
+            background-image: none;
+        }
+    }
+
+    .post-body {
+        margin-top: $spacing-24;
+    }    
+}
+
+.post-date {
+    margin-top: $spacing-8;
+}

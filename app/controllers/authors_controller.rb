@@ -68,6 +68,28 @@ class AuthorsController < ApplicationController
       end
   end
 
+  def more_posts
+    limit = 15
+    older_than = params[:older_than].to_i
+    all_posts = @display_author.listed_posts(nil, false)
+    new_posts = all_posts
+      .where('created_at < ?', Time.at(older_than).to_datetime || 0)
+      .order('created_at DESC')
+      .limit(limit)
+    older_than =
+      if all_posts.first.created_at < new_posts.last.created_at
+        new_posts.last.created_at.to_i
+      end
+
+    render :json => {
+      older_than: older_than,
+      posts: new_posts.as_json(
+        only: [:id, :title, :unlisted, :page, :created_at, :word_count],
+        methods: [:author_relative_url, :preview_text, :rendered_text]
+      )
+    }
+  end
+
   def feed
     @author = @display_author
 

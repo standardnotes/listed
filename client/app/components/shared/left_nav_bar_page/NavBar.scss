@@ -14,7 +14,7 @@
         transition: background-color 0.1s ease-in-out;
 
         &:not(.button--active) {
-            color: $text-color-default;
+            color: $color-black;
         }
 
         &:not(:last-child) {
@@ -25,7 +25,7 @@
     .button--active {
         .left-nav-bar__icon {
             path {
-                fill: $bg-color-primary;
+                fill: $color-primary;
             }
         }
     }

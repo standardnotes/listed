@@ -4,6 +4,10 @@ import { IcArrowLong } from "../../../assets/icons";
 import "./AuthorInfo.scss";
 
 const AuthorInfo = ({ author }) => {
+    const scrollToPosts = () => {
+        document.getElementById('author-posts').scrollIntoView({ behavior: "smooth" });
+    }
+
     return(
         <div className="header-author-info">
             <div className="header-author-info__items">
@@ -48,7 +52,7 @@ const AuthorInfo = ({ author }) => {
                     </p>
                 </div>
             </div>
-            <button className="word-count__button">
+            <button className="button word-count__button" onClick={scrollToPosts}>
                 <p className="p3 word-count" suppressHydrationWarning>
                     {author.word_count.toLocaleString()} words
                 </p>

@@ -12,7 +12,7 @@ const ActiveAuthors = ({ activeAuthors }) => {
         ));
 
     useEffect(() => {
-        const easterEggIndex = parseInt(Math.random() * activeAuthors.length - 1);
+        const easterEggIndex = parseInt(Math.random() * (activeAuthors.length - 1));
 
         const easterEgg = {
             id: "easter-egg",
@@ -26,7 +26,7 @@ const ActiveAuthors = ({ activeAuthors }) => {
         const authorsPlusEasterEgg = [
             ...activeAuthors.slice(0, easterEggIndex),
             easterEgg,
-            ...activeAuthors.slice(easterEggIndex, activeAuthors.length - 1),
+            ...activeAuthors.slice(easterEggIndex, activeAuthors.length),
         ];
 
         setAuthors(authorsPlusEasterEgg);
