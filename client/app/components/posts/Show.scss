@@ -26,18 +26,27 @@
 
 #single-post-footer {
     background-color: $color-default;
-    padding: $spacing-56 $spacing-11-vw;
+    padding: $spacing-48 $spacing-16;
+
+    @include Desktop() {
+        padding: $spacing-56 $spacing-11-vw;
+    }
 }
 
 .previous-next-container {
     margin-top: $spacing-24;
 
+    .previous:not(:last-child) {
+        margin-bottom: $spacing-16;
+    }
+
     @include Desktop() {
         display: flex;
-        margin-top: $spacing-36;
+        margin: $spacing-36 0 0;
 
-        .previous {
+        .previous.card {
             margin-right: $spacing-12;
+            margin-bottom: 0;
         }
     
         .next {
