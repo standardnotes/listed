@@ -1,10 +1,10 @@
 import React from "react";
 import Post from "../posts/Post";
 import SubscriptionForm from "../authors/SubscriptionForm";
-import moment from "moment";
+import ScrollToTopButton from "../shared/ScrollToTopButton";
 import "./Show.scss";
 
-export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
+export default ({ post, previous, next, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
     return (
         <div>
             <div className="single-post-show">
@@ -27,25 +27,26 @@ export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscri
                 )}
             </div>
             {post.page || (
-                    <div id="single-post-footer">
-                        <h3 className="more-from h3">
-                            More from {post.author.title}
-                            <div className="headline-separator"></div>
-                        </h3>
-                        <div className="previous-next-container">
-                            {previous && (
-                                <div className="previous card">
-                                    <Post post={previous} truncate={true}></Post>  
-                                </div>
-                            )}
-                            {next && (
-                                <div className="next card">
-                                    <Post post={next} truncate={true}></Post>  
-                                </div>
-                            )}
-                        </div>
+                <div id="single-post-footer">
+                    <h3 className="more-from h3">
+                        More from {post.author.title}
+                        <div className="headline-separator"></div>
+                    </h3>
+                    <div className="previous-next-container">
+                        {previous && (
+                            <div className="previous card">
+                                <Post post={previous} truncate={true}></Post>  
+                            </div>
+                        )}
+                        {next && (
+                            <div className="next card">
+                                <Post post={next} truncate={true}></Post>  
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
+            )}
+            <ScrollToTopButton />
         </div>
     );
 };

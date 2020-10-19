@@ -22,10 +22,6 @@
         only: [:title, :unlisted, :page, :created_at, :word_count],
         methods: [:author_relative_url, :preview_text, :rendered_text]
     ),
-    authorPosts: @author_posts.as_json(
-        only: [:id, :title, :created_at],
-        methods: :author_relative_url
-    ),
     subscribedToAuthor: subscribed_to_author,
     subscriptionForAuthor: subscription_for_author,
     subscriptionSuccess: flash[:subscription_success]

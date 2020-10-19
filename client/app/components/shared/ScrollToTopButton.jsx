@@ -4,6 +4,8 @@ import { IcArrowLong } from "../../assets/icons";
 import "./ScrollToTopButton.scss";
 
 const ScrollToTopButton = () => {
+    const MIN_SCROLL_HEIGHT = 200;
+
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
     const scrollToTop = () => {
@@ -12,7 +14,7 @@ const ScrollToTopButton = () => {
 
     const updateScrollToTop = () => {
         const scrollHeight = window.pageYOffset;
-        setShowScrollToTop(scrollHeight > 500);
+        setShowScrollToTop(scrollHeight > MIN_SCROLL_HEIGHT);
     };
     
     useEffect(() => {
