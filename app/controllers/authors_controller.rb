@@ -109,13 +109,18 @@ class AuthorsController < ApplicationController
     email = params[:email]
     @subscriber = Subscriber.find_or_create_by(email: email)
     session[:subscriber_id] = @subscriber.id
+    subscriptions = Subscription.where(:author => @display_author, :subscriber => @subscriber)
 
-    if Subscription.where(:author => @display_author, :subscriber => @subscriber).count == 0
+    if subscriptions.count == 0
       subscription = Subscription.new author: @display_author, subscriber: @subscriber
       subscription.save
       redirect_to subscription_validate_path({:subscription_id => subscription.id})
     else
-      redirect_to :back
+      if subscriptions.first.verification_sent_at
+        redirect_to :back
+      else
+        redirect_to subscription_validate_path({:subscription_id => subscriptions.first.id})
+      end
     end
   end
 

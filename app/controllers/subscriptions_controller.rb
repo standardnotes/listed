@@ -4,6 +4,7 @@ class SubscriptionsController < ApplicationController
 
   def validate
     @subscription = Subscription.find(params[:subscription_id])
+    @styles = @subscription.author.styles
   end
 
   def submit_validate
