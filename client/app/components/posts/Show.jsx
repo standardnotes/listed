@@ -6,12 +6,12 @@ import "./Show.scss";
 
 export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
     return (
-        <div className="single-post-show">
-            <Post post={post}></Post>
-            {!post.unlisted && (
-                <div>
-                    <hr></hr>
-                    <div id="single-post-footer">
+        <div>
+            <div className="single-post-show">
+                <Post post={post}></Post>
+                {!post.unlisted && (
+                    <div>
+                        <hr></hr>
                         {!post.author.newsletter_disabled && (
                             <div id="subscription-form" className="form-box centered">
                                 <SubscriptionForm
@@ -23,45 +23,29 @@ export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscri
                                 </SubscriptionForm>
                             </div>
                         )}
-                        {post.page || (
-                            <div>
-                                <p className="more-from">
-                                    More from&nbsp;
-                                    <a className="author-name" href={post.author.username}>
-                                        <strong>{post.author.title}</strong>
-                                    </a>
-                                </p>
-                                <div className="previous-next-container">
-                                    {previous && (
-                                        <div className="previous">
-                                            <Post post={previous} truncate={true}></Post>  
-                                        </div>
-                                    )}
-                                    {next && (
-                                        <div className="next">
-                                            <Post post={next} truncate={true}></Post>  
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="posts">
-                                    {authorPosts && authorPosts.length > 0 && (
-                                        authorPosts.map(tiedPost =>
-                                            <div key={tiedPost.id} className="more-from-link">
-                                                <a href={tiedPost.author_relative_url}>
-                                                    <strong>{tiedPost.title}</strong>
-                                                    <div className="faded">
-                                                        <i>{moment.utc(tiedPost.created_at).format("MMMM D, YYYY")}</i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        )
-                                    )}
-                                </div>
-                            </div>
-                        )}
                     </div>
-                </div>
-            )}
+                )}
+            </div>
+            {post.page || (
+                    <div id="single-post-footer">
+                        <h3 className="more-from h3">
+                            More from {post.author.title}
+                            <div className="headline-separator"></div>
+                        </h3>
+                        <div className="previous-next-container">
+                            {previous && (
+                                <div className="previous card">
+                                    <Post post={previous} truncate={true}></Post>  
+                                </div>
+                            )}
+                            {next && (
+                                <div className="next card">
+                                    <Post post={next} truncate={true}></Post>  
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
         </div>
     );
 };

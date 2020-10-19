@@ -4,7 +4,7 @@ import { IcListed, IcMenu, IcClose } from "../../assets/icons";
 import { MenuContainer, AuthorInfo } from "./header";
 import "./HeaderContainer.scss";
 
-const HeaderContainer = ({ homeUrl, author, post, privatePost, pages, authorGuestbookEntriesUrl, currentPath }) => {
+const HeaderContainer = ({ homeUrl, author, post, privatePost, pages, authorGuestbookEntriesUrl, currentPath, postPageHeader }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const renderMenu = isDesktopMenu => (
@@ -19,8 +19,8 @@ const HeaderContainer = ({ homeUrl, author, post, privatePost, pages, authorGues
     );
 
     return (
-        <div className="page-header__container">
-            <div id="page-header">
+        <div className={`page-header__container ${postPageHeader ? "page-header__container--post" : ""}`}>
+            <div id="page-header" >
                 <div className="left">
                     <div className="website-name">
                         <a href={homeUrl} className="listed-logo-link">

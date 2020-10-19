@@ -33,7 +33,7 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
         <div id="author-profile">
             <div id="author-posts">
                 {visiblePosts.map(post => (
-                    <div key={post.id} className="author-post single-post-show">
+                    <div key={post.id} className="author-post">
                         <Post post={post}></Post>
                     </div>
                 ))}
