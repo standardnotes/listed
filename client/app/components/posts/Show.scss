@@ -45,11 +45,14 @@
         margin: $spacing-36 0 0;
 
         .previous.card {
-            margin-right: $spacing-12;
             margin-bottom: 0;
+
+            &:not(:last-child) {
+                margin-right: $spacing-12;
+            }
         }
     
-        .next {
+        .next:not(:first-child) {
             margin-left: $spacing-12;
         }
     }
