@@ -23,6 +23,10 @@
 }
 
 .active-authors--mobile {
+    .button.card {
+        width: 100%;
+    };
+
     @include Desktop() {
         display: none;
     }
