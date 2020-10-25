@@ -2,7 +2,7 @@ import React from "react";
 import SubscriptionForm from "./SubscriptionForm";
 import "./Subscribe.scss";
 
-export default ({ displayAuthor, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
+const Subscribe = ({ displayAuthor, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
     return (
         <div id="subscribe-page" className="page-container">
             <h1 className="h1">Subscribe</h1>
@@ -29,3 +29,5 @@ export default ({ displayAuthor, subscribedToAuthor, subscriptionForAuthor, subs
         </div>
     );
 };
+
+export default Subscribe;

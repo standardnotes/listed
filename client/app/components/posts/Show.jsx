@@ -4,7 +4,7 @@ import SubscriptionForm from "../authors/SubscriptionForm";
 import ScrollToTopButton from "../shared/ScrollToTopButton";
 import "./Show.scss";
 
-export default ({ post, previous, next, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
+const Show = ({ post, previous, next, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
     return (
         <div>
             <div className="single-post-show">
@@ -56,3 +56,5 @@ export default ({ post, previous, next, subscribedToAuthor, subscriptionForAutho
         </div>
     );
 };
+
+export default Show;
