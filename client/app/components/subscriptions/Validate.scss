@@ -1,0 +1,27 @@
+.validate-page {
+    .h1 {
+        margin-bottom: $spacing-8;
+    }
+
+    #captcha-form {
+        margin: $spacing-16 0;
+
+        .text-field {
+            width: 100%;
+            margin: 0 $spacing-12 $spacing-12 0;
+    
+            @include Desktop() {
+                width: 300px;
+                margin-bottom: 0;
+            }
+        }
+    
+        .button {
+            width: 100%;
+    
+            @include Desktop() {
+                width: auto;
+            }
+        }
+    }
+}
