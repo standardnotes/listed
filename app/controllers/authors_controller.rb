@@ -41,6 +41,7 @@ class AuthorsController < ApplicationController
 
     @title = @display_author.title
     @desc = @display_author.bio || 'Via Standard Notes.'
+    @blog_page_footer = true
 
     limit = 15
     all_posts = @display_author.listed_posts(nil, false)

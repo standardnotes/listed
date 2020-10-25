@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import Post from "../posts/Post";
+import ScrollToTopButton from "../shared/ScrollToTopButton";
 import getAuthToken from "../../utils/getAuthToken";
 import { IcChevronDown } from "../../assets/icons";
 import "./Show.scss";
@@ -32,13 +33,13 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
         <div id="author-profile">
             <div id="author-posts">
                 {visiblePosts.map(post => (
-                    <div key={post.id} className="author-post single-post-show">
+                    <div key={post.id} className="author-post">
                         <Post post={post}></Post>
                     </div>
                 ))}
-                <div className="navigation">
-                    {loadMorePostsDate && (
-                        <div className="older">
+                {loadMorePostsDate && (
+                    <div className="navigation">
+                    <div className="older">
                             <button className="button" onClick={loadMorePosts}>
                                 Load more posts
                                 <SVG
@@ -47,9 +48,10 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
                                 />
                             </button>
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
+            <ScrollToTopButton />
         </div>
     );
 };

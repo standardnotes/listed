@@ -8,10 +8,41 @@
     }
 
     .post-body {
-        margin-top: $spacing-24;
-    }    
+        margin: $spacing-24 0;
+    }
+
+    .post-date {
+        margin-top: $spacing-8;
+        opacity: 0.86;
+    }
 }
 
-.post-date {
-    margin-top: $spacing-8;
+.post-preview {
+    .post-body {
+        margin: $spacing-8 0;
+    }
+
+    &.post-content a .post-header,.post-body {
+        color: var(--body-text-color);
+        font-weight: normal;
+    }
+
+    .read-more-link {
+        background: none;
+        display: flex;
+
+        &:hover {
+            background: none;
+        }
+    }
+
+    .read-more-link__icon {
+        width: 20px;
+        height: 20px;
+        margin-left: $spacing-6;
+
+        path {
+            fill: $color-primary;
+        }
+    }
 }

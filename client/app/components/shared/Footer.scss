@@ -1,21 +1,27 @@
 #footer {
-    color: var(--body-text-color);
-    border-top: $border-default;
-    margin: 0 $spacing-16;
-    padding: $spacing-36 0;
-    text-align: center;
-
-    .p3:not(:last-child) {
-        margin-bottom: $spacing-16;
-    }
-
-    @include Desktop() {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 $spacing-11-vw;
-
-        .p3 {
-            margin-bottom: 0;
+    .footer__container {
+        color: var(--body-text-color);
+        border-top: $border-default;
+        margin: 0 $spacing-16;
+        padding: $spacing-36 0;
+        text-align: center;
+    
+        .p3:not(:last-child) {
+            margin-bottom: $spacing-16;
+        }
+    
+        @include Desktop() {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 $spacing-11-vw;
+    
+            .p3 {
+                margin-bottom: 0;
+            }
         }
     }
+}
+
+.footer--blog-page {
+    background-color: $color-white;
 }

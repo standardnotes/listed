@@ -1,8 +1,9 @@
 #author-profile {
     padding: 0 $spacing-16;
+    background-color: $color-white;
 
     .older {
-        margin: $spacing-48 0;
+        padding: $spacing-48 0;
         display: flex;
         justify-content: center;
 
@@ -20,7 +21,7 @@
         }
     
         @include Desktop() {
-            margin: $spacing-56 0;
+            padding: $spacing-56 0;
         }
     }
 
