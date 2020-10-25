@@ -17,7 +17,9 @@ export default ({ post, previous, next, subscribedToAuthor, subscriptionForAutho
                                 <label htmlFor="email" className="h4">
                                     Subscribe to the author's posts
                                 </label>
-                                <p className="sublabel p2">You'll only receive an email when they publish something new.</p>
+                                {(!subscribedToAuthor ||!subscriptionForAuthor.verification_sent_at) && (
+                                    <p className="sublabel p2">You'll only receive an email when they publish something new.</p>
+                                )}
                                 <SubscriptionForm
                                     subscribedToAuthor={subscribedToAuthor}
                                     subscriptionForAuthor={subscriptionForAuthor}

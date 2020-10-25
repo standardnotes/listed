@@ -27,11 +27,11 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
         <div>
             {(subscribedToAuthor && subscriptionForAuthor.verification_sent_at) ? (
                 subscriptionSuccess || !subscriptionForAuthor.verified ? (
-                    <div className="sublabel success">
-                        <span>Success. Please check your email to confirm your subscription.</span>
-                    </div>
+                    <p className="sublabel success">
+                        Success. Please check your email to confirm your subscription.
+                    </p>
                 ) : (
-                    <div className="sublabel p2">You're subscribed to this blog.</div>
+                    <p className="sublabel">You're subscribed to this blog.</p>
                 )
             ) : (
                 <form onSubmit={e => emailSubscribe(e)}>
