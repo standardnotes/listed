@@ -32,7 +32,7 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
             {author.credentials.length > 0 && (
                 <a
                     href={`${author.url}/tip`}
-                    className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
+                    className={`button page-link ${isActiveMenuItem(`/${author.url_segment}/tip`) ? "button--active" : "button--no-fill"}`}
                 >
                     Thank
                 </a>
@@ -48,7 +48,7 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
             {!author.newsletter_disabled && (
                 <a
                     href={`${author.url}/subscribe`}
-                    className={`button page-link ${isActiveMenuItem(`${author.url}/subscribe`) ? "button--active" : "button--no-fill"}`}
+                    className={`button page-link ${isActiveMenuItem(`/${author.url_segment}/subscribe`) ? "button--active" : "button--no-fill"}`}
                 >
                     Subscribe
                 </a>
