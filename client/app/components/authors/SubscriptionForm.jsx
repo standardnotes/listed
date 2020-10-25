@@ -24,7 +24,7 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
     };
 
     return (
-        <div id="subscription-form" className="form-box centered">
+        <div>
             {(subscribedToAuthor && subscriptionForAuthor.verification_sent_at) ? (
                 subscriptionSuccess || !subscriptionForAuthor.verified ? (
                     <div className="sublabel success">
@@ -35,10 +35,6 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
                 )
             ) : (
                 <form onSubmit={e => emailSubscribe(e)}>
-                    <label htmlFor="email" className="h4">
-                        Subscribe to the author's posts
-                    </label>
-                    <p className="sublabel p2">You'll only receive an email when they publish something new.</p>
                     <div>
                         <input
                             type="email"

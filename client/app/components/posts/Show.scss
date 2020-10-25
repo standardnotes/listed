@@ -14,6 +14,14 @@
         }
     }
 
+    #subscription-form {
+        text-align: center;
+
+        .sublabel {
+            margin: $spacing-8 0 $spacing-12;
+        }
+    }
+
     @include Desktop() {
         padding: 0 $spacing-11-vw $spacing-56;
     }
