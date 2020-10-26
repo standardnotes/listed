@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import getAuthToken from "../../utils/getAuthToken";
 
-const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
+const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
     const [captchaError, setCaptchaError] = useState(false);
     const [guestbookEntry, setGuestbookEntry] = useState({
         text: "",
@@ -17,7 +18,7 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
         axios
             .post(`/authors/${author.id}/guestbook`, null, {
                 headers: {
-                    "X-CSRF-Token": authenticityToken,
+                    "X-CSRF-Token": getAuthToken()
                 },
                 data: {
                     guestbook_entry: guestbookEntry,

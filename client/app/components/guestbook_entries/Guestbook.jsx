@@ -1,26 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import getAuthToken from "../../utils/getAuthToken";
+import New from "./New";
 import "./Guestbook.scss";
 
-export default ({ sent, author, entries, newAuthorGuestbookEntryUrl }) => {
+const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
+    const [showNewEntryForm, setShowNewEntryForm] = useState(false);
+
+    const createNewEntry = event => {
+        event.preventDefault();
+
+        axios
+            .get(newAuthorGuestbookEntryUrl, null, {
+                headers: {
+                    "X-CSRF-Token": getAuthToken(),
+                }
+            })
+            .then(() => {
+                setShowNewEntryForm(true);
+            });
+    };
+
     return(
         <div className="page-container guestbook__container">
             <h1 className="h1">
                 Guestbook
             </h1>
-            {!sent && (
-                <div className="guestbook__new-entry-button-container">
-                    <a className="button button--primary" href={newAuthorGuestbookEntryUrl}>New entry</a>
-                    {entries.length > 0 ? (
-                        <p className="p1">Write something in {author.title}'s guestbook!</p>
-                    ) : (
-                        <p className="p1">Be the first to sign {author.title}'s guestbook!</p>
-                    )}
-                </div>
-            )}
-            {sent && (
-                <div className="callout callout--success">
-                    Your message has been sent to the author. They'll need to confirm it before it appears in the public guestbook.
-                </div>
+            {showNewEntryForm ? (
+                <New
+                    author={author}
+                    simpleCaptchaKey={simpleCaptchaKey}
+                    simpleCaptchaImageUrl={simpleCaptchaImageUrl}
+                />
+            ) : (
+                sent ? (
+                    <div className="callout callout--success">
+                        Your message has been sent to the author. They'll need to confirm it before it appears in the public guestbook.
+                    </div>
+                ) : (
+                    <div className="guestbook__new-entry-button-container">
+                        <button className="button button--primary" onClick={createNewEntry}>
+                            New entry
+                        </button>
+                        {entries.length > 0 ? (
+                            <p className="p1">Write something in {author.title}'s guestbook!</p>
+                        ) : (
+                            <p className="p1">Be the first to sign {author.title}'s guestbook!</p>
+                        )}
+                    </div>
+                )
             )}
             {entries.map(entry => (
                 <p key={entry.id} className="p1 guestbook__entry">
@@ -30,3 +58,5 @@ export default ({ sent, author, entries, newAuthorGuestbookEntryUrl }) => {
         </div>
     );
 };
+
+export default props => <Guestbook {...props} />;

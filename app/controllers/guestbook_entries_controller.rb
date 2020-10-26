@@ -16,6 +16,7 @@ class GuestbookEntriesController < ApplicationController
 
   def new
     @entry = GuestbookEntry.new
+    render :json => {}, :status => 200
   end
 
   def create
