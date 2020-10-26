@@ -14,9 +14,9 @@
         margin-top: $spacing-24;
     }
 
-    .label--guestbook-entry-text::after {
+    .label--required::after {
         content: "*";
-        color: red;
+        color: $color-error;
         margin-left: $spacing-4;
     }
 
@@ -51,4 +51,9 @@
             margin: 0 $spacing-16 0 0;
         }
     }
+}
+
+.guestbook-entry-form__error-message {
+    color: $color-error;
+    margin-top: $spacing-6;
 }

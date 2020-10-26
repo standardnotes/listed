@@ -10,6 +10,10 @@ $color-black-opacity-16: rgba($color-black, 0.16);
 
 $color-white: #FFFFFF;
 
+$color-success: #1AA772;
+$color-warning: #F28B52;
+$color-error: #C7000C;
+
 $font-family-default: "Roboto";
 $font-family-headline: "Merriweather";
 
@@ -67,8 +71,6 @@ $spacing-22-vw: 22vw;
 
 $border-radius-4: 4px;
 $border-default: 1px solid rgba(24, 24, 24, 0.16);
-$border-warning: 3px solid #F28B52;
-$border-success: 3px solid #1AA772;
 
 :root {
   --dimmed-text-color: #{$color-black-opacity-16};

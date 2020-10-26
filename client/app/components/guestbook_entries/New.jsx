@@ -28,7 +28,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                 }
             })
             .then(response => {
-                if (response.request.responseURL) {
+                if (response.request.responseURL && response.status === 200) {
                     window.location.href = response.request.responseURL;
                 } else {
                     setCaptchaError(true);
@@ -50,7 +50,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
             <div className="guestbook-entry-form">
                 <form onSubmit={e => submitEntry(e)}>
                     <div className="form-section">
-                        <label htmlFor="guestbook-entry-text" className="label p2 label--guestbook-entry-text">
+                        <label htmlFor="guestbook-entry-text" className="label p2 label--required">
                             Your message
                         </label>
                         <p className="p3">
@@ -62,6 +62,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                             value={guestbookEntry.text}
                             onChange={e => editGuestbookEntry("text", e.target.value)}
                             rows="4"
+                            required="required"
                         ></textarea>
                     </div>
                     <div className="form-section mt-10">
@@ -90,7 +91,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                         ></input>
                     </div>
                     <div className="form-section">
-                        <label htmlFor="captcha" className="label">
+                        <label htmlFor="captcha" className="label label--required">
                             Please complete the captcha below
                         </label>
                         <div className="simple_captcha_image">
@@ -112,8 +113,8 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                             ></input>
                         </div>
                         {captchaError && (
-                            <div style={{ fontSize: "14px", color: "#ff5d5d", marginTop: "5px" }}>
-                                Incorrect image value, please try again
+                            <div className="guestbook-entry-form__error-message">
+                                Incorrect image value, please try again.
                             </div>
                         )}
                     </div>
