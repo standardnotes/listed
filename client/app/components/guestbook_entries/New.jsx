@@ -26,7 +26,7 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                 }
             })
             .then(response => {
-                if (response.request.responseURL) {
+                if (response.request.responseURL && response.status === 200) {
                     window.location.href = response.request.responseURL;
                 } else {
                     setCaptchaError(true);
@@ -108,7 +108,7 @@ const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUr
                         </div>
                         {captchaError && (
                             <div style={{ fontSize: "14px", color: "#ff5d5d", marginTop: "5px" }}>
-                                Incorrect image value, please try again
+                                Incorrect image value, please try again.
                             </div>
                         )}
                     </div>
