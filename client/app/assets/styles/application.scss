@@ -253,13 +253,22 @@ p {
     line-height: $line-height-24;
 }
 
-.callout--warning {
+.callout {
     padding: $spacing-12;
     border-radius: $border-radius-4;
     border: $border-default;
-    border-left: $border-warning;
     font-size: $font-size-16;
     line-height: $line-height-24;
+    background-color: $color-white;
+    display: inline-block;
+
+    &.callout--warning {
+        border-left: $border-warning;
+    }
+
+    &.callout--success {
+        border-left: $border-success;
+    }
 }
 
 .block {

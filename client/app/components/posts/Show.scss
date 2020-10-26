@@ -17,10 +17,8 @@
     #subscription-form {
         text-align: center;
 
-        .sublabel {
+        .sublabel, .callout {
             margin: $spacing-8 0 $spacing-12;
-            font-size: $font-size-16;
-            line-height: $line-height-24;
         }
     }
 
