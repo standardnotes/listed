@@ -13,7 +13,7 @@ const NewAuthor = ({ secretUrl }) => {
             title: "Getting started",
             icon: IcCode,
             collapsed: false,
-            renderContent: () => (<GettingStarted secretUrl={secretUrl} />)
+            renderContent: () => <GettingStarted secretUrl={secretUrl} />
         },
         {
             id: "publishing",
@@ -44,7 +44,7 @@ const NewAuthor = ({ secretUrl }) => {
             title: "Resources",
             icon: IcLifebuoy,
             collapsed: true,
-            renderContent: () => (<Resources />)
+            renderContent: () => <Resources />
         }
     ];
 

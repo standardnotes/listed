@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const EditAuthor = ({ author, authenticityToken }) => {
+const General = ({ author, authenticityToken }) => {
     const {
         username,
         display_name,
@@ -200,4 +200,4 @@ const EditAuthor = ({ author, authenticityToken }) => {
     );
 };
 
-export default props => <EditAuthor {...props} />
+export default props => <General {...props} />

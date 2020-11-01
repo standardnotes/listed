@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-export default ({ deleteAllDataError, author, authenticityToken }) => {
+const DeleteBlog = ({ deleteAllDataError, author, authenticityToken }) => {
     const showDeleteConfirmation = event => {
         const buttons = [
             {
@@ -65,3 +65,5 @@ export default ({ deleteAllDataError, author, authenticityToken }) => {
         </div>
     );
 };
+
+export default DeleteBlog;

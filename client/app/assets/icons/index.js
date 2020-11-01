@@ -4,13 +4,16 @@ import IcChevronDown from "./ic-chevron-down.svg";
 import IcChevronUp from "./ic-chevron-up.svg";
 import IcClose from "./ic-close.svg";
 import IcCode from "./ic-code.svg";
+import IcCreditCard from "./ic-credit-card.svg";
 import IcEarth from "./ic-earth.svg";
 import IcLifebuoy from "./ic-lifebuoy.svg";
 import IcListed from "./ic-listed.svg";
 import IcMenu from "./ic-menu.svg";
 import IcOpenIn from "./ic-open-in.svg";
-import IcTextRich from "./ic-text-rich.svg";
+import IcSettingsFilled from "./ic-settings-filled.svg";
 import IcStarCircleFilled from "./ic-star-circle-filled.svg";
+import IcTextRich from "./ic-text-rich.svg";
+import IcTrash from "./ic-trash.svg";
 
 export {
     IcArrowLong,
@@ -19,11 +22,14 @@ export {
     IcChevronUp,
     IcClose,
     IcCode,
+    IcCreditCard,
     IcEarth,
     IcLifebuoy,
     IcListed,
     IcMenu,
     IcOpenIn,
-    IcTextRich,
+    IcSettingsFilled,
     IcStarCircleFilled,
+    IcTextRich,
+    IcTrash
 };

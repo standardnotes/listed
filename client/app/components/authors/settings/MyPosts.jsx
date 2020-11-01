@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import axios from "axios";
 
-export default ({ posts, author }) => {
+const MyPosts = ({ posts, author }) => {
     const deletePost = post => {
         axios
             .get(`/authors/${author.id}/posts/${post.id}/delete?secret=${author.secret}`)
@@ -44,3 +44,5 @@ export default ({ posts, author }) => {
         </div>
     );
 };
+
+export default MyPosts;

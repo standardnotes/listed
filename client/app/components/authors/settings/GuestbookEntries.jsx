@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import axios from "axios";
 
-export default ({ guestbookEntries }) => {
+const GuestbookEntries = ({ guestbookEntries }) => {
     const handleEntryAction = (url) => {
         axios
             .get(url)
@@ -61,3 +61,5 @@ export default ({ guestbookEntries }) => {
         </div>
     );
 };
+
+export default GuestbookEntries;
