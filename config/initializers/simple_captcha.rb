@@ -3,4 +3,5 @@ SimpleCaptcha.setup do |sc|
   sc.image_magick_path = ENV['IMAGE_MAGICK_PATH'] || '/usr/local/bin'
   sc.image_style = 'listed_bg'
   sc.add_image_style('listed_bg', ["-background '#F8F9FC'"])
+  sc.add_image_style('white_bg', ["-background '#FFFFFF'"])
 end

@@ -5,6 +5,8 @@ class GuestbookEntriesController < ApplicationController
     @author = Author.find(params[:author_id]) if params[:author_id]
     @entry = GuestbookEntry.find(params[:id]) if params[:id]
 
+    SimpleCaptcha.image_style = 'white_bg'
+
     if @author
       @styles = @author.styles
     end
@@ -16,6 +18,7 @@ class GuestbookEntriesController < ApplicationController
 
   def new
     @entry = GuestbookEntry.new
+    render :json => {}, :status => 200
   end
 
   def create
