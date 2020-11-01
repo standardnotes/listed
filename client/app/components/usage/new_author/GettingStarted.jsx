@@ -28,7 +28,7 @@ const GettingStarted = ({ secretUrl }) => {
                             {isCodeCopied ? "Copied!" : "Copy to clipboard"}
                         </button>
                     </div>
-                    <div className="callout--warning getting-started__callout">
+                    <div className="callout callout--warning">
                         After importing this code, you are advised to store it somewhere safe.
                     </div>
                 </li>

@@ -1,0 +1,59 @@
+.guestbook-entry-form__container {
+    display: inline-block;
+    margin: $spacing-24 0 $spacing-36;
+}
+
+.guestbook-entry-form {
+    .form-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .label {
+        font-weight: bold;
+        margin-top: $spacing-24;
+    }
+
+    .label--required::after {
+        content: "*";
+        color: $color-error;
+        margin-left: $spacing-4;
+    }
+
+    .p3 {
+        opacity: 0.86;
+    }
+
+    .text-field {
+        margin-top: $spacing-6;
+        width: 100%;
+    }
+
+    .simple_captcha_image {
+        margin-top: $spacing-6;
+    }
+}
+
+.guestbook-entry-form__button-container {
+    margin-top: $spacing-32;
+
+    .button {
+        width: 100%;
+        margin-bottom: $spacing-16;
+    }
+
+    @include Desktop() {
+        display: flex;
+        align-items: center;
+    
+        .button {
+            width: auto;
+            margin: 0 $spacing-16 0 0;
+        }
+    }
+}
+
+.guestbook-entry-form__error-message {
+    color: $color-error;
+    margin-top: $spacing-6;
+}

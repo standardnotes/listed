@@ -4,7 +4,7 @@ import SubscriptionForm from "../authors/SubscriptionForm";
 import ScrollToTopButton from "../shared/ScrollToTopButton";
 import "./Show.scss";
 
-export default ({ post, previous, next, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
+const Show = ({ post, previous, next, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
     return (
         <div>
             <div className="single-post-show">
@@ -13,7 +13,13 @@ export default ({ post, previous, next, subscribedToAuthor, subscriptionForAutho
                     <div>
                         <hr></hr>
                         {!post.author.newsletter_disabled && (
-                            <div id="subscription-form" className="form-box centered">
+                            <div id="subscription-form">
+                                <label htmlFor="email" className="h4">
+                                    Subscribe to the author's posts
+                                </label>
+                                {(!subscribedToAuthor ||!subscriptionForAuthor.verification_sent_at) && (
+                                    <p className="sublabel p2">You'll only receive an email when they publish something new.</p>
+                                )}
                                 <SubscriptionForm
                                     subscribedToAuthor={subscribedToAuthor}
                                     subscriptionForAuthor={subscriptionForAuthor}
@@ -50,3 +56,5 @@ export default ({ post, previous, next, subscribedToAuthor, subscriptionForAutho
         </div>
     );
 };
+
+export default Show;

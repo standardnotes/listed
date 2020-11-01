@@ -62,8 +62,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post_page_header = true
-
     if !@post || !@post.published
       author = Author.find_author_from_path(request.path)
       # Go to author page

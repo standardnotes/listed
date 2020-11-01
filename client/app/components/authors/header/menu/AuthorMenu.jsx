@@ -4,6 +4,10 @@ import "./AuthorMenu.scss";
 const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentPath }) => {
     const isActiveMenuItem = path => path === currentPath;
 
+    const isSubscribeMenuItemActive = () => (
+        isActiveMenuItem(`/${author.url_segment}/subscribe`) || currentPath.includes('subscriptions')
+    );
+
     const navClassName = () => {
         if (isDesktopMenu) {
             return "pages-menu author-pages-menu--desktop pages-menu--desktop";
@@ -32,7 +36,7 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
             {author.credentials.length > 0 && (
                 <a
                     href={`${author.url}/tip`}
-                    className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
+                    className={`button page-link ${isActiveMenuItem(`/${author.url_segment}/tip`) ? "button--active" : "button--no-fill"}`}
                 >
                     Thank
                 </a>
@@ -48,7 +52,7 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
             {!author.newsletter_disabled && (
                 <a
                     href={`${author.url}/subscribe`}
-                    className={`button page-link ${isActiveMenuItem(`${author.url}/subscribe`) ? "button--active" : "button--no-fill"}`}
+                    className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
                 >
                     Subscribe
                 </a>

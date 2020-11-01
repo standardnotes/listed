@@ -1,8 +1,6 @@
 @import "queries";
-@import "guestbook_entry";
 @import "authors";
 @import "help";
-@import "subscriptions";
 
 @font-face {
     font-family: "Merriweather";
@@ -254,13 +252,22 @@ p {
     line-height: $line-height-24;
 }
 
-.callout--warning {
+.callout {
     padding: $spacing-12;
     border-radius: $border-radius-4;
     border: $border-default;
-    border-left: $border-warning;
     font-size: $font-size-16;
     line-height: $line-height-24;
+    background-color: $color-white;
+    display: inline-block;
+}
+
+.callout--warning {
+    border-left: 3px solid $color-warning;
+}
+
+.callout--success {
+    border-left: 3px solid $color-success;
 }
 
 .block {

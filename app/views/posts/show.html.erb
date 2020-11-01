@@ -1,6 +1,6 @@
 <% subscribed_to_author = @subscriber && @subscriber.subscribed_to_author(@post.author) %>
 <% subscription_for_author = @subscriber && @subscriber.subscription_for_author(@post.author).as_json(
-    only: :verified
+    only: [:verified, :verification_sent_at]
 ) %>
 
 <%= react_component("PostShow", props: {
