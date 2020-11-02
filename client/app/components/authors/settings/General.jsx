@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import getAuthToken from "../../../utils/getAuthToken";
+import Checkbox from "../../shared/Checkbox";
+import "./General.scss";
 
-const General = ({ author, authenticityToken }) => {
+const General = ({ author }) => {
     const {
         username,
         display_name,
@@ -36,7 +39,7 @@ const General = ({ author, authenticityToken }) => {
         axios
             .put(`/authors/${author.id}?secret=${author.secret}`, null, {
                 headers: {
-                    "X-CSRF-Token": authenticityToken,
+                    "X-CSRF-Token": getAuthToken()
                 },
                 data: {
                     author: editedAuthor
@@ -54,149 +57,136 @@ const General = ({ author, authenticityToken }) => {
     );
 
     return(
-        <div className="mt-20 form-box full">
-            <form onSubmit={e => submitEditedAuthor(e)}>
+        <form onSubmit={e => submitEditedAuthor(e)}>
+            <div className="form-section--row">
                 <div className="form-section">
-                    <label htmlFor="author-username" className="label">
+                    <label htmlFor="author-username" className="label p2">
                         Username
                     </label>
                     <input
                         id="author-username"
-                        className="field text-input"
+                        className="text-field"
                         value={editedAuthor.username}
                         onChange={e => editAuthor("username", e.target.value)}
                     ></input>
                 </div>
                 <div className="form-section">
-                    <label htmlFor="author-display-name" className="label">
-                        Display Name
+                    <label htmlFor="author-display-name" className="label p2">
+                        Display name
                     </label>
                     <input
                         id="author-display-name"
-                        className="field text-input"
+                        className="text-field"
                         value={editedAuthor.display_name}
                         onChange={e => editAuthor("display_name", e.target.value)}
                     ></input>
                 </div>
+            </div>
+            <div className="form-section">
+                <label htmlFor="author-bio" className="label p2">
+                    Bio
+                </label>
+                <textarea
+                    id="author-bio"
+                    className="text-field"
+                    value={editedAuthor.bio}
+                    onChange={e => editAuthor("bio", e.target.value)}
+                    rows="4"
+                ></textarea>
+            </div>
+            <div className="form-section--row">
                 <div className="form-section">
-                    <label htmlFor="author-bio" className="label">
-                        Bio
-                    </label>
-                    <textarea
-                        id="author-bio"
-                        className="field text-input"
-                        value={editedAuthor.bio}
-                        onChange={e => editAuthor("bio", e.target.value)}
-                    ></textarea>
-                </div>
-                <div className="form-section">
-                    <label htmlFor ="author-link" className="label">
+                    <label htmlFor ="author-link" className="label p2">
                         Link
                     </label>
                     <input
                         id="author-link"
-                        className="field text-input"
+                        className="text-field"
                         value={editedAuthor.link}
                         onChange={e => editAuthor("link", e.target.value)}
                     ></input>
                 </div>
                 <div className="form-section">
-                    <label htmlFor="author-twitter" className="label">
-                        Twitter Username
+                    <label htmlFor="author-twitter" className="label p2">
+                        Twitter username
                     </label>
                     <input
                         id="author-twitter"
-                        className="field text-input"
+                        className="text-field"
                         value={editedAuthor.twitter}
                         onChange={e => editAuthor("twitter", e.target.value)}
                     ></input>
                 </div>
+            </div>
+            <div className="form-section">
+                <label htmlFor="author-email" className="label p2">
+                    Email
+                </label>
+                <p className="p3 sublabel">
+                    Allows subscribers to reply to your posts, as well as notifies you when someone subscribes to your blog.
+                    <input
+                        id="author-email"
+                        className="text-field"
+                        placeholder="Enter your email"
+                        value={editedAuthor.email}
+                        onChange={e => editAuthor("email", e.target.value)}
+                    ></input>
+                </p>
+            </div>
+            <div className="form-section--row">
                 <div className="form-section">
-                    <label htmlFor="author-email" className="label">
-                        Email
+                    <label htmlFor="author-meta-image-url" className="label p2">
+                        Meta image URL
                     </label>
-                    <div style={{ fontSize: "14px", opacity: 0.5, marginBottom: "5px" }}>
-                        Allows subscribers to reply to your posts, as well as notifies you when someone subscribes to your blog.
-                        <input
-                            id="author-email"
-                            className="field text-input"
-                            placeholder="Enter your email"
-                            value={editedAuthor.email}
-                            onChange={e => editAuthor("email", e.target.value)}
-                        ></input>
-                    </div>
-                </div>
-                <div className="form-section">
-                    <label htmlFor="author-meta-image-url" className="label">
-                        Meta image url
-                    </label>
-                    <div style={{ fontSize: "14px", opacity: 0.5, marginBottom: "5px" }}>
+                    <p3 className="sublabel p3">
                         The image that will be used when generating link previews in Twitter, Slack, Facebook, etc.
-                        <input
-                            id="author-meta-image-url"
-                            className="field text-input"
-                            placeholder="Meta Image URL"
-                            value={editedAuthor.meta_image_url}
-                            onChange={e => editAuthor("meta_image_url", e.target.value)}
-                        ></input>
-                    </div>
-                </div>
-                <div className="form-section">
-                    <label htmlFor="author-header-image-url" className="label">
-                        Header image url
-                    </label>
-                    <div style={{ fontSize: "14px", opacity: 0.5, marginBottom: "5px" }}>
-                        The image that will be displayed on top of your profile.
-                        <input
-                            id="author-header-image_url"
-                            className="field text-input"
-                            placeholder="Header Image URL"
-                            value={editedAuthor.header_image_url}
-                            onChange={e => editAuthor("header_image_url", e.target.value)}
-                        ></input>
-                    </div>
-                </div>
-                <div className="form-section">
+                    </p3>
                     <input
-                        id="author-guestbook-disabled"
-                        type="checkbox"
-                        className="field inline"
-                        defaultChecked={editedAuthor.guestbook_disabled}
-                        onClick={e => editAuthor("guestbook_disabled", e.target.checked)}
+                        id="author-meta-image-url"
+                        className="text-field"
+                        placeholder="Meta image URL"
+                        value={editedAuthor.meta_image_url}
+                        onChange={e => editAuthor("meta_image_url", e.target.value)}
                     ></input>
-                    <label htmlFor="author-guestbook-disabled" className="label inline">
-                        Disable guestbook
-                    </label>
                 </div>
                 <div className="form-section">
+                    <label htmlFor="author-header-image-url" className="label p2">
+                        Header image URL
+                    </label>
+                    <p className="sublabel p3 sublabel--header-image">
+                        The image that will be displayed on top of your blog page (below the description).
+                    </p>
                     <input
-                        id="author-newsletter-disabled"
-                        type="checkbox"
-                        className="field inline"
-                        defaultChecked={editedAuthor.newsletter_disabled}
-                        onClick={e => editAuthor("newsletter_disabled", e.target.checked)}
+                        id="author-header-image_url"
+                        className="text-field"
+                        placeholder="Header image URL"
+                        value={editedAuthor.header_image_url}
+                        onChange={e => editAuthor("header_image_url", e.target.value)}
                     ></input>
-                    <label htmlFor="author-newsletter-disabled" className="label inline">
-                        Disable email subscription and newsletter
-                    </label>
                 </div>
-                <div className="form-section">
-                    <input
-                        id="author-hide-from-homepage"
-                        type="checkbox"
-                        className="field inline"
-                        defaultChecked={editedAuthor.hide_from_homepage}
-                        onClick={e => editAuthor("hide_from_homepage", e.target.checked)}
-                    ></input>
-                    <label htmlFor="author-hide-from-homepage" className="label inline">
-                        Hide profile from homepage 'Recent Authors'
-                    </label>
-                </div>
-                <div className="form-section">
-                    <input type="submit" value="Save"></input>
-                </div>
-            </form>
-        </div>
+            </div>
+            <Checkbox
+                id="author-guestbook-disabled"
+                onClick={checked => editAuthor("guestbook_disabled", checked)}
+                checked={editedAuthor.guestbook_disabled}
+                label="Disable guestbook"
+            />
+            <Checkbox
+                id="author-newsletter-disabled"
+                onClick={checked => editAuthor("newsletter_disabled", checked)}
+                checked={editedAuthor.newsletter_disabled}
+                label="Disable email subscription and newsletter"
+            />
+            <Checkbox
+                id="author-hide-from-homepage"
+                onClick={checked => editAuthor("hide_from_homepage", checked)}
+                checked={editedAuthor.hide_from_homepage}
+                label="Hide profile from the “Listed authors” section in the homepage"
+            />
+            <div className="form-section form-section--row">
+                <button type="submit" className="button button--primary">Save changes</button>
+            </div>
+        </form>
     );
 };
 

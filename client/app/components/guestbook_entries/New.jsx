@@ -80,7 +80,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                         <label htmlFor="guestbook-entry-donation-info" className="label p2">
                             Donation info (optional)
                         </label>
-                        <p className="p3">
+                        <p className="p3 sublabel">
                             If you've made a contribution, feel free to let the author know the method you've used, and the amount.
                         </p>
                         <input

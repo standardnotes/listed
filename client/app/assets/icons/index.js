@@ -1,5 +1,7 @@
 import IcArrowLong from "./ic-arrow-long.svg";
 import IcBook from "./ic-book.svg";
+import IcCheckboxChecked from "./ic-checkbox-checked";
+import IcCheckboxEmpty from "./ic-checkbox-empty";
 import IcChevronDown from "./ic-chevron-down.svg";
 import IcChevronUp from "./ic-chevron-up.svg";
 import IcClose from "./ic-close.svg";
@@ -18,6 +20,8 @@ import IcTrash from "./ic-trash.svg";
 export {
     IcArrowLong,
     IcBook,
+    IcCheckboxChecked,
+    IcCheckboxEmpty,
     IcChevronDown,
     IcChevronUp,
     IcClose,
