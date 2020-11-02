@@ -8,7 +8,7 @@ const Section = ({ section }) => {
     const content = renderContent();
     const [isCollapsed, setIsCollapsed] = useState(collapsed);
 
-    useEffect(() => {
+    const setSectionStyle = () => {
         const sectionContentElement = document.querySelector(`#${section.id} .section__content`);
 
         if (isCollapsed) {
@@ -16,10 +16,20 @@ const Section = ({ section }) => {
             sectionContentElement.style.visibility = "hidden";
         } else {
             const sectionHeight = sectionContentElement.scrollHeight;
-            sectionContentElement.style.height = `${sectionHeight}px`;
-            sectionContentElement.style.visibility = "visible";
+
+            if (sectionHeight) {
+                sectionContentElement.style.height = `${sectionHeight}px`;
+                sectionContentElement.style.visibility = "visible";
+            }
         }
-    }, [isCollapsed]);
+    }
+
+    useEffect(setSectionStyle, [isCollapsed]);
+
+    useEffect(() => {
+        window.addEventListener("resize", setSectionStyle);
+        return () => window.removeEventListener("resize", setSectionStyle);
+    }, []);
 
     return(
         <li className="section__container">
