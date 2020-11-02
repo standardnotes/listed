@@ -18,6 +18,7 @@ import {
     IcLifebuoy,
     IcTrash
 } from "../../assets/icons";
+import "./SettingsPage.scss";
 
 const SettingsPage = ({ author, customDomainIP, guestbookEntries, posts, deleteAllDataError }) => {
     const sections = [
@@ -77,16 +78,18 @@ const SettingsPage = ({ author, customDomainIP, guestbookEntries, posts, deleteA
             heading="Settings"
             subheading={
                 <div>
-                    <p>
-                        Your public blog is accessible via:{" "}
+                    <p className="p1">
+                        Your public blog is accessible via:
                     </p>
-                    {author.accessible_via.map(url => (
-                        <p key={url}>
-                            <a href={url} target="_blank" rel="noopener noreferrer">
-                                {url}
-                            </a>
-                        </p>     
-                    ))}
+                    <ul className="accessible-via">
+                        {author.accessible_via.map(url => (
+                            <li key={url} className="p1">
+                                <a href={url} target="_blank" rel="noopener noreferrer">
+                                    {url}
+                                </a>
+                            </li>     
+                        ))}
+                    </ul>
                 </div>
             }
             sections={sections}

@@ -51,7 +51,11 @@ const NewAuthor = ({ secretUrl }) => {
     return(
         <LeftNavBarPage
             heading="New author?"
-            subheading="Follow these steps to get started with publishing."
+            subheading={
+                <p className="p1">
+                    Follow these steps to get started with publishing.
+                </p>
+            }
             sections={sections}
         />
     );
