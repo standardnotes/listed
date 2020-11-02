@@ -33,6 +33,8 @@ const General = ({ author }) => {
         hide_from_homepage: hide_from_homepage
     });
 
+    const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
+
     const submitEditedAuthor = event => {
         event.preventDefault();
 
@@ -46,7 +48,11 @@ const General = ({ author }) => {
                 }
             })
             .then(response => {
+                setUsernameErrorMessage(null);
                 window.location.href = response.request.responseURL;
+            })
+            .catch(error => {
+                setUsernameErrorMessage(error.response.data.message);
             })
     };
 
@@ -65,10 +71,15 @@ const General = ({ author }) => {
                     </label>
                     <input
                         id="author-username"
-                        className="text-field"
+                        className={`text-field ${usernameErrorMessage ? "text-field--error" : ""}`}
                         value={editedAuthor.username}
                         onChange={e => editAuthor("username", e.target.value)}
                     ></input>
+                    {usernameErrorMessage && (
+                        <div className="error-message">
+                            {usernameErrorMessage}
+                        </div>
+                    )}
                 </div>
                 <div className="form-section">
                     <label htmlFor="author-display-name" className="label p2">

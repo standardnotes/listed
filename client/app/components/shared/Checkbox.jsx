@@ -4,8 +4,6 @@ import { IcCheckboxChecked, IcCheckboxEmpty } from "../../assets/icons";
 import "./Checkbox.scss";
 
 const Checkbox = ({ id, onClick, checked, label }) => {
-    console.log('CHECKED', checked);
-
     return(
         <div className="form-section checkbox__container">
             <input

@@ -242,38 +242,6 @@ textarea {
     text-align: left;
 }
 
-.page-container {
-    padding: $spacing-24 $spacing-16 $spacing-48;
-
-    @include Desktop() {
-        padding: $spacing-56 $spacing-11-vw;
-    }
-}
-
-.headline-separator {
-    height: 3px;
-    background-color: $color-black-opacity-16;
-    flex: 1;
-    margin-left: $spacing-16;
-
-    @include Desktop() {
-        margin-left: $spacing-24;
-    }
-}
-
-.text-field {
-    padding: $spacing-6 0 $spacing-6 $spacing-12;
-    border-radius: $border-radius-4;
-    border: $border-default;
-    font-family: $font-family-default;
-    font-size: $font-size-16;
-    line-height: $line-height-24;
-
-    &:focus {
-        outline: $color-primary auto 1px;
-    }
-}
-
 .callout {
     padding: $spacing-12;
     border-radius: $border-radius-4;
@@ -290,6 +258,11 @@ textarea {
 
 .callout--success {
     border-left: 3px solid $color-success;
+}
+
+.error-message {
+    color: $color-error;
+    margin-top: $spacing-6;
 }
 
 .form-section {
@@ -318,6 +291,17 @@ textarea {
     }
 }
 
+.headline-separator {
+    height: 3px;
+    background-color: $color-black-opacity-16;
+    flex: 1;
+    margin-left: $spacing-16;
+
+    @include Desktop() {
+        margin-left: $spacing-24;
+    }
+}
+
 .label {
     font-weight: bold;
 }
@@ -328,6 +312,31 @@ textarea {
     margin-left: $spacing-4;
 }
 
+.page-container {
+    padding: $spacing-24 $spacing-16 $spacing-48;
+
+    @include Desktop() {
+        padding: $spacing-56 $spacing-11-vw;
+    }
+}
+
 .sublabel {
     opacity: 0.86;
+}
+
+.text-field {
+    padding: $spacing-6 0 $spacing-6 $spacing-12;
+    border-radius: $border-radius-4;
+    border: $border-default;
+    font-family: $font-family-default;
+    font-size: $font-size-16;
+    line-height: $line-height-24;
+
+    &:focus {
+        outline: $color-primary auto 1px;
+    }
+}
+
+.text-field--error {
+    outline: $color-error auto 1px;
 }

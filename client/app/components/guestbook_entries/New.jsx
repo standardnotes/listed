@@ -14,7 +14,6 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
 
     const submitEntry = event => {
         event.preventDefault();
-        setCaptchaError(false);
 
         axios
             .post(`/authors/${author.id}/guestbook`, null, {
@@ -29,6 +28,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
             })
             .then(response => {
                 if (response.request.responseURL && response.status === 200) {
+                    setCaptchaError(false);
                     window.location.href = response.request.responseURL;
                 } else {
                     setCaptchaError(true);
@@ -113,7 +113,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                             ></input>
                         </div>
                         {captchaError && (
-                            <div className="guestbook-entry-form__error-message">
+                            <div className="error-message">
                                 Incorrect image value, please try again.
                             </div>
                         )}
