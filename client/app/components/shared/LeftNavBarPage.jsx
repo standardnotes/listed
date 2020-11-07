@@ -9,9 +9,7 @@ const LeftNavBarPage = ({ heading, subheading, sections }) => {
                 <h1 className="h1">
                     {heading}
                 </h1>
-                <p className="p1">
-                    {subheading}
-                </p>
+                {subheading}
             </div>
             <div className="left-nav-bar-page__content">
                 <NavBar sections={sections} />

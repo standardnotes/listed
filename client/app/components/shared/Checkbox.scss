@@ -1,0 +1,13 @@
+.form-section.checkbox__container {
+    flex-direction: row;
+}
+
+.checkbox {
+    display: none;
+}
+
+.checkbox__icon-container {
+    margin-right: $spacing-12;
+    height: 18px;
+    width: 18px;
+}
