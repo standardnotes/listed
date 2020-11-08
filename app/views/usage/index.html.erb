@@ -1,6 +1,6 @@
 <%= react_component("Usage", props: {
     activeAuthors: @active_authors.as_json(
-        only: [:id, :featured, :bio],
+        only: [:id, :featured, :bio, :title],
         methods: [:url, :title, :word_count]
     )
 }) %>

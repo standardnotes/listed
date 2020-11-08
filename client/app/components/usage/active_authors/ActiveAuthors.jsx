@@ -4,25 +4,8 @@ import ActiveAuthorItem from "./ActiveAuthorItem";
 import "./ActiveAuthors.scss";
 
 const ActiveAuthors = ({ activeAuthors }) => {
-    const easterEggIndex = parseInt(Math.random() * (activeAuthors.length - 1));
-
-    const easterEgg = {
-        id: "easter-egg",
-        title: "This could be you :)",
-        bio: "Share your experience in its truest form. Start writing now.",
-        url: "#",
-        featured: false,
-        easterEgg: true,
-    };
-
-    const authorsPlusEasterEgg = [
-        ...activeAuthors.slice(0, easterEggIndex),
-        easterEgg,
-        ...activeAuthors.slice(easterEggIndex, activeAuthors.length),
-    ];
-
     const getItems = isDesktop =>
-        authorsPlusEasterEgg && authorsPlusEasterEgg.map(author => (
+        activeAuthors.map(author => (
             <ActiveAuthorItem key={`${author.id}${isDesktop ? "-desktop" : "-mobile"}`} author={author} />
         ));
 

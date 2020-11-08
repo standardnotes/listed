@@ -90,14 +90,14 @@
     font-weight: bold;
     color: $color-black;
     margin-top: $spacing-8;
-}
 
-.easter-egg__icon--arrow {
-    height: 16px;
-    width: 16px;
-    margin-left: $spacing-8;
-
-    path {
-        fill: $color-black;
+    .easter-egg__icon--arrow {
+        height: 16px;
+        width: 16px;
+        margin-left: $spacing-8;
+    
+        path {
+            fill: $color-black;
+        }
     }
 }
