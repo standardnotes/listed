@@ -8,6 +8,7 @@ import IcClose from "./ic-close.svg";
 import IcCode from "./ic-code.svg";
 import IcCreditCard from "./ic-credit-card.svg";
 import IcEarth from "./ic-earth.svg";
+import IcEmail from "./ic-email.svg";
 import IcEyeOff from "./ic-eye-off.svg";
 import IcLifebuoy from "./ic-lifebuoy.svg";
 import IcListed from "./ic-listed.svg";
@@ -30,6 +31,7 @@ export {
     IcCode,
     IcCreditCard,
     IcEarth,
+    IcEmail,
     IcEyeOff,
     IcLifebuoy,
     IcListed,
