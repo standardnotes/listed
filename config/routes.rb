@@ -28,7 +28,8 @@ Rails.application.routes.draw do
       member do
         post 'unpublish'
         post 'newsletter'
-        get 'delete'
+        post 'change_privacy'
+        post 'delete'
       end
     end
 
