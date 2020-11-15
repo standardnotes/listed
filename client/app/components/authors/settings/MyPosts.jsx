@@ -54,7 +54,7 @@ const MyPosts = ({ posts, author }) => {
             {posts.map(post => (
                 <li key={post.id} className="my-posts__item">
                     <a href={post.url} target="_blank" rel="noopener noreferrer" className="my-posts__post">
-                        <h5 className="h5 post-title">
+                        <h5 className="h5">
                             {post.title}
                         </h5>
                         <p className="p3 post__details">
