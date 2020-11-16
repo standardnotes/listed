@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getAuthToken from "../../utils/getAuthToken";
 import "./New.scss";
@@ -11,6 +11,7 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
         donation_info: ""
     });
     const [captcha, setCaptcha] = useState("");
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
     const submitEntry = event => {
         event.preventDefault();
@@ -41,6 +42,10 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
             { ...prevState, [key]: value }
         ))
     );
+
+    useEffect(() => {
+        setIsSubmitDisabled(!guestbookEntry.text || !captcha);
+    }, [guestbookEntry.text, captcha]);
 
     return(
         <div className="card guestbook-entry-form__container">
@@ -119,7 +124,13 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                         )}
                     </div>
                     <div className="guestbook-entry-form__button-container">
-                        <button type="submit" className="button button--primary">Send</button>
+                        <button
+                            type="submit"
+                            className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
+                            disabled={isSubmitDisabled}
+                        >
+                            Send
+                        </button>
                         <p className="p3">
                             You’ll not be able to edit your message after submission.
                         </p>
