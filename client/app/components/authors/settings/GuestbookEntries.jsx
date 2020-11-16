@@ -20,23 +20,37 @@ const GuestbookEntries = ({ guestbookEntries }) => {
             })
     };
 
-    const dropdownOptions = entry => ([
-        {
-            icon: entry.public ? IcEyeOff : IcEarth,
-            text: `Make ${entry.public ? "private" : "public"}`,
-            action: () => handleEntryAction(entry.public ? entry.unapproval_url : entry.approval_url)
-        },
-        {
-            icon: IcEmail,
-            text: "Report spam",
-            action: () => handleEntryAction(entry.spam_url)
-        },
-        {
-            icon: IcTrash,
-            text: "Delete",
-            action: () => handleEntryAction(entry.deletion_url)
+    const dropdownOptions = entry => {
+        const options = [
+            {
+                icon: IcEmail,
+                text: "Report spam",
+                action: () => handleEntryAction(entry.spam_url)
+            },
+            {
+                icon: IcTrash,
+                text: "Delete",
+                action: () => handleEntryAction(entry.deletion_url)
+            }
+        ];
+
+        if (entry.public) {
+            options.unshift(        {
+                icon: IcEyeOff,
+                text: "Make private",
+                action: () => handleEntryAction(entry.unapproval_url)
+            });
+        } else {
+            options.unshift(        {
+                icon: IcEarth,
+                text: "Publish",
+                className: "guestbook-entries__action--make-public",
+                action: () => handleEntryAction(entry.approval_url)
+            });
         }
-    ]);
+
+        return options;
+    };
 
     return(
         <ul className="guestbook-entries">
@@ -82,6 +96,14 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                         )}
                     </div>
                     <div className="guestbook-entries__hover-container">
+                        {!entry.public && (
+                            <button
+                                className="button button--primary button--make-public"
+                                onClick={() => handleEntryAction(entry.approval_url)}
+                            >
+                                Publish
+                            </button>
+                        )}
                         <Dropdown options={dropdownOptions(entry)}>
                             <div className="hover-icon__container">
                                 <SVG src={IcMoreHorizontal} className="hover-icon" />

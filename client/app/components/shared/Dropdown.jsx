@@ -11,8 +11,8 @@ const Dropdown = ({ children, options }) => {
                 {children}
             </button>
             <ul className={`dropdown__list card ${isDropdownOpen ? "dropdown__list--open" : ""}`}>
-                {options.map(({ icon, text, action }) => (
-                    <li key={text} className="dropdown__option">
+                {options.map(({ icon, text, className, action }) => (
+                    <li key={text} className={`dropdown__option ${className || ""}`}>
                         <button onClick={action} className="button option__button">
                             <SVG src={icon} className="option__icon" />
                             {text}

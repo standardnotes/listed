@@ -81,4 +81,19 @@
             fill: $color-black;
         }
     }
+
+    .button--make-public {
+        display: none;
+
+        @include Desktop() {
+            display: block;
+            margin-right: $spacing-12;
+        }
+    }
+}
+
+.guestbook-entries__action--make-public {
+    @include Desktop() {
+        display: none;
+    }
 }
