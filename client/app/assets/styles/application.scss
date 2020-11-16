@@ -235,6 +235,11 @@ textarea {
     }
 }
 
+.button--disabled {
+    background-color: $color-black-opacity-36;
+    color: $color-white;
+}
+
 .card {
     background-color: $color-white;
     padding: $spacing-16;

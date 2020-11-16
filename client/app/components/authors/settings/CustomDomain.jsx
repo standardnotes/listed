@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import getAuthToken from "../../../utils/getAuthToken";
@@ -8,6 +8,7 @@ import "./CustomDomain.scss";
 const CustomDomain = ({ author, customDomainIP }) => {
     const [extendedEmail, setExtendedEmail] = useState("");
     const [domain, setDomain] = useState("");
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
     const submitDomainRequest = event => {
         event.preventDefault();
@@ -30,6 +31,10 @@ const CustomDomain = ({ author, customDomainIP }) => {
             })
     };
 
+    useEffect(() => {
+        setIsSubmitDisabled(!extendedEmail || !domain);
+    }, [extendedEmail, domain]);
+
     return (
         <div className="custom-domain">
             <p className="p2 custom-domain__info">
@@ -45,7 +50,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
             <form onSubmit={e => submitDomainRequest(e)}>
                 <div className="form-row">
                     <div className="form-section">
-                        <label htmlFor="extended_email" className="label p2">
+                        <label htmlFor="extended_email" className="label label--required p2">
                             Extended email address
                         </label>
                         <input
@@ -59,7 +64,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         ></input>
                     </div>
                     <div className="form-section">
-                        <label htmlFor="domain" className="label p2">
+                        <label htmlFor="domain" className="label label--required p2">
                             Your domain
                         </label>
                         <input
@@ -72,13 +77,20 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         ></input>
                     </div>
                     <div className="form-section">
-                        <button type="submit" className="button button--primary">Submit</button>
+                        <button
+                            type="submit"
+                            className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
+                            disabled={isSubmitDisabled}
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
             </form>
             {author.domain && !author.domain.approved && (
                 <div className="callout callout--warning">
-                    We've received your domain request and will send you an email when your integration is ready (typically 24-48 hours).
+                    We've received your domain request ({author.domain.domain}){" "}
+                    and will send you an email when your integration is ready (typically 24-48 hours).
                 </div>
             )}
             {author.domain && author.domain.approved && !author.domain.active && (
