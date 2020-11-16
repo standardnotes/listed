@@ -64,7 +64,7 @@ const General = ({ author }) => {
 
     return(
         <form onSubmit={e => submitEditedAuthor(e)}>
-            <div className="form-section--row">
+            <div className="form-row">
                 <div className="form-section">
                     <label htmlFor="author-username" className="label p2">
                         Username
@@ -144,7 +144,7 @@ const General = ({ author }) => {
                     ></input>
                 </p>
             </div>
-            <div className="form-section--row">
+            <div className="form-row">
                 <div className="form-section">
                     <label htmlFor="author-meta-image-url" className="label p2">
                         Meta image URL
@@ -194,7 +194,7 @@ const General = ({ author }) => {
                 checked={editedAuthor.hide_from_homepage}
                 label="Hide profile from the “Listed authors” section in the homepage"
             />
-            <div className="form-section form-section--row">
+            <div className="form-section form-row">
                 <button type="submit" className="button button--primary">Save changes</button>
             </div>
         </form>

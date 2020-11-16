@@ -11,6 +11,7 @@ import IcEarth from "./ic-earth.svg";
 import IcEmail from "./ic-email.svg";
 import IcEyeOff from "./ic-eye-off.svg";
 import IcLifebuoy from "./ic-lifebuoy.svg";
+import IcLink from "./ic-link.svg";
 import IcListed from "./ic-listed.svg";
 import IcMenu from "./ic-menu.svg";
 import IcMoreHorizontal from "./ic-more-horizontal.svg";
@@ -34,6 +35,7 @@ export {
     IcEmail,
     IcEyeOff,
     IcLifebuoy,
+    IcLink,
     IcListed,
     IcMenu,
     IcMoreHorizontal,

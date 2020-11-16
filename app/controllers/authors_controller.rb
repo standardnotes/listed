@@ -303,6 +303,8 @@ class AuthorsController < ApplicationController
 
     @author.domain.domain = params[:domain]
     @author.domain.extended_email = params[:extended_email]
+    @author.domain.approved = false
+    @author.domain.active = false
     @author.domain.save
 
     AdminMailer.new_domain_request(@author).deliver_later

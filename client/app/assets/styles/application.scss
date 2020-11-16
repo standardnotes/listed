@@ -164,6 +164,7 @@ textarea {
     text-align: center;
     font-family: $font-family-default;
     background-color: transparent;
+    border: 1px solid transparent;
     
     svg path {
         fill: $color-primary;
@@ -276,7 +277,7 @@ textarea {
     }
 }
 
-.form-section--row {
+.form-row {
     @include Desktop() {
         display: flex;
         flex-direction: row;
