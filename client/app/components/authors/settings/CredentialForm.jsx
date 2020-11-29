@@ -53,7 +53,7 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
     }, [credential]);
 
     return(
-        <form className="new-credential" onSubmit={e => submitCredential(e)}>
+        <form className="credential-form" onSubmit={e => submitCredential(e)}>
             <div className="form-row">
                 <div className="form-section">
                     <label htmlFor="credential-key" className="label label--required p2">
