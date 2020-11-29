@@ -9,6 +9,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
     const [extendedEmail, setExtendedEmail] = useState("");
     const [domain, setDomain] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+    const [domainErrorMessage, setDomainErrorMessage] = useState(null);
 
     const submitDomainRequest = event => {
         event.preventDefault();
@@ -24,10 +25,11 @@ const CustomDomain = ({ author, customDomainIP }) => {
                 }
             })
             .then(response => {
+                setDomainErrorMessage(null);
                 window.location.href = response.request.responseURL;
             })
             .catch(error => {
-                alert(error.response.data.message);
+                setDomainErrorMessage(error.response.data.message);
             })
     };
 
@@ -69,12 +71,17 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         </label>
                         <input
                             id="domain"
-                            className="text-field"
+                            className={`text-field ${domainErrorMessage ? "text-field--error" : ""}`}
                             required="required"
                             placeholder="Your domain"
                             value={domain}
                             onChange={e => setDomain(e.target.value)}
                         ></input>
+                        {domainErrorMessage && (
+                            <div className="error-message">
+                                {domainErrorMessage}
+                            </div>
+                        )}
                     </div>
                     <div className="form-section">
                         <button
