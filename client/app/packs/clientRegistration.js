@@ -5,8 +5,6 @@ import AuthorSettings from "../components/authors/SettingsPage";
 import AuthorShow from "../components/authors/Show";
 import AuthorSubscribe from "../components/authors/Subscribe";
 import AuthorTip from "../components/authors/Tip";
-import CredentialsEdit from "../components/credentials/Edit";
-import CredentialsNew from "../components/credentials/New";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -30,8 +28,6 @@ ReactOnRails.register({
     AuthorShow,
     AuthorSubscribe,
     AuthorTip,
-    CredentialsEdit,
-    CredentialsNew,
     Guestbook,
     GuestbookNew,
     Help,

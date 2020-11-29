@@ -10,8 +10,6 @@ import AuthorsMailerDomainInvalid from "../components/authors_mailer/DomainInval
 import AuthorsMailerFeatured from "../components/authors_mailer/Featured";
 import AuthorsMailerUnreadGuestbookEntries from "../components/authors_mailer/UnreadGuestbookEntries";
 import AuthorsMailerVerifyEmail from "../components/authors_mailer/VerifyEmail";
-import CredentialsEdit from "../components/credentials/Edit";
-import CredentialsNew from "../components/credentials/New";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -41,8 +39,6 @@ ReactOnRails.register({
     AuthorsMailerFeatured,
     AuthorsMailerUnreadGuestbookEntries,
     AuthorsMailerVerifyEmail,
-    CredentialsEdit,
-    CredentialsNew,
     Guestbook,
     GuestbookNew,
     Help,

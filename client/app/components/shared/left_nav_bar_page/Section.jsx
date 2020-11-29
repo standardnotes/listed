@@ -18,7 +18,7 @@ const Section = ({ section }) => {
             const sectionHeight = sectionContentElement.scrollHeight;
 
             if (sectionHeight) {
-                sectionContentElement.style.maxHeight = `${sectionHeight}px`;
+                sectionContentElement.style.maxHeight = `${sectionHeight + 250}px`;
                 sectionContentElement.style.visibility = "visible";
             }
         }

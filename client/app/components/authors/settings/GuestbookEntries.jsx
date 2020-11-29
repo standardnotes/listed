@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import SVG from "react-inlinesvg";
@@ -8,6 +8,8 @@ import { IcEarth, IcEmail, IcEyeOff, IcMoreHorizontal, IcTrash } from "../../../
 import "./GuestbookEntries.scss";
 
 const GuestbookEntries = ({ guestbookEntries }) => {
+    const [dropdownOpen, setDropdownOpen] = useState(null); 
+
     const handleEntryAction = (url) => {
         axios
             .post(url, null, {
@@ -104,7 +106,11 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                                 Publish
                             </button>
                         )}
-                        <Dropdown options={dropdownOptions(entry)}>
+                        <Dropdown   
+                            options={dropdownOptions(entry)}
+                            isOpen={dropdownOpen && dropdownOpen === entry.id}
+                            onClick={() => setDropdownOpen(entry.id)}
+                        >
                             <div className="hover-icon__container">
                                 <SVG src={IcMoreHorizontal} className="hover-icon" />
                             </div>
