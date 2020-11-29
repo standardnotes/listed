@@ -21,7 +21,7 @@
                 only: [:id, :key, :value]
             },
             domain: {
-                only: [:approved, :active]
+                only: [:domain, :approved, :active]
             }
         }
     ),
@@ -48,7 +48,8 @@
             :id,
             :title,
             :unlisted,
-            :created_at
+            :created_at,
+            :word_count
         ],
         methods: :url
     ),

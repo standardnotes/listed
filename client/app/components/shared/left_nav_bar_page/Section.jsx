@@ -12,13 +12,13 @@ const Section = ({ section }) => {
         const sectionContentElement = document.querySelector(`#${section.id} .section__content`);
 
         if (isCollapsed) {
-            sectionContentElement.style.height = "0px";
+            sectionContentElement.style.maxHeight = "0px";
             sectionContentElement.style.visibility = "hidden";
         } else {
             const sectionHeight = sectionContentElement.scrollHeight;
 
             if (sectionHeight) {
-                sectionContentElement.style.height = `${sectionHeight}px`;
+                sectionContentElement.style.maxHeight = `${sectionHeight}px`;
                 sectionContentElement.style.visibility = "visible";
             }
         }
