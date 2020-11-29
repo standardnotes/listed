@@ -23,9 +23,11 @@
                 padding: $spacing-14 0;
     
                 .resources__hover-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    @include Desktop() {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
                 }
             }
         }
