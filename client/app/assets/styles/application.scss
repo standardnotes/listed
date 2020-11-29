@@ -164,7 +164,7 @@ textarea {
     text-align: center;
     font-family: $font-family-default;
     background-color: transparent;
-    border: 1px solid transparent;
+    margin: 1px;
     
     svg path {
         fill: $color-primary;
@@ -181,7 +181,7 @@ textarea {
         linear-gradient(to top, $color-black 50%, $color-primary 50%);
     background-size: 100% 200%;
     background-position: top;
-    transition: background-position 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     @include Desktop() {
         &:hover {
@@ -258,12 +258,12 @@ textarea {
     display: inline-block;
 }
 
-.callout--warning {
-    border-left: 3px solid $color-warning;
-}
-
 .callout--success {
     border-left: 3px solid $color-success;
+}
+
+.callout--warning {
+    border-left: 3px solid $color-warning;
 }
 
 .error-message {

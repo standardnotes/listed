@@ -69,7 +69,7 @@ const SettingsPage = ({ author, authorCredentialsUrl, customDomainIP, guestbookE
             title: "Delete blog",
             icon: IcTrash,
             collapsed: true,
-            renderContent: () => <DeleteBlog deleteAllDataError={deleteAllDataError} author={author} />
+            renderContent: () => <DeleteBlog author={author} />
         }
     ];
 
