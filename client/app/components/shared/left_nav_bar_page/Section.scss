@@ -35,5 +35,8 @@
 }
 
 .section__content {
+    max-height: 0;
+    visibility: hidden;
+    overflow: hidden;
     transition: all 0.2s ease-in-out;
 }

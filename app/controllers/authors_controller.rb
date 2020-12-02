@@ -332,9 +332,7 @@ class AuthorsController < ApplicationController
       redirect_to :root
     rescue => e
       puts e.message
-      redirect_to :back, :flash => {
-        :error_delete_all_data => 'Unable to delete your data. Please try again later.'
-      }
+      render :json => {:error => "Unable to delete your data. Please try again later."}, :status => 500
     end
   end
 

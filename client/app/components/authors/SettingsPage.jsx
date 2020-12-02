@@ -20,7 +20,7 @@ import {
 } from "../../assets/icons";
 import "./SettingsPage.scss";
 
-const SettingsPage = ({ author, customDomainIP, guestbookEntries, posts, deleteAllDataError }) => {
+const SettingsPage = ({ author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts, deleteAllDataError }) => {
     const sections = [
         {
             id: "general",
@@ -55,7 +55,7 @@ const SettingsPage = ({ author, customDomainIP, guestbookEntries, posts, deleteA
             title: "Payment details",
             icon: IcCreditCard,
             collapsed: true,
-            renderContent: () => <PaymentDetails author={author} />
+            renderContent: () => <PaymentDetails author={author} authorCredentialsUrl={authorCredentialsUrl} />
         },
         {
             id: "resources",
@@ -69,7 +69,7 @@ const SettingsPage = ({ author, customDomainIP, guestbookEntries, posts, deleteA
             title: "Delete blog",
             icon: IcTrash,
             collapsed: true,
-            renderContent: () => <DeleteBlog deleteAllDataError={deleteAllDataError} author={author} />
+            renderContent: () => <DeleteBlog author={author} />
         }
     ];
 

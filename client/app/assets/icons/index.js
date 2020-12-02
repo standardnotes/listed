@@ -8,6 +8,7 @@ import IcClose from "./ic-close.svg";
 import IcCode from "./ic-code.svg";
 import IcCreditCard from "./ic-credit-card.svg";
 import IcEarth from "./ic-earth.svg";
+import IcEdit from "./ic-edit.svg";
 import IcEmail from "./ic-email.svg";
 import IcEyeOff from "./ic-eye-off.svg";
 import IcLifebuoy from "./ic-lifebuoy.svg";
@@ -20,6 +21,7 @@ import IcSettingsFilled from "./ic-settings-filled.svg";
 import IcStarCircleFilled from "./ic-star-circle-filled.svg";
 import IcTextRich from "./ic-text-rich.svg";
 import IcTrash from "./ic-trash.svg";
+import IcWalletFilled from "./ic-wallet-filled.svg";
 
 export {
     IcArrowLong,
@@ -32,6 +34,7 @@ export {
     IcCode,
     IcCreditCard,
     IcEarth,
+    IcEdit,
     IcEmail,
     IcEyeOff,
     IcLifebuoy,
@@ -43,5 +46,6 @@ export {
     IcSettingsFilled,
     IcStarCircleFilled,
     IcTextRich,
-    IcTrash
+    IcTrash,
+    IcWalletFilled
 };

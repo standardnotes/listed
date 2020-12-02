@@ -14,12 +14,14 @@ const Section = ({ section }) => {
         if (isCollapsed) {
             sectionContentElement.style.maxHeight = "0px";
             sectionContentElement.style.visibility = "hidden";
+            sectionContentElement.style.overflow = "hidden";
         } else {
             const sectionHeight = sectionContentElement.scrollHeight;
 
             if (sectionHeight) {
-                sectionContentElement.style.maxHeight = `${sectionHeight}px`;
+                sectionContentElement.style.maxHeight = `${sectionHeight + 250}px`;
                 sectionContentElement.style.visibility = "visible";
+                sectionContentElement.style.overflow = "visible";
             }
         }
     }

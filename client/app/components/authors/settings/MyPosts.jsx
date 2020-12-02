@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import SVG from "react-inlinesvg";
@@ -8,6 +8,8 @@ import { IcEarth, IcEyeOff, IcMoreHorizontal, IcTrash } from "../../../assets/ic
 import "./MyPosts.scss";
 
 const MyPosts = ({ posts, author }) => {
+    const [dropdownOpen, setDropdownOpen] = useState(null);
+
     const changePostPrivacy = post => {
       axios
         .post(`/authors/${author.id}/posts/${post.id}/change_privacy?secret=${author.secret}`, null, {
@@ -78,7 +80,11 @@ const MyPosts = ({ posts, author }) => {
                         </p>
                     </a>
                     <div className="my-posts__hover-container">
-                        <Dropdown options={dropdownOptions(post)}>
+                        <Dropdown
+                            options={dropdownOptions(post)}
+                            isOpen={dropdownOpen && dropdownOpen === post.id}
+                            onClick={() => setDropdownOpen(post.id)}
+                        >
                             <div className="hover-icon__container">
                                 <SVG src={IcMoreHorizontal} className="hover-icon" />
                             </div>

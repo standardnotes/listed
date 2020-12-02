@@ -5,7 +5,7 @@ import "./Checkbox.scss";
 
 const Checkbox = ({ id, onClick, checked, label }) => {
     return(
-        <div className="form-section checkbox__container">
+        <div className={`form-section checkbox__container ${checked ? "checkbox__container--checked" : ""}`}>
             <input
                 id={id}
                 type="checkbox"
