@@ -4,7 +4,7 @@ import getAuthToken from "../../utils/getAuthToken";
 import New from "./New";
 import "./Guestbook.scss";
 
-const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
+const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, hCaptchaSiteKey }) => {
     const [showNewEntryForm, setShowNewEntryForm] = useState(false);
 
     const createNewEntry = event => {
@@ -29,8 +29,7 @@ const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, simpleCa
             {showNewEntryForm ? (
                 <New
                     author={author}
-                    simpleCaptchaKey={simpleCaptchaKey}
-                    simpleCaptchaImageUrl={simpleCaptchaImageUrl}
+                    hCaptchaSiteKey={hCaptchaSiteKey}
                 />
             ) : (
                 sent ? (

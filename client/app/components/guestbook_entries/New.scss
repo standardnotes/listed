@@ -3,16 +3,6 @@
     margin: $spacing-24 0 $spacing-36;
 }
 
-.guestbook-entry-form {
-    .form-section {
-        flex-direction: column;
-    }
-
-    .simple_captcha_image {
-        margin-top: $spacing-6;
-    }
-}
-
 .guestbook-entry-form__button-container {
     margin-top: $spacing-32;
 

@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import getAuthToken from "../../utils/getAuthToken";
 import "./New.scss";
 
-const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
-    const [captchaError, setCaptchaError] = useState(false);
+const New = ({ author, hCaptchaSiteKey }) => {
     const [guestbookEntry, setGuestbookEntry] = useState({
         text: "",
         signer_email: "",
         donation_info: ""
     });
-    const [captcha, setCaptcha] = useState("");
+    const [captchaToken, setCaptchaToken] = useState("");
+    const [captchaErrorMessage, setCaptchaErrorMessage] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
+    const captcha = useRef(null);
 
     const submitEntry = event => {
         event.preventDefault();
@@ -23,16 +26,17 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                 },
                 data: {
                     guestbook_entry: guestbookEntry,
-                    captcha: captcha,
-                    captcha_key: simpleCaptchaKey
+                    token: captchaToken,
                 }
             })
             .then(response => {
-                if (response.request.responseURL && response.status === 200) {
-                    setCaptchaError(false);
-                    window.location.href = response.request.responseURL;
+                if (response.data.error) {
+                    captcha.current.resetCaptcha();
+                    setCaptchaErrorMessage(response.data.error);
                 } else {
-                    setCaptchaError(true);
+                    setCaptchaErrorMessage("");
+                    setCaptchaToken("");
+                    window.location.href = response.request.responseURL;
                 }
             });
     };
@@ -44,8 +48,8 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
     );
 
     useEffect(() => {
-        setIsSubmitDisabled(!guestbookEntry.text || !captcha);
-    }, [guestbookEntry.text, captcha]);
+        setIsSubmitDisabled(!guestbookEntry.text || !captchaToken);
+    }, [guestbookEntry.text, captchaToken]);
 
     return(
         <div className="card guestbook-entry-form__container">
@@ -96,30 +100,14 @@ const New = ({ author, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
                         ></input>
                     </div>
                     <div className="form-section">
-                        <label htmlFor="captcha" className="label label--required">
-                            Please complete the captcha below
-                        </label>
-                        <div className="simple_captcha_image">
-                            <img src={simpleCaptchaImageUrl} alt="captcha"></img>
-                        </div>
-                        <div className="simple_captcha_field">
-                            <input
-                                type="text"
-                                name="captcha"
-                                id="captcha"
-                                className="text-field"
-                                autoComplete="off"
-                                autoCorrect="off"
-                                autoCapitalize="off"
-                                required="required"
-                                placeholder="Enter the image value (case sensitive)"
-                                value={captcha}
-                                onChange={e => setCaptcha(e.target.value)}
-                            ></input>
-                        </div>
-                        {captchaError && (
+                        <HCaptcha
+                            ref={captcha}
+                            sitekey={hCaptchaSiteKey}
+                            onVerify={token => setCaptchaToken(token)}
+                        />
+                        {captchaErrorMessage && (
                             <div className="error-message">
-                                Incorrect image value, please try again.
+                                {captchaErrorMessage}
                             </div>
                         )}
                     </div>

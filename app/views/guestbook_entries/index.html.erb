@@ -1,6 +1,6 @@
 <% sent = params[:sent] %>
 <% new_author_guestbook_entry_url = new_author_guestbook_entry_path(@author) %>
-<% show_simple_captcha %>
+<% hcaptcha_site_key = ENV["HCAPTCHA_SITE_KEY"] %>
 
 <%= react_component("Guestbook", props: {
     sent: sent,
@@ -12,6 +12,5 @@
         only: [:id, :text]
     ),
     newAuthorGuestbookEntryUrl: new_author_guestbook_entry_url,
-    simpleCaptchaKey: simple_captcha_key,
-    simpleCaptchaImageUrl: simple_captcha_image_url(simple_captcha_key)
+    hCaptchaSiteKey: hcaptcha_site_key
 }) %>
