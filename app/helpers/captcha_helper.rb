@@ -10,10 +10,10 @@ module CaptchaHelper
     response = Net::HTTP.post_form(uri, 'secret' => secret_key, 'response' => token, 'sitekey' => site_key)
     json = JSON.parse(response.body)
     
-    #if response.body["success"]
-    #  ApplicationController.render :json => { success: true}
-    #else
+    if response.body["success"]
+      ApplicationController.render :json => { success: true}
+    else
       ApplicationController.render :json => { success: false, error: "Please re-enter the captcha."}
-    #end
+    end
   end
 end
