@@ -13,7 +13,7 @@ module CaptchaHelper
     if response.body["success"]
       ApplicationController.render :json => { success: true}
     else
-      ApplicationController.render :json => { success: false, error: "Please re-enter the captcha."}
+      ApplicationController.render :json => { success: false, error: "Please try again."}
     end
   end
 end
