@@ -9,6 +9,10 @@
 
     .post-body {
         margin: $spacing-24 0;
+
+        p:not(:last-child) {
+            margin-bottom: $spacing-32;
+        }
     }
 
     .post-date {
@@ -20,6 +24,10 @@
 .post-preview {
     .post-body {
         margin: $spacing-8 0;
+
+        p:not(:last-child) {
+            margin-bottom: $spacing-32;
+        }
     }
 
     &.post-content a .post-header,.post-body {
