@@ -5,7 +5,7 @@ import "./Usage.scss";
 
 const Usage = ({ activeAuthors }) => {
     return (
-        <div className="page-container">
+        <div className="usage page-container">
             <div className="usage__column-layout">
                 <div className="usage__column">
                     <h1 className="h1 usage__header">Welcome to your new public journal.</h1>
