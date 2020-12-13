@@ -1,6 +1,5 @@
 class SubscriptionsController < ApplicationController
-
-  include SimpleCaptcha::ControllerHelpers
+  include CaptchaHelper
 
   def validate
     @subscription = Subscription.find(params[:subscription_id])
@@ -11,7 +10,10 @@ class SubscriptionsController < ApplicationController
   def submit_validate
     @subscription = Subscription.find(params[:subscription_id])
     is_valid_subscription = @subscription && !@subscription.verified && !@subscription.verification_sent_at
-    if is_valid_subscription && simple_captcha_valid?
+    captcha_verification = JSON.parse(CaptchaHelper.verify_hcaptcha(params[:token]))
+    is_valid_captcha = captcha_verification["success"]
+
+    if is_valid_subscription && is_valid_captcha
       SubscriptionMailer.confirm_subscription(@subscription).deliver_later
       @subscription.verification_sent_at = DateTime.now
       @subscription.save

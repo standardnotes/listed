@@ -28,8 +28,6 @@ RUN npm install -g yarn
 
 COPY package.json yarn.lock Gemfile Gemfile.lock /listed/
 
-COPY vendor /listed/vendor
-
 RUN yarn install --frozen-lockfile
 
 RUN gem install bundler && bundle install

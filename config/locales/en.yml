@@ -21,11 +21,3 @@
 
 en:
   hello: "Hello world"
-
-  simple_captcha:
-    placeholder: "Enter the image value (case sensitive)"
-    label: "(case sensitive)"
-    refresh_button_text: "Refresh"
-    message:
-      default: "Secret Code did not match with the Image"
-      user: "The secret Image and code were different"

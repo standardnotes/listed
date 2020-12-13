@@ -1,9 +1,3 @@
-PATH
-  remote: vendor/simple-captcha
-  specs:
-    simple_captcha2 (0.4.3)
-      rails (>= 4.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -311,7 +305,6 @@ DEPENDENCIES
   safe_yaml
   sanitize
   sass-rails (~> 5.0)
-  simple_captcha2!
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
