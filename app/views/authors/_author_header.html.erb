@@ -13,7 +13,7 @@
     ),
     author: author.as_json(
         only: [:guestbook_disabled, :newsletter_disabled, :bio, :link, :twitter, :header_image_url],
-        methods: [:title, :url_segment, :url, :word_count, :personal_link],
+        methods: [:title, :url, :word_count, :personal_link],
         include: {
             credentials: {
                 only: :id
