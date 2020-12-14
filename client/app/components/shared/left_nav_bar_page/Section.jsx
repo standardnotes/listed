@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SVG from "react-inlinesvg";
 import { IcChevronDown, IcChevronUp } from "../../../assets/icons";
 import "./Section.scss";
@@ -7,11 +7,17 @@ const Section = ({ section }) => {
     const { id, title, collapsed, renderContent } = section;
     const content = renderContent();
     const [isCollapsed, setIsCollapsed] = useState(collapsed);
+    const isCollapsedRef = useRef(isCollapsed);
+
+    const updateIsCollapsed = (collapsedState) => {
+        setIsCollapsed(collapsedState);
+        isCollapsedRef.current = collapsedState;
+    }
 
     const setSectionStyle = () => {
         const sectionContentElement = document.querySelector(`#${section.id} .section__content`);
 
-        if (isCollapsed) {
+        if (isCollapsedRef.current) {
             sectionContentElement.style.maxHeight = "0px";
             sectionContentElement.style.visibility = "hidden";
             sectionContentElement.style.overflow = "hidden";
@@ -24,7 +30,7 @@ const Section = ({ section }) => {
                 sectionContentElement.style.overflow = "visible";
             }
         }
-    }
+    };
 
     useEffect(setSectionStyle, [isCollapsed]);
 
@@ -52,7 +58,7 @@ const Section = ({ section }) => {
                     <SVG
                         src={isCollapsed ? IcChevronDown : IcChevronUp}
                         className="section__collapse-icon"
-                        onClick={() => setIsCollapsed(!isCollapsed)}
+                        onClick={() => updateIsCollapsed(!isCollapsed)}
                     />
                 </div>
                 <div className="section__content">
