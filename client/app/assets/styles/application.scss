@@ -337,6 +337,8 @@ textarea {
     font-family: $font-family-default;
     font-size: $font-size-16;
     line-height: $line-height-24;
+    appearance: none;
+    -webkit-appearance: none;
 
     &:focus {
         outline: $color-primary auto 1px;
