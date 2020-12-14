@@ -40,11 +40,11 @@
     }
 
     @include Desktop() {
-        max-width: calc((100% - #{$spacing-24} * 3) / 4);
+        width: calc((100% - #{$spacing-24} * 3) / 4);
         margin-bottom: $spacing-24;
 
         @media (max-width: 1311px) {
-            max-width: calc((100% - #{$spacing-24} * 2) / 3)
+            width: calc((100% - #{$spacing-24} * 2) / 3)
         }
     }
 }
