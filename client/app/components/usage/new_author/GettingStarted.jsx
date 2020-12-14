@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { GettingStartedGif } from "../../../assets/gifs";
 import "./GettingStarted.scss"
 
 const GettingStarted = ({ secretUrl }) => {
     const [isCodeCopied, setIsCodeCopied] = useState(false);
+    const codeInputRef = useRef(null);
 
-    const copyCode = () => {
-        const textFieldElement = document.querySelector(".getting-started__author-code .text-field");
-        textFieldElement.focus();
-        textFieldElement.select();
+    const focusInput = (event) => {
+        event.preventDefault();
+        codeInputRef.current.focus();
+    }
+
+    const copyCode = (event) => {
+        event.preventDefault();
+        event.target.select();
         document.execCommand('copy');
-        textFieldElement.blur();
+        codeInputRef.current.blur();
+        
         setIsCodeCopied(true);
         setTimeout(() => {
             setIsCodeCopied(false);
@@ -23,8 +29,13 @@ const GettingStarted = ({ secretUrl }) => {
                 <li className="p2">
                     <strong>Copy the author code</strong> we’ve just generated for you:
                     <div className="getting-started__author-code">
-                        <input defaultValue={secretUrl} className="text-field"></input>
-                        <button className="button button--primary" onClick={copyCode}>
+                        <input
+                            ref={codeInputRef}
+                            defaultValue={secretUrl}
+                            className="text-field"
+                            onFocus={copyCode}
+                        ></input>
+                        <button className="button button--primary" onClick={focusInput}>
                             {isCodeCopied ? "Copied!" : "Copy to clipboard"}
                         </button>
                     </div>
