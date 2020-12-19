@@ -12,7 +12,7 @@ export default ({ homeUrl, post, author, privatePost, pages, authorGuestbookEntr
                     </div>
                     {author && !privatePost && (
                         <div className="author-name path-item">
-                            <a href={author.url_segment}>{author.title}</a>
+                            <a href={author.url}>{author.title}</a>
                         </div>
                     )}
                     {post && post.page && (
