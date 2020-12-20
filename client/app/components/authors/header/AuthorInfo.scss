@@ -74,14 +74,14 @@
 
 .header-author-info__items {
     margin-bottom: $spacing-24;
-    min-height: calc(100vh - 223px);
+    min-height: calc(100vh - 225px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     transition: min-height 0.3s ease-in-out;
 
     @include Desktop() {
-        min-height: calc(100vh - 351px);
+        min-height: calc(100vh - 395px);
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;

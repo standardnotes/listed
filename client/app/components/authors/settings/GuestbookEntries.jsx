@@ -12,11 +12,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
 
     const handleEntryAction = (url) => {
         axios
-            .post(url, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                }
-            })
+            .get(url)
             .then(response => {
                 window.location.href = response.request.responseURL;
             })

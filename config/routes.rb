@@ -17,10 +17,10 @@ Rails.application.routes.draw do
 
     resources :guestbook_entries, path: :guestbook do
       member do
-        post 'approve'
-        post 'unapprove'
-        post 'delete'
-        post 'spam'
+        get 'approve'
+        get 'unapprove'
+        get 'delete'
+        get 'spam'
       end
     end
 

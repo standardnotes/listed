@@ -259,7 +259,7 @@ class AuthorsController < ApplicationController
 
   def update
     if @author.username != a_params[:username]
-      existing_username = Author.find_by_username(params[:username])
+      existing_username = Author.where.not(username: nil).find_by_username(params[:username])
 
       if existing_username
         render :json => { message: "Username already taken" }, :status => :conflict

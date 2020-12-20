@@ -14,8 +14,8 @@
 
 @font-face {
     font-family: "Roboto";
-    src: url("../fonts/Roboto-Medium.ttf") format("truetype");
-    font-weight: 500;
+    src: url("../fonts/Roboto-Bold.ttf") format("truetype");
+    font-weight: bold;
     font-style: normal;
 }
 
@@ -165,6 +165,7 @@ textarea {
     font-family: $font-family-default;
     background-color: transparent;
     margin: 1px;
+    transition: background-position 0.3s ease-in-out;
     
     svg path {
         fill: $color-primary;
@@ -181,7 +182,6 @@ textarea {
         linear-gradient(to top, $color-black 50%, $color-primary 50%);
     background-size: 100% 200%;
     background-position: top;
-    transition: all 0.3s ease-in-out;
 
     @include Desktop() {
         &:hover {
@@ -207,7 +207,6 @@ textarea {
             linear-gradient(to top, $color-primary-opacity-8 50%, transparent 50%);
         background-size: 100% 200%;
         background-position: top;
-        transition: background-position 0.3s ease-in-out;
     }
 
     @include Desktop() {
@@ -337,6 +336,8 @@ textarea {
     font-family: $font-family-default;
     font-size: $font-size-16;
     line-height: $line-height-24;
+    appearance: none;
+    -webkit-appearance: none;
 
     &:focus {
         outline: $color-primary auto 1px;
