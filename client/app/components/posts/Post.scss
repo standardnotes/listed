@@ -2,7 +2,7 @@
     .post-header .post-title {
         color: var(--post-title-color);
 
-        a {
+        a::before {
             background-image: none;
         }
     }
@@ -41,6 +41,16 @@
 
         &:hover {
             background: none;
+
+            .read-more-link__icon {
+                path {
+                    fill: var(--body-text-color);
+                }
+            }
+        }
+
+        &::before {
+            content: none;
         }
     }
 
@@ -50,7 +60,7 @@
         margin-left: $spacing-6;
 
         path {
-            fill: $color-primary;
+            fill: var(--link-color);
         }
     }
 }

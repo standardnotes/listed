@@ -12,7 +12,7 @@
         margin-top: $spacing-12;
     
         &.button--primary {
-            background-image: linear-gradient(to top, #181818 50%, #C7000C 50%);
+            background-image: linear-gradient(to top, $color-black 50%, $color-error 50%);
         }
     }
 

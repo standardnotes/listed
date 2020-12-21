@@ -37,19 +37,40 @@ body {
     margin-right: auto;
 }
 
-a:not(.button) {
+a {
     color: var(--link-color);
     font-weight: bold;
     text-decoration: none;
-    background-image: linear-gradient(#{$color-primary-opacity-16}, #{$color-primary-opacity-16});
-    background-position: bottom;
-    background-repeat: repeat-x;
-    background-size: 100% 4px;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: linear-gradient(to top, var(--link-color) 50%, var(--link-color) 50%);
+        background-position: bottom;
+        background-repeat: repeat-x;
+        background-size: 100% 4px;    
+        opacity: 0.16;
+    }
 
     &:hover {
-        color: var(--body-text);
-        background-image: linear-gradient(#{$color-primary-opacity-16}, #{$color-black-opacity-16});
+        color: var(--body-text-color);
+
+        &::before {
+            background-image: linear-gradient(to top, var(--body-text-color) 50%, var(--body-text-color) 50%);
+            opacity: 1;
+        }
     }
+}
+
+blockquote {
+    border-left: $spacing-2 solid $color-black-opacity-36;
+    padding-left: $spacing-20;
+    margin-left: 0;
 }
 
 p {
@@ -162,7 +183,6 @@ textarea {
     text-decoration: none;
     outline: none;
     text-align: center;
-    font-family: $font-family-default;
     background-color: transparent;
     margin: 1px;
     transition: background-position 0.3s ease-in-out;
@@ -179,7 +199,7 @@ textarea {
 .button--primary {
     color: $color-white;
     background-image: 
-        linear-gradient(to top, $color-black 50%, $color-primary 50%);
+        linear-gradient(to top, $color-black 50%, var(--page-menu-link-color) 50%);
     background-size: 100% 200%;
     background-position: top;
 
@@ -191,7 +211,7 @@ textarea {
 }
 
 .button--no-fill {
-    color: $color-primary;
+    color: var(--page-menu-link-color);
     background-color: transparent;
     position: relative;
 
@@ -204,23 +224,33 @@ textarea {
         left: 0;
         border-radius: $border-radius-4;
         background-image: 
-            linear-gradient(to top, $color-primary-opacity-8 50%, transparent 50%);
+            linear-gradient(to top, var(--page-menu-link-color) 50%, transparent 50%);
         background-size: 100% 200%;
         background-position: top;
+        opacity: 0.08;
+        transition: background-position 0.3s ease-in-out;
     }
 
     @include Desktop() {
         &:hover {
+            color: $color-primary;
+
             &::before {
+                background-image: 
+                linear-gradient(to top, var(--page-menu-link-color) 50%, transparent 50%);
+                background-size: 100% 200%;
+                background-position: top;
                 background-position: bottom;
+                opacity: 0.08;
             }
         }
     }
 }
 
 .button--active {
-    color: $color-primary;
+    color: var(--page-menu-link-color);
     position: relative;
+    background-image: none;
 
     &::before {
         content: "";
@@ -346,4 +376,10 @@ textarea {
 
 .text-field--error {
     outline: $color-error auto 1px;
+}
+
+.author-page {
+    .button--primary {
+
+    }
 }

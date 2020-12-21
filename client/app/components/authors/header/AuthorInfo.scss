@@ -4,18 +4,6 @@
     border-bottom: 3px solid var(--header-border-color);
     overflow: hidden;
 
-    .author-link {
-        color: var(--website-color);
-    }
-
-    .author-twitter {
-        color: var(--twitter-color);
-    }
-
-    .bio {
-        color: var(--bio-color);
-    }
-
     .word-count__button {
         padding: $spacing-16 0 0;
         position: relative;
@@ -70,6 +58,18 @@
     @include Desktop() {
         padding: $spacing-56 $spacing-11-vw 0;
     }
+}
+
+.author-link {
+    color: var(--website-color);
+}
+
+.author-twitter {
+    color: var(--twitter-color);
+}
+
+.bio {
+    color: var(--bio-color);
 }
 
 .header-author-info__items {

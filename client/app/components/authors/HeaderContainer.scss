@@ -4,6 +4,14 @@
     @include Desktop() {
         padding-top: $spacing-56;
     }
+
+    .listed-logo-link {
+        display: flex;
+
+        &::before {
+            background-image: none;
+        }
+    }
 }
 
 .page-header__container--post {
@@ -26,11 +34,6 @@
     display: flex;
 }
 
-.listed-logo-link {
-    display: flex;
-    background-image: none !important;
-}
-
 .listed-logo {
     height: 28px;
     width: 28px;
@@ -50,7 +53,8 @@
 
     &::before {
         content: "|";
-        color: $color-black-opacity-16;
+        color: var(--header-listed-name);
+        opacity: 0.16;
         margin: $spacing-14 $spacing-14 0 $spacing-12;
         font-size: $font-size-28;
         line-height: 0;
@@ -70,7 +74,10 @@
 
         a {
             color: var(--header-author-name);
-            background-image: none;
+
+            &::before {
+                background-image: none;
+            }
         }
     }
 }
