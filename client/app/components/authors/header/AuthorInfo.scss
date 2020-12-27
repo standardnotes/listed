@@ -62,10 +62,18 @@
 
 .author-link {
     color: var(--website-color);
+
+    &::before {
+        background-image: linear-gradient(to top, var(--website-color) 50%, var(--website-color) 50%);
+    }
 }
 
 .author-twitter {
     color: var(--twitter-color);
+
+    &::before {
+        background-image: linear-gradient(to top, var(--twitter-color) 50%, var(--twitter-color) 50%);
+    }
 }
 
 .bio {
