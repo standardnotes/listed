@@ -50,7 +50,7 @@ export default ({ deleteAllDataError, author, authenticityToken }) => {
         <div className="mt-30 form-box full">
             <strong>Delete Blog</strong>
             <p>
-                Delete yout Listed blog and all accompanying data.
+                Delete your Listed blog and all accompanying data.
             </p>
             {deleteAllDataError && (
                 <div className="alert error">
