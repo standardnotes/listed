@@ -2,7 +2,7 @@
     display: block;
     margin-bottom: $spacing-16;
 
-    a {
+    a::before {
         background-image: none;
     }
 

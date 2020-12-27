@@ -39,7 +39,7 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
                 ))}
                 {loadMorePostsDate && (
                     <div className="navigation">
-                    <div className="older">
+                        <div className="older">
                             <button className="button" onClick={loadMorePosts}>
                                 Load more posts
                                 <SVG
