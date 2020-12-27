@@ -1,8 +1,11 @@
 FROM ruby:2.6.5-slim-stretch
 
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+ARG UID=1000
+ARG GID=1000
 
-WORKDIR /listed
+RUN addgroup --system listed --gid $GID && adduser --disabled-password --system listed --gid $GID --uid $UID
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update \
     && apt-get install -y git build-essential libmariadb-dev curl imagemagick \
@@ -26,13 +29,19 @@ ENV PATH $NVM_INSTALL_PATH/bin:$PATH
 
 RUN npm install -g yarn
 
-COPY package.json yarn.lock Gemfile Gemfile.lock /listed/
+WORKDIR /listed
+
+RUN chown -R $UID:$GID .
+
+USER listed
+
+COPY --chown=$UID:$GID package.json yarn.lock Gemfile Gemfile.lock /listed/
 
 RUN yarn install --frozen-lockfile
 
 RUN gem install bundler && bundle install
 
-COPY . /listed
+COPY --chown=$UID:$GID . /listed
 
 RUN bundle exec rake assets:precompile
 
