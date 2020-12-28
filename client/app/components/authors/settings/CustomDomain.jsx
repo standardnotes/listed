@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import SVG from "react-inlinesvg";
-import getAuthToken from "../../../utils/getAuthToken";
-import { IcLink } from "../../../assets/icons";
-import "./CustomDomain.scss";
 
-const CustomDomain = ({ author, customDomainIP }) => {
+const CustomDomain = ({ author, authenticityToken, customDomainIP }) => {
     const [extendedEmail, setExtendedEmail] = useState("");
     const [domain, setDomain] = useState("");
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-    const [domainErrorMessage, setDomainErrorMessage] = useState(null);
 
     const submitDomainRequest = event => {
         event.preventDefault();
@@ -17,7 +11,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
         axios
             .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": authenticityToken,
                 },
                 data: {
                     extended_email: extendedEmail,
@@ -25,93 +19,82 @@ const CustomDomain = ({ author, customDomainIP }) => {
                 }
             })
             .then(response => {
-                setDomainErrorMessage(null);
                 window.location.href = response.request.responseURL;
             })
             .catch(error => {
-                setDomainErrorMessage(error.response.data.message);
+                alert(error.response.data.message);
             })
     };
 
-    useEffect(() => {
-        setIsSubmitDisabled(!extendedEmail || !domain);
-    }, [extendedEmail, domain]);
-
     return (
-        <div className="custom-domain">
-            <p className="p2 custom-domain__info">
+        <div className="mt-30 form-box full">
+            <strong>Custom Domain</strong>
+            <p>
                 Custom domains are available for Standard Notes{" "}
                 <a href="https://standardnotes.org/extended" target="blank" rel="noopener noreferrer">Extended</a>
                 {" "}members with an active one year or five year plan.
                 Domains include an HTTPS certificate, and require only a simple DNS record on your end.
             </p>
-            <p className="p2 custom-domain__info">
+            <p>
                 Before submitting this form, please create an "A" record with your DNS provider with
                 value {customDomainIP}.
             </p>
-            <form onSubmit={e => submitDomainRequest(e)}>
-                <div className="form-row">
-                    <div className="form-section">
-                        <label htmlFor="extended_email" className="label label--required p2">
+            {author.domain ? (
+                !author.domain.approved ? (
+                    <strong>
+                        We've received your domain request and will send you an email when your integration is ready (typically 24-48 hours).
+                    </strong>
+                ) : (
+                    author.domain.active ? (
+                        <strong>
+                            Your blog is live at{" "}
+                            <a href={author.url} target="_blank" rel="noopener noreferrer">{author.url}</a>!
+                        </strong>
+                    )
+                    : (
+                    <strong>
+                        Your domain is not currently active. Ensure your Extended subscription is not expired.
+                    </strong>
+                ))
+            ) : (
+                <form onSubmit={e => submitDomainRequest(e)}>
+                    <div className="form-section mt-20">
+                        <label htmlFor="extended_email" className="label">
                             Extended email address
                         </label>
+                        <div style={ { fontSize: "14px", opacity: 0.5, marginBottom: "5px" }}>
+                            The email address used for your Extended account
+                        </div>
                         <input
                             id="extended-email"
                             type="email"
-                            className="text-field"
+                            className="field"
                             required="required"
                             placeholder="Extended email"
                             value={extendedEmail}
                             onChange={e => setExtendedEmail(e.target.value)}
                         ></input>
                     </div>
-                    <div className="form-section">
-                        <label htmlFor="domain" className="label label--required p2">
+                    <div className="form-section mt-20">
+                        <label htmlFor="domain" className="label">
                             Your domain
                         </label>
+                        <div style={ { fontSize: "14px", opacity: 0.5, marginBottom: "5px" }}>
+                            The domain you want to use for your Listed blog.
+                        </div>
                         <input
                             id="domain"
-                            className={`text-field ${domainErrorMessage ? "text-field--error" : ""}`}
+                            className="field"
                             required="required"
                             placeholder="Your domain"
                             value={domain}
                             onChange={e => setDomain(e.target.value)}
                         ></input>
-                        {domainErrorMessage && (
-                            <div className="error-message">
-                                {domainErrorMessage}
-                            </div>
-                        )}
                     </div>
                     <div className="form-section">
-                        <button
-                            type="submit"
-                            className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
-                            disabled={isSubmitDisabled}
-                        >
-                            Submit
-                        </button>
+                        <input type="submit" value="Submit"></input>
                     </div>
-                </div>
-            </form>
-            {author.domain && !author.domain.approved && (
-                <div className="callout callout--warning">
-                    We've received your domain request ({author.domain.domain}){" "}
-                    and will send you an email when your integration is ready (typically 24-48 hours).
-                </div>
-            )}
-            {author.domain && author.domain.approved && !author.domain.active && (
-                <div className="callout callout--warning">
-                    Your domain is not currently active. Ensure your Extended subscription is not expired.
-                </div>
-            )}
-            {author.domain && author.domain.active && (
-                <div className="callout callout--success">
-                    <SVG className="custom-domain__linked-icon" src={IcLink} />
-                    <p className="p2">Linked to:{" "}
-                        <strong>{author.url}</strong>
-                    </p>
-                </div>
+                </form>
             )}
         </div>
     );

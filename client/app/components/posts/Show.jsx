@@ -1,60 +1,67 @@
 import React from "react";
 import Post from "../posts/Post";
 import SubscriptionForm from "../authors/SubscriptionForm";
-import ScrollToTopButton from "../shared/ScrollToTopButton";
-import "./Show.scss";
+import moment from "moment";
 
-const Show = ({ post, previous, next, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess }) => {
+export default ({ post, previous, next, authorPosts, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, authenticityToken }) => {
     return (
-        <div>
-            <div className="single-post-show">
-                <Post post={post}></Post>
-                {!post.unlisted && (
-                    <div>
-                        <hr></hr>
+        <div className="single-post-show">
+            <Post post={post}></Post>
+            {!post.unlisted && (
+                <div>
+                    <hr></hr>
+                    <div id="single-post-footer">
                         {!post.author.newsletter_disabled && (
-                            <div id="subscription-form">
-                                <label htmlFor="email" className="h4">
-                                    Subscribe to the author's posts
-                                </label>
-                                {(!subscribedToAuthor ||!subscriptionForAuthor.verification_sent_at) && (
-                                    <p className="sublabel p2">You'll only receive an email when they publish something new.</p>
-                                )}
+                            <div id="subscription-form" className="form-box centered">
                                 <SubscriptionForm
                                     subscribedToAuthor={subscribedToAuthor}
                                     subscriptionForAuthor={subscriptionForAuthor}
                                     subscriptionSuccess={subscriptionSuccess}
                                     author={post.author}
+                                    authenticityToken={authenticityToken}
                                 >
                                 </SubscriptionForm>
                             </div>
                         )}
-                    </div>
-                )}
-            </div>
-            {post.page || (
-                <div id="single-post-footer">
-                    <h3 className="more-from h3">
-                        More from {post.author.title}
-                        <div className="headline-separator"></div>
-                    </h3>
-                    <div className="previous-next-container">
-                        {previous && (
-                            <div className="previous card">
-                                <Post post={previous} truncate={true}></Post>  
-                            </div>
-                        )}
-                        {next && (
-                            <div className="next card">
-                                <Post post={next} truncate={true}></Post>  
+                        {post.page || (
+                            <div>
+                                <p className="more-from">
+                                    More from&nbsp;
+                                    <a className="author-name" href={post.author.username}>
+                                        <strong>{post.author.title}</strong>
+                                    </a>
+                                </p>
+                                <div className="previous-next-container">
+                                    {previous && (
+                                        <div className="previous">
+                                            <Post post={previous} truncate={true}></Post>  
+                                        </div>
+                                    )}
+                                    {next && (
+                                        <div className="next">
+                                            <Post post={next} truncate={true}></Post>  
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="posts">
+                                    {authorPosts && authorPosts.length > 0 && (
+                                        authorPosts.map(tiedPost =>
+                                            <div key={tiedPost.id} className="more-from-link">
+                                                <a href={tiedPost.author_relative_url}>
+                                                    <strong>{tiedPost.title}</strong>
+                                                    <div className="faded">
+                                                        <i>{moment.utc(tiedPost.created_at).format("MMMM D, YYYY")}</i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
                             </div>
                         )}
                     </div>
                 </div>
             )}
-            <ScrollToTopButton />
         </div>
     );
 };
-
-export default Show;

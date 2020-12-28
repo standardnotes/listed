@@ -11,7 +11,7 @@ default: &default
 
   resolved_paths: []
   cache_manifest: false
-  extract_css: true
+  extract_css: false
 
   static_assets_extensions:
     - .jpg

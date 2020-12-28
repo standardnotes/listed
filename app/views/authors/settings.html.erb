@@ -1,5 +1,3 @@
-<% author_credentials_url = author_credentials_path(@author, :secret => @author.secret) %>
-
 <%= react_component("AuthorSettings", props: {
     author: @author.as_json(
         only: [
@@ -23,11 +21,11 @@
                 only: [:id, :key, :value]
             },
             domain: {
-                only: [:domain, :approved, :active]
+                only: [:approved, :active]
             }
         }
     ),
-    authorCredentialsUrl: author_credentials_url,
+    authenticityToken: form_authenticity_token,
     customDomainIP: ENV["CUSTOM_DOMAIN_IP"],
     guestbookEntries: @guestbook_entries.as_json(
         only: [
@@ -50,8 +48,7 @@
             :id,
             :title,
             :unlisted,
-            :created_at,
-            :word_count
+            :created_at
         ],
         methods: :url
     ),

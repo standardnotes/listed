@@ -1,4 +1,4 @@
-<% author_guestbook_entries_url = author_guestbook_entries_path(@display_author) %>
+<% new_author_guestbook_entry_url = new_author_guestbook_entry_path(@display_author) %>
 
 <%= react_component("AuthorTip", props: {
     displayAuthor: @display_author.as_json(
@@ -10,5 +10,5 @@
             }
         }
     ),
-    authorGuestbookEntriesUrl: author_guestbook_entries_url
+    newAuthorGuestbookEntryUrl: new_author_guestbook_entry_url
 }) %>

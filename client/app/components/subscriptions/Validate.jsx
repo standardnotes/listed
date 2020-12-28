@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
-import getAuthToken from "../../utils/getAuthToken";
-import "./Validate.scss";
 
-const Validate = ({ subscription, hCaptchaSiteKey }) => {
-    const [captchaToken, setCaptchaToken] = useState("");
-    const [showCaptcha, setShowCaptcha] = useState(false);
+const Validate = ({ subscription, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
+    const [captcha, setCaptcha] = useState("");
 
     const submitValidate = event => {
         event.preventDefault();
@@ -14,10 +10,11 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
         axios
             .post(`/subscriptions/${subscription.id}/submit_validate`, null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": authenticityToken,
                 },
                 data: {
-                    token: captchaToken
+                    captcha: captcha,
+                    captcha_key: simpleCaptchaKey
                 }
             })
             .then(response => {
@@ -25,29 +22,34 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
             });
     };
 
-    useEffect(() => {
-        setShowCaptcha(true);
-    }, []);
-
     return (
-        <div className="validate-page page-container">
-            <h1 className="h1">Subscribe</h1>
-            <p className="p1">
+        <div>
+            <p>
                 Please complete the captcha below to finalize your subscription to{" "}
                 <strong>{subscription.author.title}</strong>.
             </p>
-            <div id="captcha-form">
+            <div id="captcha-form" className="form-box">
                 <form onSubmit={e => submitValidate(e)}>
-                    <div className="form-section" suppressHydrationWarning>
-                        {showCaptcha && (
-                            <HCaptcha
-                                id="hcaptcha"
-                                sitekey={hCaptchaSiteKey}
-                                onVerify={token => setCaptchaToken(token)}
-                            />
-                        )}
+                    <div className="simple_captcha_image">
+                        <img src={simpleCaptchaImageUrl} alt="captcha"></img>
                     </div>
-                    <button type="submit" className="button button--primary">Verify Subscription</button>
+                    <div className="simple_captcha_field">
+                        <input
+                            type="text"
+                            name="captcha"
+                            id="captcha"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            autoCapitalize="off"
+                            required="required"
+                            placeholder="Enter the image value (case sensitive)"
+                            value={captcha}
+                            onChange={e => setCaptcha(e.target.value)}
+                        ></input>
+                    </div>
+                    <div className="mt-10">
+                        <input type="submit" value="Verify Subscription"></input>
+                    </div>
                 </form>
             </div>
         </div>

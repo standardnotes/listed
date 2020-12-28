@@ -1,3 +1,5 @@
+<% home_url = ENV['HOST'] %>
+
 <%= react_component("SharedFooter", props: {
-    blogPage: @blog_page,
+    homeUrl: home_url
 }) %>

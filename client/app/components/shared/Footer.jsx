@@ -1,16 +1,19 @@
-import React from "react";
-import "./Footer.scss";
+import React from 'react';
 
-const Footer = ({ blogPage }) => {
+export default ({ homeUrl }) => {
     return (
-        <div id="footer" className={blogPage ? "footer--blog-page" : ""}>
-            <div className="footer__container">
-                <p className="p3">Listed Blogging Platform</p>
-                <p className="p3">Copyright Ⓒ 2020</p>
-                <p className="p3">By Standard Notes</p>
+        <div id="footer">
+            <div className="left">
+                <a href={homeUrl} className="listed">
+                    <p>Listed</p>
+                </a>
+            </div>
+            <div className="right">
+                <a href="https://standardnotes.org">
+                    <p>via Standard Notes</p>
+                </a>
             </div>
         </div>
     );
 };
-
-export default Footer;
+      

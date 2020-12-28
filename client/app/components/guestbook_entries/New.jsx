@@ -1,42 +1,35 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import HCaptcha from '@hcaptcha/react-hcaptcha';
-import getAuthToken from "../../utils/getAuthToken";
-import "./New.scss";
 
-const New = ({ author, hCaptchaSiteKey }) => {
+const New = ({ author, authenticityToken, simpleCaptchaKey, simpleCaptchaImageUrl }) => {
+    const [captchaError, setCaptchaError] = useState(false);
     const [guestbookEntry, setGuestbookEntry] = useState({
         text: "",
         signer_email: "",
         donation_info: ""
     });
-    const [captchaToken, setCaptchaToken] = useState("");
-    const [captchaErrorMessage, setCaptchaErrorMessage] = useState("");
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-
-    const captcha = useRef(null);
+    const [captcha, setCaptcha] = useState("");
 
     const submitEntry = event => {
         event.preventDefault();
+        setCaptchaError(false);
 
         axios
             .post(`/authors/${author.id}/guestbook`, null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": authenticityToken,
                 },
                 data: {
                     guestbook_entry: guestbookEntry,
-                    token: captchaToken,
+                    captcha: captcha,
+                    captcha_key: simpleCaptchaKey
                 }
             })
             .then(response => {
-                if (response.data.error) {
-                    captcha.current.resetCaptcha();
-                    setCaptchaErrorMessage(response.data.error);
-                } else {
-                    setCaptchaErrorMessage("");
-                    setCaptchaToken("");
+                if (response.request.responseURL && response.status === 200) {
                     window.location.href = response.request.responseURL;
+                } else {
+                    setCaptchaError(true);
                 }
             });
     };
@@ -47,81 +40,80 @@ const New = ({ author, hCaptchaSiteKey }) => {
         ))
     );
 
-    useEffect(() => {
-        setIsSubmitDisabled(!guestbookEntry.text || !captchaToken);
-    }, [guestbookEntry.text, captchaToken]);
-
     return(
-        <div className="card guestbook-entry-form__container">
-            <h3 className="h3">
-                New entry
-            </h3>
-            <div className="guestbook-entry-form">
+        <div>
+            <p>
+                Sign
+                <strong> {author.title}'s </strong>
+                guestbook.
+            </p>
+            <div className="mt-20 form-box full guestbook-entry-form">
                 <form onSubmit={e => submitEntry(e)}>
                     <div className="form-section">
-                        <label htmlFor="guestbook-entry-text" className="label p2 label--required">
+                        <label htmlFor="guestbook-entry-text" className="label">
                             Your message
                         </label>
-                        <p className="p3">
-                            This will be visible to everyone.
-                        </p>
                         <textarea
                             id="guestbook-entry-text"
-                            className="text-field"
+                            className="field text-input tall"
                             value={guestbookEntry.text}
                             onChange={e => editGuestbookEntry("text", e.target.value)}
-                            rows="4"
-                            required="required"
                         ></textarea>
                     </div>
                     <div className="form-section mt-10">
-                        <label htmlFor="guestbook-entry-signer-email" className="label p2">
+                        <label htmlFor="guestbook-entry-signer-email" className="label">
                             Your email (optional)
                         </label>
                         <input
                             id="guestbook-entry-signer-email"
-                            className="text-field"
+                            className="field text-input"
                             value={guestbookEntry.signer_email}
                             onChange={e => editGuestbookEntry("signer_email", e.target.value)}
                         ></input>
                     </div>
                     <div className="form-section mt-10">
-                        <label htmlFor="guestbook-entry-donation-info" className="label p2">
+                        <label htmlFor="guestbook-entry-donation-info" className="label">
                             Donation info (optional)
                         </label>
-                        <p className="p3 sublabel">
+                        <div style={{ fontSize: "14px", opacity: 0.5, marginBottom: "5px" }}>
                             If you've made a contribution, feel free to let the author know the method you've used, and the amount.
-                        </p>
-                        <input
+                        </div>
+                        <textarea
                             id="guestbook-entry-donation-info"
-                            className="text-field"
+                            className="field text-input mid-tall"
                             value={guestbookEntry.donation_info}
                             onChange={e => editGuestbookEntry("donation_info", e.target.value)}
-                        ></input>
+                        ></textarea>
                     </div>
-                    <div className="form-section">
-                        <HCaptcha
-                            ref={captcha}
-                            sitekey={hCaptchaSiteKey}
-                            onVerify={token => setCaptchaToken(token)}
-                        />
-                        {captchaErrorMessage && (
-                            <div className="error-message">
-                                {captchaErrorMessage}
+                    <div className="form-section mt-10">
+                        <label htmlFor="captcha" className="label">
+                            Please complete the captcha below
+                        </label>
+                        <div className="simple_captcha_image">
+                            <img src={simpleCaptchaImageUrl} alt="captcha"></img>
+                        </div>
+                        <div className="simple_captcha_field">
+                            <input
+                                type="text"
+                                name="captcha"
+                                id="captcha"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                autoCapitalize="off"
+                                required="required"
+                                placeholder="Enter the image value (case sensitive)"
+                                value={captcha}
+                                onChange={e => setCaptcha(e.target.value)}
+                            ></input>
+                        </div>
+                        {captchaError && (
+                            <div style={{ fontSize: "14px", color: "#ff5d5d", marginTop: "5px" }}>
+                                Incorrect image value, please try again.
                             </div>
                         )}
                     </div>
-                    <div className="guestbook-entry-form__button-container">
-                        <button
-                            type="submit"
-                            className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
-                            disabled={isSubmitDisabled}
-                        >
-                            Send
-                        </button>
-                        <p className="p3">
-                            You’ll not be able to edit your message after submission.
-                        </p>
+                    <div className="form-section mt-20">
+                        <input type="submit" value="Send"></input>
                     </div>
                 </form>
             </div>
