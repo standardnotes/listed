@@ -40,7 +40,7 @@ const Post = ({ truncate, post }) => {
                     </a>
                 )
             ) : (
-                <div>
+                <>
                     <div className="post-header">
                         {post.unlisted ? (
                             <h2 className="post-title h2">{post.title}</h2>
@@ -65,7 +65,7 @@ const Post = ({ truncate, post }) => {
                             {`${moment.utc(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
                         </p>
                     )}
-                </div>
+                </>
             )}
         </div>
     );
