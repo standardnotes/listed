@@ -21,11 +21,14 @@
     }
 
     a.my-posts__post {
-        background-image: none;
         color: $color-black;
         flex-grow: 1;
 
-        &:hover {
+        &::before {
+            background-image: none;
+        }
+
+        &:hover::before {
             background-image: none;
         }
     
