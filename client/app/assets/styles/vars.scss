@@ -1,0 +1,98 @@
+$color-default: #F8F9FC;
+
+$color-primary: rgb(0, 32, 143);
+$color-primary-opacity-8: rgba($color-primary, 0.08);
+$color-primary-opacity-16: rgba($color-primary, 0.16);
+$color-primary-opacity-56: rgba($color-primary, 0.56);
+
+$color-black: rgb(24, 24, 24);
+$color-black-opacity-16: rgba($color-black, 0.16);
+$color-black-opacity-36: rgba($color-black, 0.36);
+$color-black-opacity-86: rgba($color-black, 0.86);
+
+$color-white: #FFFFFF;
+
+$color-gray: #63666B;
+
+$color-success: #1AA772;
+$color-warning: #F28B52;
+$color-error: #C7000C;
+
+$font-family-default: "Roboto";
+$font-family-headline: "Merriweather";
+
+$font-size-12: 12px;
+$font-size-14: 14px;
+$font-size-16: 16px;
+$font-size-17: 17px;
+$font-size-18: 18px;
+$font-size-19: 19px;
+$font-size-22: 22px;
+$font-size-24: 24px;
+$font-size-26: 26px;
+$font-size-28: 28px;
+$font-size-32: 32px;
+$font-size-36: 36px;
+$font-size-48: 48px;
+$font-size-120: 120px;
+
+$line-height-15: 15px;
+$line-height-20: 20px;
+$line-height-24: 24px;
+$line-height-28: 28px;
+$line-height-30: 30px;
+$line-height-32: 32px;
+$line-height-36: 36px;
+$line-height-42: 42px;
+$line-height-44: 44px;
+$line-height-52: 52px;
+$line-height-64: 64px;
+
+$spacing-2: 2px;
+$spacing-4: 4px;
+$spacing-6: 6px;
+$spacing-8: 8px;
+$spacing-10: 10px;
+$spacing-12: 12px;
+$spacing-14: 14px;
+$spacing-16: 16px;
+$spacing-18: 18px;
+$spacing-20: 20px;
+$spacing-24: 24px;
+$spacing-26: 26px;
+$spacing-32: 32px;
+$spacing-36: 36px;
+$spacing-38: 38px;
+$spacing-48: 48px;
+$spacing-56: 56px;
+$spacing-60: 60px;
+$spacing-86: 86px;
+$spacing-90: 90px;
+$spacing-136: 136px;
+$spacing-148: 148px;
+
+$spacing-11-vw: 11vw;
+$spacing-22-vw: 22vw;
+
+$border-radius-4: 4px;
+$border-default: 1px solid rgba(24, 24, 24, 0.16);
+
+:root {
+  --dimmed-text-color: #{$color-black-opacity-16};
+  --dimmed-border-color: #{$color-default};
+  --background-color: #{$color-default};
+  --body-text-color: #{$color-black};
+  --post-title-color: var(--body-text-color);
+  --post-date-color: var(--body-text-color);
+  --post-text-color: var(--body-text-color);
+  --page-menu-link-color: var(--link-color);
+  --header-author-name: #{$color-primary};
+  --header-listed-name: #{$color-primary};
+  --more-from-border-color: var(--dimmed-border-color);
+  --bio-color: var(--body-text-color);
+  --wordcount-color: #{$color-primary};
+  --website-color: var(--link-color);
+  --twitter-color: var(--link-color);
+  --link-color: #{$color-primary};
+  --header-border-color: #{$color-primary};
+};

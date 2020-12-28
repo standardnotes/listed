@@ -1,9 +1,11 @@
 import React from "react";
+import "./Tip.scss";
 
-export default ({ displayAuthor, newAuthorGuestbookEntryUrl }) => {
+const Tip = ({ displayAuthor, authorGuestbookEntriesUrl }) => {
     return(
-        <div id="tip" className="single-post-show">
-            <p>
+        <div id="tip" className="page-container">
+            <h1 className="h1">Thank</h1>
+            <p className="p1">
                 The world is made good when good ideas are supported. You can tip or thank
                 <strong> {displayAuthor.title} </strong>
                 to encourage the author to continue doing their best work.
@@ -12,18 +14,22 @@ export default ({ displayAuthor, newAuthorGuestbookEntryUrl }) => {
                 or,
                 <i> I want to see more of this in the world</i>.
             </p>
-            <p>
+            <p className="p1">
                 The author has specified the following payment credentials.
                 Once you've made a contribution to <strong> {displayAuthor.display_name}</strong>, be sure to signal their{" "}
-                <a href={newAuthorGuestbookEntryUrl}>guestbook</a>
+                <a href={authorGuestbookEntriesUrl}>guestbook</a>
                 {" "}to let them know!
             </p>
-            {displayAuthor.credentials.map(credential => (
-                <p key={credential.id}>
-                    <strong>{credential.key}: </strong>
-                    {credential.value}
-                </p>
-            ))}
+            <div className="tip__credentials">
+                {displayAuthor.credentials.map(credential => (
+                    <div className="callout callout--success" key={credential.id}>
+                        <strong>{credential.key}: </strong>
+                        {credential.value}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
+
+export default Tip;

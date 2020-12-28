@@ -1,5 +1,5 @@
 class GuestbookEntriesController < ApplicationController
-  include SimpleCaptcha::ControllerHelpers
+  include CaptchaHelper
 
   before_action do
     @author = Author.find(params[:author_id]) if params[:author_id]
@@ -16,6 +16,7 @@ class GuestbookEntriesController < ApplicationController
 
   def new
     @entry = GuestbookEntry.new
+    render :json => {}, :status => 200
   end
 
   def create
@@ -26,9 +27,16 @@ class GuestbookEntriesController < ApplicationController
        @entry.text == @entry.donation_info
       @entry.spam = true
     end
-    if simple_captcha_valid?
+
+
+    captcha_verification = JSON.parse(CaptchaHelper.verify_hcaptcha(params[:token]))
+    is_valid_captcha = captcha_verification["success"]
+
+    if is_valid_captcha
       @entry.save
       redirect_to_guestbook(sent: true)
+    else
+      render :json => { error: captcha_verification["error"] }
     end
   end
 

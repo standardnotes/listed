@@ -1,0 +1,17 @@
+#tip {
+    .h1, .p1 {
+        margin-bottom: $spacing-8;
+    }
+
+    .tip__credentials {
+        margin-top: $spacing-24;
+    }
+
+    .callout {
+        width: 100%;
+
+        &:not(:last-child) {
+            margin-bottom: $spacing-12;
+        }
+    }
+}

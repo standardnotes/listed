@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import getAuthToken from "../../utils/getAuthToken";
+import "./SubscriptionForm.scss";
 
-const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author, authenticityToken }) => {
+const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author }) => {
     const [email, setEmail] = useState("");
 
     const emailSubscribe = event => {
@@ -10,7 +12,7 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
         axios
             .post(`/authors/${author.id}/email_subscribe`, null, {
                 headers: {
-                    "X-CSRF-Token": authenticityToken,
+                    "X-CSRF-Token": getAuthToken(),
                 },
                 data: {
                     email: email
@@ -25,23 +27,25 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
         <div>
             {(subscribedToAuthor && subscriptionForAuthor.verification_sent_at) ? (
                 subscriptionSuccess || !subscriptionForAuthor.verified ? (
-                    <div className="sublabel success">
-                        <span>Success. Please check your email to confirm your subscription.</span>
+                    <div className="callout callout--success">
+                        Success. Please check your email to confirm your subscription.
                     </div>
                 ) : (
-                    <div className="sublabel">You're subscribed to this blog.</div>
+                    <div className="callout callout--success">You're subscribed to this blog.</div>
                 )
             ) : (
                 <form onSubmit={e => emailSubscribe(e)}>
-                    <label htmlFor="email">Subscribe to @{author.username}'s posts</label>
-                    <div className="sublabel">You'll only receive email when {author.title} publishes a new post</div>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Your email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    ></input>
+                    <div>
+                        <input
+                            type="email"
+                            id="email"
+                            className="text-field"
+                            placeholder="Your email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        ></input>
+                        <button type="submit" className="button button--primary">Subscribe</button>
+                    </div>
                 </form>
             )}
         </div>

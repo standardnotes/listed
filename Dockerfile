@@ -37,8 +37,6 @@ USER listed
 
 COPY --chown=$UID:$GID package.json yarn.lock Gemfile Gemfile.lock /listed/
 
-COPY --chown=$UID:$GID vendor /listed/vendor
-
 RUN yarn install --frozen-lockfile
 
 RUN gem install bundler && bundle install

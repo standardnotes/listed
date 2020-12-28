@@ -1,7 +1,7 @@
 import ReactOnRails from "react-on-rails";
 import AdminMailerNewDomainRequest from "../components/admin_mailer/NewDomainRequest";
-import AuthorHeader from "../components/authors/Header";
-import AuthorSettings from "../components/authors/Settings";
+import AuthorHeader from "../components/authors/HeaderContainer";
+import AuthorSettings from "../components/authors/SettingsPage";
 import AuthorShow from "../components/authors/Show";
 import AuthorSubscribe from "../components/authors/Subscribe";
 import AuthorTip from "../components/authors/Tip";
@@ -10,8 +10,6 @@ import AuthorsMailerDomainInvalid from "../components/authors_mailer/DomainInval
 import AuthorsMailerFeatured from "../components/authors_mailer/Featured";
 import AuthorsMailerUnreadGuestbookEntries from "../components/authors_mailer/UnreadGuestbookEntries";
 import AuthorsMailerVerifyEmail from "../components/authors_mailer/VerifyEmail";
-import CredentialsEdit from "../components/credentials/Edit";
-import CredentialsNew from "../components/credentials/New";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -27,6 +25,7 @@ import SubscriptionUnsubscribe from "../components/subscriptions/Unsubscribe";
 import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequency";
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import Usage from "../components/usage/Usage";
+import UsageNewAuthor from "../components/usage/NewAuthor";
 
 ReactOnRails.register({
     AdminMailerNewDomainRequest,
@@ -40,8 +39,6 @@ ReactOnRails.register({
     AuthorsMailerFeatured,
     AuthorsMailerUnreadGuestbookEntries,
     AuthorsMailerVerifyEmail,
-    CredentialsEdit,
-    CredentialsNew,
     Guestbook,
     GuestbookNew,
     Help,
@@ -56,5 +53,6 @@ ReactOnRails.register({
     SubscriptionUnsubscribe,
     SubscriptionUpdateFrequency,
     SubscriptionValidate,
-    Usage
+    Usage,
+    UsageNewAuthor
 });

@@ -1,0 +1,47 @@
+.left-nav-bar {
+    display: none;
+    width: 252px;
+    height: 100%;
+    margin-right: $spacing-24;
+    position: sticky;
+    top: 36px;
+
+    .button {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        align-items: center;
+
+        &::before {
+            transition: background-position 0.3s ease-in-out, background-color 0.1s ease-in-out;
+        }
+
+        &:not(.button--active) {
+            color: $color-black-opacity-86;
+
+            svg path {
+                fill: $color-black;
+            }
+        }
+
+        &:not(:last-child) {
+            margin-bottom: $spacing-8;
+        }
+    }
+
+    .button--active {
+        .left-nav-bar__icon {
+            path {
+                fill: $color-primary;
+            }
+        }
+    }
+
+    @include Desktop() {
+        display: block;
+    }
+}
+
+.left-nav-bar__icon {
+    margin-right: $spacing-12;
+}

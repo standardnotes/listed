@@ -1,9 +1,11 @@
 <%= react_component("AuthorShow", props: {
     posts: @posts.as_json(
-        only: [:id, :title, :unlisted, :page, :created_at],
+        only: [:id, :title, :unlisted, :page, :created_at, :word_count],
         methods: [:author_relative_url, :preview_text, :rendered_text]
     ),
     olderThan: @older_than,
     newerThan: @newer_than,
-    displayAuthorUrl: @display_author.url
+    displayAuthor: @display_author.as_json(
+        only: :id
+    )
 }) %>

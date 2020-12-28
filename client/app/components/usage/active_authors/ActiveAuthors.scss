@@ -1,0 +1,33 @@
+.active-authors__headline {
+    display: flex;
+    align-items: center;
+    margin: $spacing-48 0 $spacing-24;
+
+    @include Desktop() {
+        margin: $spacing-56 0 $spacing-36;
+    }
+}
+
+.active-authors__masonry-layout {
+    display: none;
+
+    @include Desktop() {
+        display: flex;
+    }
+}
+
+.active-authors__masonry-column {
+    &:not(:last-child) {
+        margin-right: $spacing-24;
+    }
+}
+
+.active-authors--mobile {
+    .button.card {
+        width: 100%;
+    };
+
+    @include Desktop() {
+        display: none;
+    }
+}

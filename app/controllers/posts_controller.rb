@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     }[metatype]
   end
 
-  before_action :find_post, except: [:unpublish, :delete]
+  before_action :find_post, except: [:unpublish, :change_privacy, :delete]
 
   def find_page(author, title)
     return unless author
@@ -204,6 +204,21 @@ class PostsController < ApplicationController
     post.save
 
     post.author.update_word_count
+  end
+
+  def change_privacy
+    post = Post.find(params[:id])
+
+    if post.author != @author
+      render :json => {:error => "Unauthorized"}
+      return
+    end
+
+    post.unlisted = !post.unlisted
+    post.save
+
+    post.author.update_word_count
+    redirect_to :back
   end
 
   def delete

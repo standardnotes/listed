@@ -1,0 +1,23 @@
+.custom-domain {
+    .form-row {
+        align-items: flex-end;
+    }
+
+    .callout {
+        margin-top: $spacing-24;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .custom-domain__info {
+        margin-top: $spacing-8;
+    }
+}
+
+.custom-domain__linked-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: $spacing-8;
+}

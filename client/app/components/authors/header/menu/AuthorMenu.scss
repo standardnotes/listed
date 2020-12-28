@@ -1,0 +1,23 @@
+.pages-menu .page-link {
+    color: var(--page-menu-link-color);
+
+    &.button--no-fill {
+        background-color: transparent;
+        position: relative;
+    
+        &::before {
+            background-image: 
+                linear-gradient(to top, var(--page-menu-link-color) 50%, transparent 50%);
+            opacity: 0.08;
+        }
+
+        &:hover {
+            color: var(--page-menu-link-color);
+        }
+    }
+    
+    &.button--active::before {
+        background-color: var(--page-menu-link-color);
+        opacity: 0.08;
+    }
+}

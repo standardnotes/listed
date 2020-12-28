@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'tip'
       get 'subscribe'
       get 'verify_email'
+      get 'more_posts'
       post 'email_subscribe', as: 'email_subscribe'
       post 'domain_request'
       post 'delete_all_data'
@@ -27,7 +28,8 @@ Rails.application.routes.draw do
       member do
         post 'unpublish'
         post 'newsletter'
-        get 'delete'
+        post 'change_privacy'
+        post 'delete'
       end
     end
 
@@ -59,6 +61,7 @@ Rails.application.routes.draw do
   end
 
   get '/usage' => 'usage#index'
+  get '/new_author' => 'usage#new_author'
 
   un_regex = /@.[^\/]*/
 

@@ -41,6 +41,7 @@ class AuthorsController < ApplicationController
 
     @title = @display_author.title
     @desc = @display_author.bio || 'Via Standard Notes.'
+    @blog_page = true
 
     limit = 15
     all_posts = @display_author.listed_posts(nil, false)
@@ -66,6 +67,28 @@ class AuthorsController < ApplicationController
       if all_posts.count > limit && all_posts.first.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
+  end
+
+  def more_posts
+    limit = 15
+    older_than = params[:older_than].to_i
+    all_posts = @display_author.listed_posts(nil, false)
+    new_posts = all_posts
+      .where('created_at < ?', Time.at(older_than).to_datetime || 0)
+      .order('created_at DESC')
+      .limit(limit)
+    older_than =
+      if all_posts.first.created_at < new_posts.last.created_at
+        new_posts.last.created_at.to_i
+      end
+
+    render :json => {
+      older_than: older_than,
+      posts: new_posts.as_json(
+        only: [:id, :title, :unlisted, :page, :created_at, :word_count],
+        methods: [:author_relative_url, :preview_text, :rendered_text]
+      )
+    }
   end
 
   def feed
@@ -103,7 +126,7 @@ class AuthorsController < ApplicationController
 
   def redirect_to_authenticated_usage(author, secret)
     @secret_url = CGI.escape("#{author.get_host}/authors/#{author.id}/extension/?secret=#{secret}&type=sn")
-    redirect_to "/usage/?secret_url=#{@secret_url}"
+    redirect_to "/new_author?secret_url=#{@secret_url}"
   end
 
   def extension
@@ -235,6 +258,15 @@ class AuthorsController < ApplicationController
   end
 
   def update
+    if @author.username != a_params[:username]
+      existing_username = Author.where.not(username: nil).find_by_username(params[:username])
+
+      if existing_username
+        render :json => { message: "Username already taken" }, :status => :conflict
+        return
+      end
+    end
+
     @author.username = a_params[:username]
     @author.display_name = a_params[:display_name]
     @author.bio = a_params[:bio]
@@ -273,6 +305,8 @@ class AuthorsController < ApplicationController
 
     @author.domain.domain = params[:domain]
     @author.domain.extended_email = params[:extended_email]
+    @author.domain.approved = false
+    @author.domain.active = false
     @author.domain.save
 
     AdminMailer.new_domain_request(@author).deliver_later
@@ -298,9 +332,7 @@ class AuthorsController < ApplicationController
       redirect_to :root
     rescue => e
       puts e.message
-      redirect_to :back, :flash => {
-        :error_delete_all_data => 'Unable to delete your data. Please try again later.'
-      }
+      render :json => {:error => "Unable to delete your data. Please try again later."}, :status => 500
     end
   end
 
