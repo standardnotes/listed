@@ -1,11 +1,11 @@
 import React from "react";
 import "./AuthorMenu.scss";
 
-const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentPath }) => {
-    const isActiveMenuItem = path => path === currentPath;
+const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentUrl }) => {
+    const isActiveMenuItem = url => url === currentUrl;
 
     const isSubscribeMenuItemActive = () => (
-        isActiveMenuItem(`/${author.url_segment}/subscribe`) || currentPath.includes('subscriptions')
+        isActiveMenuItem(`${author.url}/subscribe`) || currentUrl.includes("subscriptions")
     );
 
     const navClassName = () => {
@@ -19,8 +19,8 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
     return(
         <nav className={navClassName()}>
             <a
-                href={`/${author.url_segment}`}
-                className={`button page-link ${isActiveMenuItem(`/${author.url_segment}`) ? "button--active" : "button--no-fill"}`}
+                href={author.url}
+                className={`button page-link ${isActiveMenuItem(author.url) ? "button--active" : "button--no-fill"}`}
             >
                 Home
             </a>
@@ -36,7 +36,7 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
             {author.credentials.length > 0 && (
                 <a
                     href={`${author.url}/tip`}
-                    className={`button page-link ${isActiveMenuItem(`/${author.url_segment}/tip`) ? "button--active" : "button--no-fill"}`}
+                    className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
                 >
                     Thank
                 </a>
@@ -44,7 +44,7 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
             {author.guestbook_disabled || (
                 <a
                     href={authorGuestbookEntriesUrl}
-                    className={`button page-link ${isActiveMenuItem(authorGuestbookEntriesUrl) ? "button--active" : "button--no-fill"}`}
+                    className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
                 >
                     Guestbook
                 </a>

@@ -2,7 +2,7 @@ import React from "react";
 import { HomepageMenu, AuthorMenu } from "./menu";
 import "./MenuContainer.scss";
 
-const MenuContainer = ({ isMobileMenuOpen, isDesktopMenu, author, pages, privatePost, authorGuestbookEntriesUrl, currentPath }) => {
+const MenuContainer = ({ isMobileMenuOpen, isDesktopMenu, author, pages, privatePost, authorGuestbookEntriesUrl, currentUrl }) => {
     return(
         <div className="pages-menu__container">
             {!author && (
@@ -15,7 +15,7 @@ const MenuContainer = ({ isMobileMenuOpen, isDesktopMenu, author, pages, private
                     author={author}
                     pages={pages}
                     authorGuestbookEntriesUrl={authorGuestbookEntriesUrl}
-                    currentPath={currentPath}
+                    currentUrl={currentUrl}
                 />
             )}
         </div>
