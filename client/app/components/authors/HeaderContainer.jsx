@@ -11,7 +11,7 @@ const HeaderContainer = ({
     privatePost,
     pages,
     authorGuestbookEntriesUrl,
-    currentPath,
+    currentUrl,
     blogPage
 }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,7 +23,7 @@ const HeaderContainer = ({
             author={author}
             pages={pages}
             authorGuestbookEntriesUrl={authorGuestbookEntriesUrl}
-            currentPath={currentPath}
+            currentUrl={currentUrl}
         />
     );
 
