@@ -85,7 +85,7 @@ class Post < ApplicationRecord
     text = markdown.render(limit ? (input[0, limit] + "...") : input)
 
     sanitized = Sanitize.fragment(text, Sanitize::Config.merge(Sanitize::Config::RELAXED,
-      :elements => Sanitize::Config::RELAXED[:elements] + ['center', 'iframe'],
+      :elements => Sanitize::Config::RELAXED[:elements] + ['center', 'iframe', 'details'],
       :attributes => {'iframe' => ['src', 'width', 'height', 'frameborder', 'allow']},
       :transformers => link_transformer
     ))
