@@ -181,13 +181,13 @@ class Author < ApplicationRecord
   end
 
   def self.active_authors
-    authors = Author.joins(:posts).
-      where("last_word_count > 100").
-      where.not(:username => nil).
-      where(:hide_from_homepage => false).
-      where("posts.created_at >= ? OR featured = TRUE", 28.days.ago.utc).
-      where("posts.unlisted = FALSE").
-      order("posts.created_at DESC")
+    authors = Author.joins(:posts)
+      .where("last_word_count > 100")
+      .where.not(:username => nil)
+      .where(:hide_from_homepage => false)
+      .where("(posts.created_at >= ? AND posts.created_at <= ?) OR featured = TRUE", 28.days.ago.utc, DateTime.now.utc)
+      .where("posts.unlisted = FALSE")
+      .order("posts.created_at DESC")
 
     authors.to_a.uniq
   end
