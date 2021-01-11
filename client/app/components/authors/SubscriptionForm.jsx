@@ -19,7 +19,7 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
                 }
             })
             .then(response => {
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             })
     };
 

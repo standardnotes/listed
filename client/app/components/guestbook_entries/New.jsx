@@ -36,7 +36,7 @@ const New = ({ author, hCaptchaSiteKey }) => {
                 } else {
                     setCaptchaErrorMessage("");
                     setCaptchaToken("");
-                    window.location.href = response.request.responseURL;
+                    Turbolinks.visit(response.request.responseURL);
                 }
             });
     };

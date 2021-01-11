@@ -14,7 +14,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
         axios
             .get(url)
             .then(response => {
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             })
     };
 

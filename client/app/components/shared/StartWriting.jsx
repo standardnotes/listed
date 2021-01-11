@@ -13,7 +13,7 @@ const StartWriting = ({ className, children }) => {
                 },
             })
             .then(response => {
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             });
     };
 
