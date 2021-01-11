@@ -11,11 +11,20 @@ const clientConfig = merge(clientEnvironment.toWebpackConfig(), {
     output: {
         filename: "[name].js",
         chunkFilename: "[name].bundle.js",
-        path: clientEnvironment.config.output.path
+        path: clientEnvironment.config.output.path,
     },
     optimization: {
         splitChunks: {
             name: "vendor",
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name(module) {
+                        const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                        return `npm.${packageName.replace("@", "")}`;
+                    },
+                },
+            },
         },
     },
 });
