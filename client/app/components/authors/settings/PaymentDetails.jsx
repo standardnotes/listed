@@ -19,7 +19,7 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
                 }
             })
             .then(response => {
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             })
     }
 

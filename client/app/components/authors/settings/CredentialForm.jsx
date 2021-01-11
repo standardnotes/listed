@@ -24,7 +24,7 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
                     }
                 })
                 .then(response => {
-                    window.location.href = response.request.responseURL;
+                    Turbolinks.visit(response.request.responseURL);
                 })
         } else {
             axios
@@ -37,7 +37,7 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
                     }
                 })
                 .then(response => {
-                    window.location.href = response.request.responseURL;
+                    Turbolinks.visit(response.request.responseURL);
                 })
         }
     }

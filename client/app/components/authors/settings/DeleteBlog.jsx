@@ -24,7 +24,7 @@ const DeleteBlog = ({ author }) => {
             })
             .then(response => {
                 setErrorMessage(null);
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             })
             .catch(error => {
                 setErrorMessage(error.response.data.error);

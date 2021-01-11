@@ -18,7 +18,7 @@ const MyPosts = ({ posts, author }) => {
             }
         })
         .then(response => {
-            window.location.href = response.request.responseURL;
+            Turbolinks.visit(response.request.responseURL);
         })
     };
 
@@ -30,7 +30,7 @@ const MyPosts = ({ posts, author }) => {
                 }
             })
             .then(response => {
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             })
     };
 

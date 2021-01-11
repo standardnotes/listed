@@ -49,7 +49,7 @@ const General = ({ author }) => {
             })
             .then(response => {
                 setUsernameErrorMessage(null);
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             })
             .catch(error => {
                 setUsernameErrorMessage(error.response.data.message);

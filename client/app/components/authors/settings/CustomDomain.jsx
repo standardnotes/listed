@@ -26,7 +26,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
             })
             .then(response => {
                 setDomainErrorMessage(null);
-                window.location.href = response.request.responseURL;
+                Turbolinks.visit(response.request.responseURL);
             })
             .catch(error => {
                 setDomainErrorMessage(error.response.data.message);
