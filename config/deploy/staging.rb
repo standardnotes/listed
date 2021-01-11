@@ -15,6 +15,8 @@ set :deploy_to, ENV.fetch('LISTED_SSH_DEPLOY_TO')
 
 set :rails_env, 'production'
 
+set :keep_releases, 2
+
 # role-based syntax
 # ==================
 
