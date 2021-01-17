@@ -7,10 +7,14 @@ const Footer = ({ blogPage }) => {
             <div className="footer__container">
                 <p className="p3">Listed Blogging Platform</p>
                 <p className="p3">Copyright Ⓒ 2020</p>
-                <p className="p3">By Standard Notes</p>
+                <p className="p3">By{" "}
+                    <a href="https://standardnotes.org" target="_blank" rel="noopener noreferrer">
+                        Standard Notes
+                    </a>
+                </p>
             </div>
         </div>
     );
 };
 
-export default Footer;
+export default props => <Footer {...props} />;
