@@ -338,6 +338,40 @@ textarea {
     }
 }
 
+.hover-container:hover .hover-content {
+    @include Desktop() {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.hover-content {
+    @include Desktop() {
+        display: none;
+    }
+
+    .hover-content__icon-container {
+        width: 28px;
+        height: 28px;
+        border: $border-default;
+        border-radius: 14px;
+        background-color: $color-white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hover-content__icon {
+        width: 16px;
+        height: 16px;
+
+        path {
+            fill: $color-black;
+        }
+    }
+}
+
 .label {
     font-weight: bold;
 }

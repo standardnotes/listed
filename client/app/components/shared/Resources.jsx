@@ -51,11 +51,13 @@ const Resources = () => {
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="button resources__link"
+                        className="button resources__link hover-container"
                     >
                         {text}
-                        <div className="resources__hover-container">
-                            <SVG src={IcOpenIn} className="resources__hover-icon" />
+                        <div className="hover-content">
+                            <div className="hover-content__icon-container">
+                                <SVG src={IcOpenIn} className="hover-content__icon" />
+                            </div>
                         </div>
                     </a>
                 </li>

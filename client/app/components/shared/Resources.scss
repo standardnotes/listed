@@ -22,33 +22,7 @@
 
                 &:hover {
                     padding: $spacing-14 0;
-        
-                    .resources__hover-container {
-                        @include Desktop() {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
-                    }
                 }
-            }
-        }
-    }
-
-    .resources__hover-container {
-        display: none;
-        width: 28px;
-        height: 28px;
-        border: $border-default;
-        border-radius: 14px;
-        background-color: $color-primary-opacity-8;
-
-        .resources__hover-icon {
-            width: 16px;
-            height: 16px;
-
-            path {
-                fill: $color-black;
             }
         }
     }
@@ -62,4 +36,8 @@
             background-image: none;
         }
     }
+}
+
+.hover-content {
+    display: none;
 }

@@ -14,10 +14,13 @@
         border-bottom: $border-default;
     }
 
-    &:hover .guestbook-entries__hover-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .button--make-public {
+        display: none;
+
+        @include Desktop() {
+            display: block;
+            margin-right: $spacing-12;
+        }
     }
 }
 
@@ -53,41 +56,6 @@
         &:not(:last-child)::after {
             content: "·";
             margin: 0 $spacing-6;
-        }
-    }
-}
-
-.guestbook-entries__hover-container {
-    @include Desktop() {
-        display: none;
-    }
-
-    .hover-icon__container {
-        width: 28px;
-        height: 28px;
-        border: $border-default;
-        border-radius: 14px;
-        background-color: $color-primary-opacity-8;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hover-icon {
-        width: 16px;
-        height: 16px;
-
-        path {
-            fill: $color-black;
-        }
-    }
-
-    .button--make-public {
-        display: none;
-
-        @include Desktop() {
-            display: block;
-            margin-right: $spacing-12;
         }
     }
 }
