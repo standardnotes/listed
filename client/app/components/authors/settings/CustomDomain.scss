@@ -3,6 +3,10 @@
         align-items: flex-end;
     }
 
+    .form-row--error .form-section {
+        padding-top: 0px;
+    }
+
     .callout {
         margin-top: $spacing-24;
         width: 100%;

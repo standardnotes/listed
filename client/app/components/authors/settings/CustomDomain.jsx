@@ -77,11 +77,6 @@ const CustomDomain = ({ author, customDomainIP }) => {
                             value={domain}
                             onChange={e => setDomain(e.target.value)}
                         ></input>
-                        {domainErrorMessage && (
-                            <div className="error-message">
-                                {domainErrorMessage}
-                            </div>
-                        )}
                     </div>
                     <div className="form-section">
                         <button
@@ -92,6 +87,17 @@ const CustomDomain = ({ author, customDomainIP }) => {
                             Submit
                         </button>
                     </div>
+                </div>
+                <div className="form-row form-row--error">
+                    <div className="form-section"></div>
+                    <div className="form-section">
+                        {domainErrorMessage && (
+                            <div className="error-message">
+                                {domainErrorMessage}
+                            </div>
+                        )}
+                    </div>
+                    <div className="form-section"></div>
                 </div>
             </form>
             {author.domain && !author.domain.approved && (
