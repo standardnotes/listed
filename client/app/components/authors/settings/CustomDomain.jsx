@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import getAuthToken from "../../../utils/getAuthToken";
-import { IcLink } from "../../../assets/icons";
+import Dropdown from "../../shared/Dropdown";
+import { IcLink, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./CustomDomain.scss";
 
 const CustomDomain = ({ author, customDomainIP }) => {
@@ -10,6 +11,17 @@ const CustomDomain = ({ author, customDomainIP }) => {
     const [domain, setDomain] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const [domainErrorMessage, setDomainErrorMessage] = useState(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+
+    const dropdownOptions = domain => {
+        return [
+            {
+                icon: IcTrash,
+                text: "Delete",
+                action: () => deleteDomain(domain)
+            }
+        ];
+    }
 
     const submitDomainRequest = event => {
         event.preventDefault();
@@ -32,6 +44,22 @@ const CustomDomain = ({ author, customDomainIP }) => {
                 setDomainErrorMessage(error.response.data.message);
             })
     };
+
+    const deleteDomain = domain => {
+        axios
+            .post(`/authors/${author.id}/delete_domain?secret=${author.secret}`, null, {
+                headers: {
+                    "X-CSRF-Token": getAuthToken()
+                },
+                data: {
+                    domain: domain
+                }
+            })
+            .then(response => {
+                Turbolinks.visit(response.request.responseURL);
+            })
+    };
+
 
     useEffect(() => {
         setIsSubmitDisabled(!extendedEmail || !domain);
@@ -102,8 +130,23 @@ const CustomDomain = ({ author, customDomainIP }) => {
             </form>
             {author.domain && !author.domain.approved && (
                 <div className="callout callout--warning">
-                    We've received your domain request ({author.domain.domain}){" "}
-                    and will send you an email when your integration is ready (typically 24-48 hours).
+                    <div className="hover-container">
+                        <div className="custom-domain__details">
+                            We've received your domain request ({author.domain.domain}){" "}
+                            and will send you an email when your integration is ready (typically 24-48 hours).
+                        </div>
+                        <div className="hover-content">
+                            <Dropdown
+                                options={dropdownOptions(author.domain.domain)}
+                                isOpen={isDropdownOpen}
+                                onClick={() => setIsDropdownOpen()}
+                            >
+                                <div className="hover-content__icon-container">
+                                    <SVG src={IcMoreHorizontal} className="hover-content__icon" />
+                                </div>
+                            </Dropdown>
+                        </div>
+                    </div>
                 </div>
             )}
             {author.domain && author.domain.approved && !author.domain.active && (
@@ -113,10 +156,25 @@ const CustomDomain = ({ author, customDomainIP }) => {
             )}
             {author.domain && author.domain.active && (
                 <div className="callout callout--success">
-                    <SVG className="custom-domain__linked-icon" src={IcLink} />
-                    <p className="p2">Linked to:{" "}
-                        <strong>{author.url}</strong>
-                    </p>
+                    <div className="hover-container">
+                        <div className="custom-domain__details">
+                            <SVG className="custom-domain__linked-icon" src={IcLink} />
+                            <p className="p2">Linked to:{" "}
+                                <strong>{author.url}</strong>
+                            </p>
+                        </div>
+                        <div className="hover-content">
+                            <Dropdown
+                                options={dropdownOptions(author.domain.domain)}
+                                isOpen={isDropdownOpen}
+                                onClick={() => setIsDropdownOpen()}
+                            >
+                                <div className="hover-content__icon-container">
+                                    <SVG src={IcMoreHorizontal} className="hover-content__icon" />
+                                </div>
+                            </Dropdown>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

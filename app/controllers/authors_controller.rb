@@ -313,6 +313,13 @@ class AuthorsController < ApplicationController
     redirect_back fallback_location: @author.url
   end
 
+  def delete_domain
+    domain = Domain.find_by_domain(params[:domain])
+    domain.delete
+
+    redirect_back fallback_location: @author.url
+  end
+
   def verify_email
     return if !@author
 

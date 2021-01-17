@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'more_posts'
       post 'email_subscribe', as: 'email_subscribe'
       post 'domain_request'
+      post 'delete_domain'
       post 'delete_all_data'
     end
 
