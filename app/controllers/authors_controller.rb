@@ -259,10 +259,10 @@ class AuthorsController < ApplicationController
 
   def update
     if @author.username != a_params[:username]
-      existing_username = Author.where.not(username: nil).find_by_username(params[:username])
+      existing_username = Author.where.not(username: nil).find_by_username(a_params[:username])
 
       if existing_username
-        render :json => { message: "Username already taken" }, :status => :conflict
+        render :json => { message: "Username #{a_params[:username]} is already taken." }, :status => :conflict
         return
       end
     end
@@ -284,11 +284,8 @@ class AuthorsController < ApplicationController
     @author.guestbook_disabled = a_params[:guestbook_disabled]
     @author.newsletter_disabled = a_params[:newsletter_disabled]
 
-    if @author.save
-      redirect_to @author.url, :status => 303
-    else
-      redirect_to :back
-    end
+    @author.save
+    redirect_to :back, :status => 303
   end
 
   def domain_request
