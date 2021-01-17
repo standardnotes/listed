@@ -10,13 +10,23 @@
     .callout {
         margin-top: $spacing-24;
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
     }
 
-    .custom-domain__info {
+    .hover-container {
+        display: flex;
+        align-items: center;
+        min-height: 30px;
+    }
+
+    &__info {
         margin-top: $spacing-8;
+    }
+
+    &__details {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex-grow: 1;
     }
 }
 
