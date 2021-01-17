@@ -14,12 +14,6 @@
         border-bottom: $border-default;
     }
 
-    &:hover .my-posts__hover-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     a.my-posts__post {
         color: $color-black;
         flex-grow: 1;
@@ -58,32 +52,6 @@
                 content: "·";
                 margin: 0 $spacing-6;
             }
-        }
-    }
-}
-
-.my-posts__hover-container {
-    @include Desktop() {
-        display: none;
-    }
-
-    .hover-icon__container {
-        width: 28px;
-        height: 28px;
-        border: $border-default;
-        border-radius: 14px;
-        background-color: $color-primary-opacity-8;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hover-icon {
-        width: 16px;
-        height: 16px;
-
-        path {
-            fill: $color-black;
         }
     }
 }

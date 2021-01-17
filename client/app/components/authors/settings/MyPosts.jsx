@@ -54,7 +54,7 @@ const MyPosts = ({ posts, author }) => {
                 <p>No posts yet.</p>
             )}
             {posts.map(post => (
-                <li key={post.id} className="my-posts__item">
+                <li key={post.id} className="my-posts__item hover-container">
                     <a href={post.url} target="_blank" rel="noopener noreferrer" className="my-posts__post">
                         <h5 className="h5">
                             {post.title}
@@ -79,14 +79,14 @@ const MyPosts = ({ posts, author }) => {
                             </span>
                         </p>
                     </a>
-                    <div className="my-posts__hover-container">
+                    <div className="hover-content">
                         <Dropdown
                             options={dropdownOptions(post)}
                             isOpen={dropdownOpen && dropdownOpen === post.id}
                             onClick={() => setDropdownOpen(post.id)}
                         >
-                            <div className="hover-icon__container">
-                                <SVG src={IcMoreHorizontal} className="hover-icon" />
+                            <div className="hover-content__icon-container">
+                                <SVG src={IcMoreHorizontal} className="hover-content__icon" />
                             </div>
                         </Dropdown>
                     </div>

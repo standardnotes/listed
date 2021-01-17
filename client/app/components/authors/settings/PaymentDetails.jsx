@@ -66,7 +66,7 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
                             key={credential.id}
                             className="callout callout--success"
                         >
-                            <div className="payment-details__credential">
+                            <div className="payment-details__credential hover-container">
                                 <div className="credential__details">
                                     <SVG className="credential__icon" src={IcWalletFilled} />
                                     <span className="credential__key">
@@ -76,14 +76,14 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
                                         Value:{" "}<strong>{credential.value}</strong>
                                     </span>
                                 </div>
-                                <div className="credential__hover-container">
+                                <div className="hover-content">
                                     <Dropdown
                                         options={dropdownOptions(credential)}
                                         isOpen={dropdownOpen && dropdownOpen === credential.id}
                                         onClick={() => setDropdownOpen(credential.id)}
                                     >
-                                        <div className="hover-icon__container">
-                                            <SVG src={IcMoreHorizontal} className="hover-icon" />
+                                        <div className="hover-content__icon-container">
+                                            <SVG src={IcMoreHorizontal} className="hover-content__icon" />
                                         </div>
                                     </Dropdown>
                                 </div>

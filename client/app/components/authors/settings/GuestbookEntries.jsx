@@ -58,7 +58,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                 </p>
             )}
             {guestbookEntries.map(entry => (
-                <li key={entry.id} className="guestbook-entries__item">
+                <li key={entry.id} className="guestbook-entries__item hover-container">
                     <div className="guestbook-entries__entry">
                         <p className="p2">
                             {entry.text}
@@ -93,7 +93,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                             </p>
                         )}
                     </div>
-                    <div className="guestbook-entries__hover-container">
+                    <div className="hover-content">
                         {!entry.public && (
                             <button
                                 className="button button--primary button--make-public"
@@ -107,8 +107,8 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                             isOpen={dropdownOpen && dropdownOpen === entry.id}
                             onClick={() => setDropdownOpen(entry.id)}
                         >
-                            <div className="hover-icon__container">
-                                <SVG src={IcMoreHorizontal} className="hover-icon" />
+                            <div className="hover-content__icon-container">
+                                <SVG src={IcMoreHorizontal} className="hover-content__icon" />
                             </div>
                         </Dropdown>
                     </div>
