@@ -51,7 +51,7 @@ const Resources = () => {
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="button"
+                        className="button resources__link"
                     >
                         {text}
                         <div className="resources__hover-container">
