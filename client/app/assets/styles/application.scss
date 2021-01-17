@@ -62,7 +62,7 @@ a {
 
         &::before {
             background-image: linear-gradient(to top, var(--body-text-color) 50%, var(--body-text-color) 50%);
-            opacity: 1;
+            opacity: 0.08;
         }
     }
 }
