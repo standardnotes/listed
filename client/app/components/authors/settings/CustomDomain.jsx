@@ -133,7 +133,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                     <div className="hover-container">
                         <div className="custom-domain__details">
                             We've received your domain request ({author.domain.domain}){" "}
-                            and will send you an email when your integration is ready (typically 24-48 hours).
+                            and will send you an email when your integration is ready (typically up to 1 hour).
                         </div>
                         <div className="hover-content">
                             <Dropdown
