@@ -117,7 +117,7 @@ class AuthorsController < ApplicationController
       redirect_to subscription_validate_path({:subscription_id => subscription.id})
     else
       if subscriptions.first.verification_sent_at
-        redirect_to :back
+        redirect_back fallback_location: subscribe_author_path({:author_id => @display_author.id})
       else
         redirect_to subscription_validate_path({:subscription_id => subscriptions.first.id})
       end
@@ -285,7 +285,7 @@ class AuthorsController < ApplicationController
     @author.newsletter_disabled = a_params[:newsletter_disabled]
 
     @author.save
-    redirect_to :back, :status => 303
+    redirect_back fallback_location: @author.url, :status => 303
   end
 
   def domain_request
@@ -310,7 +310,7 @@ class AuthorsController < ApplicationController
 
     SslCertificateCreateJob.perform_later(params[:domain])
 
-    redirect_to :back
+    redirect_back fallback_location: @author.url
   end
 
   def verify_email

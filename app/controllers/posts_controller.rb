@@ -218,7 +218,7 @@ class PostsController < ApplicationController
     post.save
 
     post.author.update_word_count
-    redirect_to :back
+    redirect_back fallback_location: @author.url
   end
 
   def delete
@@ -236,7 +236,7 @@ class PostsController < ApplicationController
     post.delete
 
     @author.update_word_count
-    redirect_to :back
+    redirect_back fallback_location: @author.url
   end
 
   def post_params
