@@ -54,7 +54,7 @@ const Resources = () => {
                         className="button resources__link hover-container"
                     >
                         {text}
-                        <div className="hover-content">
+                        <div className="hover-content resources__hover-content">
                             <div className="hover-content__icon-container">
                                 <SVG src={IcOpenIn} className="hover-content__icon" />
                             </div>
