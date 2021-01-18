@@ -149,9 +149,9 @@ const General = ({ author }) => {
                     <label htmlFor="author-meta-image-url" className="label p2">
                         Meta image URL
                     </label>
-                    <p3 className="sublabel p3">
+                    <p className="sublabel p3">
                         The image that will be used when generating link previews in Twitter, Slack, Facebook, etc.
-                    </p3>
+                    </p>
                     <input
                         id="author-meta-image-url"
                         className="text-field"
