@@ -1,22 +1,31 @@
 .delete-blog {
-    .delete-blog__info {
+    &__info {
         margin-top: $spacing-8;
     }
 
-    .delete-blog__instructions {
+    &__instructions {
         font-weight: bold;
         margin-top: $spacing-24;
     }
 
-    .delete-blog__button {
+    .delete-blog__button-container {
+        display: block;
+    }
+
+    &__button {
         margin-top: $spacing-12;
+        width: 100%;
     
         &.button--primary {
             background-image: linear-gradient(to top, $color-black 50%, $color-error 50%);
         }
+
+        @include Desktop() {
+            width: auto;
+        }
     }
 
-    .delete-blog__form .checkbox__container--checked {
+    &__form .checkbox__container--checked {
         color: $color-error;
 
         .checkbox__icon-container svg path {
