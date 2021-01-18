@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import getAuthToken from "../../../utils/getAuthToken";
+import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
 import { IcLink, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./CustomDomain.scss";
@@ -12,16 +13,15 @@ const CustomDomain = ({ author, customDomainIP }) => {
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const [domainErrorMessage, setDomainErrorMessage] = useState(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
-    const dropdownOptions = domain => {
-        return [
-            {
-                icon: IcTrash,
-                text: "Delete",
-                action: () => deleteDomain(domain)
-            }
-        ];
-    }
+    const dropdownOptions = [
+        {
+            icon: IcTrash,
+            text: "Delete",
+            action: () => setShowConfirmationModal(true)
+        }
+    ];
 
     const submitDomainRequest = event => {
         event.preventDefault();
@@ -137,7 +137,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         </div>
                         <div className="hover-content">
                             <Dropdown
-                                options={dropdownOptions(author.domain.domain)}
+                                options={dropdownOptions}
                                 isOpen={isDropdownOpen}
                                 onClick={() => setIsDropdownOpen()}
                             >
@@ -165,7 +165,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         </div>
                         <div className="hover-content">
                             <Dropdown
-                                options={dropdownOptions(author.domain.domain)}
+                                options={dropdownOptions}
                                 isOpen={isDropdownOpen}
                                 onClick={() => setIsDropdownOpen()}
                             >
@@ -176,6 +176,21 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         </div>
                     </div>
                 </div>
+            )}
+            {showConfirmationModal && (
+                <ConfirmationModal
+                    text={author.domain.active
+                           ? `Are you sure you want to delete custom domain ${author.domain.domain}?`
+                           : `Are you sure you want to delete the request for custom domain ${author.domain.domain}?`}
+                    primaryOption={{
+                        text: "Cancel",
+                        onClick: () => setShowConfirmationModal(false),
+                    }}
+                    secondaryOption={{
+                        text: "Delete",
+                        onClick: () => deleteDomain(author.domain.domain),
+                    }}
+                />
             )}
         </div>
     );

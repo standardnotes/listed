@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import SVG from "react-inlinesvg";
+import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
 import getAuthToken from "../../../utils/getAuthToken";
 import { IcEarth, IcEmail, IcEyeOff, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
@@ -9,6 +10,7 @@ import "./GuestbookEntries.scss";
 
 const GuestbookEntries = ({ guestbookEntries }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null); 
+    const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
     const handleEntryAction = (url) => {
         axios
@@ -28,7 +30,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
             {
                 icon: IcTrash,
                 text: "Delete",
-                action: () => handleEntryAction(entry.deletion_url)
+                action: () => setConfirmationModalDisplayed(entry.id)
             }
         ];
 
@@ -112,6 +114,19 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                             </div>
                         </Dropdown>
                     </div>
+                    {confirmationModalDisplayed && confirmationModalDisplayed === entry.id && (
+                        <ConfirmationModal
+                            text={"Are you sure you want to delete this guestbook entry?"}
+                            primaryOption={{
+                                text: "Cancel",
+                                onClick: () => setConfirmationModalDisplayed(null),
+                            }}
+                            secondaryOption={{
+                                text: "Delete",
+                                onClick: () => handleEntryAction(entry.deletion_url),
+                            }}
+                        />
+                    )}
                 </li>
             ))}
         </ul>
