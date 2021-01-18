@@ -39,7 +39,7 @@ const HeaderContainer = ({
                     {author && !privatePost && (
                         <div className="author-name__container">
                             <div className="h4 author-name path-item">
-                                <a href={author.url_segment}>{author.title}</a>
+                                <a href={author.url}>{author.title}</a>
                             </div>
                         </div>
                     )}
