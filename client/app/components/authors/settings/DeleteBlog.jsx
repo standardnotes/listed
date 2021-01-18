@@ -59,7 +59,7 @@ const DeleteBlog = ({ author }) => {
                     checked={isDeletePostsChecked}
                     label="All my posts will be deleted"
                 />
-                <div className="form-section">
+                <div className="form-section delete-blog__button-container">
                     <button
                         type="submit"
                         className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"} delete-blog__button`}
