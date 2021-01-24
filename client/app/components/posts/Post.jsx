@@ -66,11 +66,6 @@ const Post = ({ truncate, post }) => {
                 </div>
                 {/* eslint-disable-next-line react/no-danger */}
                 <div className="post-body p1" dangerouslySetInnerHTML={renderedText} />
-                {post.page || (
-                    <p className="post-date p3">
-                        {`${moment.utc(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
-                    </p>
-                )}
             </>
         );
     };
