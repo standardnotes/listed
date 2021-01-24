@@ -4,7 +4,9 @@ import { IcChevronDown, IcChevronUp } from "../../../assets/icons";
 import "./Section.scss";
 
 const Section = ({ section }) => {
-    const { id, title, collapsed, renderContent } = section;
+    const {
+        id, title, collapsed, renderContent,
+    } = section;
     const content = renderContent();
     const [isCollapsed, setIsCollapsed] = useState(collapsed);
     const isCollapsedRef = useRef(isCollapsed);
@@ -12,7 +14,7 @@ const Section = ({ section }) => {
     const updateIsCollapsed = (collapsedState) => {
         setIsCollapsed(collapsedState);
         isCollapsedRef.current = collapsedState;
-    }
+    };
 
     const setSectionStyle = () => {
         const sectionContentElement = document.querySelector(`#${section.id} .section__content`);
@@ -39,7 +41,7 @@ const Section = ({ section }) => {
         return () => window.removeEventListener("resize", setSectionStyle);
     }, []);
 
-    return(
+    return (
         <li className="section__container">
             <div id={id} className="card section--desktop">
                 <h3 className="h3">
@@ -66,7 +68,7 @@ const Section = ({ section }) => {
                 </div>
             </div>
         </li>
-        
+
     );
 };
 

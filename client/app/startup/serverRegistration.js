@@ -54,5 +54,5 @@ ReactOnRails.register({
     SubscriptionUpdateFrequency,
     SubscriptionValidate,
     Usage,
-    UsageNewAuthor
+    UsageNewAuthor,
 });

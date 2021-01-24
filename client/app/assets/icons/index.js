@@ -1,7 +1,7 @@
 import IcArrowLong from "./ic-arrow-long.svg";
 import IcBook from "./ic-book.svg";
-import IcCheckboxChecked from "./ic-checkbox-checked";
-import IcCheckboxEmpty from "./ic-checkbox-empty";
+import IcCheckboxChecked from "./ic-checkbox-checked.svg";
+import IcCheckboxEmpty from "./ic-checkbox-empty.svg";
 import IcChevronDown from "./ic-chevron-down.svg";
 import IcChevronUp from "./ic-chevron-up.svg";
 import IcClose from "./ic-close.svg";
@@ -47,5 +47,5 @@ export {
     IcStarCircleFilled,
     IcTextRich,
     IcTrash,
-    IcWalletFilled
+    IcWalletFilled,
 };

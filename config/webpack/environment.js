@@ -6,7 +6,7 @@ const ManifestPlugin = environment.plugins.get("Manifest");
 const sassResources = ["./client/app/assets/styles/vars.scss", "./client/app/assets/styles/mixins.scss"];
 const sassLoader = rules.get("sass");
 
-sassLoader.use = sassLoader.use.filter(item => item.loader !== "postcss-loader");
+sassLoader.use = sassLoader.use.filter((item) => item.loader !== "postcss-loader");
 sassLoader.use.push({
     loader: "sass-resources-loader",
     options: {

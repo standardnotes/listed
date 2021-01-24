@@ -7,16 +7,14 @@ const MasonryLayout = ({ children }) => {
 
     const [containerVisible, setContainerVisible] = useState(false);
 
-    const getCols = windowWidth => {
-        return windowWidth < THREE_COLUMN_BREAKPOINT ? 3 : 4;
-    };
+    const getCols = (windowWidth) => (windowWidth < THREE_COLUMN_BREAKPOINT ? 3 : 4);
 
     const setupLayout = () => {
         const cols = getCols(window.innerWidth);
         const colHeights = new Array(cols).fill(0);
         const container = document.getElementById("masonry-layout-container");
 
-        for (let i = 0; i < children.length; i++) {
+        for (let i = 0; i < children.length; i += 1) {
             const colIndex = colHeights.indexOf(Math.min(...colHeights));
             const child = container.children[i];
 
@@ -24,7 +22,7 @@ const MasonryLayout = ({ children }) => {
             colHeights[colIndex] += child.offsetHeight + MARGIN;
         }
 
-        for (let i = 0; i < cols - 1; i++) {
+        for (let i = 0; i < cols - 1; i += 1) {
             const columnBreakId = `masonry-colum-break-${i}`;
 
             if (!document.getElementById(columnBreakId)) {

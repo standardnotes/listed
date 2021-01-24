@@ -6,7 +6,7 @@ import {
     GuestbookEntries,
     CustomDomain,
     PaymentDetails,
-    DeleteBlog
+    DeleteBlog,
 } from "./settings";
 import Resources from "../shared/Resources";
 import {
@@ -16,82 +16,86 @@ import {
     IcEarth,
     IcCreditCard,
     IcLifebuoy,
-    IcTrash
+    IcTrash,
 } from "../../assets/icons";
 import "./SettingsPage.scss";
 
-const SettingsPage = ({ author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts, deleteAllDataError }) => {
+const SettingsPage = ({
+    author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts,
+}) => {
     const sections = [
         {
             id: "general",
             title: "General",
             icon: IcSettingsFilled,
             collapsed: false,
-            renderContent: () => <General author={author} />
+            renderContent: () => <General author={author} />,
         },
         {
             id: "my-posts",
             title: "My posts",
             icon: IcTextRich,
             collapsed: true,
-            renderContent: () => <MyPosts posts={posts} author={author} />
+            renderContent: () => <MyPosts posts={posts} author={author} />,
         },
         {
             id: "guestbook-entries",
             title: "Guestbook entries",
             icon: IcBook,
             collapsed: true,
-            renderContent: () => <GuestbookEntries guestbookEntries={guestbookEntries} />
+            renderContent: () => <GuestbookEntries guestbookEntries={guestbookEntries} />,
         },
         {
             id: "custom-domain",
             title: "Custom domain",
             icon: IcEarth,
             collapsed: true,
-            renderContent: () => <CustomDomain author={author} customDomainIP={customDomainIP} />
+            renderContent: () => <CustomDomain author={author} customDomainIP={customDomainIP} />,
         },
         {
             id: "payment-details",
             title: "Payment details",
             icon: IcCreditCard,
             collapsed: true,
-            renderContent: () => <PaymentDetails author={author} authorCredentialsUrl={authorCredentialsUrl} />
+            renderContent: () => (
+                <PaymentDetails author={author} authorCredentialsUrl={authorCredentialsUrl} />
+            ),
         },
         {
             id: "resources",
             title: "Resources",
             icon: IcLifebuoy,
             collapsed: true,
-            renderContent: () => <Resources />
+            renderContent: () => <Resources />,
         },
         {
             id: "delete-blog",
             title: "Delete blog",
             icon: IcTrash,
             collapsed: true,
-            renderContent: () => <DeleteBlog author={author} />
-        }
+            renderContent: () => <DeleteBlog author={author} />,
+        },
     ];
 
     return (
         <LeftNavBarPage
             heading="Settings"
-            subheading={
+            subheading={(
                 <div>
                     <p className="p1">
                         Your public blog is accessible via:
                     </p>
                     <ul className="accessible-via">
-                        {author.accessible_via.map(url => (
+                        {author.accessible_via.map((url) => (
                             <li key={url} className="p1">
                                 <a href={url} target="_blank" rel="noopener noreferrer">
                                     {url}
                                 </a>
-                            </li>     
+                            </li>
                         ))}
                     </ul>
                 </div>
-            }
+            )}
             sections={sections}
         />
     );

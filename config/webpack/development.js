@@ -1,8 +1,8 @@
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
+const merge = require("webpack-merge");
 const clientEnvironment = require("./client");
 const serverConfig = require("./server");
-const merge = require("webpack-merge");
 
 clientEnvironment.splitChunks();
 

@@ -53,7 +53,7 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.logger = false
-  config.assets.quiet = true
+  # config.assets.quiet = true
 
   # config.active_job.queue_adapter = :inline
   config.action_mailer.perform_deliveries = true

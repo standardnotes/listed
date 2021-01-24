@@ -5,15 +5,15 @@ import "./AuthorInfo.scss";
 
 const AuthorInfo = ({ author }) => {
     const scrollToPosts = () => {
-        document.getElementById('author-posts').scrollIntoView({ behavior: "smooth" });
-    }
+        document.getElementById("author-posts").scrollIntoView({ behavior: "smooth" });
+    };
 
-    return(
+    return (
         <div className="header-author-info">
             <div className="header-author-info__items">
                 <div className="header-image-container">
                     {author.header_image_url ? (
-                        <div style={ { backgroundImage: `url(${author.header_image_url})` } } className="header-image"></div>
+                        <div style={{ backgroundImage: `url(${author.header_image_url})` }} className="header-image" />
                     ) : (
                         <p className="header-author-capital">
                             {author.title[0]}
@@ -52,13 +52,15 @@ const AuthorInfo = ({ author }) => {
                     </p>
                 </div>
             </div>
-            <button className="button word-count__button" onClick={scrollToPosts}>
+            <button className="button word-count__button" type="button" onClick={scrollToPosts}>
                 <p className="p3 word-count" suppressHydrationWarning>
-                    {author.word_count.toLocaleString()} words
+                    {author.word_count.toLocaleString()}
+                    {" "}
+                    words
                 </p>
                 <SVG src={IcArrowLong} className="word-count__icon" />
             </button>
-        </div>      
+        </div>
     );
 };
 
