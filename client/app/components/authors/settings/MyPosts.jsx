@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import SVG from "react-inlinesvg";
+import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
 import getAuthToken from "../../../utils/getAuthToken";
 import { IcEarth, IcEyeOff, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
@@ -9,6 +10,7 @@ import "./MyPosts.scss";
 
 const MyPosts = ({ posts, author }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
+    const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
     const changePostPrivacy = post => {
       axios
@@ -43,7 +45,7 @@ const MyPosts = ({ posts, author }) => {
         {
             icon: IcTrash,
             text: "Delete",
-            action: () => deletePost(post)
+            action: () => setConfirmationModalDisplayed(post.id)
         }
     ]);
 
@@ -90,6 +92,19 @@ const MyPosts = ({ posts, author }) => {
                             </div>
                         </Dropdown>
                     </div>
+                    {confirmationModalDisplayed && confirmationModalDisplayed === post.id && (
+                        <ConfirmationModal
+                            text="Are you sure you want to delete this post?"
+                            primaryOption={{
+                                text: "Cancel",
+                                onClick: () => setConfirmationModalDisplayed(null),
+                            }}
+                            secondaryOption={{
+                                text: "Delete",
+                                onClick: () => deletePost(post),
+                            }}
+                        />
+                    )}
                 </li>
             ))}
         </ul>

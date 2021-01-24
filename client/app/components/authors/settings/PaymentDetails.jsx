@@ -3,6 +3,7 @@ import SVG from "react-inlinesvg";
 import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
 import CredentialForm from "./CredentialForm";
+import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
 import { IcEdit, IcWalletFilled, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./PaymentDetails.scss";
@@ -10,6 +11,7 @@ import "./PaymentDetails.scss";
 const PaymentDetails = ({ author, authorCredentialsUrl }) => {
     const [editCredentialFormDisplayed, setEditCredentialFormDisplayed] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(null); 
+    const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
     const deleteCredential = credential => {
         axios
@@ -28,7 +30,7 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
             {
                 icon: IcTrash,
                 text: "Delete",
-                action: () => deleteCredential(credential)
+                action: () => setConfirmationModalDisplayed(credential.id)
             }
         ];
 
@@ -92,6 +94,19 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
                                 <CredentialForm
                                     currentCredential={credential}
                                     authorCredentialUrl={`/authors/${author.id}/credentials/${credential.id}?secret=${author.secret}`}
+                                />
+                            )}
+                            {confirmationModalDisplayed && confirmationModalDisplayed === credential.id && (
+                                <ConfirmationModal
+                                    text={`Are you sure you want to delete payment details for ${credential.key}?`}
+                                    primaryOption={{
+                                        text: "Cancel",
+                                        onClick: () => setConfirmationModalDisplayed(null),
+                                    }}
+                                    secondaryOption={{
+                                        text: "Delete",
+                                        onClick: () => deleteCredential(credential),
+                                    }}
                                 />
                             )}
                         </div>
