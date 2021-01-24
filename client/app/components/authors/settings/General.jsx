@@ -36,27 +36,27 @@ const General = ({ author }) => {
     const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-    const submitEditedAuthor = event => {
+    const submitEditedAuthor = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
 
-        axios
-            .put(`/authors/${author.id}?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-                data: {
-                    author: editedAuthor
-                }
-            })
-            .then(response => {
-                setUsernameErrorMessage(null);
-                Turbolinks.visit(response.request.responseURL);
-            })
-            .catch(error => {
-                setUsernameErrorMessage(error.response.data.message);
-                setIsSubmitDisabled(false);
-            })
+        try {
+            const response = await axios
+                .put(`/authors/${author.id}?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                    data: {
+                        author: editedAuthor
+                    }
+                });
+
+            setUsernameErrorMessage(null);
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setUsernameErrorMessage(err.response.data.message);
+            setIsSubmitDisabled(false);
+        }
     };
 
     const editAuthor = (key, value) => (

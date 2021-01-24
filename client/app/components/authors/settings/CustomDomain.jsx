@@ -23,43 +23,44 @@ const CustomDomain = ({ author, customDomainIP }) => {
         }
     ];
 
-    const submitDomainRequest = event => {
+    const submitDomainRequest = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
-
-        axios
-            .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-                data: {
-                    extended_email: extendedEmail,
-                    domain: domain
-                }
-            })
-            .then(response => {
-                setDomainErrorMessage(null);
-                Turbolinks.visit(response.request.responseURL);
-            })
-            .catch(error => {
-                setDomainErrorMessage(error.response.data.message);
-                setIsSubmitDisabled(false);
-            })
+        
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                    data: {
+                        extended_email: extendedEmail,
+                        domain: domain
+                    }
+                });
+            
+            setDomainErrorMessage(null);
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setDomainErrorMessage(err.response.data.message);
+            setIsSubmitDisabled(false);
+        }   
     };
 
-    const deleteDomain = domain => {
-        axios
-            .post(`/authors/${author.id}/delete_domain?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-                data: {
-                    domain: domain
-                }
-            })
-            .then(response => {
-                Turbolinks.visit(response.request.responseURL);
-            })
+    const deleteDomain = async (domain) => {
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/delete_domain?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                    data: {
+                        domain: domain
+                    }
+                });
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {}
     };
 
 

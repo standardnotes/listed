@@ -11,22 +11,22 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
     const [visiblePosts, setVisiblePosts] = useState(posts);
     const [loadMorePostsDate, setLoadMorePostsDate] = useState(olderThan);
 
-    const loadMorePosts = () => {
-        axios
-            .get(`/authors/${displayAuthor.id}/more_posts?older_than=${loadMorePostsDate}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-            })
-            .then(response => {
-                const { older_than, posts } = response.data;
+    const loadMorePosts = async () => {
+        try {
+            const response = await axios
+                .get(`/authors/${displayAuthor.id}/more_posts?older_than=${loadMorePostsDate}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                });
+            
+            const { older_than, posts } = response.data;
 
-                setVisiblePosts([...visiblePosts, ...posts]);
-                setLoadMorePostsDate(older_than);
-            })
-            .catch(error => {
-                setLoadMorePostsDate(null);
-            })
+            setVisiblePosts([...visiblePosts, ...posts]);
+            setLoadMorePostsDate(older_than);
+        } catch (err) {
+            setLoadMorePostsDate(null);
+        }
     };
 
     return (

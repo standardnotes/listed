@@ -10,27 +10,27 @@ const DeleteBlog = ({ author }) => {
     const [isDeletePostsChecked, setIsDeletePostsChecked] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
-    const submitDeleteAllData = event => {
+    const submitDeleteAllData = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
 
-        axios
-            .post(`/authors/${author.id}/delete_all_data`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-                data: {
-                    secret: author.secret
-                }
-            })
-            .then(response => {
-                setErrorMessage(null);
-                Turbolinks.visit(response.request.responseURL);
-            })
-            .catch(error => {
-                setErrorMessage(error.response.data.error);
-                setIsSubmitDisabled(false);
-            })
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/delete_all_data`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                    data: {
+                        secret: author.secret
+                    }
+                });
+            
+            setErrorMessage(null);
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setErrorMessage(err.response.data.error);
+            setIsSubmitDisabled(false);
+        }
     }
 
     useEffect(() => {

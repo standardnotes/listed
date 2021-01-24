@@ -9,23 +9,25 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
     const [showCaptcha, setShowCaptcha] = useState(false);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
-    const submitValidate = event => {
+    const submitValidate = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
 
-        axios
-            .post(`/subscriptions/${subscription.id}/submit_validate`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-                data: {
-                    token: captchaToken
-                }
-            })
-            .then(response => {
-                Turbolinks.visit(response.request.responseURL);
-            })
-            .catch(() => setIsSubmitDisabled(false))
+        try {
+            const response = await axios
+                .post(`/subscriptions/${subscription.id}/submit_validate`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                    data: {
+                        token: captchaToken
+                    }
+                });
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setIsSubmitDisabled(false);
+        }
     };
 
     useEffect(() => {

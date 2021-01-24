@@ -3,18 +3,19 @@ import axios from 'axios';
 import getAuthToken from "../../utils/getAuthToken";
 
 const StartWriting = ({ className, children }) => {
-    const createNewAuthor = event => {
+    const createNewAuthor = async (event) => {
         event.preventDefault();
 
-        axios
-            .post("/authors", null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-            })
-            .then(response => {
-                Turbolinks.visit(response.request.responseURL);
-            });
+        try {
+            const response = await axios
+                .post("/authors", null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                })
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {}
     };
 
     return(

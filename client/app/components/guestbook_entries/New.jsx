@@ -16,32 +16,34 @@ const New = ({ author, hCaptchaSiteKey }) => {
 
     const captcha = useRef(null);
 
-    const submitEntry = event => {
+    const submitEntry = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
 
-        axios
-            .post(`/authors/${author.id}/guestbook`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                },
-                data: {
-                    guestbook_entry: guestbookEntry,
-                    token: captchaToken,
-                }
-            })
-            .then(response => {
-                if (response.data.error) {
-                    captcha.current.resetCaptcha();
-                    setCaptchaErrorMessage(response.data.error);
-                    setIsSubmitDisabled(false);
-                } else {
-                    setCaptchaErrorMessage("");
-                    setCaptchaToken("");
-                    Turbolinks.visit(response.request.responseURL);
-                }
-            })
-            .catch(() => setIsSubmitDisabled(false))
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/guestbook`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    },
+                    data: {
+                        guestbook_entry: guestbookEntry,
+                        token: captchaToken,
+                    }
+                });
+
+            if (response.data.error) {
+                captcha.current.resetCaptcha();
+                setCaptchaErrorMessage(response.data.error);
+                setIsSubmitDisabled(false);
+            } else {
+                setCaptchaErrorMessage("");
+                setCaptchaToken("");
+                Turbolinks.visit(response.request.responseURL);
+            }
+        } catch (err) {
+            setIsSubmitDisabled(false);
+        }
     };
 
     const editGuestbookEntry = (key, value) => (

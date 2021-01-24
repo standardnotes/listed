@@ -13,16 +13,17 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null); 
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
-    const deleteCredential = credential => {
-        axios
-            .delete(`/authors/${author.id}/credentials/${credential.id}?secret=${author.secret}`, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                }
-            })
-            .then(response => {
-                Turbolinks.visit(response.request.responseURL);
-            })
+    const deleteCredential = async (credential) => {
+        try {
+            const response = await axios
+                .delete(`/authors/${author.id}/credentials/${credential.id}?secret=${author.secret}`, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    }
+                })
+            
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {}
     }
 
     const dropdownOptions = credential => {

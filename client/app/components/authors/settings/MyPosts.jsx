@@ -12,28 +12,30 @@ const MyPosts = ({ posts, author }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
-    const changePostPrivacy = post => {
-      axios
-        .post(`/authors/${author.id}/posts/${post.id}/change_privacy?secret=${author.secret}`, null, {
-            headers: {
-                "X-CSRF-Token": getAuthToken()
-            }
-        })
-        .then(response => {
+    const changePostPrivacy = async (post) => {
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/posts/${post.id}/change_privacy?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    }
+                });
+
             Turbolinks.visit(response.request.responseURL);
-        })
+        } catch (err) {}
     };
 
-    const deletePost = post => {
-        axios
-            .post(`/authors/${author.id}/posts/${post.id}/delete?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken()
-                }
-            })
-            .then(response => {
-                Turbolinks.visit(response.request.responseURL);
-            })
+    const deletePost = async (post) => {
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/posts/${post.id}/delete?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken()
+                    }
+                })
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {}
     };
 
     const dropdownOptions = post => ([

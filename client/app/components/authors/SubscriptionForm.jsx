@@ -7,23 +7,25 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
     const [email, setEmail] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-    const emailSubscribe = event => {
+    const emailSubscribe = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
 
-        axios
-            .post(`/authors/${author.id}/email_subscribe`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-                data: {
-                    email: email
-                }
-            })
-            .then(response => {
-                Turbolinks.visit(response.request.responseURL);
-            })
-            .catch(() => setIsSubmitDisabled(false));
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/email_subscribe`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                    data: {
+                        email: email
+                    }
+                });
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setIsSubmitDisabled(false);
+        }
     };
 
     return (

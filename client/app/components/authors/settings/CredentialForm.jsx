@@ -10,37 +10,42 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
     });
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
-    const submitCredential = event => {
+    const submitCredential = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
 
         if (currentCredential) {
-            axios
-                .patch(authorCredentialUrl, null, {
-                    headers: {
-                        "X-CSRF-Token": getAuthToken()
-                    },
-                    data: {
-                        credential: credential
-                    }
-                })
-                .then(response => {
-                    Turbolinks.visit(response.request.responseURL);
-                })
+            try {
+                const response = await axios
+                    .patch(authorCredentialUrl, null, {
+                        headers: {
+                            "X-CSRF-Token": getAuthToken()
+                        },
+                        data: {
+                            credential: credential
+                        }
+                    });
+                
+                Turbolinks.visit(response.request.responseURL);
+            } catch (err) {
+                setIsSubmitDisabled(false);
+            }
         } else {
-            axios
-                .post(authorCredentialUrl, null, {
-                    headers: {
-                        "X-CSRF-Token": getAuthToken()
-                    },
-                    data: {
-                        credential: credential
-                    }
-                })
-                .then(response => {
+            try {
+                const response = await axios
+                    .post(authorCredentialUrl, null, {
+                        headers: {
+                            "X-CSRF-Token": getAuthToken()
+                        },
+                        data: {
+                            credential: credential
+                        }
+                    });
+
                     Turbolinks.visit(response.request.responseURL);
-                })
-                .catch(() => setIsSubmitDisabled(false));
+            } catch (err) {
+                setIsSubmitDisabled(false);
+            }
         }
     }
 

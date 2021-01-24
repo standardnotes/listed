@@ -1,25 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
-import getAuthToken from "../../utils/getAuthToken";
 import New from "./New";
 import "./Guestbook.scss";
 
 const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, hCaptchaSiteKey }) => {
     const [showNewEntryForm, setShowNewEntryForm] = useState(false);
-
-    const createNewEntry = event => {
-        event.preventDefault();
-
-        axios
-            .get(newAuthorGuestbookEntryUrl, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                }
-            })
-            .then(() => {
-                setShowNewEntryForm(true);
-            });
-    };
 
     return(
         <div className="page-container guestbook__container">
@@ -38,7 +22,7 @@ const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, hCaptcha
                     </div>
                 ) : (
                     <div className="guestbook__new-entry-button-container">
-                        <button className="button button--primary" onClick={createNewEntry}>
+                        <button className="button button--primary" onClick={() => setShowNewEntryForm(true)}>
                             New entry
                         </button>
                         {entries.length > 0 ? (

@@ -12,8 +12,8 @@ const GuestbookEntries = ({ guestbookEntries }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null); 
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
-    const handleEntryAction = (url) => {
-        axios
+    const handleEntryAction = async (url) => {
+        await axios
             .get(url)
             .then(response => {
                 Turbolinks.visit(response.request.responseURL);
