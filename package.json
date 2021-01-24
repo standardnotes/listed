@@ -28,5 +28,13 @@
     "build:dev:watch": "RAILS_ENV=development NODE_ENV=development bin/webpack --watch",
     "build:production": "RAILS_ENV=production NODE_ENV=production bin/webpack -p",
     "build:clean": "rm -rf public/packs || true"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4"
   }
 }
