@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./SubscriptionForm.scss";
 
 const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author }) => {
     const [email, setEmail] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
     const emailSubscribe = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
 
         try {
             const response = await axios
@@ -25,6 +29,8 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setIsSubmitDisabled(false);
+            setErrorToastMessage("There was an error trying to subscribe you to this author. Please try again.");
+            setIsErrorToastDisplayed(true);
         }
     };
 
@@ -58,7 +64,13 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
                         </button>
                     </div>
                 </form>
+                
             )}
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed}
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };

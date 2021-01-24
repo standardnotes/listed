@@ -8,12 +8,15 @@ import Dropdown from "../../shared/Dropdown";
 import { IcEdit, IcWalletFilled, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./PaymentDetails.scss";
 
-const PaymentDetails = ({ author, authorCredentialsUrl }) => {
+const PaymentDetails = ({ author, authorCredentialsUrl, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const [editCredentialFormDisplayed, setEditCredentialFormDisplayed] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(null); 
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
     const deleteCredential = async (credential) => {
+        setIsErrorToastDisplayed(false);
+        setConfirmationModalDisplayed(null);
+
         try {
             const response = await axios
                 .delete(`/authors/${author.id}/credentials/${credential.id}?secret=${author.secret}`, {
@@ -23,7 +26,10 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
                 })
             
             Turbolinks.visit(response.request.responseURL);
-        } catch (err) {}
+        } catch (err) {
+            setErrorToastMessage("There was an error trying to delete the payment detail. Please try again.");
+            setIsErrorToastDisplayed(true);
+        }
     }
 
     const dropdownOptions = credential => {
@@ -62,7 +68,11 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
                 the value will be your BTC address. Or, you can specify a key of "PayPal", and the value will be your
                 PayPal payment link.
             </p>
-            <CredentialForm authorCredentialUrl={authorCredentialsUrl} />
+            <CredentialForm
+                authorCredentialUrl={authorCredentialsUrl} 
+                setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                setErrorToastMessage={setErrorToastMessage}
+            />
             <div>
                 {author.credentials.map(credential => (
                         <div
@@ -95,6 +105,8 @@ const PaymentDetails = ({ author, authorCredentialsUrl }) => {
                                 <CredentialForm
                                     currentCredential={credential}
                                     authorCredentialUrl={`/authors/${author.id}/credentials/${credential.id}?secret=${author.secret}`}
+                                    setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                                    setErrorToastMessage={setErrorToastMessage}
                                 />
                             )}
                             {confirmationModalDisplayed && confirmationModalDisplayed === credential.id && (

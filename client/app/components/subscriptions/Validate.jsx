@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./Validate.scss";
 
@@ -8,10 +9,13 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
     const [captchaToken, setCaptchaToken] = useState("");
     const [showCaptcha, setShowCaptcha] = useState(false);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
     const submitValidate = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
 
         try {
             const response = await axios
@@ -27,6 +31,8 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setIsSubmitDisabled(false);
+            setErrorToastMessage("There was an error trying to validate your subscription. Please try again.");
+            setIsErrorToastDisplayed(true);
         }
     };
 
@@ -65,6 +71,11 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
                     </button>
                 </form>
             </div>
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed}
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };

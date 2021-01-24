@@ -3,7 +3,7 @@ import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
 import "./CredentialForm.scss";
 
-const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
+const CredentialForm = ({ authorCredentialUrl, currentCredential, setIsErrorToastDisplayed, setErrorToastMessage }) => {
     const [credential, setCredential] = useState({
         key: currentCredential ? currentCredential.key : "",
         value: currentCredential ? currentCredential.value : ""
@@ -13,6 +13,7 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
     const submitCredential = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
 
         if (currentCredential) {
             try {
@@ -29,6 +30,8 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
                 Turbolinks.visit(response.request.responseURL);
             } catch (err) {
                 setIsSubmitDisabled(false);
+                setErrorToastMessage("There was an error trying to update the payment detail. Please try again.");
+                setIsErrorToastDisplayed(true);
             }
         } else {
             try {
@@ -45,6 +48,8 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
                     Turbolinks.visit(response.request.responseURL);
             } catch (err) {
                 setIsSubmitDisabled(false);
+                setErrorToastMessage("There was an error trying to create the payment detail. Please try again.");
+                setIsErrorToastDisplayed(true);
             }
         }
     }
@@ -99,7 +104,7 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
                 </div>
             </div>
         </form>
-        );
+    );
 };
 
 export default CredentialForm;

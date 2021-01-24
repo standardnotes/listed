@@ -4,20 +4,26 @@ import axios from "axios";
 import SVG from "react-inlinesvg";
 import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
-import getAuthToken from "../../../utils/getAuthToken";
 import { IcEarth, IcEmail, IcEyeOff, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./GuestbookEntries.scss";
 
-const GuestbookEntries = ({ guestbookEntries }) => {
+const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null); 
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
-    const handleEntryAction = async (url) => {
-        await axios
-            .get(url)
-            .then(response => {
-                Turbolinks.visit(response.request.responseURL);
-            })
+    const handleEntryAction = async (url, text) => {
+        setIsErrorToastDisplayed(false);
+        setConfirmationModalDisplayed(null);
+
+        try {
+            const response = axios
+                .get(url);
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setErrorToastMessage(`There was an error trying to ${text}. Please try again.`);
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     const dropdownOptions = entry => {
@@ -25,12 +31,12 @@ const GuestbookEntries = ({ guestbookEntries }) => {
             {
                 icon: IcEmail,
                 text: "Report spam",
-                action: () => handleEntryAction(entry.spam_url)
+                action: () => handleEntryAction(entry.spam_url, "report this entry")
             },
             {
                 icon: IcTrash,
                 text: "Delete",
-                action: () => setConfirmationModalDisplayed(entry.id)
+                action: () => setConfirmationModalDisplayed(entry.id, "delete this entry")
             }
         ];
 
@@ -38,14 +44,14 @@ const GuestbookEntries = ({ guestbookEntries }) => {
             options.unshift(        {
                 icon: IcEyeOff,
                 text: "Make private",
-                action: () => handleEntryAction(entry.unapproval_url)
+                action: () => handleEntryAction(entry.unapproval_url, "make this entry private")
             });
         } else {
             options.unshift(        {
                 icon: IcEarth,
                 text: "Publish",
                 className: "guestbook-entries__action--make-public",
-                action: () => handleEntryAction(entry.approval_url)
+                action: () => handleEntryAction(entry.approval_url, "make this entry public")
             });
         }
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
+import ErrorToast from "../shared/ErrorToast";
 import Post from "../posts/Post";
 import ScrollToTopButton from "../shared/ScrollToTopButton";
 import getAuthToken from "../../utils/getAuthToken";
@@ -10,8 +11,12 @@ import "./Show.scss";
 const Show = ({ posts, olderThan, displayAuthor }) => {
     const [visiblePosts, setVisiblePosts] = useState(posts);
     const [loadMorePostsDate, setLoadMorePostsDate] = useState(olderThan);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
     const loadMorePosts = async () => {
+        setIsErrorToastDisplayed(false);
+
         try {
             const response = await axios
                 .get(`/authors/${displayAuthor.id}/more_posts?older_than=${loadMorePostsDate}`, null, {
@@ -25,7 +30,8 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
             setVisiblePosts([...visiblePosts, ...posts]);
             setLoadMorePostsDate(older_than);
         } catch (err) {
-            setLoadMorePostsDate(null);
+            setErrorToastMessage("There was an error trying to load more posts. Please try again.");
+            setIsErrorToastDisplayed(true);
         }
     };
 
@@ -52,6 +58,11 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
                 )}
             </div>
             <ScrollToTopButton />
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed}
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };

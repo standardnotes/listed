@@ -4,6 +4,7 @@ import SVG from "react-inlinesvg";
 import getAuthToken from "../../../utils/getAuthToken";
 import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
+import ErrorToast from "../../shared/ErrorToast";
 import { IcLink, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./CustomDomain.scss";
 
@@ -14,6 +15,8 @@ const CustomDomain = ({ author, customDomainIP }) => {
     const [domainErrorMessage, setDomainErrorMessage] = useState(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
     const dropdownOptions = [
         {
@@ -26,6 +29,8 @@ const CustomDomain = ({ author, customDomainIP }) => {
     const submitDomainRequest = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
+        setShowConfirmationModal(false);
         
         try {
             const response = await axios
@@ -42,12 +47,21 @@ const CustomDomain = ({ author, customDomainIP }) => {
             setDomainErrorMessage(null);
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
-            setDomainErrorMessage(err.response.data.message);
             setIsSubmitDisabled(false);
+
+            if (err.response.status === 409) {
+                setDomainErrorMessage(err.response.data.message);
+            } else {
+                setErrorToastMessage("There was an error trying to submit the domain request. Please try again.");
+                setIsErrorToastDisplayed(true);
+            }
         }   
     };
 
     const deleteDomain = async (domain) => {
+        setIsErrorToastDisplayed(false);
+        setShowConfirmationModal(false);
+
         try {
             const response = await axios
                 .post(`/authors/${author.id}/delete_domain?secret=${author.secret}`, null, {
@@ -60,7 +74,12 @@ const CustomDomain = ({ author, customDomainIP }) => {
                 });
 
             Turbolinks.visit(response.request.responseURL);
-        } catch (err) {}
+        } catch (err) {
+            setErrorToastMessage(
+                `There was an error trying to delete the ${author.domain.active ? "domain" : "domain request"}. Please try again.`
+            );
+            setIsErrorToastDisplayed(true);
+        }
     };
 
 
@@ -195,6 +214,11 @@ const CustomDomain = ({ author, customDomainIP }) => {
                     }}
                 />
             )}
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed}
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };

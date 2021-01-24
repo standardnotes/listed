@@ -4,7 +4,7 @@ import getAuthToken from "../../../utils/getAuthToken";
 import Checkbox from "../../shared/Checkbox";
 import "./General.scss";
 
-const General = ({ author }) => {
+const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const {
         username,
         display_name,
@@ -39,6 +39,7 @@ const General = ({ author }) => {
     const submitEditedAuthor = async (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
 
         try {
             const response = await axios
@@ -54,8 +55,14 @@ const General = ({ author }) => {
             setUsernameErrorMessage(null);
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
-            setUsernameErrorMessage(err.response.data.message);
             setIsSubmitDisabled(false);
+
+            if (err.response.status === 409) {
+                setUsernameErrorMessage(err.response.data.message);
+            } else {
+                setErrorToastMessage("There was an error trying to update your settings. Please try again.");
+                setIsErrorToastDisplayed(true);
+            }
         }
     };
 

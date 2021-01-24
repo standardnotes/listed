@@ -8,11 +8,13 @@ import getAuthToken from "../../../utils/getAuthToken";
 import { IcEarth, IcEyeOff, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./MyPosts.scss";
 
-const MyPosts = ({ posts, author }) => {
+const MyPosts = ({ posts, author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
     const changePostPrivacy = async (post) => {
+        setIsErrorToastDisplayed(false);
+
         try {
             const response = await axios
                 .post(`/authors/${author.id}/posts/${post.id}/change_privacy?secret=${author.secret}`, null, {
@@ -22,10 +24,16 @@ const MyPosts = ({ posts, author }) => {
                 });
 
             Turbolinks.visit(response.request.responseURL);
-        } catch (err) {}
+        } catch (err) {
+            setErrorToastMessage("There was an error trying to change the post's privacy. Please try again.");
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     const deletePost = async (post) => {
+        setIsErrorToastDisplayed(false);
+        setConfirmationModalDisplayed(null);
+
         try {
             const response = await axios
                 .post(`/authors/${author.id}/posts/${post.id}/delete?secret=${author.secret}`, null, {
@@ -35,7 +43,10 @@ const MyPosts = ({ posts, author }) => {
                 })
 
             Turbolinks.visit(response.request.responseURL);
-        } catch (err) {}
+        } catch (err) {
+            setErrorToastMessage("There was an error trying to delete the post. Please try again.");
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     const dropdownOptions = post => ([

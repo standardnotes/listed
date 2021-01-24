@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./New.scss";
 
@@ -13,6 +14,8 @@ const New = ({ author, hCaptchaSiteKey }) => {
     const [captchaToken, setCaptchaToken] = useState("");
     const [captchaErrorMessage, setCaptchaErrorMessage] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
     const captcha = useRef(null);
 
@@ -43,6 +46,8 @@ const New = ({ author, hCaptchaSiteKey }) => {
             }
         } catch (err) {
             setIsSubmitDisabled(false);
+            setErrorToastMessage("There was an error trying to create the guestbook entry. Please try again.");
+            setIsErrorToastDisplayed(true);
         }
     };
 
@@ -130,6 +135,11 @@ const New = ({ author, hCaptchaSiteKey }) => {
                     </div>
                 </form>
             </div>
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed} 
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };
