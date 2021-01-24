@@ -47,6 +47,7 @@ const Guestbook = ({
                     {entries.length > 0 ? (
                         <p className="p1">
                             Write something in
+                            {" "}
                             {author.title}
                             &apos;s guestbook!
                         </p>
