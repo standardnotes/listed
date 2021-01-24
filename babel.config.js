@@ -33,5 +33,6 @@ module.exports = function (api) {
                 },
             ],
         ],
+        plugins: ["@babel/plugin-transform-runtime"],
     };
 };

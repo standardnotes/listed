@@ -25,6 +25,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
 
     const submitDomainRequest = event => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
         axios
             .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
@@ -42,6 +43,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
             })
             .catch(error => {
                 setDomainErrorMessage(error.response.data.message);
+                setIsSubmitDisabled(false);
             })
     };
 

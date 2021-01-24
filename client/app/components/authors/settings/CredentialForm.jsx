@@ -12,6 +12,7 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
 
     const submitCredential = event => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
         if (currentCredential) {
             axios
@@ -39,6 +40,7 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
                 .then(response => {
                     Turbolinks.visit(response.request.responseURL);
                 })
+                .catch(() => setIsSubmitDisabled(false));
         }
     }
 

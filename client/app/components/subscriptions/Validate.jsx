@@ -11,6 +11,7 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
 
     const submitValidate = event => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
         axios
             .post(`/subscriptions/${subscription.id}/submit_validate`, null, {
@@ -23,7 +24,8 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
             })
             .then(response => {
                 Turbolinks.visit(response.request.responseURL);
-            });
+            })
+            .catch(() => setIsSubmitDisabled(false))
     };
 
     useEffect(() => {

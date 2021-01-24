@@ -34,9 +34,11 @@ const General = ({ author }) => {
     });
 
     const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
     const submitEditedAuthor = event => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
         axios
             .put(`/authors/${author.id}?secret=${author.secret}`, null, {
@@ -53,6 +55,7 @@ const General = ({ author }) => {
             })
             .catch(error => {
                 setUsernameErrorMessage(error.response.data.message);
+                setIsSubmitDisabled(false);
             })
     };
 
@@ -195,7 +198,13 @@ const General = ({ author }) => {
                 label="Hide profile from the “Listed authors” section in the homepage"
             />
             <div className="form-section form-row">
-                <button type="submit" className="button button--primary">Save changes</button>
+                <button
+                    type="submit"
+                    className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
+                    disabled={isSubmitDisabled}
+                >
+                    Save changes
+                </button>
             </div>
         </form>
     );

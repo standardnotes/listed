@@ -28,5 +28,9 @@
         .button--primary {
             margin-left: $spacing-12;
         }
+
+        .button--secondary-disabled {
+            color: $color-black-opacity-36;
+        }
     }
 }

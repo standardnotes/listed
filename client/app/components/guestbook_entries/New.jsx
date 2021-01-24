@@ -18,6 +18,7 @@ const New = ({ author, hCaptchaSiteKey }) => {
 
     const submitEntry = event => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
         axios
             .post(`/authors/${author.id}/guestbook`, null, {
@@ -33,12 +34,14 @@ const New = ({ author, hCaptchaSiteKey }) => {
                 if (response.data.error) {
                     captcha.current.resetCaptcha();
                     setCaptchaErrorMessage(response.data.error);
+                    setIsSubmitDisabled(false);
                 } else {
                     setCaptchaErrorMessage("");
                     setCaptchaToken("");
                     Turbolinks.visit(response.request.responseURL);
                 }
-            });
+            })
+            .catch(() => setIsSubmitDisabled(false))
     };
 
     const editGuestbookEntry = (key, value) => (

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getAuthToken from "../../utils/getAuthToken";
 import "./SubscriptionForm.scss";
 
 const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author }) => {
     const [email, setEmail] = useState("");
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
     const emailSubscribe = event => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
         axios
             .post(`/authors/${author.id}/email_subscribe`, null, {
@@ -21,6 +23,7 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
             .then(response => {
                 Turbolinks.visit(response.request.responseURL);
             })
+            .catch(() => setIsSubmitDisabled(false));
     };
 
     return (
@@ -44,7 +47,13 @@ const SubscriptionForm = ({ subscribedToAuthor, subscriptionForAuthor, subscript
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         ></input>
-                        <button type="submit" className="button button--primary">Subscribe</button>
+                        <button
+                            type="submit"
+                            className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
+                            disabled={isSubmitDisabled}
+                        >
+                            Subscribe
+                        </button>
                     </div>
                 </form>
             )}

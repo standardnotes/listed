@@ -12,6 +12,7 @@ const DeleteBlog = ({ author }) => {
 
     const submitDeleteAllData = event => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
         axios
             .post(`/authors/${author.id}/delete_all_data`, null, {
@@ -28,6 +29,7 @@ const DeleteBlog = ({ author }) => {
             })
             .catch(error => {
                 setErrorMessage(error.response.data.error);
+                setIsSubmitDisabled(false);
             })
     }
 
