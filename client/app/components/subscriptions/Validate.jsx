@@ -7,6 +7,7 @@ import "./Validate.scss";
 const Validate = ({ subscription, hCaptchaSiteKey }) => {
     const [captchaToken, setCaptchaToken] = useState("");
     const [showCaptcha, setShowCaptcha] = useState(false);
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
     const submitValidate = event => {
         event.preventDefault();
@@ -29,6 +30,10 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
         setShowCaptcha(true);
     }, []);
 
+    useEffect(() => {
+        setIsSubmitDisabled(!captchaToken);
+    }, [captchaToken]);
+
     return (
         <div className="validate-page page-container">
             <h1 className="h1">Subscribe</h1>
@@ -47,7 +52,13 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
                             />
                         )}
                     </div>
-                    <button type="submit" className="button button--primary">Verify Subscription</button>
+                    <button
+                        type="submit"
+                        className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
+                        disabled={isSubmitDisabled}
+                    >
+                        Verify Subscription
+                    </button>
                 </form>
             </div>
         </div>
