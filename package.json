@@ -28,7 +28,8 @@
     "build:dev": "rm -rf public/packs/development && RAILS_ENV=development NODE_ENV=development bin/webpack",
     "build:dev:watch": "RAILS_ENV=development NODE_ENV=development bin/webpack --watch",
     "build:production": "RAILS_ENV=production NODE_ENV=production bin/webpack -p",
-    "build:clean": "rm -rf public/packs || true"
+    "build:clean": "rm -rf public/packs || true",
+    "eslint": "node_modules/.bin/eslint --ext js,jsx --fix client/app"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
