@@ -22,7 +22,7 @@ const ErrorToast = ({ message, isDisplayed, setIsDisplayed }) => {
             if (toastTimeout) {
                 clearTimeout(toastTimeout);
             }
-        }
+        };
     }, [isDisplayed]);
 
     return (
@@ -32,7 +32,7 @@ const ErrorToast = ({ message, isDisplayed, setIsDisplayed }) => {
                     <p className="p2 error-toast__message">
                         {message}
                     </p>
-                    <button 
+                    <button
                         className="button error-toast__dismiss-button"
                         type="button"
                         onClick={() => setIsToastDisplayed(false)}

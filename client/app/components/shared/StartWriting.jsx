@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from 'axios';
-import ErrorToast from "../shared/ErrorToast";
+import axios from "axios";
+import ErrorToast from "./ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 
 const StartWriting = ({ className, children }) => {
@@ -15,23 +15,25 @@ const StartWriting = ({ className, children }) => {
             const response = await axios
                 .post("/authors", null, {
                     headers: {
-                        "X-CSRF-Token": getAuthToken()
+                        "X-CSRF-Token": getAuthToken(),
                     },
-                })
+                });
 
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
-            setErrorToastMessage("There was an error trying to generate a new author token for you. Please try again.")
+            setErrorToastMessage("There was an error trying to generate a new author token for you. Please try again.");
             setIsErrorToastDisplayed(true);
         }
     };
 
-    return(
+    return (
         <>
-            <button onClick={createNewAuthor} className={`${children ? "button" : "button button--primary"} ${className ? className : ""}`}>
-                {children ? (
-                    children
-                ) : (
+            <button
+                onClick={createNewAuthor}
+                className={`${children ? "button" : "button button--primary"} ${className || ""}`}
+                type="button"
+            >
+                {children || (
                     "Start writing"
                 )}
             </button>

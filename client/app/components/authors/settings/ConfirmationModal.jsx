@@ -12,7 +12,7 @@ const ConfirmationModal = ({ text, primaryOption, secondaryOption }) => {
         } catch (err) {
             setIsSubmitDisabled(false);
         }
-    }
+    };
 
     return (
         <div className="confirmation-modal__overlay">
@@ -25,15 +25,20 @@ const ConfirmationModal = ({ text, primaryOption, secondaryOption }) => {
                         className={`button ${isSubmitDisabled ? "button--secondary-disabled" : "button--no-fill"}`}
                         onClick={onClickSecondary}
                         disabled={isSubmitDisabled}
+                        type="button"
                     >
                         {secondaryOption.text}
                     </button>
-                    <button className="button button--primary" onClick={primaryOption.onClick}>
+                    <button
+                        className="button button--primary"
+                        onClick={primaryOption.onClick}
+                        type="button"
+                    >
                         {primaryOption.text}
                     </button>
                 </div>
             </div>
-        </div>  
+        </div>
     );
 };
 
