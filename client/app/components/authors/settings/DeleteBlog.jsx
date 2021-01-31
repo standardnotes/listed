@@ -18,37 +18,38 @@ const DeleteBlog = ({ author }) => {
             const response = await axios
                 .post(`/authors/${author.id}/delete_all_data`, null, {
                     headers: {
-                        "X-CSRF-Token": getAuthToken()
+                        "X-CSRF-Token": getAuthToken(),
                     },
                     data: {
-                        secret: author.secret
-                    }
+                        secret: author.secret,
+                    },
                 });
-            
+
             setErrorMessage(null);
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setErrorMessage(err.response.data.error);
             setIsSubmitDisabled(false);
         }
-    }
+    };
 
     useEffect(() => {
         setIsSubmitDisabled(!isDeleteBlogChecked || !isDeletePostsChecked);
     }, [isDeleteBlogChecked, isDeletePostsChecked]);
-    
+
     return (
         <div className="delete-blog">
             <p className="p2 delete-blog__info">
                 Delete your Listed blog and all accompanying data including all your posts.
             </p>
             <p className="p2 delete-blog__info">
-                Note that this will not affect any of the source notes in your Standard Notes account.
+                Note that this will not affect any of the source notes
+                in your Standard Notes account.
             </p>
             <p className="p2 delete-blog__instructions">
                 Please confirm that you understand the ramifications of your actions:
             </p>
-            <form onSubmit={e => submitDeleteAllData(e)} className="delete-blog__form">
+            <form onSubmit={(e) => submitDeleteAllData(e)} className="delete-blog__form">
                 <Checkbox
                     id="listed-blog-deleted"
                     onClick={setIsDeleteBlogChecked}

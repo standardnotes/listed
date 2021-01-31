@@ -1,8 +1,10 @@
 import React from "react";
 import "./AuthorMenu.scss";
 
-const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentUrl }) => {
-    const isActiveMenuItem = url => url === currentUrl;
+const AuthorMenu = ({
+    isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentUrl,
+}) => {
+    const isActiveMenuItem = (url) => url === currentUrl;
 
     const isSubscribeMenuItemActive = () => (
         isActiveMenuItem(`${author.url}/subscribe`) || currentUrl.includes("subscriptions")
@@ -14,9 +16,9 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
         }
 
         return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
-    }
+    };
 
-    return(
+    return (
         <nav className={navClassName()}>
             <a
                 href={author.url}
@@ -24,8 +26,8 @@ const AuthorMenu = ({ isMobileMenuOpen, isDesktopMenu, author, pages, authorGues
             >
                 Home
             </a>
-            {pages.map(page => (
-                <a 
+            {pages.map((page) => (
+                <a
                     key={page.id}
                     href={page.author_relative_url}
                     className={`button page-link ${isActiveMenuItem(page.author_relative_url) ? "button--active" : "button--no-fill"}`}

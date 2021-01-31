@@ -3,7 +3,7 @@ import MyPosts from "./MyPosts";
 import GuestbookEntries from "./GuestbookEntries";
 import CustomDomain from "./CustomDomain";
 import PaymentDetails from "./PaymentDetails";
-import DeleteBlog from "./DeleteBlog";;
+import DeleteBlog from "./DeleteBlog";
 
 export {
     General,
@@ -11,5 +11,5 @@ export {
     GuestbookEntries,
     CustomDomain,
     PaymentDetails,
-    DeleteBlog
+    DeleteBlog,
 };

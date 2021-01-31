@@ -6,7 +6,7 @@ import {
     GuestbookEntries,
     CustomDomain,
     PaymentDetails,
-    DeleteBlog
+    DeleteBlog,
 } from "./settings";
 import Resources from "../shared/Resources";
 import {
@@ -16,12 +16,14 @@ import {
     IcEarth,
     IcCreditCard,
     IcLifebuoy,
-    IcTrash
+    IcTrash,
 } from "../../assets/icons";
 import "./SettingsPage.scss";
 import ErrorToast from "../shared/ErrorToast";
 
-const SettingsPage = ({ author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts }) => {
+const SettingsPage = ({
+    author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts,
+}) => {
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
 
@@ -90,7 +92,7 @@ const SettingsPage = ({ author, authorCredentialsUrl, customDomainIP, guestbookE
                     author={author}
                     authorCredentialsUrl={authorCredentialsUrl}
                     setErrorToastMessage={setErrorToastMessage}
-                    setIsErrorToastDisplayed={setIsErrorToastDisplayed} 
+                    setIsErrorToastDisplayed={setIsErrorToastDisplayed}
                 />
             ),
         },
@@ -99,37 +101,37 @@ const SettingsPage = ({ author, authorCredentialsUrl, customDomainIP, guestbookE
             title: "Resources",
             icon: IcLifebuoy,
             collapsed: true,
-            renderContent: () => <Resources />
+            renderContent: () => <Resources />,
         },
         {
             id: "delete-blog",
             title: "Delete blog",
             icon: IcTrash,
             collapsed: true,
-            renderContent: () => <DeleteBlog author={author} />
-        }
+            renderContent: () => <DeleteBlog author={author} />,
+        },
     ];
 
     return (
         <>
             <LeftNavBarPage
                 heading="Settings"
-                subheading={
+                subheading={(
                     <div>
                         <p className="p1">
                             Your public blog is accessible via:
                         </p>
                         <ul className="accessible-via">
-                            {author.accessible_via.map(url => (
+                            {author.accessible_via.map((url) => (
                                 <li key={url} className="p1">
                                     <a href={url} target="_blank" rel="noopener noreferrer">
                                         {url}
                                     </a>
-                                </li>     
+                                </li>
                             ))}
                         </ul>
                     </div>
-                }
+                )}
                 sections={sections}
             />
             <ErrorToast

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./New.scss";
@@ -9,7 +9,7 @@ const New = ({ author, hCaptchaSiteKey }) => {
     const [guestbookEntry, setGuestbookEntry] = useState({
         text: "",
         signer_email: "",
-        donation_info: ""
+        donation_info: "",
     });
     const [captchaToken, setCaptchaToken] = useState("");
     const [captchaErrorMessage, setCaptchaErrorMessage] = useState("");
@@ -27,12 +27,12 @@ const New = ({ author, hCaptchaSiteKey }) => {
             const response = await axios
                 .post(`/authors/${author.id}/guestbook`, null, {
                     headers: {
-                        "X-CSRF-Token": getAuthToken()
+                        "X-CSRF-Token": getAuthToken(),
                     },
                     data: {
                         guestbook_entry: guestbookEntry,
                         token: captchaToken,
-                    }
+                    },
                 });
 
             if (response.data.error) {
@@ -52,7 +52,7 @@ const New = ({ author, hCaptchaSiteKey }) => {
     };
 
     const editGuestbookEntry = (key, value) => (
-        setGuestbookEntry(prevState => (
+        setGuestbookEntry((prevState) => (
             { ...prevState, [key]: value }
         ))
     );
@@ -61,13 +61,13 @@ const New = ({ author, hCaptchaSiteKey }) => {
         setIsSubmitDisabled(!guestbookEntry.text || !captchaToken);
     }, [guestbookEntry.text, captchaToken]);
 
-    return(
+    return (
         <div className="card guestbook-entry-form__container">
             <h3 className="h3">
                 New entry
             </h3>
             <div className="guestbook-entry-form">
-                <form onSubmit={e => submitEntry(e)}>
+                <form onSubmit={(e) => submitEntry(e)}>
                     <div className="form-section">
                         <label htmlFor="guestbook-entry-text" className="label p2 label--required">
                             Your message
@@ -79,10 +79,10 @@ const New = ({ author, hCaptchaSiteKey }) => {
                             id="guestbook-entry-text"
                             className="text-field"
                             value={guestbookEntry.text}
-                            onChange={e => editGuestbookEntry("text", e.target.value)}
+                            onChange={(e) => editGuestbookEntry("text", e.target.value)}
                             rows="4"
                             required="required"
-                        ></textarea>
+                        />
                     </div>
                     <div className="form-section mt-10">
                         <label htmlFor="guestbook-entry-signer-email" className="label p2">
@@ -92,28 +92,30 @@ const New = ({ author, hCaptchaSiteKey }) => {
                             id="guestbook-entry-signer-email"
                             className="text-field"
                             value={guestbookEntry.signer_email}
-                            onChange={e => editGuestbookEntry("signer_email", e.target.value)}
-                        ></input>
+                            onChange={(e) => editGuestbookEntry("signer_email", e.target.value)}
+                        />
                     </div>
                     <div className="form-section mt-10">
                         <label htmlFor="guestbook-entry-donation-info" className="label p2">
                             Donation info (optional)
                         </label>
                         <p className="p3 sublabel">
-                            If you've made a contribution, feel free to let the author know the method you've used, and the amount.
+                            If you&apos;ve made a contribution,
+                            feel free to let the author know the method
+                            you&apos;ve used, and the amount.
                         </p>
                         <input
                             id="guestbook-entry-donation-info"
                             className="text-field"
                             value={guestbookEntry.donation_info}
-                            onChange={e => editGuestbookEntry("donation_info", e.target.value)}
-                        ></input>
+                            onChange={(e) => editGuestbookEntry("donation_info", e.target.value)}
+                        />
                     </div>
                     <div className="form-section">
                         <HCaptcha
                             ref={captcha}
                             sitekey={hCaptchaSiteKey}
-                            onVerify={token => setCaptchaToken(token)}
+                            onVerify={(token) => setCaptchaToken(token)}
                         />
                         {captchaErrorMessage && (
                             <div className="error-message">
@@ -137,11 +139,11 @@ const New = ({ author, hCaptchaSiteKey }) => {
             </div>
             <ErrorToast
                 message={errorToastMessage}
-                isDisplayed={isErrorToastDisplayed} 
+                isDisplayed={isErrorToastDisplayed}
                 setIsDisplayed={setIsErrorToastDisplayed}
             />
         </div>
     );
 };
 
-export default props => <New {...props} />;
+export default (props) => <New {...props} />;

@@ -4,11 +4,13 @@ import axios from "axios";
 import SVG from "react-inlinesvg";
 import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
-import { IcEarth, IcEmail, IcEyeOff, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
+import {
+    IcEarth, IcEmail, IcEyeOff, IcMoreHorizontal, IcTrash,
+} from "../../../assets/icons";
 import "./GuestbookEntries.scss";
 
 const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorToastDisplayed }) => {
-    const [dropdownOpen, setDropdownOpen] = useState(null); 
+    const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
     const handleEntryAction = async (url, text) => {
@@ -26,46 +28,46 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
         }
     };
 
-    const dropdownOptions = entry => {
+    const dropdownOptions = (entry) => {
         const options = [
             {
                 icon: IcEmail,
                 text: "Report spam",
-                action: () => handleEntryAction(entry.spam_url, "report this entry")
+                action: () => handleEntryAction(entry.spam_url, "report this entry"),
             },
             {
                 icon: IcTrash,
                 text: "Delete",
-                action: () => setConfirmationModalDisplayed(entry.id, "delete this entry")
-            }
+                action: () => setConfirmationModalDisplayed(entry.id, "delete this entry"),
+            },
         ];
 
         if (entry.public) {
-            options.unshift(        {
+            options.unshift({
                 icon: IcEyeOff,
                 text: "Make private",
-                action: () => handleEntryAction(entry.unapproval_url, "make this entry private")
+                action: () => handleEntryAction(entry.unapproval_url, "make this entry private"),
             });
         } else {
-            options.unshift(        {
+            options.unshift({
                 icon: IcEarth,
                 text: "Publish",
                 className: "guestbook-entries__action--make-public",
-                action: () => handleEntryAction(entry.approval_url, "make this entry public")
+                action: () => handleEntryAction(entry.approval_url, "make this entry public"),
             });
         }
 
         return options;
     };
 
-    return(
+    return (
         <ul className="guestbook-entries">
-            {guestbookEntries.length == 0 && (
+            {guestbookEntries.length === 0 && (
                 <p>
                     No guestbook entries yet.
                 </p>
             )}
-            {guestbookEntries.map(entry => (
+            {guestbookEntries.map((entry) => (
                 <li key={entry.id} className="guestbook-entries__item hover-container">
                     <div className="guestbook-entries__entry">
                         <p className="p2">
@@ -92,11 +94,13 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                                 <strong>Only visible to you: </strong>
                                 {entry.signer_email && (
                                     <span className="entry-details__item">
-                                        Author email: {entry.signer_email}
+                                        Author email:
+                                        {entry.signer_email}
                                     </span>
                                 )}
                                 <span className="entry-details__item">
-                                    Donation info: {entry.donation_info}
+                                    Donation info:
+                                    {entry.donation_info}
                                 </span>
                             </p>
                         )}
@@ -105,12 +109,13 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                         {!entry.public && (
                             <button
                                 className="button button--primary button--make-public"
+                                type="button"
                                 onClick={() => handleEntryAction(entry.approval_url)}
                             >
                                 Publish
                             </button>
                         )}
-                        <Dropdown   
+                        <Dropdown
                             options={dropdownOptions(entry)}
                             isOpen={dropdownOpen && dropdownOpen === entry.id}
                             onClick={() => setDropdownOpen(entry.id)}
@@ -122,7 +127,7 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                     </div>
                     {confirmationModalDisplayed && confirmationModalDisplayed === entry.id && (
                         <ConfirmationModal
-                            text={"Are you sure you want to delete this guestbook entry?"}
+                            text="Are you sure you want to delete this guestbook entry?"
                             primaryOption={{
                                 text: "Cancel",
                                 onClick: () => setConfirmationModalDisplayed(null),

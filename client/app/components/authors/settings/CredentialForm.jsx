@@ -3,10 +3,12 @@ import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
 import "./CredentialForm.scss";
 
-const CredentialForm = ({ authorCredentialUrl, currentCredential, setIsErrorToastDisplayed, setErrorToastMessage }) => {
+const CredentialForm = ({
+    authorCredentialUrl, currentCredential, setIsErrorToastDisplayed, setErrorToastMessage,
+}) => {
     const [credential, setCredential] = useState({
         key: currentCredential ? currentCredential.key : "",
-        value: currentCredential ? currentCredential.value : ""
+        value: currentCredential ? currentCredential.value : "",
     });
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
@@ -20,13 +22,13 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential, setIsErrorToas
                 const response = await axios
                     .patch(authorCredentialUrl, null, {
                         headers: {
-                            "X-CSRF-Token": getAuthToken()
+                            "X-CSRF-Token": getAuthToken(),
                         },
                         data: {
-                            credential: credential
-                        }
+                            credential,
+                        },
                     });
-                
+
                 Turbolinks.visit(response.request.responseURL);
             } catch (err) {
                 setIsSubmitDisabled(false);
@@ -38,24 +40,24 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential, setIsErrorToas
                 const response = await axios
                     .post(authorCredentialUrl, null, {
                         headers: {
-                            "X-CSRF-Token": getAuthToken()
+                            "X-CSRF-Token": getAuthToken(),
                         },
                         data: {
-                            credential: credential
-                        }
+                            credential,
+                        },
                     });
 
-                    Turbolinks.visit(response.request.responseURL);
+                Turbolinks.visit(response.request.responseURL);
             } catch (err) {
                 setIsSubmitDisabled(false);
                 setErrorToastMessage("There was an error trying to create the payment detail. Please try again.");
                 setIsErrorToastDisplayed(true);
             }
         }
-    }
+    };
 
     const editCredential = (key, value) => (
-        setCredential(prevState => (
+        setCredential((prevState) => (
             { ...prevState, [key]: value }
         ))
     );
@@ -64,8 +66,8 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential, setIsErrorToas
         setIsSubmitDisabled(!credential.key || !credential.value);
     }, [credential]);
 
-    return(
-        <form className="credential-form" onSubmit={e => submitCredential(e)}>
+    return (
+        <form className="credential-form" onSubmit={(e) => submitCredential(e)}>
             <div className="form-row">
                 <div className="form-section">
                     <label htmlFor="credential-key" className="label label--required p2">
@@ -77,21 +79,21 @@ const CredentialForm = ({ authorCredentialUrl, currentCredential, setIsErrorToas
                         required="required"
                         placeholder="Key"
                         value={credential.key}
-                        onChange={e => editCredential("key", e.target.value)}
-                    ></input>
+                        onChange={(e) => editCredential("key", e.target.value)}
+                    />
                 </div>
                 <div className="form-section">
                     <label htmlFor="credential-value" className="label label--required p2">
                         Value
                     </label>
                     <input
-                        id="domain"
+                        id="credential-value"
                         className="text-field"
                         required="required"
                         placeholder="Value"
                         value={credential.value}
-                        onChange={e => editCredential("value", e.target.value)}
-                    ></input>
+                        onChange={(e) => editCredential("value", e.target.value)}
+                    />
                 </div>
                 <div className="form-section">
                     <button

@@ -12,11 +12,11 @@ const HeaderContainer = ({
     pages,
     authorGuestbookEntriesUrl,
     currentUrl,
-    blogPage
+    blogPage,
 }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    const renderMenu = isDesktopMenu => (
+    const renderMenu = (isDesktopMenu) => (
         <MenuContainer
             isMobileMenuOpen={isMobileMenuOpen}
             isDesktopMenu={isDesktopMenu}
@@ -29,7 +29,7 @@ const HeaderContainer = ({
 
     return (
         <div className={`page-header__container ${post ? "page-header__container--post" : ""}`}>
-            <div id="page-header" >
+            <div id="page-header">
                 <div className="left">
                     <div className="website-name">
                         <a href={homeUrl} className="listed-logo-link">
@@ -45,11 +45,15 @@ const HeaderContainer = ({
                     )}
                 </div>
                 <div className="right">
-                    <button className="button button--menu-icon" aria-label="Menu" aria-controls="navigation">
-                        {isMobileMenuOpen 
+                    <button
+                        className="button button--menu-icon"
+                        aria-label="Menu"
+                        aria-controls="navigation"
+                        type="button"
+                    >
+                        {isMobileMenuOpen
                             ? <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
-                            : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />
-                        }
+                            : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />}
                     </button>
                     {renderMenu(true)}
                 </div>
@@ -62,4 +66,4 @@ const HeaderContainer = ({
     );
 };
 
-export default props => <HeaderContainer {...props} />;
+export default (props) => <HeaderContainer {...props} />;

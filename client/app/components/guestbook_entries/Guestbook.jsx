@@ -2,38 +2,58 @@ import React, { useState } from "react";
 import New from "./New";
 import "./Guestbook.scss";
 
-const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, hCaptchaSiteKey }) => {
+const Guestbook = ({
+    sent, author, entries, hCaptchaSiteKey,
+}) => {
     const [showNewEntryForm, setShowNewEntryForm] = useState(false);
 
-    return(
-        <div className="page-container guestbook__container">
-            <h1 className="h1">
-                Guestbook
-            </h1>
-            {showNewEntryForm ? (
+    const renderForm = () => {
+        if (showNewEntryForm) {
+            return (
                 <New
                     author={author}
                     hCaptchaSiteKey={hCaptchaSiteKey}
                 />
+            );
+        }
+
+        return (
+            sent ? (
+                <div className="callout callout--success">
+                    Your message has been sent to the author.
+                    They&apos;ll need to confirm it before it appears in the public guestbook.
+                </div>
             ) : (
-                sent ? (
-                    <div className="callout callout--success">
-                        Your message has been sent to the author. They'll need to confirm it before it appears in the public guestbook.
-                    </div>
-                ) : (
-                    <div className="guestbook__new-entry-button-container">
-                        <button className="button button--primary" onClick={() => setShowNewEntryForm(true)}>
-                            New entry
-                        </button>
-                        {entries.length > 0 ? (
-                            <p className="p1">Write something in {author.title}'s guestbook!</p>
-                        ) : (
-                            <p className="p1">Be the first to sign {author.title}'s guestbook!</p>
-                        )}
-                    </div>
-                )
-            )}
-            {entries.map(entry => (
+                <div className="guestbook__new-entry-button-container">
+                    <button className="button button--primary" type="button" onClick={() => setShowNewEntryForm(true)}>
+                        New entry
+                    </button>
+                    {entries.length > 0 ? (
+                        <p className="p1">
+                            Write something in
+                            {" "}
+                            {author.title}
+                            &apos;s guestbook!
+                        </p>
+                    ) : (
+                        <p className="p1">
+                            Be the first to sign
+                            {author.title}
+                            &apos;s guestbook!
+                        </p>
+                    )}
+                </div>
+            )
+        );
+    };
+
+    return (
+        <div className="page-container guestbook__container">
+            <h1 className="h1">
+                Guestbook
+            </h1>
+            {renderForm()}
+            {entries.map((entry) => (
                 <p key={entry.id} className="p1 guestbook__entry">
                     {entry.text}
                 </p>
@@ -42,4 +62,4 @@ const Guestbook = ({ sent, author, entries, newAuthorGuestbookEntryUrl, hCaptcha
     );
 };
 
-export default props => <Guestbook {...props} />;
+export default (props) => <Guestbook {...props} />;

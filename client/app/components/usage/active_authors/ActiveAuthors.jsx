@@ -4,16 +4,15 @@ import ActiveAuthorItem from "./ActiveAuthorItem";
 import "./ActiveAuthors.scss";
 
 const ActiveAuthors = ({ activeAuthors }) => {
-    const getItems = isDesktop =>
-        activeAuthors.map(author => (
-            <ActiveAuthorItem key={`${author.id}${isDesktop ? "-desktop" : "-mobile"}`} author={author} />
-        ));
+    const getItems = (isDesktop) => activeAuthors.map((author) => (
+        <ActiveAuthorItem key={`${author.id}${isDesktop ? "-desktop" : "-mobile"}`} author={author} />
+    ));
 
     return (
         <div className="active-authors">
             <div className="active-authors__headline">
                 <h3 className="h3">Listed authors</h3>
-                <div className="headline-separator"></div>
+                <div className="headline-separator" />
             </div>
             <MasonryLayout>
                 {getItems(true)}
