@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import ConfirmationModal from "./ConfirmationModal";
@@ -86,7 +86,7 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                                 </span>
                             )}
                             <span className="entry-details__item">
-                                {moment(entry.created_at).format("MMMM D, YYYY")}
+                                {dayjs(entry.created_at).format("MMMM D, YYYY")}
                             </span>
                         </p>
                         {entry.donation_info && entry.donation_info.length > 0 && (

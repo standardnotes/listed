@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import SVG from "react-inlinesvg";
 import { IcArrowLong } from "../../assets/icons";
 import "./Post.scss";
@@ -15,7 +15,7 @@ const Post = ({ truncate, post }) => {
                 <h5 className="post-title h5">{post.title}</h5>
                 {post.page || (
                     <p className="post-date p3">
-                        {`${moment.utc(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
+                        {`${dayjs(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
                     </p>
                 )}
             </div>
@@ -60,7 +60,7 @@ const Post = ({ truncate, post }) => {
                     )}
                     {post.page || (
                         <p className="post-date p3">
-                            {`${moment.utc(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
+                            {`${dayjs(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
                         </p>
                     )}
                 </div>

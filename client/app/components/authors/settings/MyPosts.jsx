@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import ConfirmationModal from "./ConfirmationModal";
@@ -90,7 +90,7 @@ const MyPosts = ({
                                 </span>
                             )}
                             <span className="post-details__item">
-                                {moment(post.created_at).format("MMMM D, YYYY")}
+                                {dayjs(post.created_at).format("MMMM D, YYYY")}
                             </span>
                             <span className="post-details__item">
                                 {post.word_count.toLocaleString()}
