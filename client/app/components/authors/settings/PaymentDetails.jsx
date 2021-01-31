@@ -112,32 +112,32 @@ const PaymentDetails = ({
                                     </div>
                                 </Dropdown>
                             </div>
-                            {editCredentialFormDisplayed
-                            && editCredentialFormDisplayed === credential.id
-                            && (
-                                <CredentialForm
-                                    currentCredential={credential}
-                                    authorCredentialUrl={`/authors/${author.id}/credentials/${credential.id}?secret=${author.secret}`}
-                                    setIsErrorToastDisplayed={setIsErrorToastDisplayed}
-                                    setErrorToastMessage={setErrorToastMessage}
-                                />
-                            )}
-                            {confirmationModalDisplayed
-                            && confirmationModalDisplayed === credential.id
-                            && (
-                                <ConfirmationModal
-                                    text={`Are you sure you want to delete payment details for ${credential.key}?`}
-                                    primaryOption={{
-                                        text: "Cancel",
-                                        onClick: () => setConfirmationModalDisplayed(null),
-                                    }}
-                                    secondaryOption={{
-                                        text: "Delete",
-                                        onClick: () => deleteCredential(credential),
-                                    }}
-                                />
-                            )}
                         </div>
+                        {editCredentialFormDisplayed
+                        && editCredentialFormDisplayed === credential.id
+                        && (
+                            <CredentialForm
+                                currentCredential={credential}
+                                authorCredentialUrl={`/authors/${author.id}/credentials/${credential.id}?secret=${author.secret}`}
+                                setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                                setErrorToastMessage={setErrorToastMessage}
+                            />
+                        )}
+                        {confirmationModalDisplayed
+                        && confirmationModalDisplayed === credential.id
+                        && (
+                            <ConfirmationModal
+                                text={`Are you sure you want to delete payment details for ${credential.key}?`}
+                                primaryOption={{
+                                    text: "Cancel",
+                                    onClick: () => setConfirmationModalDisplayed(null),
+                                }}
+                                secondaryOption={{
+                                    text: "Delete",
+                                    onClick: () => deleteCredential(credential),
+                                }}
+                            />
+                        )}
                     </div>
                 ))}
             </div>
