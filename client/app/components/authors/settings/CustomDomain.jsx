@@ -69,7 +69,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         "X-CSRF-Token": getAuthToken(),
                     },
                     data: {
-                        domain: author.domain,
+                        domain: author.domain.domain,
                     },
                 });
 
