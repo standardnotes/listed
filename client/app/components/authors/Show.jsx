@@ -15,32 +15,32 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
         axios
             .get(`/authors/${displayAuthor.id}/more_posts?older_than=${loadMorePostsDate}`, null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": getAuthToken(),
                 },
             })
-            .then(response => {
-                const { older_than, posts } = response.data;
+            .then((response) => {
+                const { older_than: newOlderThan, posts: newPosts } = response.data;
 
-                setVisiblePosts([...visiblePosts, ...posts]);
-                setLoadMorePostsDate(older_than);
+                setVisiblePosts([...visiblePosts, ...newPosts]);
+                setLoadMorePostsDate(newOlderThan);
             })
-            .catch(error => {
+            .catch(() => {
                 setLoadMorePostsDate(null);
-            })
+            });
     };
 
     return (
         <div id="author-profile">
             <div id="author-posts">
-                {visiblePosts.map(post => (
+                {visiblePosts.map((post) => (
                     <div key={post.id} className="author-post">
-                        <Post post={post}></Post>
+                        <Post post={post} />
                     </div>
                 ))}
                 {loadMorePostsDate && (
                     <div className="navigation">
                         <div className="older">
-                            <button className="button" onClick={loadMorePosts}>
+                            <button className="button" type="button" onClick={loadMorePosts}>
                                 Load more posts
                                 <SVG
                                     src={IcChevronDown}
@@ -56,4 +56,4 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
     );
 };
 
-export default props => <Show {...props} />;
+export default (props) => <Show {...props} />;

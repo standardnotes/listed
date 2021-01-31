@@ -39,9 +39,10 @@ ReactOnRails.register({
     SubscriptionUpdateFrequency,
     SubscriptionValidate,
     Usage,
-    UsageNewAuthor
+    UsageNewAuthor,
 });
 
 ReactOnRails.setOptions({
-    traceTurbolinks: TRACE_TURBOLINKS
+    /* global TRACE_TURBOLINKS */
+    traceTurbolinks: TRACE_TURBOLINKS,
 });

@@ -12,54 +12,53 @@ const CustomDomain = ({ author, customDomainIP }) => {
     const [domain, setDomain] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const [domainErrorMessage, setDomainErrorMessage] = useState(null);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
     const dropdownOptions = [
         {
             icon: IcTrash,
             text: "Delete",
-            action: () => setShowConfirmationModal(true)
-        }
+            action: () => setShowConfirmationModal(true),
+        },
     ];
 
-    const submitDomainRequest = event => {
+    const submitDomainRequest = (event) => {
         event.preventDefault();
 
         axios
             .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": getAuthToken(),
                 },
                 data: {
                     extended_email: extendedEmail,
-                    domain: domain
-                }
+                    domain,
+                },
             })
-            .then(response => {
+            .then((response) => {
                 setDomainErrorMessage(null);
                 Turbolinks.visit(response.request.responseURL);
             })
-            .catch(error => {
+            .catch((error) => {
                 setDomainErrorMessage(error.response.data.message);
-            })
+            });
     };
 
-    const deleteDomain = domain => {
+    const deleteDomain = (selectedDomain) => {
         axios
             .post(`/authors/${author.id}/delete_domain?secret=${author.secret}`, null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": getAuthToken(),
                 },
                 data: {
-                    domain: domain
-                }
+                    domain: selectedDomain,
+                },
             })
-            .then(response => {
+            .then((response) => {
                 Turbolinks.visit(response.request.responseURL);
-            })
+            });
     };
-
 
     useEffect(() => {
         setIsSubmitDisabled(!extendedEmail || !domain);
@@ -68,16 +67,22 @@ const CustomDomain = ({ author, customDomainIP }) => {
     return (
         <div className="custom-domain">
             <p className="p2 custom-domain__info">
-                Custom domains are available for Standard Notes{" "}
+                Custom domains are available for Standard Notes
+                {" "}
                 <a href="https://standardnotes.org/extended" target="blank" rel="noopener noreferrer">Extended</a>
-                {" "}members with an active one year or five year plan.
-                Domains include an HTTPS certificate, and require only a simple DNS record on your end.
+                {" "}
+                members with an active one year or five year plan.
+                Domains include an HTTPS certificate,
+                and require only a simple DNS record on your end.
             </p>
             <p className="p2 custom-domain__info">
-                Before submitting this form, please create an "A" record with your DNS provider with
-                value {customDomainIP}.
+                Before submitting this form,
+                please create an &quot;A&quot; record with your DNS provider with
+                value
+                {customDomainIP}
+                .
             </p>
-            <form onSubmit={e => submitDomainRequest(e)}>
+            <form onSubmit={(e) => submitDomainRequest(e)}>
                 <div className="form-row">
                     <div className="form-section">
                         <label htmlFor="extended_email" className="label label--required p2">
@@ -90,8 +95,8 @@ const CustomDomain = ({ author, customDomainIP }) => {
                             required="required"
                             placeholder="Extended email"
                             value={extendedEmail}
-                            onChange={e => setExtendedEmail(e.target.value)}
-                        ></input>
+                            onChange={(e) => setExtendedEmail(e.target.value)}
+                        />
                     </div>
                     <div className="form-section">
                         <label htmlFor="domain" className="label label--required p2">
@@ -103,8 +108,8 @@ const CustomDomain = ({ author, customDomainIP }) => {
                             required="required"
                             placeholder="Your domain"
                             value={domain}
-                            onChange={e => setDomain(e.target.value)}
-                        ></input>
+                            onChange={(e) => setDomain(e.target.value)}
+                        />
                     </div>
                     <div className="form-section">
                         <button
@@ -117,7 +122,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                     </div>
                 </div>
                 <div className="form-row form-row--error">
-                    <div className="form-section"></div>
+                    <div className="form-section" />
                     <div className="form-section">
                         {domainErrorMessage && (
                             <div className="error-message">
@@ -125,15 +130,20 @@ const CustomDomain = ({ author, customDomainIP }) => {
                             </div>
                         )}
                     </div>
-                    <div className="form-section"></div>
+                    <div className="form-section" />
                 </div>
             </form>
             {author.domain && !author.domain.approved && (
                 <div className="callout callout--warning">
                     <div className="hover-container">
                         <div className="custom-domain__details">
-                            We've received your domain request ({author.domain.domain}){" "}
-                            and will send you an email when your integration is ready (typically up to 1 hour).
+                            We&apos;ve received your domain request (
+                            {author.domain.domain}
+                            )
+                            {" "}
+                            and will send you an email when your integration is ready
+                            {" "}
+                            typically up to 1 hour).
                         </div>
                         <div className="hover-content">
                             <Dropdown
@@ -151,7 +161,9 @@ const CustomDomain = ({ author, customDomainIP }) => {
             )}
             {author.domain && author.domain.approved && !author.domain.active && (
                 <div className="callout callout--warning">
-                    Your domain is not currently active. Ensure your Extended subscription is not expired.
+                    Your domain is not currently active.
+                    {" "}
+                    Ensure your Extended subscription is not expired.
                 </div>
             )}
             {author.domain && author.domain.active && (
@@ -159,7 +171,9 @@ const CustomDomain = ({ author, customDomainIP }) => {
                     <div className="hover-container">
                         <div className="custom-domain__details">
                             <SVG className="custom-domain__linked-icon" src={IcLink} />
-                            <p className="p2">Linked to:{" "}
+                            <p className="p2">
+                                Linked to:
+                                {" "}
                                 <strong>{author.url}</strong>
                             </p>
                         </div>
@@ -180,8 +194,8 @@ const CustomDomain = ({ author, customDomainIP }) => {
             {showConfirmationModal && (
                 <ConfirmationModal
                     text={author.domain.active
-                           ? `Are you sure you want to delete custom domain ${author.domain.domain}?`
-                           : `Are you sure you want to delete the request for custom domain ${author.domain.domain}?`}
+                        ? `Are you sure you want to delete custom domain ${author.domain.domain}?`
+                        : `Are you sure you want to delete the request for custom domain ${author.domain.domain}?`}
                     primaryOption={{
                         text: "Cancel",
                         onClick: () => setShowConfirmationModal(false),
@@ -196,4 +210,4 @@ const CustomDomain = ({ author, customDomainIP }) => {
     );
 };
 
-export default props => <CustomDomain {...props} />
+export default (props) => <CustomDomain {...props} />;

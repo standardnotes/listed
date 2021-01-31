@@ -5,5 +5,5 @@ import SettingsGif from "./listed-settings.gif";
 export {
     GettingStartedGif,
     PublishGif,
-    SettingsGif
+    SettingsGif,
 };

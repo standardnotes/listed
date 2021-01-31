@@ -1,27 +1,29 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import getAuthToken from "../../utils/getAuthToken";
 
 const StartWriting = ({ className, children }) => {
-    const createNewAuthor = event => {
+    const createNewAuthor = (event) => {
         event.preventDefault();
 
         axios
             .post("/authors", null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": getAuthToken(),
                 },
             })
-            .then(response => {
+            .then((response) => {
                 Turbolinks.visit(response.request.responseURL);
             });
     };
 
-    return(
-        <button onClick={createNewAuthor} className={`${children ? "button" : "button button--primary"} ${className ? className : ""}`}>
-            {children ? (
-                children
-            ) : (
+    return (
+        <button
+            onClick={createNewAuthor}
+            className={`${children ? "button" : "button button--primary"} ${className || ""}`}
+            type="button"
+        >
+            {children || (
                 "Start writing"
             )}
         </button>

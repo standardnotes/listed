@@ -1,7 +1,9 @@
-const environment = require("./environment");
 const merge = require("webpack-merge");
-const devBuild = process.env.NODE_ENV === "production" ? "production" : "development";
 const webpack = require("webpack");
+
+const devBuild = process.env.NODE_ENV === "production" ? "production" : "development";
+
+const environment = require("./environment");
 
 environment.plugins.insert(
     "DefinePlugin",
@@ -11,7 +13,7 @@ environment.plugins.insert(
             NODE_ENV: devBuild,
         },
     }),
-    { after: "Environment" }
+    { after: "Environment" },
 );
 
 const serverConfig = merge(environment.toWebpackConfig(), {

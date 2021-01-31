@@ -1,9 +1,7 @@
 import React from "react";
 
-export default () => {
-    return (
-        <p>
-            Unable to find subscription.
-        </p>
-    );
-};
+export default () => (
+    <p>
+        Unable to find subscription.
+    </p>
+);

@@ -8,9 +8,9 @@ const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
         }
 
         return `pages-menu pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
-    }
+    };
 
-    return(
+    return (
         <nav className={navClassName()}>
             <a
                 href="https://listed.to/@Listed/5063/what-will-you-write-about"

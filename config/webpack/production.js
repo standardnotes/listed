@@ -1,8 +1,8 @@
 process.env.NODE_ENV = process.env.NODE_ENV || "production";
 
+const merge = require("webpack-merge");
 const clientEnvironment = require("./client");
 const serverConf = require("./server");
-const merge = require("webpack-merge");
 
 clientEnvironment.splitChunks();
 
@@ -11,7 +11,7 @@ const clientConfig = merge(clientEnvironment.toWebpackConfig(), {
     output: {
         filename: "[name].js",
         chunkFilename: "[name].bundle.js",
-        path: clientEnvironment.config.output.path
+        path: clientEnvironment.config.output.path,
     },
     optimization: {
         splitChunks: {

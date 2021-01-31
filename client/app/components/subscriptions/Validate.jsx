@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import getAuthToken from "../../utils/getAuthToken";
 import "./Validate.scss";
 
@@ -8,19 +8,19 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
     const [captchaToken, setCaptchaToken] = useState("");
     const [showCaptcha, setShowCaptcha] = useState(false);
 
-    const submitValidate = event => {
+    const submitValidate = (event) => {
         event.preventDefault();
 
         axios
             .post(`/subscriptions/${subscription.id}/submit_validate`, null, {
                 headers: {
-                    "X-CSRF-Token": getAuthToken()
+                    "X-CSRF-Token": getAuthToken(),
                 },
                 data: {
-                    token: captchaToken
-                }
+                    token: captchaToken,
+                },
             })
-            .then(response => {
+            .then((response) => {
                 Turbolinks.visit(response.request.responseURL);
             });
     };
@@ -33,17 +33,19 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
         <div className="validate-page page-container">
             <h1 className="h1">Subscribe</h1>
             <p className="p1">
-                Please complete the captcha below to finalize your subscription to{" "}
-                <strong>{subscription.author.title}</strong>.
+                Please complete the captcha below to finalize your subscription to
+                {" "}
+                <strong>{subscription.author.title}</strong>
+                .
             </p>
             <div id="captcha-form">
-                <form onSubmit={e => submitValidate(e)}>
+                <form onSubmit={(e) => submitValidate(e)}>
                     <div className="form-section" suppressHydrationWarning>
                         {showCaptcha && (
                             <HCaptcha
                                 id="hcaptcha"
                                 sitekey={hCaptchaSiteKey}
-                                onVerify={token => setCaptchaToken(token)}
+                                onVerify={(token) => setCaptchaToken(token)}
                             />
                         )}
                     </div>
@@ -54,4 +56,4 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
     );
 };
 
-export default props => <Validate {...props} />;
+export default (props) => <Validate {...props} />;
