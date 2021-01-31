@@ -18,7 +18,7 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
         setConfirmationModalDisplayed(null);
 
         try {
-            const response = axios
+            const response = await axios
                 .get(url);
 
             Turbolinks.visit(response.request.responseURL);
@@ -33,12 +33,12 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
             {
                 icon: IcEmail,
                 text: "Report spam",
-                action: () => handleEntryAction(entry.spam_url, "report this entry"),
+                action: () => handleEntryAction(entry.spam_url, "report the entry"),
             },
             {
                 icon: IcTrash,
                 text: "Delete",
-                action: () => setConfirmationModalDisplayed(entry.id, "delete this entry"),
+                action: () => setConfirmationModalDisplayed(entry.id),
             },
         ];
 
@@ -46,14 +46,14 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
             options.unshift({
                 icon: IcEyeOff,
                 text: "Make private",
-                action: () => handleEntryAction(entry.unapproval_url, "make this entry private"),
+                action: () => handleEntryAction(entry.unapproval_url, "make the entry private"),
             });
         } else {
             options.unshift({
                 icon: IcEarth,
                 text: "Publish",
                 className: "guestbook-entries__action--make-public",
-                action: () => handleEntryAction(entry.approval_url, "make this entry public"),
+                action: () => handleEntryAction(entry.approval_url, "make the entry public"),
             });
         }
 
@@ -110,7 +110,7 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                             <button
                                 className="button button--primary button--make-public"
                                 type="button"
-                                onClick={() => handleEntryAction(entry.approval_url)}
+                                onClick={() => handleEntryAction(entry.approval_url, "make the entry public")}
                             >
                                 Publish
                             </button>
@@ -134,7 +134,7 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                             }}
                             secondaryOption={{
                                 text: "Delete",
-                                onClick: () => handleEntryAction(entry.deletion_url),
+                                onClick: () => handleEntryAction(entry.deletion_url, "delete this entry"),
                             }}
                         />
                     )}
