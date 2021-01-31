@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./SubscriptionForm.scss";
 
@@ -7,22 +8,32 @@ const SubscriptionForm = ({
     subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess, author,
 }) => {
     const [email, setEmail] = useState("");
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
-    const emailSubscribe = (event) => {
+    const emailSubscribe = async (event) => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
 
-        axios
-            .post(`/authors/${author.id}/email_subscribe`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-                data: {
-                    email,
-                },
-            })
-            .then((response) => {
-                Turbolinks.visit(response.request.responseURL);
-            });
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/email_subscribe`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                    data: {
+                        email,
+                    },
+                });
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setIsSubmitDisabled(false);
+            setErrorToastMessage("There was an error trying to subscribe you to this author. Please try again.");
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     const renderForm = () => {
@@ -49,7 +60,13 @@ const SubscriptionForm = ({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <button type="submit" className="button button--primary">Subscribe</button>
+                    <button
+                        type="submit"
+                        className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
+                        disabled={isSubmitDisabled}
+                    >
+                        Subscribe
+                    </button>
                 </div>
             </form>
         );
@@ -58,6 +75,11 @@ const SubscriptionForm = ({
     return (
         <div>
             {renderForm()}
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed}
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };

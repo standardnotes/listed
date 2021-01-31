@@ -3,42 +3,56 @@ import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
 import "./CredentialForm.scss";
 
-const CredentialForm = ({ authorCredentialUrl, currentCredential }) => {
+const CredentialForm = ({
+    authorCredentialUrl, currentCredential, setIsErrorToastDisplayed, setErrorToastMessage,
+}) => {
     const [credential, setCredential] = useState({
         key: currentCredential ? currentCredential.key : "",
         value: currentCredential ? currentCredential.value : "",
     });
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
-    const submitCredential = (event) => {
+    const submitCredential = async (event) => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
 
         if (currentCredential) {
-            axios
-                .patch(authorCredentialUrl, null, {
-                    headers: {
-                        "X-CSRF-Token": getAuthToken(),
-                    },
-                    data: {
-                        credential,
-                    },
-                })
-                .then((response) => {
-                    Turbolinks.visit(response.request.responseURL);
-                });
+            try {
+                const response = await axios
+                    .patch(authorCredentialUrl, null, {
+                        headers: {
+                            "X-CSRF-Token": getAuthToken(),
+                        },
+                        data: {
+                            credential,
+                        },
+                    });
+
+                Turbolinks.visit(response.request.responseURL);
+            } catch (err) {
+                setIsSubmitDisabled(false);
+                setErrorToastMessage("There was an error trying to update the payment detail. Please try again.");
+                setIsErrorToastDisplayed(true);
+            }
         } else {
-            axios
-                .post(authorCredentialUrl, null, {
-                    headers: {
-                        "X-CSRF-Token": getAuthToken(),
-                    },
-                    data: {
-                        credential,
-                    },
-                })
-                .then((response) => {
-                    Turbolinks.visit(response.request.responseURL);
-                });
+            try {
+                const response = await axios
+                    .post(authorCredentialUrl, null, {
+                        headers: {
+                            "X-CSRF-Token": getAuthToken(),
+                        },
+                        data: {
+                            credential,
+                        },
+                    });
+
+                Turbolinks.visit(response.request.responseURL);
+            } catch (err) {
+                setIsSubmitDisabled(false);
+                setErrorToastMessage("There was an error trying to create the payment detail. Please try again.");
+                setIsErrorToastDisplayed(true);
+            }
         }
     };
 

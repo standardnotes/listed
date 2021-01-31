@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./New.scss";
 
@@ -13,32 +14,41 @@ const New = ({ author, hCaptchaSiteKey }) => {
     const [captchaToken, setCaptchaToken] = useState("");
     const [captchaErrorMessage, setCaptchaErrorMessage] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
     const captcha = useRef(null);
 
-    const submitEntry = (event) => {
+    const submitEntry = async (event) => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
 
-        axios
-            .post(`/authors/${author.id}/guestbook`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-                data: {
-                    guestbook_entry: guestbookEntry,
-                    token: captchaToken,
-                },
-            })
-            .then((response) => {
-                if (response.data.error) {
-                    captcha.current.resetCaptcha();
-                    setCaptchaErrorMessage(response.data.error);
-                } else {
-                    setCaptchaErrorMessage("");
-                    setCaptchaToken("");
-                    Turbolinks.visit(response.request.responseURL);
-                }
-            });
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/guestbook`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                    data: {
+                        guestbook_entry: guestbookEntry,
+                        token: captchaToken,
+                    },
+                });
+
+            if (response.data.error) {
+                captcha.current.resetCaptcha();
+                setCaptchaErrorMessage(response.data.error);
+                setIsSubmitDisabled(false);
+            } else {
+                setCaptchaErrorMessage("");
+                setCaptchaToken("");
+                Turbolinks.visit(response.request.responseURL);
+            }
+        } catch (err) {
+            setIsSubmitDisabled(false);
+            setErrorToastMessage("There was an error trying to create the guestbook entry. Please try again.");
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     const editGuestbookEntry = (key, value) => (
@@ -127,6 +137,11 @@ const New = ({ author, hCaptchaSiteKey }) => {
                     </div>
                 </form>
             </div>
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed}
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };

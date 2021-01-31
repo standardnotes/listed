@@ -4,6 +4,7 @@ import SVG from "react-inlinesvg";
 import getAuthToken from "../../../utils/getAuthToken";
 import ConfirmationModal from "./ConfirmationModal";
 import Dropdown from "../../shared/Dropdown";
+import ErrorToast from "../../shared/ErrorToast";
 import { IcLink, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./CustomDomain.scss";
 
@@ -14,6 +15,8 @@ const CustomDomain = ({ author, customDomainIP }) => {
     const [domainErrorMessage, setDomainErrorMessage] = useState(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
+    const [errorToastMessage, setErrorToastMessage] = useState("");
 
     const dropdownOptions = [
         {
@@ -23,41 +26,60 @@ const CustomDomain = ({ author, customDomainIP }) => {
         },
     ];
 
-    const submitDomainRequest = (event) => {
+    const submitDomainRequest = async (event) => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
+        setShowConfirmationModal(false);
 
-        axios
-            .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-                data: {
-                    extended_email: extendedEmail,
-                    domain,
-                },
-            })
-            .then((response) => {
-                setDomainErrorMessage(null);
-                Turbolinks.visit(response.request.responseURL);
-            })
-            .catch((error) => {
-                setDomainErrorMessage(error.response.data.message);
-            });
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                    data: {
+                        extended_email: extendedEmail,
+                        domain,
+                    },
+                });
+
+            setDomainErrorMessage(null);
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setIsSubmitDisabled(false);
+
+            if (err.response.status === 409) {
+                setDomainErrorMessage(err.response.data.message);
+            } else {
+                setErrorToastMessage("There was an error trying to submit the domain request. Please try again.");
+                setIsErrorToastDisplayed(true);
+            }
+        }
     };
 
-    const deleteDomain = (selectedDomain) => {
-        axios
-            .post(`/authors/${author.id}/delete_domain?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-                data: {
-                    domain: selectedDomain,
-                },
-            })
-            .then((response) => {
-                Turbolinks.visit(response.request.responseURL);
-            });
+    const deleteDomain = async () => {
+        setIsErrorToastDisplayed(false);
+        setShowConfirmationModal(false);
+
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/delete_domain?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                    data: {
+                        domain: author.domain.domain,
+                    },
+                });
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setErrorToastMessage(
+                `There was an error trying to delete the ${author.domain.active ? "domain" : "domain request"}. Please try again.`,
+            );
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     useEffect(() => {
@@ -206,6 +228,11 @@ const CustomDomain = ({ author, customDomainIP }) => {
                     }}
                 />
             )}
+            <ErrorToast
+                message={errorToastMessage}
+                isDisplayed={isErrorToastDisplayed}
+                setIsDisplayed={setIsErrorToastDisplayed}
+            />
         </div>
     );
 };

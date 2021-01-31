@@ -10,32 +10,47 @@ import {
 } from "../../../assets/icons";
 import "./MyPosts.scss";
 
-const MyPosts = ({ posts, author }) => {
+const MyPosts = ({
+    posts, author, setErrorToastMessage, setIsErrorToastDisplayed,
+}) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
-    const changePostPrivacy = (post) => {
-        axios
-            .post(`/authors/${author.id}/posts/${post.id}/change_privacy?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-            })
-            .then((response) => {
-                Turbolinks.visit(response.request.responseURL);
-            });
+    const changePostPrivacy = async (post) => {
+        setIsErrorToastDisplayed(false);
+
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/posts/${post.id}/change_privacy?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                });
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setErrorToastMessage("There was an error trying to change the post's privacy. Please try again.");
+            setIsErrorToastDisplayed(true);
+        }
     };
 
-    const deletePost = (post) => {
-        axios
-            .post(`/authors/${author.id}/posts/${post.id}/delete?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-            })
-            .then((response) => {
-                Turbolinks.visit(response.request.responseURL);
-            });
+    const deletePost = async (post) => {
+        setIsErrorToastDisplayed(false);
+        setConfirmationModalDisplayed(null);
+
+        try {
+            const response = await axios
+                .post(`/authors/${author.id}/posts/${post.id}/delete?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                });
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setErrorToastMessage("There was an error trying to delete the post. Please try again.");
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     const dropdownOptions = (post) => ([

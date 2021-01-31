@@ -9,16 +9,23 @@ import {
 } from "../../../assets/icons";
 import "./GuestbookEntries.scss";
 
-const GuestbookEntries = ({ guestbookEntries }) => {
+const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
-    const handleEntryAction = (url) => {
-        axios
-            .get(url)
-            .then((response) => {
-                Turbolinks.visit(response.request.responseURL);
-            });
+    const handleEntryAction = async (url, text) => {
+        setIsErrorToastDisplayed(false);
+        setConfirmationModalDisplayed(null);
+
+        try {
+            const response = await axios
+                .get(url);
+
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setErrorToastMessage(`There was an error trying to ${text}. Please try again.`);
+            setIsErrorToastDisplayed(true);
+        }
     };
 
     const dropdownOptions = (entry) => {
@@ -26,7 +33,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
             {
                 icon: IcEmail,
                 text: "Report spam",
-                action: () => handleEntryAction(entry.spam_url),
+                action: () => handleEntryAction(entry.spam_url, "report the entry"),
             },
             {
                 icon: IcTrash,
@@ -39,14 +46,14 @@ const GuestbookEntries = ({ guestbookEntries }) => {
             options.unshift({
                 icon: IcEyeOff,
                 text: "Make private",
-                action: () => handleEntryAction(entry.unapproval_url),
+                action: () => handleEntryAction(entry.unapproval_url, "make the entry private"),
             });
         } else {
             options.unshift({
                 icon: IcEarth,
                 text: "Publish",
                 className: "guestbook-entries__action--make-public",
-                action: () => handleEntryAction(entry.approval_url),
+                action: () => handleEntryAction(entry.approval_url, "make the entry public"),
             });
         }
 
@@ -103,7 +110,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                             <button
                                 className="button button--primary button--make-public"
                                 type="button"
-                                onClick={() => handleEntryAction(entry.approval_url)}
+                                onClick={() => handleEntryAction(entry.approval_url, "make the entry public")}
                             >
                                 Publish
                             </button>
@@ -127,7 +134,7 @@ const GuestbookEntries = ({ guestbookEntries }) => {
                             }}
                             secondaryOption={{
                                 text: "Delete",
-                                onClick: () => handleEntryAction(entry.deletion_url),
+                                onClick: () => handleEntryAction(entry.deletion_url, "delete this entry"),
                             }}
                         />
                     )}

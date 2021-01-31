@@ -1,0 +1,39 @@
+.error-toast {
+    &__container {
+        position: fixed;
+        top: -$spacing-86;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        transition: top 0.3s ease-in-out;
+    }
+
+    &__toast {
+        margin: auto;
+        background-color: $color-error-light;
+        padding: $spacing-16;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: $border-radius-4;
+        border: $border-default;
+    }
+
+    .error-toast__message {
+        margin-right: $spacing-16;
+    }
+
+    .error-toast__dismiss-button {
+        padding: 0;
+        line-height: 0;
+
+        path {
+            fill: $color-black;
+        }
+    }
+
+    &--visible .error-toast__container {
+        top: $spacing-8;
+    }
+}

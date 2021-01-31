@@ -5,7 +5,7 @@ import getAuthToken from "../../../utils/getAuthToken";
 import Checkbox from "../../shared/Checkbox";
 import "./General.scss";
 
-const General = ({ author }) => {
+const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const {
         username,
         display_name,
@@ -35,26 +35,36 @@ const General = ({ author }) => {
     });
 
     const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-    const submitEditedAuthor = (event) => {
+    const submitEditedAuthor = async (event) => {
         event.preventDefault();
+        setIsSubmitDisabled(true);
+        setIsErrorToastDisplayed(false);
 
-        axios
-            .put(`/authors/${author.id}?secret=${author.secret}`, null, {
-                headers: {
-                    "X-CSRF-Token": getAuthToken(),
-                },
-                data: {
-                    author: editedAuthor,
-                },
-            })
-            .then((response) => {
-                setUsernameErrorMessage(null);
-                Turbolinks.visit(response.request.responseURL);
-            })
-            .catch((error) => {
-                setUsernameErrorMessage(error.response.data.message);
-            });
+        try {
+            const response = await axios
+                .put(`/authors/${author.id}?secret=${author.secret}`, null, {
+                    headers: {
+                        "X-CSRF-Token": getAuthToken(),
+                    },
+                    data: {
+                        author: editedAuthor,
+                    },
+                });
+
+            setUsernameErrorMessage(null);
+            Turbolinks.visit(response.request.responseURL);
+        } catch (err) {
+            setIsSubmitDisabled(false);
+
+            if (err.response.status === 409) {
+                setUsernameErrorMessage(err.response.data.message);
+            } else {
+                setErrorToastMessage("There was an error trying to update your settings. Please try again.");
+                setIsErrorToastDisplayed(true);
+            }
+        }
     };
 
     const editAuthor = (key, value) => (
@@ -199,7 +209,13 @@ const General = ({ author }) => {
                 label="Hide profile from the “Listed authors” section in the homepage"
             />
             <div className="form-section form-row">
-                <button type="submit" className="button button--primary">Save changes</button>
+                <button
+                    type="submit"
+                    className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
+                    disabled={isSubmitDisabled}
+                >
+                    Save changes
+                </button>
             </div>
         </form>
     );
