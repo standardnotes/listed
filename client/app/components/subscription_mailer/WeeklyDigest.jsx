@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default ({ author, posts, unsubscribeUrl }) => {
     const renderedText = (post) => ({ __html: post.rendered_text });
@@ -19,7 +19,7 @@ export default ({ author, posts, unsubscribeUrl }) => {
                         </a>
                     </h3>
                     <div className="post-content">
-                        <i>{moment.utc(post.created_at).format("MMMM D, YYYY")}</i>
+                        <i>{dayjs(post.created_at).format("MMMM D, YYYY")}</i>
                         {/* eslint-disable-next-line react/no-danger */}
                         <div className="post-body" dangerouslySetInnerHTML={renderedText(post)} />
                     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default ({ author, entries }) => (
     <div>
@@ -16,7 +16,7 @@ export default ({ author, entries }) => (
                 <p>
                     <strong>
                         On
-                        {moment.utc(entry.created_at).format("MMMM D, YYYY HH:mm")}
+                        {dayjs(entry.created_at).format("MMMM D, YYYY HH:mm")}
                         :
                     </strong>
                 </p>
