@@ -23,7 +23,7 @@ const ActiveAuthorItem = ({ author }) => (
             </StartWriting>
         ) : (
             <div className="card">
-                <a href={author.url}>
+                <a href={author.url} data-turbolinks="false">
                     <div className="active-author__title">
                         <h5 className="h5">
                             {author.title}
