@@ -15,7 +15,7 @@ const Post = ({ truncate, post }) => {
                 <h5 className="post-title h5">{post.title}</h5>
                 {post.page || (
                     <p className="post-date p3">
-                        {`${dayjs(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
+                        {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
                     </p>
                 )}
             </div>
@@ -48,7 +48,7 @@ const Post = ({ truncate, post }) => {
                 )}
                 {post.page || (
                     <p className="post-date p3">
-                        {`${dayjs(post.created_at).format("MMMM D, YYYY")} · ${post.word_count} words`}
+                        {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
                     </p>
                 )}
             </div>
