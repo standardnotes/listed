@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({ customDomainIP }) => (
+const DomainInvalid = ({ customDomainIP }) => (
     <div>
         <p>
             Hi there, your Listed domain settings were not configured properly.
@@ -24,3 +25,9 @@ export default ({ customDomainIP }) => (
         </p>
     </div>
 );
+
+DomainInvalid.propTypes = {
+    customDomainIP: PropTypes.string.isRequired,
+};
+
+export default DomainInvalid;

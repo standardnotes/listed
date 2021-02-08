@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({ subscription }) => (
+const Unsubscribe = ({ subscription }) => (
     <p>
         You&apos;ve been successfully unsubscribed from
         {" "}
@@ -8,3 +9,13 @@ export default ({ subscription }) => (
         &apos;s posts.
     </p>
 );
+
+Unsubscribe.propTypes = {
+    subscription: PropTypes.shape({
+        author: PropTypes.shape({
+            title: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
+};
+
+export default Unsubscribe;

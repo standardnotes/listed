@@ -1,7 +1,9 @@
 import React from "react";
 
-export default () => (
+const Confirm = () => (
     <p>
         Unable to find subscription.
     </p>
 );
+
+export default Confirm;

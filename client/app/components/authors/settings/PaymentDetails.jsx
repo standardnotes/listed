@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import SVG from "react-inlinesvg";
 import axios from "axios";
@@ -143,6 +144,23 @@ const PaymentDetails = ({
             </div>
         </div>
     );
+};
+
+PaymentDetails.propTypes = {
+    author: PropTypes.shape({
+        credentials: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                key: PropTypes.string.isRequired,
+                value: PropTypes.string.isRequired,
+            }),
+        ).isRequired,
+        id: PropTypes.number.isRequired,
+        secret: PropTypes.string.isRequired,
+    }).isRequired,
+    authorCredentialsUrl: PropTypes.string.isRequired,
+    setErrorToastMessage: PropTypes.func.isRequired,
+    setIsErrorToastDisplayed: PropTypes.func.isRequired,
 };
 
 export default PaymentDetails;

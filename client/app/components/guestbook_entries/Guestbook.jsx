@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import New from "./New";
 import "./Guestbook.scss";
@@ -60,6 +61,24 @@ const Guestbook = ({
             ))}
         </div>
     );
+};
+
+Guestbook.propTypes = {
+    author: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+    }).isRequired,
+    entries: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            text: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
+    hCaptchaSiteKey: PropTypes.string.isRequired,
+    sent: PropTypes.bool,
+};
+
+Guestbook.defaultProps = {
+    sent: false,
 };
 
 export default (props) => <Guestbook {...props} />;

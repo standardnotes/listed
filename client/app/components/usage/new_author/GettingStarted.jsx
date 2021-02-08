@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useRef } from "react";
 import { GettingStartedGif } from "../../../assets/gifs";
 import "./GettingStarted.scss";
@@ -70,6 +71,10 @@ const GettingStarted = ({ secretUrl }) => {
             </p>
         </div>
     );
+};
+
+GettingStarted.propTypes = {
+    secretUrl: PropTypes.string.isRequired,
 };
 
 export default GettingStarted;

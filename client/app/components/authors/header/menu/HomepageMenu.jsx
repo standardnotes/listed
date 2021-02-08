@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import StartWriting from "../../../shared/StartWriting";
 
 const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
@@ -31,6 +32,11 @@ const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
             <StartWriting />
         </nav>
     );
+};
+
+HomepageMenu.propTypes = {
+    isMobileMenuOpen: PropTypes.bool.isRequired,
+    isDesktopMenu: PropTypes.bool.isRequired,
 };
 
 export default HomepageMenu;

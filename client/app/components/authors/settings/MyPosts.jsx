@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import axios from "axios";
@@ -101,7 +102,7 @@ const MyPosts = ({
                     <div className="hover-content">
                         <Dropdown
                             options={dropdownOptions(post)}
-                            isOpen={dropdownOpen && dropdownOpen === post.id}
+                            isOpen={!!dropdownOpen && dropdownOpen === post.id}
                             onClick={() => setDropdownOpen(post.id)}
                         >
                             <div className="hover-content__icon-container">
@@ -126,6 +127,25 @@ const MyPosts = ({
             ))}
         </ul>
     );
+};
+
+MyPosts.propTypes = {
+    author: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        secret: PropTypes.string.isRequired,
+    }).isRequired,
+    posts: PropTypes.arrayOf(
+        PropTypes.shape({
+            created_at: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            unlisted: PropTypes.bool.isRequired,
+            url: PropTypes.string.isRequired,
+            word_count: PropTypes.number.isRequired,
+        }),
+    ).isRequired,
+    setErrorToastMessage: PropTypes.func.isRequired,
+    setIsErrorToastDisplayed: PropTypes.func.isRequired,
 };
 
 export default MyPosts;

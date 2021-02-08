@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({ days }) => (
+const Posts = ({ days }) => (
     <div id="posts-container">
         <div className="days">
             {days.map((day) => (
@@ -19,3 +20,20 @@ export default ({ days }) => (
         </div>
     </div>
 );
+
+Posts.propTypes = {
+    days: PropTypes.arrayOf(
+        PropTypes.shape({
+            day: PropTypes.string.isRequired,
+            posts: PropTypes.arrayOf(
+                PropTypes.shape({
+                    id: PropTypes.number.isRequired,
+                    title: PropTypes.string.isRequired,
+                    tokenized_url: PropTypes.string.isRequired,
+                }),
+            ).isRequired,
+        }),
+    ).isRequired,
+};
+
+export default Posts;

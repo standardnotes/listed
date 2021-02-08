@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
@@ -144,6 +145,13 @@ const New = ({ author, hCaptchaSiteKey }) => {
             />
         </div>
     );
+};
+
+New.propTypes = {
+    author: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+    }).isRequired,
+    hCaptchaSiteKey: PropTypes.string.isRequired,
 };
 
 export default (props) => <New {...props} />;

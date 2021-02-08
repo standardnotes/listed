@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import MasonryLayout from "./MasonryLayout";
 import ActiveAuthorItem from "./ActiveAuthorItem";
@@ -22,6 +23,17 @@ const ActiveAuthors = ({ activeAuthors }) => {
             </div>
         </div>
     );
+};
+
+ActiveAuthors.propTypes = {
+    activeAuthors: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number,
+            ]).isRequired,
+        }),
+    ).isRequired,
 };
 
 export default ActiveAuthors;

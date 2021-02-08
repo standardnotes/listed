@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./AuthorMenu.scss";
 
 const AuthorMenu = ({
@@ -61,6 +62,30 @@ const AuthorMenu = ({
             )}
         </nav>
     );
+};
+
+AuthorMenu.propTypes = {
+    author: PropTypes.shape({
+        credentials: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number.isRequired,
+            }),
+        ).isRequired,
+        guestbook_disabled: PropTypes.bool.isRequired,
+        newsletter_disabled: PropTypes.bool.isRequired,
+        url: PropTypes.string.isRequired,
+    }).isRequired,
+    authorGuestbookEntriesUrl: PropTypes.string.isRequired,
+    currentUrl: PropTypes.string.isRequired,
+    isDesktopMenu: PropTypes.bool.isRequired,
+    isMobileMenuOpen: PropTypes.bool.isRequired,
+    pages: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            author_relative_url: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
 };
 
 export default AuthorMenu;

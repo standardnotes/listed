@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
@@ -107,6 +108,20 @@ const CredentialForm = ({
             </div>
         </form>
     );
+};
+
+CredentialForm.propTypes = {
+    authorCredentialUrl: PropTypes.string.isRequired,
+    currentCredential: PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+    }),
+    setErrorToastMessage: PropTypes.func.isRequired,
+    setIsErrorToastDisplayed: PropTypes.func.isRequired,
+};
+
+CredentialForm.defaultProps = {
+    currentCredential: null,
 };
 
 export default CredentialForm;

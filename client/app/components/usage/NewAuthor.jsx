@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import LeftNavBarPage from "../shared/LeftNavBarPage";
 import {
@@ -61,6 +62,10 @@ const NewAuthor = ({ secretUrl }) => {
             sections={sections}
         />
     );
+};
+
+NewAuthor.propTypes = {
+    secretUrl: PropTypes.string.isRequired,
 };
 
 export default NewAuthor;

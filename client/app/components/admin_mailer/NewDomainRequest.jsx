@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default ({
+const NewDomainRequest = ({
     username, id, domain, email,
 }) => (
     <div>
@@ -23,3 +24,12 @@ export default ({
         </p>
     </div>
 );
+
+NewDomainRequest.propTypes = {
+    username: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    domain: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+};
+
+export default NewDomainRequest;

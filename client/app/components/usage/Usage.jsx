@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import ActiveAuthors from "./active_authors/ActiveAuthors";
 import StartWriting from "../shared/StartWriting";
@@ -53,5 +54,11 @@ const Usage = ({ activeAuthors }) => (
         <ActiveAuthors activeAuthors={activeAuthors} />
     </div>
 );
+
+Usage.propTypes = {
+    activeAuthors: PropTypes.arrayOf(
+        PropTypes.shape({}),
+    ).isRequired,
+};
 
 export default Usage;

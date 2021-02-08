@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import SVG from "react-inlinesvg";
 import { IcCheckboxChecked, IcCheckboxEmpty } from "../../assets/icons";
@@ -25,5 +26,12 @@ const Checkbox = ({
         </label>
     </div>
 );
+
+Checkbox.propTypes = {
+    checked: PropTypes.bool.isRequired,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+};
 
 export default Checkbox;

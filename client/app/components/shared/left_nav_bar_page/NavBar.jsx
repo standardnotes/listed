@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import SVG from "react-inlinesvg";
 import "./NavBar.scss";
@@ -44,6 +45,16 @@ const NavBar = ({ sections }) => {
             ))}
         </nav>
     );
+};
+
+NavBar.propTypes = {
+    sections: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            icon: PropTypes.node.isRequired,
+        }),
+    ).isRequired,
 };
 
 export default NavBar;

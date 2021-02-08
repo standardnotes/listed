@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import React from "react";
 import dayjs from "dayjs";
 
-export default ({ author, entries }) => (
+const UnreadGuestbookEntries = ({ author, entries }) => (
     <div>
         <h3>
             Hey
@@ -66,3 +67,24 @@ export default ({ author, entries }) => (
         ))}
     </div>
 );
+
+UnreadGuestbookEntries.propTypes = {
+    author: PropTypes.shape({
+        display_name: PropTypes.string.isRequired,
+    }).isRequired,
+    entries: PropTypes.arrayOf(
+        PropTypes.shape({
+            approval_url: PropTypes.string.isRequired,
+            created_at: PropTypes.string.isRequired,
+            donation_info: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+            private: PropTypes.bool.isRequired,
+            signer_email: PropTypes.string.isRequired,
+            spam_url: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+            unapproval_url: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
+};
+
+export default UnreadGuestbookEntries;

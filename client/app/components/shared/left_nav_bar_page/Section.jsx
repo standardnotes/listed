@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect, useRef } from "react";
 import SVG from "react-inlinesvg";
 import { IcChevronDown, IcChevronUp } from "../../../assets/icons";
@@ -70,6 +71,15 @@ const Section = ({ section }) => {
         </li>
 
     );
+};
+
+Section.propTypes = {
+    section: PropTypes.shape({
+        collapsed: PropTypes.bool.isRequired,
+        id: PropTypes.string.isRequired,
+        renderContent: PropTypes.func.isRequired,
+        title: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default Section;

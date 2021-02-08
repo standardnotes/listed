@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import SVG from "react-inlinesvg";
 import { IcClose } from "../../assets/icons";
@@ -43,6 +44,12 @@ const ErrorToast = ({ message, isDisplayed, setIsDisplayed }) => {
             </div>
         </div>
     );
+};
+
+ErrorToast.propTypes = {
+    isDisplayed: PropTypes.bool.isRequired,
+    message: PropTypes.string.isRequired,
+    setIsDisplayed: PropTypes.func.isRequired,
 };
 
 export default ErrorToast;

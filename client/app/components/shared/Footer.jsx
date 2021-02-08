@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import "./Footer.scss";
 
@@ -24,5 +25,17 @@ const Footer = ({ blogPage, author }) => (
         </div>
     </div>
 );
+
+Footer.propTypes = {
+    author: PropTypes.shape({
+        display_name: PropTypes.string.isRequired,
+    }),
+    blogPage: PropTypes.bool,
+};
+
+Footer.defaultProps = {
+    author: null,
+    blogPage: false,
+};
 
 export default (props) => <Footer {...props} />;

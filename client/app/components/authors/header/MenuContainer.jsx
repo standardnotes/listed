@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { HomepageMenu, AuthorMenu } from "./menu";
 import "./MenuContainer.scss";
@@ -27,5 +28,24 @@ const MenuContainer = ({
         )}
     </div>
 );
+
+MenuContainer.propTypes = {
+    author: PropTypes.shape({}),
+    authorGuestbookEntriesUrl: PropTypes.string,
+    currentUrl: PropTypes.string.isRequired,
+    isDesktopMenu: PropTypes.bool.isRequired,
+    isMobileMenuOpen: PropTypes.bool.isRequired,
+    pages: PropTypes.arrayOf(
+        PropTypes.shape({}),
+    ),
+    privatePost: PropTypes.bool,
+};
+
+MenuContainer.defaultProps = {
+    author: null,
+    authorGuestbookEntriesUrl: "",
+    pages: null,
+    privatePost: false,
+};
 
 export default MenuContainer;

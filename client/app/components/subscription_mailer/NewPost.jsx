@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({
+const NewPost = ({
     hiddenText, post, renderedText, weeklyUrl, unsubscribeUrl,
 }) => {
     const renderedTextHtml = { __html: renderedText };
@@ -58,3 +59,21 @@ export default ({
         </div>
     );
 };
+
+NewPost.propTypes = {
+    hiddenText: PropTypes.string.isRequired,
+    post: PropTypes.shape({
+        author: PropTypes.shape({
+            email: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            url: PropTypes.string.isRequired,
+        }),
+        title: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+    }).isRequired,
+    renderedText: PropTypes.string.isRequired,
+    unsubscribeUrl: PropTypes.string.isRequired,
+    weeklyUrl: PropTypes.string.isRequired,
+};
+
+export default NewPost;

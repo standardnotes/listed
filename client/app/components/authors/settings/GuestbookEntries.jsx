@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import axios from "axios";
@@ -117,7 +118,7 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                         )}
                         <Dropdown
                             options={dropdownOptions(entry)}
-                            isOpen={dropdownOpen && dropdownOpen === entry.id}
+                            isOpen={!!dropdownOpen && dropdownOpen === entry.id}
                             onClick={() => setDropdownOpen(entry.id)}
                         >
                             <div className="hover-content__icon-container">
@@ -142,6 +143,25 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
             ))}
         </ul>
     );
+};
+
+GuestbookEntries.propTypes = {
+    guestbookEntries: PropTypes.arrayOf(
+        PropTypes.shape({
+            approval_url: PropTypes.string.isRequired,
+            created_at: PropTypes.string.isRequired,
+            deletion_url: PropTypes.string.isRequired,
+            donation_info: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+            public: PropTypes.bool.isRequired,
+            signer_email: PropTypes.string.isRequired,
+            spam_url: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+            unapproval_url: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
+    setErrorToastMessage: PropTypes.func.isRequired,
+    setIsErrorToastDisplayed: PropTypes.func.isRequired,
 };
 
 export default GuestbookEntries;

@@ -27,7 +27,6 @@
         "quotes": ["error", "double"],
         "react/jsx-indent": [2, 4],
         "react/jsx-indent-props": [2, 4],
-        "react/jsx-props-no-spreading": [0],
-        "react/prop-types": [0]
+        "react/jsx-props-no-spreading": [0]
     }
 }
