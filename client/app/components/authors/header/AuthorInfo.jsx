@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import SVG from "react-inlinesvg";
 import { IcArrowLong } from "../../../assets/icons";
 import "./AuthorInfo.scss";
@@ -62,6 +63,18 @@ const AuthorInfo = ({ author }) => {
             </button>
         </div>
     );
+};
+
+AuthorInfo.propTypes = {
+    author: PropTypes.shape({
+        bio: PropTypes.string,
+        header_image_url: PropTypes.string,
+        link: PropTypes.string,
+        personal_link: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        twitter: PropTypes.string,
+        word_count: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 export default AuthorInfo;

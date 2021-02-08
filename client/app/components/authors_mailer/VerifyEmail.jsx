@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({ author, verificationLink }) => (
+const VerifyEmail = ({ author, verificationLink }) => (
     <div>
         <h3>
             Hey
@@ -13,3 +14,12 @@ export default ({ author, verificationLink }) => (
         <a href={verificationLink}>{verificationLink}</a>
     </div>
 );
+
+VerifyEmail.propTypes = {
+    author: PropTypes.shape({
+        display_name: PropTypes.string.isRequired,
+    }).isRequired,
+    verificationLink: PropTypes.string.isRequired,
+};
+
+export default VerifyEmail;

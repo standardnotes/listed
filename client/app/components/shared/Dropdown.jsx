@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import SVG from "react-inlinesvg";
 import "./Dropdown.scss";
@@ -47,6 +48,20 @@ const Dropdown = ({
             </ul>
         </div>
     );
+};
+
+Dropdown.propTypes = {
+    children: PropTypes.node.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            action: PropTypes.func.isRequired,
+            className: PropTypes.string,
+            icon: PropTypes.node.isRequired,
+            text: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
 };
 
 export default Dropdown;

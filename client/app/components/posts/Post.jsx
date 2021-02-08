@@ -1,10 +1,11 @@
+import PropTypes from "prop-types";
 import React from "react";
 import dayjs from "dayjs";
 import SVG from "react-inlinesvg";
 import { IcArrowLong } from "../../assets/icons";
 import "./Post.scss";
 
-const Post = ({ truncate, post }) => {
+const Post = ({ truncate = false, post }) => {
     // HTML has already been sanitized on Rails side
     const previewText = { __html: post.preview_text };
     const renderedText = { __html: post.rendered_text };
@@ -62,6 +63,24 @@ const Post = ({ truncate, post }) => {
             {truncate ? renderTruncatePost() : renderPost()}
         </div>
     );
+};
+
+Post.propTypes = {
+    post: PropTypes.shape({
+        author_relative_url: PropTypes.string.isRequired,
+        created_at: PropTypes.string.isRequired,
+        page: PropTypes.bool,
+        preview_text: PropTypes.string.isRequired,
+        rendered_text: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        unlisted: PropTypes.bool.isRequired,
+        word_count: PropTypes.number.isRequired,
+    }).isRequired,
+    truncate: PropTypes.bool,
+};
+
+Post.defaultProps = {
+    truncate: false,
 };
 
 export default Post;

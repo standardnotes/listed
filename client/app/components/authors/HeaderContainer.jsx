@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import SVG from "react-inlinesvg";
 import { IcListed, IcMenu, IcClose } from "../../assets/icons";
@@ -64,6 +65,30 @@ const HeaderContainer = ({
             )}
         </div>
     );
+};
+
+HeaderContainer.propTypes = {
+    author: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+    }),
+    authorGuestbookEntriesUrl: PropTypes.string,
+    blogPage: PropTypes.bool,
+    currentUrl: PropTypes.string.isRequired,
+    homeUrl: PropTypes.string.isRequired,
+    pages: PropTypes.arrayOf(
+        PropTypes.shape({}),
+    ),
+    post: PropTypes.bool.isRequired,
+    privatePost: PropTypes.bool,
+};
+
+HeaderContainer.defaultProps = {
+    author: null,
+    authorGuestbookEntriesUrl: null,
+    blogPage: false,
+    pages: null,
+    privatePost: false,
 };
 
 export default (props) => <HeaderContainer {...props} />;

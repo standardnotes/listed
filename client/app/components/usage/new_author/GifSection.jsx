@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import "./GifSection.scss";
 
@@ -7,5 +8,10 @@ const GifSection = ({ text, gifSource }) => (
         <img src={gifSource} className="new-author__gif" alt="" />
     </div>
 );
+
+GifSection.propTypes = {
+    gifSource: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+};
 
 export default GifSection;

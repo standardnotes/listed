@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({ url }) => (
+const DomainApproved = ({ url }) => (
     <div>
         <h3>
             Congratulations!
@@ -18,3 +19,9 @@ export default ({ url }) => (
         </p>
     </div>
 );
+
+DomainApproved.propTypes = {
+    url: PropTypes.string.isRequired,
+};
+
+export default DomainApproved;

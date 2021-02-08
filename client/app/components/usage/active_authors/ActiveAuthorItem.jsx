@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import SVG from "react-inlinesvg";
 import StartWriting from "../../shared/StartWriting";
@@ -44,5 +45,19 @@ const ActiveAuthorItem = ({ author }) => (
         )}
     </li>
 );
+
+ActiveAuthorItem.propTypes = {
+    author: PropTypes.shape({
+        bio: PropTypes.string,
+        featured: PropTypes.bool.isRequired,
+        id: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number,
+        ]).isRequired,
+        title: PropTypes.string.isRequired,
+        url: PropTypes.string,
+        word_count: PropTypes.number,
+    }).isRequired,
+};
 
 export default ActiveAuthorItem;

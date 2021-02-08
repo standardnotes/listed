@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import "./ConfirmationModal.scss";
 
@@ -40,6 +41,18 @@ const ConfirmationModal = ({ text, primaryOption, secondaryOption }) => {
             </div>
         </div>
     );
+};
+
+ConfirmationModal.propTypes = {
+    primaryOption: PropTypes.shape({
+        onClick: PropTypes.func.isRequired,
+        text: PropTypes.string.isRequired,
+    }).isRequired,
+    secondaryOption: PropTypes.shape({
+        onClick: PropTypes.func.isRequired,
+        text: PropTypes.string.isRequired,
+    }).isRequired,
+    text: PropTypes.string.isRequired,
 };
 
 export default ConfirmationModal;

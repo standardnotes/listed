@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import Post from "./Post";
 import SubscriptionForm from "../authors/SubscriptionForm";
@@ -58,5 +59,23 @@ const Show = ({
         <ScrollToTopButton />
     </div>
 );
+
+Show.propTypes = {
+    next: PropTypes.shape({}).isRequired,
+    post: PropTypes.shape({
+        author: PropTypes.shape({
+            newsletter_disabled: PropTypes.bool.isRequired,
+            title: PropTypes.string.isRequired,
+        }).isRequired,
+        page: PropTypes.bool.isRequired,
+        unlisted: PropTypes.bool.isRequired,
+    }).isRequired,
+    previous: Post.propTypes.post.isRequired,
+    subscribedToAuthor: PropTypes.bool.isRequired,
+    subscriptionForAuthor: PropTypes.shape({
+        verification_sent_at: PropTypes.string.isRequired,
+    }).isRequired,
+    subscriptionSuccess: PropTypes.bool.isRequired,
+};
 
 export default Show;

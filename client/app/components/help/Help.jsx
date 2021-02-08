@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const Help = () => (
     <p>
         Questions? Get in touch any time:
         {" "}
@@ -8,3 +8,5 @@ export default () => (
         .
     </p>
 );
+
+export default Help;

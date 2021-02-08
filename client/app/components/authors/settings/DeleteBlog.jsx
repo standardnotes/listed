@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
@@ -79,6 +80,13 @@ const DeleteBlog = ({ author }) => {
             )}
         </div>
     );
+};
+
+DeleteBlog.propTypes = {
+    author: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        secret: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default DeleteBlog;

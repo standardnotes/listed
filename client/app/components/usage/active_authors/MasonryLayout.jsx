@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import "./MasonryLayout.scss";
 
@@ -55,6 +56,10 @@ const MasonryLayout = ({ children }) => {
             {children}
         </ul>
     );
+};
+
+MasonryLayout.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default MasonryLayout;

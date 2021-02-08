@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import axios from "axios";
 import ErrorToast from "./ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 
-const StartWriting = ({ className, children }) => {
+const StartWriting = ({ className, children = null }) => {
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
 
@@ -30,7 +31,7 @@ const StartWriting = ({ className, children }) => {
         <>
             <button
                 onClick={createNewAuthor}
-                className={`${children ? "button" : "button button--primary"} ${className || ""}`}
+                className={`${children ? "button" : "button button--primary"} ${className}`}
                 type="button"
             >
                 {children || (
@@ -44,6 +45,16 @@ const StartWriting = ({ className, children }) => {
             />
         </>
     );
+};
+
+StartWriting.propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+};
+
+StartWriting.defaultProps = {
+    children: null,
+    className: "",
 };
 
 export default StartWriting;

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const Featured = () => (
     <div>
         <h3>Congratulations!</h3>
         <p>
@@ -18,3 +18,5 @@ export default () => (
         </p>
     </div>
 );
+
+export default Featured;

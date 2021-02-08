@@ -1,6 +1,8 @@
 <%= react_component("SubscriptionMailerNewSubscription", props: {
     author: @author.as_json(
         only: [],
-        methods: :verified_subscriptions
+        methods: :verified_subscriptions.as_json(
+            only: :id
+        )
     )
 }) %>

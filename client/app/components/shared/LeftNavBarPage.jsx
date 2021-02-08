@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { NavBar, Section } from "./left_nav_bar_page";
 import "./LeftNavBarPage.scss";
@@ -18,5 +19,15 @@ const LeftNavBarPage = ({ heading, subheading, sections }) => (
         </div>
     </div>
 );
+
+LeftNavBarPage.propTypes = {
+    heading: PropTypes.string.isRequired,
+    sections: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
+    subheading: PropTypes.node.isRequired,
+};
 
 export default LeftNavBarPage;

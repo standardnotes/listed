@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import React from "react";
 import dayjs from "dayjs";
 
-export default ({ author, posts, unsubscribeUrl }) => {
+const WeeklyDigest = ({ author, posts, unsubscribeUrl }) => {
     const renderedText = (post) => ({ __html: post.rendered_text });
 
     return (
@@ -42,3 +43,21 @@ export default ({ author, posts, unsubscribeUrl }) => {
         </div>
     );
 };
+
+WeeklyDigest.propTypes = {
+    author: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+    }).isRequired,
+    posts: PropTypes.arrayOf(
+        PropTypes.shape({
+            author_relative_url: PropTypes.string.isRequired,
+            created_at: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
+    unsubscribeUrl: PropTypes.string.isRequired,
+};
+
+export default WeeklyDigest;

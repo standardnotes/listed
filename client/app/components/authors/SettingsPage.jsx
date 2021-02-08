@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import LeftNavBarPage from "../shared/LeftNavBarPage";
 import {
@@ -141,6 +142,22 @@ const SettingsPage = ({
             />
         </>
     );
+};
+
+SettingsPage.propTypes = {
+    author: PropTypes.shape({
+        accessible_via: PropTypes.arrayOf(
+            PropTypes.string,
+        ).isRequired,
+    }).isRequired,
+    authorCredentialsUrl: PropTypes.string.isRequired,
+    customDomainIP: PropTypes.string.isRequired,
+    guestbookEntries: PropTypes.arrayOf(
+        PropTypes.shape({}),
+    ).isRequired,
+    posts: PropTypes.arrayOf(
+        PropTypes.shape({}),
+    ).isRequired,
 };
 
 export default (props) => <SettingsPage {...props} />;

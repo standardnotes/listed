@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import SubscriptionForm from "./SubscriptionForm";
 import "./Subscribe.scss";
@@ -30,5 +31,16 @@ const Subscribe = ({
         )}
     </div>
 );
+
+Subscribe.propTypes = {
+    displayAuthor: PropTypes.shape({
+        rss_url: PropTypes.string.isRequired,
+    }).isRequired,
+    subscribedToAuthor: PropTypes.bool.isRequired,
+    subscriptionForAuthor: PropTypes.shape({
+        verification_sent_at: PropTypes.string.isRequired,
+    }).isRequired,
+    subscriptionSuccess: PropTypes.bool.isRequired,
+};
 
 export default Subscribe;

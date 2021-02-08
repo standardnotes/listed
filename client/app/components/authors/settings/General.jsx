@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
@@ -219,6 +220,26 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
             </div>
         </form>
     );
+};
+
+General.propTypes = {
+    author: PropTypes.shape({
+        bio: PropTypes.string,
+        display_name: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        guestbook_disabled: PropTypes.bool.isRequired,
+        header_image_url: PropTypes.string,
+        hide_from_homepage: PropTypes.bool.isRequired,
+        id: PropTypes.number.isRequired,
+        link: PropTypes.string,
+        meta_image_url: PropTypes.string,
+        newsletter_disabled: PropTypes.bool.isRequired,
+        secret: PropTypes.string.isRequired,
+        twitter: PropTypes.string,
+        username: PropTypes.string.isRequired,
+    }).isRequired,
+    setErrorToastMessage: PropTypes.func.isRequired,
+    setIsErrorToastDisplayed: PropTypes.func.isRequired,
 };
 
 export default (props) => <General {...props} />;

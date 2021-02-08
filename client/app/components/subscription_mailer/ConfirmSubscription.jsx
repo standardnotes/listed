@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({ authorUrl, author, confirmUrl }) => (
+const ConfirmSubscription = ({ authorUrl, author, confirmUrl }) => (
     <div>
         <p>
             Please confirm your subscription to
@@ -19,3 +20,13 @@ export default ({ authorUrl, author, confirmUrl }) => (
         </p>
     </div>
 );
+
+ConfirmSubscription.propTypes = {
+    author: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+    }).isRequired,
+    authorUrl: PropTypes.string.isRequired,
+    confirmUrl: PropTypes.string.isRequired,
+};
+
+export default ConfirmSubscription;

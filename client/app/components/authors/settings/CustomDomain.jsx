@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
@@ -235,6 +236,20 @@ const CustomDomain = ({ author, customDomainIP }) => {
             />
         </div>
     );
+};
+
+CustomDomain.propTypes = {
+    author: PropTypes.shape({
+        domain: PropTypes.shape({
+            active: PropTypes.bool.isRequired,
+            approved: PropTypes.bool.isRequired,
+            domain: PropTypes.string.isRequired,
+        }),
+        id: PropTypes.number.isRequired,
+        secret: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+    }).isRequired,
+    customDomainIP: PropTypes.string.isRequired,
 };
 
 export default (props) => <CustomDomain {...props} />;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import "./Tip.scss";
 
@@ -47,5 +48,20 @@ const Tip = ({ displayAuthor, authorGuestbookEntriesUrl }) => (
         </div>
     </div>
 );
+
+Tip.propTypes = {
+    authorGuestbookEntriesUrl: PropTypes.string.isRequired,
+    displayAuthor: PropTypes.shape({
+        credentials: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                key: PropTypes.string.isRequired,
+                value: PropTypes.string.isRequired,
+            }),
+        ).isRequired,
+        display_name: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+    }).isRequired,
+};
 
 export default Tip;

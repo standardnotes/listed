@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-export default ({ author }) => (
+const NewSubscription = ({ author }) => (
     <div>
         <p>
             Good news! Someone just subscribed to your blog.
@@ -15,3 +16,15 @@ export default ({ author }) => (
         </p>
     </div>
 );
+
+NewSubscription.propTypes = {
+    author: PropTypes.shape({
+        verified_subscriptions: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number.isRequired,
+            }),
+        ).isRequired,
+    }).isRequired,
+};
+
+export default NewSubscription;

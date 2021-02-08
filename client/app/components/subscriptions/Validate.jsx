@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
@@ -80,6 +81,16 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
             />
         </div>
     );
+};
+
+Validate.propTypes = {
+    hCaptchaSiteKey: PropTypes.string.isRequired,
+    subscription: PropTypes.shape({
+        author: PropTypes.shape({
+            title: PropTypes.string.isRequired,
+        }),
+        id: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 export default (props) => <Validate {...props} />;

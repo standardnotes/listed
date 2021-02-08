@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
@@ -65,6 +66,22 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
             />
         </div>
     );
+};
+
+Show.propTypes = {
+    displayAuthor: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+    }).isRequired,
+    olderThan: PropTypes.number,
+    posts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+        }),
+    ).isRequired,
+};
+
+Show.defaultProps = {
+    olderThan: null,
 };
 
 export default (props) => <Show {...props} />;

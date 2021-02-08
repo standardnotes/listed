@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import axios from "axios";
 import ErrorToast from "../shared/ErrorToast";
@@ -82,6 +83,24 @@ const SubscriptionForm = ({
             />
         </div>
     );
+};
+
+SubscriptionForm.propTypes = {
+    author: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+    }).isRequired,
+    subscribedToAuthor: PropTypes.bool,
+    subscriptionForAuthor: PropTypes.shape({
+        verification_sent_at: PropTypes.string.isRequired,
+        verified: PropTypes.bool.isRequired,
+    }),
+    subscriptionSuccess: PropTypes.bool,
+};
+
+SubscriptionForm.defaultProps = {
+    subscribedToAuthor: false,
+    subscriptionForAuthor: null,
+    subscriptionSuccess: false,
 };
 
 export default (props) => <SubscriptionForm {...props} />;
