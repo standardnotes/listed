@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3000/rails/mailers/authors_mailer
+# Preview all emails at http://localhost:3009/rails/mailers/authors_mailer
 class AuthorsMailerPreview < ActionMailer::Preview
 
   def domain_approved
