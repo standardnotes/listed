@@ -43,7 +43,7 @@ class AuthorsController < ApplicationController
     @desc = @display_author.bio || 'Via Standard Notes.'
 
     limit = 15
-    all_posts = @display_author.listed_posts(nil, false)
+    all_posts = @display_author.listed_posts(nil, false).order('created_at DESC')
     posts =
       if params[:a]
         all_posts
@@ -51,19 +51,17 @@ class AuthorsController < ApplicationController
       elsif params[:b]
         all_posts
           .where('created_at < ?', Time.at(params[:b].to_i).to_datetime || 0)
-          .order('created_at DESC')
       else
         all_posts
-          .order('created_at DESC')
       end
 
     @posts = posts.limit(limit).sort { |a, b| b.created_at <=> a.created_at }
     @newer_than =
-      if all_posts.count > limit && all_posts.last.created_at > @posts.first.created_at
+      if all_posts.count > limit && all_posts.first.created_at > @posts.first.created_at
         @posts.first.created_at.to_i
       end
     @older_than =
-      if all_posts.count > limit && all_posts.first.created_at < @posts.last.created_at
+      if all_posts.count > limit && all_posts.last.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
   end
