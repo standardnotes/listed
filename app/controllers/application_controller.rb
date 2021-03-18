@@ -44,11 +44,11 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_authenticated_settings(author)
-    redirect_to "/authors/#{author.id}/settings/?secret=#{author.secret}", :status => 303
+    redirect_to "#{ENV['HOST']}/authors/#{author.id}/settings/?secret=#{author.secret}", :status => 303
   end
 
   def not_found
-    redirect_to "/"
+    redirect_to "#{ENV['HOST']}/"
   end
 
 end
