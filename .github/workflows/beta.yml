@@ -36,8 +36,8 @@ jobs:
     - name: Setup SSH
       uses: MrSquaare/ssh-setup-action@v1
       with:
-        host: ${{ secrets.LISTED_SSH_SERVER_DEV }}
-        private-key: ${{ secrets.LISTED_SSH_KEY_DEV }}
+        host: ${{ secrets.LISTED_SSH_SERVER_BETA }}
+        private-key: ${{ secrets.LISTED_SSH_KEY_BETA }}
     - name: Deploy with Capistrano
       run: bundle exec cap staging deploy
       env:
