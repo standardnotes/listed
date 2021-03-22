@@ -34,10 +34,10 @@ jobs:
         port: '22'
         description: 'GitHub Action'
     - name: Setup SSH
-      uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+      uses: MrSquaare/ssh-setup-action@v1
       with:
-        ssh-private-key: ${{ secrets.LISTED_SSH_KEY_BETA }}
-        ssh-host: ${{ secrets.LISTED_SSH_SERVER_BETA }}
+        host: ${{ secrets.LISTED_SSH_SERVER_DEV }}
+        private-key: ${{ secrets.LISTED_SSH_KEY_DEV }}
     - name: Deploy with Capistrano
       run: bundle exec cap staging deploy
       env:
