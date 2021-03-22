@@ -38,10 +38,10 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v1
+      uses: kielabokkie/ssh-key-and-known-hosts-action@v1
       with:
-        host: ${{ secrets.LISTED_SSH_SERVER_BETA }}
-        private-key: ${{ secrets.LISTED_SSH_KEY_BETA }}
+        ssh-private-key: ${{ secrets.LISTED_SSH_KEY_BETA }}
+        ssh-host: ${{ secrets.LISTED_SSH_SERVER_BETA }}
     - name: Add public IP to AWS security group
       uses: sohelamin/aws-security-group-add-ip-action@master
       with:
