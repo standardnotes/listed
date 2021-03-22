@@ -6,6 +6,8 @@ on:
 
 jobs:
   docker_publish:
+    needs: deploy
+
     runs-on: ubuntu-latest
 
     steps:
@@ -37,11 +39,6 @@ jobs:
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
-    - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v1
-      with:
-        host: ${{ secrets.LISTED_SSH_SERVER_DEV }}
-        private-key: ${{ secrets.LISTED_SSH_KEY_DEV }}
     - name: Add public IP to AWS security group
       uses: sohelamin/aws-security-group-add-ip-action@master
       with:
@@ -51,6 +48,11 @@ jobs:
         aws-security-group-id: ${{ secrets.AWS_SECURITY_GROUP_ID_DEV }}
         port: '22'
         description: 'GitHub Action'
+    - name: Setup SSH
+      uses: MrSquaare/ssh-setup-action@v1
+      with:
+        host: ${{ secrets.LISTED_SSH_SERVER_DEV }}
+        private-key: ${{ secrets.LISTED_SSH_KEY_DEV }}
     - name: Deploy with Capistrano
       run: bundle exec cap staging deploy
       env:
