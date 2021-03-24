@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200806085900) do
+ActiveRecord::Schema.define(version: 20200826113044) do
 
   create_table "authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "secret"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20200806085900) do
   end
 
   create_table "letsencrypt_certificates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "domain"
+    t.string   "domain",              limit: 180
     t.text     "certificate",         limit: 65535
     t.text     "intermediaries",      limit: 65535
     t.text     "key",                 limit: 65535
@@ -76,8 +76,6 @@ ActiveRecord::Schema.define(version: 20200806085900) do
     t.datetime "renew_after"
     t.string   "verification_path"
     t.string   "verification_string"
-    t.string   "aws_arn"
-    t.string   "aws_hosted_zone_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.index ["domain"], name: "index_letsencrypt_certificates_on_domain", using: :btree

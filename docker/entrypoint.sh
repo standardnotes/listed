@@ -19,7 +19,7 @@ case "$COMMAND" in
     echo "Prestart Step 1/5 - Removing server lock"
     rm -f /listed/tmp/pids/server.pid
     echo "Prestart Step 2/5 - Installing dependencies"
-    yarn install --frozen-lockfile
+    yarn install --pure-lockfile
     echo "Prestart Step 3/5 - Compiling assets"
     bundle exec rake assets:precompile
     echo "Prestart Step 4/5 - Migrating database"

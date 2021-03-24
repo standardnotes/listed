@@ -56,7 +56,7 @@ You can change the date that appears on your post, or set a [canonical URL](http
 
 To run the application locally, after cloning the repo follow these steps:
 ```
-yarn install --frozen-lockfile
+yarn install --pure-lockfile
 bundle exec rails db:migrate
 bundle exec rails db:seed
 gem install bundler && bundle install

@@ -8,7 +8,7 @@ RUN addgroup --system listed --gid $GID && adduser --disabled-password --system 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update \
-    && apt-get install -y git build-essential libmariadb-dev curl imagemagick \
+    && apt-get install -y git build-essential libmariadb-dev curl imagemagick python \
     && apt-get -y autoclean
 
 RUN mkdir -p /usr/local/nvm
@@ -37,7 +37,7 @@ USER listed
 
 COPY --chown=$UID:$GID package.json yarn.lock Gemfile Gemfile.lock /listed/
 
-RUN yarn install --frozen-lockfile
+RUN yarn install --pure-lockfile
 
 RUN gem install bundler && bundle install
 

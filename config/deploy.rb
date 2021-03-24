@@ -42,7 +42,7 @@ namespace :deploy do
     on roles(:app) do
       within release_path do
         # string commands dont work, have to use special *%w syntax
-        execute *%w[ yarn install --frozen-lockfile ]
+        execute *%w[ yarn install --pure-lockfile ]
       end
     end
   end
