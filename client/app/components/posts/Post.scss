@@ -10,8 +10,12 @@
     .post-body {
         margin: $spacing-24 0;
 
+        li:not(:last-child) {
+            margin-bottom: $spacing-10;
+        }
+
         p:not(:last-child) {
-            margin-bottom: $spacing-32;
+            margin-bottom: $spacing-22;
         }
     }
 
@@ -26,11 +30,12 @@
         margin: $spacing-8 0;
 
         p:not(:last-child) {
-            margin-bottom: $spacing-32;
+            margin-bottom: $spacing-22;
         }
     }
 
-    &.post-content a .post-header,.post-body {
+    &.post-content a .post-header,
+    .post-body {
         color: var(--body-text-color);
         font-weight: normal;
     }
