@@ -37,7 +37,7 @@ const ActiveAuthorItem = ({ author }) => (
                     <div className="active-author__word-count">
                         <SVG src={IcTextRich} className="active-author__icon active-author__icon--word-count" />
                         <p className="p3 active-author__word-count" suppressHydrationWarning>
-                            {`${author.word_count.toLocaleString()} words`}
+                            {`${author.last_word_count.toLocaleString()} words`}
                         </p>
                     </div>
                 </a>
@@ -56,7 +56,7 @@ ActiveAuthorItem.propTypes = {
         ]).isRequired,
         title: PropTypes.string.isRequired,
         url: PropTypes.string,
-        word_count: PropTypes.number,
+        last_word_count: PropTypes.number,
     }).isRequired,
 };
 

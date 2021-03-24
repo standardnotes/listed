@@ -124,18 +124,13 @@ class Author < ApplicationRecord
     end
   end
 
-  def word_count
-    count = self.posts.where(:unlisted => false, :published => true).sum(:word_count)
-    if count != self.last_word_count
-      self.last_word_count = count
-      self.save
-    end
-    return count
-  end
-
   def update_word_count
-    # Just access word_count
-    word_count
+    count = posts.where(:unlisted => false, :published => true).sum(:word_count)
+    if count != last_word_count
+      self.last_word_count = count
+      save
+    end
+    count
   end
 
   def styles
