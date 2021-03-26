@@ -1,16 +1,19 @@
 class Author < ApplicationRecord
-  has_many :subscriptions, :dependent => :destroy
-  has_many :subscribers, :through => :subscriptions, :dependent => :destroy
-  has_many :credentials, :dependent => :destroy
-  validates :username, uniqueness: {:case_sensitive => false}, :allow_nil => true, :allow_blank => true,
-    :format => {
-      with: /\A[\w]+\z/ ,
-      :message => 'Only letters, numbers, and underscores are allowed.'
-    }
-  validates :email, uniqueness: true, :allow_nil => true, :allow_blank => true
-  has_many :posts, :dependent => :destroy
-  has_one :domain, :dependent => :destroy
-  has_many :guestbook_entries, :dependent => :destroy
+  has_many :subscriptions, dependent: :destroy
+  has_many :subscribers, through: :subscriptions, dependent: :destroy
+  has_many :credentials, dependent: :destroy
+  validates :username,
+            uniqueness: { case_sensitive: false },
+            allow_nil: true,
+            allow_blank: true,
+            format: {
+              with: /\A[\w]+\z/ ,
+              message: 'Only letters, numbers, and underscores are allowed.'
+            }
+  validates :email, uniqueness: true, allow_nil: true, allow_blank: true
+  has_many :posts, dependent: :destroy
+  has_one :domain, dependent: :destroy
+  has_many :guestbook_entries, dependent: :destroy
 
   def public_guestbook_entries
     guestbook_entries.where(public: true)
@@ -21,26 +24,14 @@ class Author < ApplicationRecord
   end
 
   def listed_posts(exclude_posts = nil, sort = true)
-    results = posts
-              .where(
-                unlisted: false,
-                hidden: [false, nil],
-                published: true,
-                page: [false, nil]
-              )
+    results = posts.where(author_show: true)
     results = results.where('id NOT IN (?)', exclude_posts.compact) if exclude_posts
     results = results.order('created_at DESC') if sort
     results
   end
 
   def pages
-    posts
-      .where(
-        unlisted: [false, nil],
-        hidden: [false, nil],
-        published: true,
-        page: true
-      )
+    posts.where(author_page: true)
   end
 
   def code
@@ -118,14 +109,14 @@ class Author < ApplicationRecord
 
   def accessible_via
     if ENV['ALT_HOST']
-      return [url, "#{ENV['ALT_HOST']}/#{url_segment}"]
+      [url, "#{ENV['ALT_HOST']}/#{url_segment}"]
     else
-      return [url]
+      [url]
     end
   end
 
   def update_word_count
-    count = posts.where(:unlisted => false, :published => true).sum(:word_count)
+    count = posts.where(unlisted: false, published: true).sum(:word_count)
     if count != last_word_count
       self.last_word_count = count
       save
@@ -133,38 +124,9 @@ class Author < ApplicationRecord
     count
   end
 
-  def styles
-    post = posts.where(metatype: 'css', published: true).first
-    return unless post
-
-    css = post.text
-    config = Sanitize::Config.merge(
-      Sanitize::Config::RELAXED,
-      css: {
-        protocols: Sanitize::Config::RELAXED[:css][:protocols] + ['data'],
-        at_rules: ['import'],
-        properties: Sanitize::Config::RELAXED[:css][:properties] + [
-          '--dimmed-text-color',
-          '--dimmed-border-color',
-          '--background-color',
-          '--body-text-color',
-          '--post-title-color',
-          '--post-date-color',
-          '--post-text-color',
-          '--page-menu-link-color',
-          '--header-author-name',
-          '--header-listed-name',
-          '--more-from-border-color',
-          '--bio-color',
-          '--wordcount-color',
-          '--website-color',
-          '--twitter-color',
-          '--link-color',
-          '--header-border-color'
-        ]
-      }
-    )
-    Sanitize::CSS.stylesheet(css, config).html_safe
+  def update_css(text)
+    self.css = !text ? nil : Sanitize::CSS.stylesheet(text, SANITIZE_CONFIG).html_safe
+    save
   end
 
   def personal_link

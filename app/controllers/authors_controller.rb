@@ -13,9 +13,8 @@ class AuthorsController < ApplicationController
       @display_author = Author.find_author_from_path(request.path)
     end
 
-    if @display_author
-      @styles = @display_author.styles
-    end
+    @pages = @display_author.pages if @display_author
+    @styles = @display_author.css if @display_author
 
     set_meta_images_for_author(@display_author)
   }
@@ -33,6 +32,8 @@ class AuthorsController < ApplicationController
     @posts = @author.posts
   end
 
+  POST_LIMIT = 15
+
   def show
     unless @display_author
       not_found
@@ -43,9 +44,8 @@ class AuthorsController < ApplicationController
     @desc = @display_author.bio || 'Via Standard Notes.'
     @blog_page = true
 
-    limit = 15
-    all_posts = @display_author.listed_posts(nil, false).order('created_at DESC')
-    posts =
+    all_posts = @display_author.listed_posts(nil, true)
+    @posts =
       if params[:a]
         all_posts
           .where('created_at > ?', Time.at(params[:a].to_i).to_datetime || 0)
@@ -56,13 +56,13 @@ class AuthorsController < ApplicationController
         all_posts
       end
 
-    @posts = posts.limit(limit).sort { |a, b| b.created_at <=> a.created_at }
+    @posts = @posts.limit(POST_LIMIT).sort { |a, b| b.created_at <=> a.created_at }
     @newer_than =
-      if all_posts.count > limit && all_posts.first.created_at > @posts.first.created_at
+      if all_posts.count > POST_LIMIT && all_posts.first.created_at > @posts.first.created_at
         @posts.first.created_at.to_i
       end
     @older_than =
-      if all_posts.count > limit && all_posts.last.created_at < @posts.last.created_at
+      if all_posts.count > POST_LIMIT && all_posts.last.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
   end

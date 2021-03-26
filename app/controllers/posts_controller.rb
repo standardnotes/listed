@@ -31,20 +31,22 @@ class PostsController < ApplicationController
   def find_post
     author =
       if params[:author_id]
-        Author.find(params[:author_id])
+        Author.includes(:domain, :credentials).find(params[:author_id])
       else
-        Author.find_author_from_path(request.path)
+        Author.includes(:domain, :credentials).find_author_from_path(request.path)
       end
     unless author
       domain = Domain.find_by(domain: request.host)
       author = domain&.author
     end
+
     if params[:id]
       if params[:id].is_integer?
         @post = Post.find_by_id(params[:id])
       else
         @post = find_page(author, params[:id])
       end
+
       if @post && @post.unlisted == true
         not_found
         return
@@ -91,7 +93,7 @@ class PostsController < ApplicationController
       return
     end
 
-    @styles = @post.author.styles
+    @styles = @post.author.css
     set_meta_images_for_author(@post.author)
   end
 
@@ -155,9 +157,6 @@ class PostsController < ApplicationController
     post.unlisted = unlisted
     post.published = true
     post.save
-
-    post.author.update_word_count
-    post.author.update_homepage_status
   end
 
   def newsletter
@@ -203,8 +202,6 @@ class PostsController < ApplicationController
 
     post.published = false
     post.save
-
-    post.author.update_word_count
   end
 
   def change_privacy
@@ -218,7 +215,6 @@ class PostsController < ApplicationController
     post.unlisted = !post.unlisted
     post.save
 
-    post.author.update_word_count
     redirect_back fallback_location: @author.url
   end
 

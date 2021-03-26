@@ -10,6 +10,25 @@ class Post < ApplicationRecord
   include Tokenable
   belongs_to :author
 
+  before_commit do
+    update_author_show_status
+  end
+
+  after_commit do
+    author.update_word_count
+    author.update_homepage_status
+
+    if metatype == 'css'
+      author.update_css(published ? text : nil)
+    end
+  end
+
+  def update_author_show_status
+    is_public = !unlisted && !hidden && published && !metatype
+    self.author_show = is_public && !page
+    self.author_page = is_public && page
+  end
+
   def next
     posts = author.listed_posts
     index = posts.index(self)
@@ -48,16 +67,16 @@ class Post < ApplicationRecord
     # Remove HTML syntax
     result = ActionView::Base.full_sanitizer.sanitize(result)
 
-    limit = 500
-    return result[0, 500] + "..."
+    result[0, 500] + '...'
   end
 
   def rendered_text(limit = nil)
-    return get_rendered_text(self.text, limit)
+    get_rendered_text(self.text, limit)
   end
 
   def get_rendered_text(input, limit = nil)
     return nil if input == nil
+
     options = {
       filter_html: false,
       hard_wrap: true,
