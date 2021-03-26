@@ -32,7 +32,9 @@ ActiveRecord::Schema.define(version: 20200826113044) do
     t.boolean  "email_verified",                         default: false
     t.string   "email_verification_token"
     t.boolean  "newsletter_disabled",                    default: false
+    t.datetime "homepage_activity"
     t.index ["hide_from_homepage"], name: "index_authors_on_hide_from_homepage", using: :btree
+    t.index ["homepage_activity"], name: "index_authors_on_homepage_activity", using: :btree
   end
 
   create_table "credentials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 
   def find_page(author, title)
     return unless author
-    
+
     title = title.gsub('-', ' ')
     author.pages.where('lower(title) = ?', title.downcase).first
   end
@@ -157,6 +157,7 @@ class PostsController < ApplicationController
     post.save
 
     post.author.update_word_count
+    post.author.update_homepage_status
   end
 
   def newsletter
@@ -176,11 +177,11 @@ class PostsController < ApplicationController
       post.save
 
       @author.subscriptions.each do |subscription|
-        if subscription.verified == true && 
-          subscription.frequency == 'daily' && 
+        if subscription.verified == true &&
+          subscription.frequency == 'daily' &&
           subscription.unsubscribed == false
           SubscriptionMailer.new_post(
-            post, 
+            post,
             subscription.subscriber
           ).deliver_later
         end

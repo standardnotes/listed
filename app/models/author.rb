@@ -170,36 +170,39 @@ class Author < ApplicationRecord
   def personal_link
     return nil if !link || link.empty?
 
-    return link if link.include? "http"
+    return link if link.include? 'http'
 
     "http://#{link}"
   end
 
-  def self.active_authors
-    authors = Author.joins(:posts)
-      .where("last_word_count > 100")
-      .where.not(:username => nil)
-      .where(:hide_from_homepage => false)
-      .where("(posts.created_at >= ? AND posts.created_at <= ?) OR featured = TRUE", 28.days.ago.utc, DateTime.now.utc)
-      .where("posts.unlisted = FALSE")
-      .order("posts.created_at DESC")
+  def update_homepage_status
+    most_recent_post = listed_posts.where(
+      '(posts.created_at >= ? AND posts.created_at <= ?)',
+      28.days.ago.utc,
+      DateTime.now.utc
+    ).first
 
-    authors.to_a.uniq
+    return unless most_recent_post && last_word_count > 100 && username && !hide_from_homepage
+
+    self.homepage_activity = most_recent_post.created_at
+    save
   end
 
   def make_featured
     self.featured = true
-    self.save
+    self.homepage_activity = DateTime.now
 
-    if self.email
+    save
+
+    if email
       AuthorsMailer.featured(self).deliver_later
     end
   end
 
   def approve_domain
-    self.domain.active = true
-    self.domain.approved = true
-    self.domain.save
+    domain.active = true
+    domain.approved = true
+    domain.save
   end
 
   def notify_domain
