@@ -4,6 +4,7 @@ import GuestbookEntries from "./GuestbookEntries";
 import CustomDomain from "./CustomDomain";
 import PaymentDetails from "./PaymentDetails";
 import DeleteBlog from "./DeleteBlog";
+import Appearance from "./Appearance";
 
 export {
     General,
@@ -12,4 +13,5 @@ export {
     CustomDomain,
     PaymentDetails,
     DeleteBlog,
+    Appearance,
 };

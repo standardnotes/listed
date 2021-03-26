@@ -17,6 +17,7 @@ import IcListed from "./ic-listed.svg";
 import IcMenu from "./ic-menu.svg";
 import IcMoreHorizontal from "./ic-more-horizontal.svg";
 import IcOpenIn from "./ic-open-in.svg";
+import IcPalette from "./ic-pallete.svg";
 import IcSettingsFilled from "./ic-settings-filled.svg";
 import IcStarCircleFilled from "./ic-star-circle-filled.svg";
 import IcTextRich from "./ic-text-rich.svg";
@@ -48,4 +49,5 @@ export {
     IcTextRich,
     IcTrash,
     IcWalletFilled,
+    IcPalette,
 };
