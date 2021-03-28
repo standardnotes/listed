@@ -3,3 +3,9 @@
     @content;
   }
 }
+
+@mixin DesktopWide() {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}

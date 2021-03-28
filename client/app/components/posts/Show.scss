@@ -12,6 +12,10 @@
         @include Desktop() {
             padding: $spacing-56 $spacing-60;
         }
+
+        @include DesktopWide() {
+            padding: $spacing-56 $spacing-136;
+        }
     }
 
     #subscription-form {
