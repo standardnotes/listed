@@ -10,7 +10,7 @@ const Subscribe = ({
         <h1 className="h1">Subscribe</h1>
         {(!subscribedToAuthor || !subscriptionForAuthor.verification_sent_at) && (
             <p className="p1">
-                You&apos;ll only receive an email when the author publishes something new.
+                You&apos;ll only receive email when the author publishes something new.
             </p>
         )}
         <div id="subscription-form">

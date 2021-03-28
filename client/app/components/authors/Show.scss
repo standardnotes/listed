@@ -19,7 +19,7 @@
                 }
             }
         }
-    
+
         @include Desktop() {
             padding: $spacing-56 0;
         }
@@ -38,6 +38,6 @@
     }
 
     @include Desktop() {
-        padding: $spacing-56 $spacing-136;
+        padding: $spacing-56 $spacing-60;
     }
 }

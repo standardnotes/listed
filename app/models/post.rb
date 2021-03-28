@@ -10,11 +10,11 @@ class Post < ApplicationRecord
   include Tokenable
   belongs_to :author
 
-  before_commit do
+  before_save do
     update_author_show_status
   end
 
-  after_commit do
+  after_save do
     author.update_word_count
     author.update_homepage_status
 

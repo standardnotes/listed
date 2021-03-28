@@ -1,7 +1,4 @@
 class UsageController < ApplicationController
-  before_action do
-    set_meta_images_for_letter('L')
-  end
 
   def index
     active_authors = Author

@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action {
-    if(session[:subscriber_id])
+    set_meta_images_for_letter('L')
+
+    if session[:subscriber_id]
       @subscriber = Subscriber.find_by_id(session[:subscriber_id])
     end
 
@@ -22,10 +24,10 @@ class ApplicationController < ActionController::Base
   }
 
   def set_meta_images_for_author(author)
-    return if author == nil
+    return if author.nil?
 
     first_letter = author.title[0].capitalize
-    if first_letter == "@" && author.title.length > 1
+    if first_letter == '@' && author.title.length > 1
       first_letter = author.title[1].capitalize
     end
 
@@ -33,14 +35,14 @@ class ApplicationController < ActionController::Base
 
     # You want to do this at the end, because currently there's no way to override favicon.
     # So you want that to be set above by default
-    if author.meta_image_url && author.meta_image_url.size > 0
+    if author.meta_image_url && !author.meta_image_url.empty?
       @meta_image = author.meta_image_url
     end
   end
 
   def set_meta_images_for_letter(first_letter)
-    @meta_image = "https://s3.amazonaws.com/sn-listed/letters/big/#{first_letter}.png"
-    @fav_icon = "https://s3.amazonaws.com/sn-listed/letters/fav/#{first_letter}.png"
+    @meta_image = "https://s3.amazonaws.com/sn-listed/letters/v2/big/#{first_letter}.png"
+    @fav_icon = "https://s3.amazonaws.com/sn-listed/letters/v2/fav/#{first_letter}.png"
   end
 
   def redirect_to_authenticated_settings(author)

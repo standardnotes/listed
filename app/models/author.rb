@@ -39,12 +39,12 @@ class Author < ApplicationRecord
   end
 
   def title
-    if self.display_name && self.display_name.length > 0
-      return self.display_name
-    elsif self.username && self.username.length > 0
-      @title = "@#{self.username}"
+    if display_name && !display_name.empty?
+      display_name
+    elsif username && !username.empty?
+      "#{username}"
     else
-      @title = "#{self.id}"
+      id.to_s
     end
   end
 

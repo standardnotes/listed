@@ -39,6 +39,7 @@ const Guestbook = ({
                     ) : (
                         <p className="p1">
                             Be the first to sign
+                            {" "}
                             {author.title}
                             &apos;s guestbook!
                         </p>

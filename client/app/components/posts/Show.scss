@@ -8,9 +8,9 @@
 
     .post-content {
         padding: $spacing-24 0 $spacing-48;
-    
+
         @include Desktop() {
-            padding: $spacing-56 $spacing-136;
+            padding: $spacing-56 $spacing-60;
         }
     }
 
@@ -59,7 +59,7 @@
                 margin-right: $spacing-12;
             }
         }
-    
+
         .next:not(:first-child) {
             margin-left: $spacing-12;
         }

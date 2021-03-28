@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
 
-  require "safe_yaml/load"
-  FRONT_MATTER_WRAPPER_PATTERN = /\A---(.|\n)*---/
-  FRONT_MATTER_CONTENT_PATTERN = /^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m
+  require 'safe_yaml/load'
+  FRONT_MATTER_WRAPPER_PATTERN = /\A---(.|\n)*---/.freeze
+  FRONT_MATTER_CONTENT_PATTERN = /^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m.freeze
 
   # Allow API acess for actions inside "only"
   skip_before_filter :verify_authenticity_token, :only => [
@@ -80,6 +80,7 @@ class PostsController < ApplicationController
 
     if !@post.unlisted
       @author_posts = @post.author.listed_posts([@post, @next, @previous]).order("created_at DESC")
+      set_meta_images_for_author(@post.author)
     end
 
     if @post.metatype
@@ -94,7 +95,6 @@ class PostsController < ApplicationController
     end
 
     @styles = @post.author.css
-    set_meta_images_for_author(@post.author)
   end
 
   def index
@@ -109,9 +109,7 @@ class PostsController < ApplicationController
   def create
     item_uuid = params[:item_uuid]
     post = Post.find_by_item_uuid(item_uuid)
-    if post && post.author != @author
-      return
-    end
+    return if post && post.author != @author
 
     if !post
       post = @author.posts.new(post_params)
@@ -120,8 +118,8 @@ class PostsController < ApplicationController
     end
 
     item = params[:items][0]
-    content = item["content"]
-    raw_text = content["text"]
+    content = item['content']
+    raw_text = content['text']
 
     has_frontmatter = raw_text.scan(FRONT_MATTER_WRAPPER_PATTERN).size == 1
     front_params = [
@@ -135,22 +133,19 @@ class PostsController < ApplicationController
     if has_frontmatter && (yaml_hash = SafeYAML.load(raw_text)) && yaml_hash.is_a?(Hash)
       frontmatter = ActionController::Parameters.new(yaml_hash)
       post_text = raw_text.match(FRONT_MATTER_CONTENT_PATTERN).post_match
-      post.update_attributes(frontmatter.permit(
-        :created_at,
-        *front_params
-      ))
+      post.update_attributes(
+        frontmatter.permit(:created_at, *front_params)
+      )
     else
       post_text = raw_text
       front_params.each do |param|
         post[param] = nil
       end
-      post.save
     end
 
-    # Posts with a metatype are always unlisted
-    unlisted = params[:unlisted] == "true" || post.metatype != nil
+    unlisted = params[:unlisted] == 'true' || post.metatype != nil
 
-    post.title = content["title"]
+    post.title = content['title']
     post.text = post_text
 
     post.word_count = post.text.split.size
