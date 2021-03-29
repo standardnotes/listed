@@ -286,6 +286,15 @@ class AuthorsController < ApplicationController
     redirect_back fallback_location: @author.url, :status => 303
   end
 
+  def appearance
+    @author.cover_style = a_params[:cover_style]
+    @author.blog_layout_style = a_params[:blog_layout_style]
+    @author.custom_theme_enabled = a_params[:custom_theme_enabled]
+
+    @author.save
+    redirect_back fallback_location: @author.url, :status => 303
+  end
+
   def domain_request
     existing_domain = Domain.find_by_domain(params[:domain])
     if existing_domain
@@ -343,7 +352,7 @@ class AuthorsController < ApplicationController
   def a_params
     params.require(:author).permit(:username, :display_name, :bio, :link, :email,
       :secret, :twitter, :meta_image_url, :guestbook_disabled, :header_image_url, :hide_from_homepage,
-    :newsletter_disabled)
+    :newsletter_disabled, :cover_style, :blog_layout_style, :custom_theme_enabled)
   end
 
 end

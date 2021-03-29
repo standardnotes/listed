@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post 'domain_request'
       post 'delete_domain'
       post 'delete_all_data'
+      put 'appearance'
     end
 
     resources :guestbook_entries, path: :guestbook do
