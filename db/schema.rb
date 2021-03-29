@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200826113044) do
+ActiveRecord::Schema.define(version: 20210326165901) do
 
   create_table "authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "secret"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.string   "username"
     t.string   "display_name"
     t.text     "bio",                      limit: 65535
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 20200826113044) do
     t.boolean  "email_verified",                         default: false
     t.string   "email_verification_token"
     t.boolean  "newsletter_disabled",                    default: false
+    t.string   "cover_style",                            default: "full"
+    t.string   "blog_layout_style",                      default: "vertical"
+    t.boolean  "custom_theme_enabled",                   default: false
     t.index ["hide_from_homepage"], name: "index_authors_on_hide_from_homepage", using: :btree
   end
 
