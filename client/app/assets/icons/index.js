@@ -18,6 +18,8 @@ import IcMenu from "./ic-menu.svg";
 import IcMoreHorizontal from "./ic-more-horizontal.svg";
 import IcOpenIn from "./ic-open-in.svg";
 import IcPalette from "./ic-pallete.svg";
+import IcRadioButtonEmpty from "./ic-radio-button-empty.svg";
+import IcRadioButtonSelected from "./ic-radio-button-selected.svg";
 import IcSettingsFilled from "./ic-settings-filled.svg";
 import IcStarCircleFilled from "./ic-star-circle-filled.svg";
 import IcTextRich from "./ic-text-rich.svg";
@@ -44,6 +46,8 @@ export {
     IcMenu,
     IcMoreHorizontal,
     IcOpenIn,
+    IcRadioButtonEmpty,
+    IcRadioButtonSelected,
     IcSettingsFilled,
     IcStarCircleFilled,
     IcTextRich,
