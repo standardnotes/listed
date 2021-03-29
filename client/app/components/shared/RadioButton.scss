@@ -1,0 +1,26 @@
+.form-section.radio_button__container {
+  border: 1px solid $color-black-opacity-16;
+  border-radius: 4px;
+  height: 135px;
+  width: 141px;
+  padding: 0;
+  margin-right: 30px;
+}
+
+.radio_button {
+  display: none;
+}
+
+.radio_button__icon-container {
+  margin-right: $spacing-12;
+  height: 20px;
+  width: 20px;
+}
+
+.radio_button__input-container {
+  display: flex;
+  padding: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  border-top: 1px solid $color-black-opacity-16;
+}
