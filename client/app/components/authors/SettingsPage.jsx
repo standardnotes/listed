@@ -45,6 +45,19 @@ const SettingsPage = ({
             ),
         },
         {
+            id: "appearance",
+            title: "Appearance",
+            icon: IcPalette,
+            collapsed: true,
+            renderContent: () => (
+                <Appearance
+                    author={author}
+                    setErrorToastMessage={setErrorToastMessage}
+                    setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                />
+            ),
+        },
+        {
             id: "my-posts",
             title: "My posts",
             icon: IcTextRich,
@@ -80,19 +93,6 @@ const SettingsPage = ({
                 <CustomDomain
                     author={author}
                     customDomainIP={customDomainIP}
-                    setErrorToastMessage={setErrorToastMessage}
-                    setIsErrorToastDisplayed={setIsErrorToastDisplayed}
-                />
-            ),
-        },
-        {
-            id: "appearance",
-            title: "Appearance",
-            icon: IcPalette,
-            collapsed: true,
-            renderContent: () => (
-                <Appearance
-                    author={author}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
                 />
