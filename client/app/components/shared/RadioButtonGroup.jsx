@@ -11,7 +11,7 @@ const RadioButtonGroup = ({
     };
     return (
         <div className="form-section radio_button_group__container">
-            <p>{text}</p>
+            <p className="label p2">{text}</p>
             <div className="form-section radio_button_group__options-container">
                 {options.map((option) => (
                     <RadioButton
