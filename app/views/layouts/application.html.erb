@@ -51,7 +51,7 @@
       <%= auto_discovery_link_tag( :rss, @display_author.url + "/feed.rss" ) %>
     <% end %>
 
-    <% if @styles %>
+    <% if @styles && @custom_theme_enabled %>
       <style type="text/css" data-turbolinks-track='reload'>
         <%= @styles %>
       </style>

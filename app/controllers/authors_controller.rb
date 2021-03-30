@@ -65,6 +65,7 @@ class AuthorsController < ApplicationController
       if all_posts.count > POST_LIMIT && all_posts.last.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
+    @custom_theme_enabled = @display_author.custom_theme_enabled
   end
 
   def more_posts
