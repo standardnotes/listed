@@ -1,0 +1,43 @@
+#author-posts {
+  padding-top: 48px;
+}
+
+#author-posts .navigation {
+  width: 100%;
+}
+
+#author-posts .author-post {
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(24, 24, 24, 0.16);
+  border-radius: 4px;
+  background-color: #F8F9FC;
+}
+
+#author-posts .author-post .post-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+#author-posts .post-title {
+  font-size: 28px;
+  line-height: 42px;
+  word-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  #author-posts {
+    padding-top: 56px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: -16px;
+  }
+
+  #author-posts .author-post {
+    width: calc(25% - 16px); /* Change this percentage to get a different number of columns */
+    margin-right: 16px;
+  }
+}

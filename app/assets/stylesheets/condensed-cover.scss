@@ -1,0 +1,33 @@
+.page-header__container .header-author-info {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.page-header__container .header-author-info__items {
+  min-height: 0;
+  flex-direction: column-reverse;
+  margin-bottom: 0;
+  align-items: flex-start;
+}
+
+.header-author-info__items .h1 {
+  display: none;
+}
+
+.page-header__container .header-author-links {
+  margin-bottom: 16px;
+}
+
+.page-header__container .header-image-container {
+  width: 100%;
+  margin-right: 0;
+  margin-bottom: 0;
+  height: 200px; /* Set this to whatever height you want for the image */
+  // display: none; /* Uncomment if you don’t have an image and don’t want the initial letter container to display */
+}
+
+.page-header__container .header-author-info .word-count__button {
+  margin-top: 24px;
+  padding-top: 16px;
+  padding-bottom: 8px;
+}

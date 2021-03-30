@@ -44,6 +44,14 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'stylekit', 'data-turbolinks-track': 'reload' %>
 
+    <% if @should_show_condensed_cover %>
+      <%= stylesheet_link_tag    'condensed-cover', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+
+    <% if @should_show_carded_blog %>
+      <%= stylesheet_link_tag    'carded-blog', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+
     <%= stylesheet_packs_with_chunks_tag('clientRegistration', media: 'all', 'data-turbolinks-track': 'reload') %>
     <%= javascript_packs_with_chunks_tag('clientRegistration', 'data-turbolinks-track': 'reload', defer: true) %>
 

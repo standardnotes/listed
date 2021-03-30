@@ -13,3 +13,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('node_modules', 'sn-stylekit', 'dist')
 
 Rails.application.config.assets.precompile += %w( stylekit.js )
+
+Rails.application.config.assets.precompile += %w( condensed-cover.css )
+Rails.application.config.assets.precompile += %w( carded-blog.css )

@@ -66,6 +66,8 @@ class AuthorsController < ApplicationController
         @posts.last.created_at.to_i
       end
     @custom_theme_enabled = @display_author.custom_theme_enabled
+    @should_show_condensed_cover = @display_author.cover_style == "condensed"
+    @should_show_carded_blog = @display_author.blog_layout_style == "cards"
   end
 
   def more_posts
