@@ -6,7 +6,7 @@ class GuestbookEntriesController < ApplicationController
     @entry = GuestbookEntry.find(params[:id]) if params[:id]
 
     if @author
-      @styles = @author.styles
+      @styles = @author.css
     end
   end
 

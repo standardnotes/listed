@@ -1,0 +1,7 @@
+!!! XML
+%sitemapindex{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
+
+  - for author in @authors
+    %sitemap
+      %loc= "#{ENV['HOST']}/sitemap/author/#{author.id}/sitemap.xml"
+      %lastmod=author.updated_at&.strftime('%Y-%m-%d')

@@ -21,7 +21,7 @@ const Show = ({
                             </label>
                             {(!subscribedToAuthor || !subscriptionForAuthor.verification_sent_at)
                             && (
-                                <p className="sublabel p2">You&apos;ll only receive an email when they publish something new.</p>
+                                <p className="sublabel p2">You&apos;ll only receive email when they publish something new.</p>
                             )}
                             <SubscriptionForm
                                 subscribedToAuthor={subscribedToAuthor}

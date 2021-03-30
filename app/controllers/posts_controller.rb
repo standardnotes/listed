@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
 
-  require "safe_yaml/load"
-  FRONT_MATTER_WRAPPER_PATTERN = /\A---(.|\n)*---/
-  FRONT_MATTER_CONTENT_PATTERN = /^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m
+  require 'safe_yaml/load'
+  FRONT_MATTER_WRAPPER_PATTERN = /\A---(.|\n)*---/.freeze
+  FRONT_MATTER_CONTENT_PATTERN = /^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m.freeze
 
   # Allow API acess for actions inside "only"
   skip_before_filter :verify_authenticity_token, :only => [
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 
   def find_page(author, title)
     return unless author
-    
+
     title = title.gsub('-', ' ')
     author.pages.where('lower(title) = ?', title.downcase).first
   end
@@ -31,20 +31,22 @@ class PostsController < ApplicationController
   def find_post
     author =
       if params[:author_id]
-        Author.find(params[:author_id])
+        Author.includes(:domain, :credentials).find(params[:author_id])
       else
-        Author.find_author_from_path(request.path)
+        Author.includes(:domain, :credentials).find_author_from_path(request.path)
       end
     unless author
       domain = Domain.find_by(domain: request.host)
       author = domain&.author
     end
+
     if params[:id]
       if params[:id].is_integer?
         @post = Post.find_by_id(params[:id])
       else
         @post = find_page(author, params[:id])
       end
+
       if @post && @post.unlisted == true
         not_found
         return
@@ -78,6 +80,7 @@ class PostsController < ApplicationController
 
     if !@post.unlisted
       @author_posts = @post.author.listed_posts([@post, @next, @previous]).order("created_at DESC")
+      set_meta_images_for_author(@post.author)
     end
 
     if @post.metatype
@@ -91,8 +94,7 @@ class PostsController < ApplicationController
       return
     end
 
-    @styles = @post.author.styles
-    set_meta_images_for_author(@post.author)
+    @styles = @post.author.css
   end
 
   def index
@@ -107,9 +109,7 @@ class PostsController < ApplicationController
   def create
     item_uuid = params[:item_uuid]
     post = Post.find_by_item_uuid(item_uuid)
-    if post && post.author != @author
-      return
-    end
+    return if post && post.author != @author
 
     if !post
       post = @author.posts.new(post_params)
@@ -118,8 +118,8 @@ class PostsController < ApplicationController
     end
 
     item = params[:items][0]
-    content = item["content"]
-    raw_text = content["text"]
+    content = item['content']
+    raw_text = content['text']
 
     has_frontmatter = raw_text.scan(FRONT_MATTER_WRAPPER_PATTERN).size == 1
     front_params = [
@@ -133,30 +133,25 @@ class PostsController < ApplicationController
     if has_frontmatter && (yaml_hash = SafeYAML.load(raw_text)) && yaml_hash.is_a?(Hash)
       frontmatter = ActionController::Parameters.new(yaml_hash)
       post_text = raw_text.match(FRONT_MATTER_CONTENT_PATTERN).post_match
-      post.update_attributes(frontmatter.permit(
-        :created_at,
-        *front_params
-      ))
+      post.update_attributes(
+        frontmatter.permit(:created_at, *front_params)
+      )
     else
       post_text = raw_text
       front_params.each do |param|
         post[param] = nil
       end
-      post.save
     end
 
-    # Posts with a metatype are always unlisted
-    unlisted = params[:unlisted] == "true" || post.metatype != nil
+    unlisted = params[:unlisted] == 'true' || post.metatype != nil
 
-    post.title = content["title"]
+    post.title = content['title']
     post.text = post_text
 
     post.word_count = post.text.split.size
     post.unlisted = unlisted
     post.published = true
     post.save
-
-    post.author.update_word_count
   end
 
   def newsletter
@@ -176,11 +171,11 @@ class PostsController < ApplicationController
       post.save
 
       @author.subscriptions.each do |subscription|
-        if subscription.verified == true && 
-          subscription.frequency == 'daily' && 
+        if subscription.verified == true &&
+          subscription.frequency == 'daily' &&
           subscription.unsubscribed == false
           SubscriptionMailer.new_post(
-            post, 
+            post,
             subscription.subscriber
           ).deliver_later
         end
@@ -202,8 +197,6 @@ class PostsController < ApplicationController
 
     post.published = false
     post.save
-
-    post.author.update_word_count
   end
 
   def change_privacy
@@ -217,7 +210,6 @@ class PostsController < ApplicationController
     post.unlisted = !post.unlisted
     post.save
 
-    post.author.update_word_count
     redirect_back fallback_location: @author.url
   end
 

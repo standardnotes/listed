@@ -1,10 +1,11 @@
 class UsageController < ApplicationController
-  before_action do
-    set_meta_images_for_letter('L')
-  end
 
   def index
-    active_authors = Author.active_authors
+    active_authors = Author
+                     .includes(:domain)
+                     .where.not(homepage_activity: nil)
+                     .order(homepage_activity: :desc)
+                     .to_a
     easter_egg_index = active_authors.size.positive? ? rand(1..active_authors.size) : 0
     easter_egg = {
       id: 'easter-egg',

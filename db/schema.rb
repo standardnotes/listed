@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210326165901) do
+ActiveRecord::Schema.define(version: 20210326223431) do
 
   create_table "authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "secret"
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
     t.string   "username"
     t.string   "display_name"
     t.text     "bio",                      limit: 65535
@@ -23,19 +23,22 @@ ActiveRecord::Schema.define(version: 20210326165901) do
     t.string   "email"
     t.string   "twitter"
     t.integer  "last_word_count"
-    t.boolean  "featured",                               default: false
-    t.boolean  "show_tip_option",                        default: true
+    t.boolean  "featured",                                  default: false
+    t.boolean  "show_tip_option",                           default: true
     t.string   "meta_image_url"
     t.string   "header_image_url"
-    t.boolean  "hide_from_homepage",                     default: false
-    t.boolean  "guestbook_disabled",                     default: false
-    t.boolean  "email_verified",                         default: false
+    t.boolean  "hide_from_homepage",                        default: false
+    t.boolean  "guestbook_disabled",                        default: false
+    t.boolean  "email_verified",                            default: false
     t.string   "email_verification_token"
-    t.boolean  "newsletter_disabled",                    default: false
-    t.string   "cover_style",                            default: "full"
-    t.string   "blog_layout_style",                      default: "vertical"
-    t.boolean  "custom_theme_enabled",                   default: false
+    t.boolean  "newsletter_disabled",                       default: false
+    t.string   "cover_style",                               default: "full"
+    t.string   "blog_layout_style",                         default: "vertical"
+    t.boolean  "custom_theme_enabled",                      default: false
+    t.datetime "homepage_activity"
+    t.text     "css",                      limit: 16777215
     t.index ["hide_from_homepage"], name: "index_authors_on_hide_from_homepage", using: :btree
+    t.index ["homepage_activity"], name: "index_authors_on_homepage_activity", using: :btree
   end
 
   create_table "credentials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -106,6 +109,11 @@ ActiveRecord::Schema.define(version: 20210326165901) do
     t.decimal  "price",                            precision: 10, scale: 2
     t.text     "paid_content",    limit: 16777215
     t.boolean  "page",                                                      default: false
+    t.boolean  "author_show",                                               default: false
+    t.boolean  "author_page",                                               default: false
+    t.index ["author_page"], name: "index_posts_on_author_page", using: :btree
+    t.index ["author_show", "created_at"], name: "index_posts_on_author_show_and_created_at", using: :btree
+    t.index ["author_show"], name: "index_posts_on_author_show", using: :btree
     t.index ["created_at"], name: "index_posts_on_created_at", using: :btree
     t.index ["metatype"], name: "index_posts_on_metatype", using: :btree
     t.index ["unlisted", "hidden", "published"], name: "index_posts_on_unlisted_and_hidden_and_published", using: :btree
