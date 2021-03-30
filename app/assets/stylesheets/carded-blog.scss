@@ -31,6 +31,20 @@
   word-wrap: break-word;
 }
 
+#author-posts .post-header {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#author-posts  h2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 @media (min-width: 992px) {
   #author-posts {
     padding-top: 56px;
