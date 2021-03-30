@@ -14,7 +14,7 @@ class AuthorsController < ApplicationController
     end
 
     @pages = @display_author.pages if @display_author
-    @styles = @display_author.css if @display_author
+    @styles = @display_author.css if @display_author && @display_author.custom_theme_enabled
 
     set_meta_images_for_author(@display_author)
   }
@@ -65,7 +65,6 @@ class AuthorsController < ApplicationController
       if all_posts.count > POST_LIMIT && all_posts.last.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
-    @custom_theme_enabled = @display_author.custom_theme_enabled
     @should_show_condensed_cover = @display_author.cover_style == "condensed"
     @should_show_carded_blog = @display_author.blog_layout_style == "cards"
   end
