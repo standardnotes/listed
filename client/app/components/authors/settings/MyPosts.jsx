@@ -95,6 +95,7 @@ const MyPosts = ({
                             </span>
                             <span className="post-details__item">
                                 {post.word_count.toLocaleString()}
+                                {" "}
                                 words
                             </span>
                         </p>
