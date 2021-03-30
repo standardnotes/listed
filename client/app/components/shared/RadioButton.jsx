@@ -5,7 +5,7 @@ import { IcRadioButtonEmpty, IcRadioButtonSelected } from "../../assets/icons";
 import "./RadioButton.scss";
 
 const RadioButton = ({
-    id, onChange, selected, label, name, value,
+    id, onChange, selected, label, name, value, image,
 }) => {
     const handleChange = (event) => {
         onChange(event.target.value);
@@ -16,8 +16,11 @@ const RadioButton = ({
 
     return (
         <div className="form-section radio_button__container">
-            <div style={{ height: "100%" /* todo: this is a placeholder until we can use the images */}}>
-                image
+            <div className="radio_button__image-container">
+                <img
+                    src={image.src}
+                    alt={image.alt}
+                />
             </div>
             <div className="radio_button__input-container">
                 <input
@@ -50,6 +53,10 @@ RadioButton.propTypes = {
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
+    image: PropTypes.shape({
+        src: PropTypes.node.isRequired,
+        alt: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default RadioButton;

@@ -1,10 +1,22 @@
 .form-section.radio_button__container {
   border: 1px solid $color-black-opacity-16;
   border-radius: 4px;
-  height: 135px;
-  width: 141px;
+  height: 150px;
+  width: 155px;
   padding: 0;
   margin-right: 30px;
+}
+
+.radio_button__image-container {
+  height: 100px;
+  overflow: hidden;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+}
+
+.radio_button__image-container img {
+  height: 100%;
+  width: 100%;
 }
 
 .radio_button {

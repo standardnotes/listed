@@ -6,6 +6,12 @@ import axios from "axios";
 import Checkbox from "../../shared/Checkbox";
 import getAuthToken from "../../../utils/getAuthToken";
 import RadioButtonGroup from "../../shared/RadioButtonGroup";
+import {
+    CardedBlogImage,
+    CondensedCoverImage,
+    FullCoverImage,
+    VerticalBlogImage,
+} from "../../../assets/images";
 
 const validOptions = {
     coverStyle: [
@@ -18,14 +24,38 @@ const validOptions = {
     ],
 };
 
-const optionText = {
+const optionData = {
     coverStyle: {
-        full: "Default",
-        condensed: "Condensed",
+        full: {
+            label: "Default",
+            image: {
+                src: FullCoverImage,
+                alt: "Cover takes up all the space",
+            },
+        },
+        condensed: {
+            label: "Condensed",
+            image: {
+                src: CondensedCoverImage,
+                alt: "Cover takes up 50% of the space",
+            },
+        },
     },
     blogLayoutStyle: {
-        vertical: "Default",
-        cards: "Cards",
+        vertical: {
+            label: "Default",
+            image: {
+                src: VerticalBlogImage,
+                alt: "Blog posts are shown in a vertical layout",
+            },
+        },
+        cards: {
+            label: "Cards",
+            image: {
+                src: CardedBlogImage,
+                alt: "Blog posts are shown in cards layout",
+            },
+        },
     },
 };
 
@@ -73,7 +103,7 @@ const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) 
     const getOptions = (type) => validOptions[type].map((option) => ({
         id: option,
         value: option,
-        label: optionText[type][option],
+        ...optionData[type][option],
     }));
 
     return (

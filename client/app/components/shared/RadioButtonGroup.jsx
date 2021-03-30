@@ -17,11 +17,9 @@ const RadioButtonGroup = ({
                     <RadioButton
                         name={name}
                         onChange={handleChange}
-                        id={option.id}
                         key={option.id}
-                        label={option.label}
-                        value={option.value}
                         selected={selected === option.value}
+                        {...option}
                     />
                 ))}
             </div>
