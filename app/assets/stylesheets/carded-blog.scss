@@ -14,6 +14,10 @@
   background-color: #F8F9FC;
 }
 
+#author-posts .post-body {
+  display: none;
+}
+
 #author-posts .author-post .post-content {
   display: flex;
   flex-direction: column;
