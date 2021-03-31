@@ -33,6 +33,10 @@ RadioButtonGroup.propTypes = {
             id: PropTypes.string.isRequired,
             value: PropTypes.string.isRequired,
             label: PropTypes.string.isRequired,
+            image: PropTypes.shape({
+                src: PropTypes.node.isRequired,
+                alt: PropTypes.string.isRequired,
+            }).isRequired,
         }),
     ).isRequired,
     name: PropTypes.string.isRequired,
