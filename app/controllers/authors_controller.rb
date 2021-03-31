@@ -288,7 +288,7 @@ class AuthorsController < ApplicationController
     redirect_back fallback_location: @author.url, :status => 303
   end
 
-  def appearance
+  def update_appearance
     @author.cover_style = a_params[:cover_style]
     @author.blog_layout_style = a_params[:blog_layout_style]
     @author.custom_theme_enabled = a_params[:custom_theme_enabled]
