@@ -1,0 +1,38 @@
+.form-section.radio-button__container {
+  border: 1px solid $color-black-opacity-16;
+  border-radius: $border-radius-4;
+  height: 150px;
+  width: 155px;
+  padding: 0;
+  margin-right: 30px;
+}
+
+.radio-button__image-container {
+  height: 100px;
+  overflow: hidden;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+}
+
+.radio-button__image-container img {
+  height: 100%;
+  width: 100%;
+}
+
+.radio-button {
+  display: none;
+}
+
+.radio-button__icon-container {
+  margin-right: $spacing-12;
+  height: 20px;
+  width: 20px;
+}
+
+.radio-button__input-container {
+  display: flex;
+  padding: $spacing-12;
+  align-items: center;
+  justify-content: flex-start;
+  border-top: 1px solid $color-black-opacity-16;
+}

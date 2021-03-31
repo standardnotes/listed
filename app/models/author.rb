@@ -126,6 +126,7 @@ class Author < ApplicationRecord
 
   def update_css(text)
     self.css = !text ? nil : Sanitize::CSS.stylesheet(text, SANITIZE_CONFIG).html_safe
+    self.custom_theme_enabled = true
     save
   end
 

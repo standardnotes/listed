@@ -5,7 +5,7 @@ class GuestbookEntriesController < ApplicationController
     @author = Author.find(params[:author_id]) if params[:author_id]
     @entry = GuestbookEntry.find(params[:id]) if params[:id]
 
-    if @author
+    if @author && @author.custom_theme_enabled
       @styles = @author.css
     end
   end

@@ -8,6 +8,7 @@ import {
     CustomDomain,
     PaymentDetails,
     DeleteBlog,
+    Appearance,
 } from "./settings";
 import Resources from "../shared/Resources";
 import {
@@ -18,6 +19,7 @@ import {
     IcCreditCard,
     IcLifebuoy,
     IcTrash,
+    IcPalette,
 } from "../../assets/icons";
 import "./SettingsPage.scss";
 import ErrorToast from "../shared/ErrorToast";
@@ -36,6 +38,19 @@ const SettingsPage = ({
             collapsed: false,
             renderContent: () => (
                 <General
+                    author={author}
+                    setErrorToastMessage={setErrorToastMessage}
+                    setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                />
+            ),
+        },
+        {
+            id: "appearance",
+            title: "Appearance",
+            icon: IcPalette,
+            collapsed: true,
+            renderContent: () => (
+                <Appearance
                     author={author}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}

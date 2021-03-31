@@ -1,5 +1,8 @@
 class AuthorsController < ApplicationController
 
+  CARDS_BLOG_LAYOUT_STYLE = "cards"
+  CONDENSED_COVER_STYLE = "condensed"
+
   # Allow API acess for actions inside "only"
   skip_before_filter :verify_authenticity_token, :only => [:extension]
 
@@ -14,7 +17,7 @@ class AuthorsController < ApplicationController
     end
 
     @pages = @display_author.pages if @display_author
-    @styles = @display_author.css if @display_author
+    @styles = @display_author.css if @display_author && @display_author.custom_theme_enabled
 
     set_meta_images_for_author(@display_author)
   }
@@ -65,6 +68,8 @@ class AuthorsController < ApplicationController
       if all_posts.count > POST_LIMIT && all_posts.last.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
+    @should_show_condensed_cover = @display_author.cover_style == CONDENSED_COVER_STYLE
+    @should_show_carded_blog = @display_author.blog_layout_style == CARDS_BLOG_LAYOUT_STYLE
   end
 
   def more_posts
@@ -281,6 +286,9 @@ class AuthorsController < ApplicationController
     @author.hide_from_homepage = a_params[:hide_from_homepage]
     @author.guestbook_disabled = a_params[:guestbook_disabled]
     @author.newsletter_disabled = a_params[:newsletter_disabled]
+    @author.cover_style = a_params[:cover_style]
+    @author.blog_layout_style = a_params[:blog_layout_style]
+    @author.custom_theme_enabled = a_params[:custom_theme_enabled]
 
     @author.save
     redirect_back fallback_location: @author.url, :status => 303
@@ -343,7 +351,7 @@ class AuthorsController < ApplicationController
   def a_params
     params.require(:author).permit(:username, :display_name, :bio, :link, :email,
       :secret, :twitter, :meta_image_url, :guestbook_disabled, :header_image_url, :hide_from_homepage,
-    :newsletter_disabled)
+    :newsletter_disabled, :cover_style, :blog_layout_style, :custom_theme_enabled)
   end
 
 end
