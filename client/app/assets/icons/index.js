@@ -17,7 +17,7 @@ import IcListed from "./ic-listed.svg";
 import IcMenu from "./ic-menu.svg";
 import IcMoreHorizontal from "./ic-more-horizontal.svg";
 import IcOpenIn from "./ic-open-in.svg";
-import IcPalette from "./ic-pallete.svg";
+import IcPalette from "./ic-palette.svg";
 import IcRadioButtonEmpty from "./ic-radio-button-empty.svg";
 import IcRadioButtonSelected from "./ic-radio-button-selected.svg";
 import IcSettingsFilled from "./ic-settings-filled.svg";
