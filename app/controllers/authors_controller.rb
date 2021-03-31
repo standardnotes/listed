@@ -1,5 +1,8 @@
 class AuthorsController < ApplicationController
 
+  CARDS_BLOG_LAYOUT_STYLE = "cards"
+  CONDENSED_COVER_STYLE = "condensed"
+
   # Allow API acess for actions inside "only"
   skip_before_filter :verify_authenticity_token, :only => [:extension]
 
@@ -65,8 +68,8 @@ class AuthorsController < ApplicationController
       if all_posts.count > POST_LIMIT && all_posts.last.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
-    @should_show_condensed_cover = @display_author.cover_style == "condensed"
-    @should_show_carded_blog = @display_author.blog_layout_style == "cards"
+    @should_show_condensed_cover = @display_author.cover_style == CONDENSED_COVER_STYLE
+    @should_show_carded_blog = @display_author.blog_layout_style == CARDS_BLOG_LAYOUT_STYLE
   end
 
   def more_posts
