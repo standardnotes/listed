@@ -15,24 +15,24 @@ const RadioButton = ({
     };
 
     return (
-        <div className="form-section radio_button__container">
-            <div className="radio_button__image-container">
+        <div className="form-section radio-button__container">
+            <div className="radio-button__image-container">
                 <img
                     src={image.src}
                     alt={image.alt}
                 />
             </div>
-            <div className="radio_button__input-container">
+            <div className="radio-button__input-container">
                 <input
                     id={id}
                     type="radio"
-                    className="radio_button"
+                    className="radio-button"
                     checked={selected}
                     onChange={handleChange}
                     name={name}
                     value={value}
                 />
-                <div className="radio_button__icon-container">
+                <div className="radio-button__icon-container">
                     <SVG
                         src={selected ? IcRadioButtonSelected : IcRadioButtonEmpty}
                         onClick={handleSVGClick}

@@ -1,4 +1,4 @@
-.form-section.radio_button__container {
+.form-section.radio-button__container {
   border: 1px solid $color-black-opacity-16;
   border-radius: 4px;
   height: 150px;
@@ -7,29 +7,29 @@
   margin-right: 30px;
 }
 
-.radio_button__image-container {
+.radio-button__image-container {
   height: 100px;
   overflow: hidden;
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
 }
 
-.radio_button__image-container img {
+.radio-button__image-container img {
   height: 100%;
   width: 100%;
 }
 
-.radio_button {
+.radio-button {
   display: none;
 }
 
-.radio_button__icon-container {
+.radio-button__icon-container {
   margin-right: $spacing-12;
   height: 20px;
   width: 20px;
 }
 
-.radio_button__input-container {
+.radio-button__input-container {
   display: flex;
   padding: 12px;
   align-items: center;

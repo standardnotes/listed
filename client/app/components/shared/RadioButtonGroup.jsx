@@ -10,9 +10,9 @@ const RadioButtonGroup = ({
         onChange(name, value);
     };
     return (
-        <div className="form-section radio_button_group__container">
+        <div className="form-section">
             <p className="label p2">{text}</p>
-            <div className="form-section radio_button_group__options-container">
+            <div className="form-section radio-button-group__options-container">
                 {options.map((option) => (
                     <RadioButton
                         name={name}
