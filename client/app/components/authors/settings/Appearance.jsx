@@ -13,19 +13,24 @@ import {
     VerticalBlogImage,
 } from "../../../assets/images";
 
+const optionType = {
+    coverStyle: "coverStyle",
+    blogLayoutStyle: "blogLayoutStyle",
+};
+
 const validOptions = {
-    coverStyle: [
+    [optionType.coverStyle]: [
         "full",
         "condensed",
     ],
-    blogLayoutStyle: [
+    [optionType.blogLayoutStyle]: [
         "vertical",
         "cards",
     ],
 };
 
 const optionData = {
-    coverStyle: {
+    [optionType.coverStyle]: {
         full: {
             label: "Default",
             image: {
@@ -41,7 +46,7 @@ const optionData = {
             },
         },
     },
-    blogLayoutStyle: {
+    [optionType.blogLayoutStyle]: {
         vertical: {
             label: "Default",
             image: {
@@ -114,7 +119,7 @@ const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) 
                 selected={editedAuthor.cover_style}
                 text="Cover Style"
                 name="cover_style"
-                options={getOptions("coverStyle")}
+                options={getOptions(optionType.coverStyle)}
             />
             <RadioButtonGroup
                 id="author-blog-layout-style"
@@ -122,7 +127,7 @@ const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) 
                 selected={editedAuthor.blog_layout_style}
                 text="Blog Layout Style"
                 name="blog_layout_style"
-                options={getOptions("blogLayoutStyle")}
+                options={getOptions(optionType.blogLayoutStyle)}
             />
             <Checkbox
                 id="author-custom-theme-enabled"
