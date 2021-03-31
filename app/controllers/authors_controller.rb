@@ -283,12 +283,6 @@ class AuthorsController < ApplicationController
     @author.hide_from_homepage = a_params[:hide_from_homepage]
     @author.guestbook_disabled = a_params[:guestbook_disabled]
     @author.newsletter_disabled = a_params[:newsletter_disabled]
-
-    @author.save
-    redirect_back fallback_location: @author.url, :status => 303
-  end
-
-  def update_appearance
     @author.cover_style = a_params[:cover_style]
     @author.blog_layout_style = a_params[:blog_layout_style]
     @author.custom_theme_enabled = a_params[:custom_theme_enabled]

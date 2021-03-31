@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
 import Checkbox from "../../shared/Checkbox";
+import authorType from "../../../types/author";
 import "./General.scss";
 
 const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
@@ -50,7 +51,10 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         "X-CSRF-Token": getAuthToken(),
                     },
                     data: {
-                        author: editedAuthor,
+                        author: {
+                            ...author,
+                            ...editedAuthor,
+                        },
                     },
                 });
 
@@ -223,21 +227,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
 };
 
 General.propTypes = {
-    author: PropTypes.shape({
-        bio: PropTypes.string,
-        display_name: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        guestbook_disabled: PropTypes.bool.isRequired,
-        header_image_url: PropTypes.string,
-        hide_from_homepage: PropTypes.bool.isRequired,
-        id: PropTypes.number.isRequired,
-        link: PropTypes.string,
-        meta_image_url: PropTypes.string,
-        newsletter_disabled: PropTypes.bool.isRequired,
-        secret: PropTypes.string.isRequired,
-        twitter: PropTypes.string,
-        username: PropTypes.string.isRequired,
-    }).isRequired,
+    author: authorType.isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
 };

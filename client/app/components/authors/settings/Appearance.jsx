@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import React, { useState } from "react";
-import "./Appearance.scss";
 import PropTypes from "prop-types";
 import axios from "axios";
 import Checkbox from "../../shared/Checkbox";
@@ -12,25 +11,15 @@ import {
     FullCoverImage,
     VerticalBlogImage,
 } from "../../../assets/images";
-
-const optionType = {
-    coverStyle: "coverStyle",
-    blogLayoutStyle: "blogLayoutStyle",
-};
-
-const validOptions = {
-    [optionType.coverStyle]: [
-        "full",
-        "condensed",
-    ],
-    [optionType.blogLayoutStyle]: [
-        "vertical",
-        "cards",
-    ],
-};
+import {
+    authorAppearanceValidOptions as validOptions,
+    authorAppearanceOptionTypes as optionTypes,
+} from "../../../constants";
+import authorType from "../../../types/author";
+import "./Appearance.scss";
 
 const optionData = {
-    [optionType.coverStyle]: {
+    [optionTypes.coverStyle]: {
         full: {
             label: "Default",
             image: {
@@ -46,7 +35,7 @@ const optionData = {
             },
         },
     },
-    [optionType.blogLayoutStyle]: {
+    [optionTypes.blogLayoutStyle]: {
         vertical: {
             label: "Default",
             image: {
@@ -83,12 +72,15 @@ const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) 
 
         try {
             const response = await axios
-                .put(`/authors/${author.id}/appearance?secret=${author.secret}`, null, {
+                .put(`/authors/${author.id}?secret=${author.secret}`, null, {
                     headers: {
                         "X-CSRF-Token": getAuthToken(),
                     },
                     data: {
-                        author: editedAuthor,
+                        author: {
+                            ...author,
+                            ...editedAuthor,
+                        },
                     },
                 });
 
@@ -119,7 +111,7 @@ const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) 
                 selected={editedAuthor.cover_style}
                 text="Cover Style"
                 name="cover_style"
-                options={getOptions(optionType.coverStyle)}
+                options={getOptions(optionTypes.coverStyle)}
             />
             <RadioButtonGroup
                 id="author-blog-layout-style"
@@ -127,7 +119,7 @@ const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) 
                 selected={editedAuthor.blog_layout_style}
                 text="Blog Layout Style"
                 name="blog_layout_style"
-                options={getOptions(optionType.blogLayoutStyle)}
+                options={getOptions(optionTypes.blogLayoutStyle)}
             />
             <Checkbox
                 id="author-custom-theme-enabled"
@@ -148,13 +140,7 @@ const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) 
 };
 
 Appearance.propTypes = {
-    author: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        secret: PropTypes.string.isRequired,
-        cover_style: PropTypes.oneOf(validOptions.coverStyle).isRequired,
-        blog_layout_style: PropTypes.oneOf(validOptions.blogLayoutStyle).isRequired,
-        custom_theme_enabled: PropTypes.bool.isRequired,
-    }).isRequired,
+    author: authorType.isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
 };
