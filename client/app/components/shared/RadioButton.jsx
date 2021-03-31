@@ -7,15 +7,33 @@ import "./RadioButton.scss";
 const RadioButton = ({
     id, onChange, selected, label, name, value, image,
 }) => {
+    const ENTER_KEY = 13;
+    const SPACE_KEY = 32;
+
     const handleChange = (event) => {
         onChange(event.target.value);
     };
-    const handleSVGClick = () => {
+
+    const handleClick = () => {
         onChange(value);
     };
 
+    const handleKeyDown = (event) => {
+        if (event.keyCode === ENTER_KEY || event.keyCode === SPACE_KEY) {
+            event.preventDefault();
+            onChange(value);
+        }
+    };
+
     return (
-        <div className="form-section radio-button__container">
+        <div
+            className="form-section radio-button__container"
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
+            role="radio"
+            aria-checked={selected}
+            tabIndex={0}
+        >
             <div className="radio-button__image-container">
                 <img
                     src={image.src}
@@ -35,7 +53,6 @@ const RadioButton = ({
                 <div className="radio-button__icon-container">
                     <SVG
                         src={selected ? IcRadioButtonSelected : IcRadioButtonEmpty}
-                        onClick={handleSVGClick}
                     />
                 </div>
                 <label htmlFor={id} className="p2">
