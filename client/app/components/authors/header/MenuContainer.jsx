@@ -16,7 +16,7 @@ const MenuContainer = ({
         {!author && (
             <HomepageMenu isMobileMenuOpen={isMobileMenuOpen} isDesktopMenu={isDesktopMenu} />
         )}
-        {pages && !privatePost && (
+        {!privatePost && (
             <AuthorMenu
                 isMobileMenuOpen={isMobileMenuOpen}
                 isDesktopMenu={isDesktopMenu}
