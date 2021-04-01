@@ -1,5 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {
+    hasPages,
+    hasCredentials,
+    hasGuestbook,
+    hasNewsletter,
+} from "../../../../helpers/author";
 import "./AuthorMenu.scss";
 
 const AuthorMenu = ({
@@ -18,64 +24,48 @@ const AuthorMenu = ({
 
         return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
     };
-
-    const hasCredentials = () => author.credentials.length > 0;
-
-    const hasPages = () => pages && pages.length > 0;
-
-    const hasGuestbook = () => !author.guestbook_disabled;
-
-    const hasNewsletter = () => !author.newsletter_disabled;
-
-    const shouldRenderMenu = () => hasPages() || hasCredentials()
-        || hasGuestbook() || hasNewsletter();
-
     return (
-        shouldRenderMenu()
-            ? (
-                <nav className={navClassName()}>
-                    <a
-                        href={author.url}
-                        className={`button page-link ${isActiveMenuItem(author.url) ? "button--active" : "button--no-fill"}`}
-                    >
-                        Home
-                    </a>
-                    {hasPages() && pages.map((page) => (
-                        <a
-                            key={page.id}
-                            href={page.author_relative_url}
-                            className={`button page-link ${isActiveMenuItem(page.author_relative_url) ? "button--active" : "button--no-fill"}`}
-                        >
-                            {page.title}
-                        </a>
-                    ))}
-                    {hasCredentials() && (
-                        <a
-                            href={`${author.url}/tip`}
-                            className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
-                        >
-                            Thank
-                        </a>
-                    )}
-                    {hasGuestbook() && (
-                        <a
-                            href={authorGuestbookEntriesUrl}
-                            className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
-                        >
-                            Guestbook
-                        </a>
-                    )}
-                    {hasNewsletter() && (
-                        <a
-                            href={`${author.url}/subscribe`}
-                            className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
-                        >
-                            Subscribe
-                        </a>
-                    )}
-                </nav>
-            )
-            : null
+        <nav className={navClassName()}>
+            <a
+                href={author.url}
+                className={`button page-link ${isActiveMenuItem(author.url) ? "button--active" : "button--no-fill"}`}
+            >
+                Home
+            </a>
+            {hasPages(pages) && pages.map((page) => (
+                <a
+                    key={page.id}
+                    href={page.author_relative_url}
+                    className={`button page-link ${isActiveMenuItem(page.author_relative_url) ? "button--active" : "button--no-fill"}`}
+                >
+                    {page.title}
+                </a>
+            ))}
+            {hasCredentials(author) && (
+                <a
+                    href={`${author.url}/tip`}
+                    className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
+                >
+                    Thank
+                </a>
+            )}
+            {hasGuestbook(author) && (
+                <a
+                    href={authorGuestbookEntriesUrl}
+                    className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
+                >
+                    Guestbook
+                </a>
+            )}
+            {hasNewsletter(author) && (
+                <a
+                    href={`${author.url}/subscribe`}
+                    className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
+                >
+                    Subscribe
+                </a>
+            )}
+        </nav>
     );
 };
 

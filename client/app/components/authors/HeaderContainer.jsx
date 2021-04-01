@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import SVG from "react-inlinesvg";
 import { IcListed, IcMenu, IcClose } from "../../assets/icons";
 import { MenuContainer, AuthorInfo } from "./header";
+import { shouldShowMenu } from "../../helpers/author";
 import "./HeaderContainer.scss";
 
 const HeaderContainer = ({
@@ -45,19 +46,21 @@ const HeaderContainer = ({
                         </div>
                     )}
                 </div>
-                <div className="right">
-                    <button
-                        className="button button--menu-icon"
-                        aria-label="Menu"
-                        aria-controls="navigation"
-                        type="button"
-                    >
-                        {isMobileMenuOpen
-                            ? <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
-                            : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />}
-                    </button>
-                    {renderMenu(true)}
-                </div>
+                { (!author || shouldShowMenu(author, pages)) && (
+                    <div className="right">
+                        <button
+                            className="button button--menu-icon"
+                            aria-label="Menu"
+                            aria-controls="navigation"
+                            type="button"
+                        >
+                            {isMobileMenuOpen
+                                ? <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
+                                : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />}
+                        </button>
+                        {renderMenu(true)}
+                    </div>
+                )}
             </div>
             {renderMenu(false)}
             {blogPage && (
