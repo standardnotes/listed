@@ -21,4 +21,17 @@ rules.delete("nodeModules");
 
 ManifestPlugin.options.writeToFileEmit = true;
 
+environment.config.optimization = {
+    splitChunks: {
+        chunks: "all",
+        cacheGroups: {
+            vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: "vendor",
+                enforce: true,
+            },
+        },
+    },
+};
+
 module.exports = environment;
