@@ -94,7 +94,7 @@ class PostsController < ApplicationController
       return
     end
 
-    @styles = @post.author.css
+    @styles = @post.author.css if @post.author.custom_theme_enabled
   end
 
   def index

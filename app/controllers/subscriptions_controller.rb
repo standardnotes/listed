@@ -4,7 +4,7 @@ class SubscriptionsController < ApplicationController
   def validate
     @subscription = Subscription.find(params[:subscription_id])
     @author = @subscription.author
-    @styles = @subscription.author.css
+    @styles = @subscription.author.css if @subscription.author.custom_theme_enabled
   end
 
   def submit_validate
