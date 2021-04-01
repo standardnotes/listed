@@ -7,7 +7,7 @@ end
 
 gem 'rails', '~> 5.0.2'
 gem 'mysql2'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'safe_yaml'
@@ -45,7 +45,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'mini_racer', platforms: :ruby
+
+gem 'mini_racer', github: 'sqreen/mini_racer', branch: 'use-libv8-node'
 
 gem "dogstatsd-ruby", "~> 4.8"
 gem "ddtrace", "~> 0.39.0"
