@@ -19,48 +19,63 @@ const AuthorMenu = ({
         return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
     };
 
+    const hasCredentials = () => author.credentials.length > 0;
+
+    const hasPages = () => pages && pages.length > 0;
+
+    const hasGuestbook = () => !author.guestbook_disabled;
+
+    const hasNewsletter = () => !author.newsletter_disabled;
+
+    const shouldRenderMenu = () => hasPages() || hasCredentials()
+        || hasGuestbook() || hasNewsletter();
+
     return (
-        <nav className={navClassName()}>
-            <a
-                href={author.url}
-                className={`button page-link ${isActiveMenuItem(author.url) ? "button--active" : "button--no-fill"}`}
-            >
-                Home
-            </a>
-            {pages.map((page) => (
-                <a
-                    key={page.id}
-                    href={page.author_relative_url}
-                    className={`button page-link ${isActiveMenuItem(page.author_relative_url) ? "button--active" : "button--no-fill"}`}
-                >
-                    {page.title}
-                </a>
-            ))}
-            {author.credentials.length > 0 && (
-                <a
-                    href={`${author.url}/tip`}
-                    className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
-                >
-                    Thank
-                </a>
-            )}
-            {author.guestbook_disabled || (
-                <a
-                    href={authorGuestbookEntriesUrl}
-                    className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
-                >
-                    Guestbook
-                </a>
-            )}
-            {!author.newsletter_disabled && (
-                <a
-                    href={`${author.url}/subscribe`}
-                    className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
-                >
-                    Subscribe
-                </a>
-            )}
-        </nav>
+        shouldRenderMenu()
+            ? (
+                <nav className={navClassName()}>
+                    <a
+                        href={author.url}
+                        className={`button page-link ${isActiveMenuItem(author.url) ? "button--active" : "button--no-fill"}`}
+                    >
+                        Home
+                    </a>
+                    {hasPages() && pages.map((page) => (
+                        <a
+                            key={page.id}
+                            href={page.author_relative_url}
+                            className={`button page-link ${isActiveMenuItem(page.author_relative_url) ? "button--active" : "button--no-fill"}`}
+                        >
+                            {page.title}
+                        </a>
+                    ))}
+                    {hasCredentials() && (
+                        <a
+                            href={`${author.url}/tip`}
+                            className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
+                        >
+                            Thank
+                        </a>
+                    )}
+                    {hasGuestbook() && (
+                        <a
+                            href={authorGuestbookEntriesUrl}
+                            className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
+                        >
+                            Guestbook
+                        </a>
+                    )}
+                    {hasNewsletter() && (
+                        <a
+                            href={`${author.url}/subscribe`}
+                            className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
+                        >
+                            Subscribe
+                        </a>
+                    )}
+                </nav>
+            )
+            : null
     );
 };
 
@@ -85,7 +100,11 @@ AuthorMenu.propTypes = {
             title: PropTypes.string.isRequired,
             author_relative_url: PropTypes.string.isRequired,
         }),
-    ).isRequired,
+    ),
+};
+
+AuthorMenu.defaultProps = {
+    pages: null,
 };
 
 export default AuthorMenu;
