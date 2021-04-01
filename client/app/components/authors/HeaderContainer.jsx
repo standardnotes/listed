@@ -33,7 +33,7 @@ const HeaderContainer = ({
             <div id="page-header">
                 <div className="left">
                     <div className="website-name">
-                        <a href={homeUrl} className="listed-logo-link" aria-label="link">
+                        <a href={homeUrl} className="listed-logo-link" aria-label="Listed logo">
                             <SVG src={IcListed} className="listed-logo" />
                         </a>
                     </div>

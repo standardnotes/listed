@@ -37,7 +37,7 @@ const ErrorToast = ({ message, isDisplayed, setIsDisplayed }) => {
                         className="button error-toast__dismiss-button"
                         type="button"
                         onClick={() => setIsToastDisplayed(false)}
-                        aria-label="button"
+                        aria-label="Close error toast"
                     >
                         <SVG src={IcClose} />
                     </button>
