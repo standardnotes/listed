@@ -1,35 +1,17 @@
 process.env.NODE_ENV = process.env.NODE_ENV || "production";
 
 const merge = require("webpack-merge");
-const clientEnvironment = require("./client");
-const serverConf = require("./server");
+const client = require("./client");
+const server = require("./server");
 
-clientEnvironment.splitChunks();
-
-const clientConfig = merge(clientEnvironment.toWebpackConfig(), {
+const clientConfig = merge(client, {
     mode: "production",
-    output: {
-        filename: "[name].js",
-        chunkFilename: "[name].bundle.js",
-        path: clientEnvironment.config.output.path,
-    },
     optimization: {
-        splitChunks: {
-            name: "vendor",
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name(module) {
-                        const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-                        return `npm.${packageName.replace("@", "")}`;
-                    },
-                },
-            },
-        },
+        minimize: true,
     },
 });
 
-const serverConfig = merge(serverConf, {
+const serverConfig = merge(server, {
     mode: "production",
     optimization: {
         minimize: true,

@@ -25,9 +25,6 @@ const serverConfig = merge(environment.toWebpackConfig(), {
         path: environment.config.output.path,
         globalObject: "this",
     },
-    optimization: {
-        minimize: false,
-    },
 });
 
 serverConfig.plugins = serverConfig.plugins.filter((plugin) => plugin.constructor.name !== "WebpackAssetsManifest");

@@ -1,22 +1,25 @@
 @font-face {
     font-family: "Merriweather";
-    src: url("../fonts/Merriweather-Bold.ttf") format("truetype");
+    src: local("serif"), url("../fonts/Merriweather-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+    src: local("sans-serif"), url("../fonts/Roboto-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: url("../fonts/Roboto-Bold.ttf") format("truetype");
+    src: local("sans-serif"), url("../fonts/Roboto-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 * {
