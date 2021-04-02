@@ -7,6 +7,11 @@
 
     .listed-logo-link {
         display: flex;
+        @include MenuHover(var(--header-listed-name));
+
+        svg path {
+            fill: var(--header-listed-name);
+        }
 
         &::before {
             background-image: none;
@@ -37,10 +42,6 @@
 .listed-logo {
     height: 28px;
     width: 28px;
-
-    path {
-        fill: var(--header-listed-name);
-    }
 
     @include Desktop() {
         height: 36px;
@@ -73,7 +74,7 @@
         }
 
         a {
-            color: var(--header-author-name);
+            @include MenuHover(var(--header-author-name));
 
             &::before {
                 background-image: none;

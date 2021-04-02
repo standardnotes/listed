@@ -33,14 +33,16 @@ const HeaderContainer = ({
             <div id="page-header">
                 <div className="left">
                     <div className="website-name">
-                        <a href={homeUrl} className="listed-logo-link">
+                        <a href={homeUrl} className="listed-logo-link button button--no-fill">
                             <SVG src={IcListed} className="listed-logo" />
                         </a>
                     </div>
                     {author && !privatePost && (
                         <div className="author-name__container">
                             <div className="h4 author-name path-item">
-                                <a href={author.url}>{author.title}</a>
+                                <a href={author.url} className="button button--no-fill">
+                                    {author.title}
+                                </a>
                             </div>
                         </div>
                     )}

@@ -9,3 +9,22 @@
     @content;
   }
 }
+
+@mixin MenuHover($color) {
+  color: $color;
+
+  &.button--no-fill {
+    background-color: transparent;
+    position: relative;
+
+    &::before {
+      background-image:
+              linear-gradient(to top, $color 50%, transparent 50%);
+      opacity: 0.08;
+    }
+
+    &:hover {
+      color: $color;
+    }
+  }
+}
