@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import SVG from "react-inlinesvg";
 import { IcListed, IcMenu, IcClose } from "../../assets/icons";
 import { MenuContainer, AuthorInfo } from "./header";
+import { shouldShowAuthorMenu } from "../../helpers";
 import "./HeaderContainer.scss";
 
 const HeaderContainer = ({
@@ -28,6 +29,8 @@ const HeaderContainer = ({
         />
     );
 
+    const shouldShowMenu = () => !author || shouldShowAuthorMenu(author, pages);
+
     return (
         <div className={`page-header__container ${post ? "page-header__container--post" : ""}`}>
             <div id="page-header">
@@ -45,21 +48,23 @@ const HeaderContainer = ({
                         </div>
                     )}
                 </div>
-                <div className="right">
-                    <button
-                        className="button button--menu-icon"
-                        aria-label="Menu"
-                        aria-controls="navigation"
-                        type="button"
-                    >
-                        {isMobileMenuOpen
-                            ? <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
-                            : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />}
-                    </button>
-                    {renderMenu(true)}
-                </div>
+                { shouldShowMenu() && (
+                    <div className="right">
+                        <button
+                            className="button button--menu-icon"
+                            aria-label="Menu"
+                            aria-controls="navigation"
+                            type="button"
+                        >
+                            {isMobileMenuOpen
+                                ? <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
+                                : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />}
+                        </button>
+                        {renderMenu(true)}
+                    </div>
+                )}
             </div>
-            {renderMenu(false)}
+            { shouldShowMenu() && renderMenu(false)}
             {blogPage && (
                 <AuthorInfo author={author} />
             )}

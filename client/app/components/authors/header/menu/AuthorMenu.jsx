@@ -1,5 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {
+    authorHasPages,
+    authorHasCredentials,
+    authorHasGuestbook,
+    authorHasNewsletter,
+} from "../../../../helpers";
 import "./AuthorMenu.scss";
 
 const AuthorMenu = ({
@@ -18,7 +24,6 @@ const AuthorMenu = ({
 
         return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
     };
-
     return (
         <nav className={navClassName()}>
             <a
@@ -27,7 +32,7 @@ const AuthorMenu = ({
             >
                 Home
             </a>
-            {pages.map((page) => (
+            {authorHasPages(pages) && pages.map((page) => (
                 <a
                     key={page.id}
                     href={page.author_relative_url}
@@ -36,7 +41,7 @@ const AuthorMenu = ({
                     {page.title}
                 </a>
             ))}
-            {author.credentials.length > 0 && (
+            {authorHasCredentials(author) && (
                 <a
                     href={`${author.url}/tip`}
                     className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
@@ -44,7 +49,7 @@ const AuthorMenu = ({
                     Thank
                 </a>
             )}
-            {author.guestbook_disabled || (
+            {authorHasGuestbook(author) && (
                 <a
                     href={authorGuestbookEntriesUrl}
                     className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
@@ -52,7 +57,7 @@ const AuthorMenu = ({
                     Guestbook
                 </a>
             )}
-            {!author.newsletter_disabled && (
+            {authorHasNewsletter(author) && (
                 <a
                     href={`${author.url}/subscribe`}
                     className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
@@ -85,7 +90,11 @@ AuthorMenu.propTypes = {
             title: PropTypes.string.isRequired,
             author_relative_url: PropTypes.string.isRequired,
         }),
-    ).isRequired,
+    ),
+};
+
+AuthorMenu.defaultProps = {
+    pages: null,
 };
 
 export default AuthorMenu;
