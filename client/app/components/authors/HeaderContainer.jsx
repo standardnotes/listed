@@ -4,7 +4,6 @@ import SVG from "react-inlinesvg";
 import { IcListed, IcMenu, IcClose } from "../../assets/icons";
 import { MenuContainer, AuthorInfo } from "./header";
 import "./HeaderContainer.scss";
-import MenuItem from "./header/menu/MenuItem";
 
 const HeaderContainer = ({
     homeUrl,
@@ -33,20 +32,16 @@ const HeaderContainer = ({
         <div className={`page-header__container ${post ? "page-header__container--post" : ""}`}>
             <div id="page-header">
                 <div className="left">
-                    <div className="listed-logo-link">
-                        <MenuItem url={homeUrl} isLeftItem>
-                            <div className="listed-logo__container">
-                                <SVG src={IcListed} className="listed-logo" />
-                            </div>
-                        </MenuItem>
+                    <div className="website-name">
+                        <a href={homeUrl} className="listed-logo-link">
+                            <SVG src={IcListed} className="listed-logo" />
+                        </a>
                     </div>
                     {author && !privatePost && (
                         <div className="author-name__container">
-                            <MenuItem url={author.url} isLeftItem>
-                                <div className="h4 author-name path-item">
-                                    {author.title}
-                                </div>
-                            </MenuItem>
+                            <div className="h4 author-name path-item">
+                                <a href={author.url}>{author.title}</a>
+                            </div>
                         </div>
                     )}
                 </div>

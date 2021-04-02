@@ -1,11 +1,5 @@
-.menu-item {
-  display: flex;
-}
-
-.page-link {
+.pages-menu .page-link {
   color: var(--page-menu-link-color);
-  display: flex;
-  justify-content: center;
 
   &.button--no-fill {
     background-color: transparent;
@@ -26,10 +20,4 @@
     background-color: var(--page-menu-link-color);
     opacity: 0.08;
   }
-}
-
-.menu-item .menu-item__left {
-  padding: 0;
-  margin: 0;
-  line-height: 0;
 }

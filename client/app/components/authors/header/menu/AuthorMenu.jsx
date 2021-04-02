@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MenuItem from "./MenuItem";
+import "./AuthorMenu.scss";
 
 const AuthorMenu = ({
     isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentUrl,
@@ -21,41 +21,44 @@ const AuthorMenu = ({
 
     return (
         <nav className={navClassName()}>
-            <MenuItem isActive={isActiveMenuItem(author.url)} url={author.url}>
+            <a
+                href={author.url}
+                className={`button page-link ${isActiveMenuItem(author.url) ? "button--active" : "button--no-fill"}`}
+            >
                 Home
-            </MenuItem>
+            </a>
             {pages.map((page) => (
-                <MenuItem
-                    isActive={isActiveMenuItem(page.author_relative_url)}
-                    url={page.author_relative_url}
+                <a
                     key={page.id}
+                    href={page.author_relative_url}
+                    className={`button page-link ${isActiveMenuItem(page.author_relative_url) ? "button--active" : "button--no-fill"}`}
                 >
                     {page.title}
-                </MenuItem>
+                </a>
             ))}
             {author.credentials.length > 0 && (
-                <MenuItem
-                    url={`${author.url}/tip`}
-                    isActive={isActiveMenuItem(`${author.url}/tip`)}
+                <a
+                    href={`${author.url}/tip`}
+                    className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
                 >
                     Thank
-                </MenuItem>
+                </a>
             )}
             {author.guestbook_disabled || (
-                <MenuItem
-                    url={authorGuestbookEntriesUrl}
-                    isActive={currentUrl.includes("guestbook")}
+                <a
+                    href={authorGuestbookEntriesUrl}
+                    className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
                 >
                     Guestbook
-                </MenuItem>
+                </a>
             )}
             {!author.newsletter_disabled && (
-                <MenuItem
-                    url={`${author.url}/subscribe`}
-                    isActive={isSubscribeMenuItemActive()}
+                <a
+                    href={`${author.url}/subscribe`}
+                    className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
                 >
                     Subscribe
-                </MenuItem>
+                </a>
             )}
         </nav>
     );
