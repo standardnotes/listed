@@ -67,7 +67,6 @@
     .author-name.path-item {
         display: flex;
         align-items: center;
-        color: var(--header-author-name);
 
         @include Desktop() {
             margin-right: $spacing-16;
