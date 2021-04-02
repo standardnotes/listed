@@ -1,4 +1,4 @@
-.pages-menu .page-link {
+.page-link {
   @include MenuHover(var(--page-menu-link-color));
 
   &.button--active::before {
