@@ -27,7 +27,7 @@ const MasonryLayout = ({ children }) => {
             const columnBreakId = `masonry-colum-break-${i}`;
 
             if (!document.getElementById(columnBreakId)) {
-                const columnBreak = document.createElement("div");
+                const columnBreak = document.createElement("li");
                 columnBreak.id = columnBreakId;
                 columnBreak.className = "masonry-layout__column-break";
                 columnBreak.style.order = i + 1;

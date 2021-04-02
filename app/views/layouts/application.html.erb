@@ -52,7 +52,7 @@
       <%= stylesheet_link_tag    'carded-blog', media: 'all', 'data-turbolinks-track': 'reload' %>
     <% end %>
 
-    <%= stylesheet_packs_with_chunks_tag('clientRegistration', media: 'all', 'data-turbolinks-track': 'reload') %>
+    <%= stylesheet_pack_tag('clientRegistration', media: 'all', 'data-turbolinks-track': 'reload', defer: true) %>
     <%= javascript_packs_with_chunks_tag('clientRegistration', 'data-turbolinks-track': 'reload', defer: true) %>
 
     <% if @display_author %>
