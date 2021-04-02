@@ -19,11 +19,13 @@ const AuthorMenu = ({
         return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
     };
 
+    const getLinkClassName = (isActive) => `button page-link ${isActive ? "button--active" : "button--no-fill"}`;
+
     return (
         <nav className={navClassName()}>
             <a
                 href={author.url}
-                className={`button page-link ${isActiveMenuItem(author.url) ? "button--active" : "button--no-fill"}`}
+                className={getLinkClassName(isActiveMenuItem(author.url))}
             >
                 Home
             </a>
@@ -31,7 +33,7 @@ const AuthorMenu = ({
                 <a
                     key={page.id}
                     href={page.author_relative_url}
-                    className={`button page-link ${isActiveMenuItem(page.author_relative_url) ? "button--active" : "button--no-fill"}`}
+                    className={getLinkClassName(isActiveMenuItem(page.author_relative_url))}
                 >
                     {page.title}
                 </a>
@@ -39,7 +41,7 @@ const AuthorMenu = ({
             {author.credentials.length > 0 && (
                 <a
                     href={`${author.url}/tip`}
-                    className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
+                    className={getLinkClassName(isActiveMenuItem(`${author.url}/tip`))}
                 >
                     Thank
                 </a>
@@ -47,7 +49,7 @@ const AuthorMenu = ({
             {author.guestbook_disabled || (
                 <a
                     href={authorGuestbookEntriesUrl}
-                    className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
+                    className={getLinkClassName(currentUrl.includes("guestbook"))}
                 >
                     Guestbook
                 </a>
@@ -55,7 +57,7 @@ const AuthorMenu = ({
             {!author.newsletter_disabled && (
                 <a
                     href={`${author.url}/subscribe`}
-                    className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
+                    className={getLinkClassName(isSubscribeMenuItemActive())}
                 >
                     Subscribe
                 </a>
