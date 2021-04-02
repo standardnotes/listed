@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import SVG from "react-inlinesvg";
 import { IcListed, IcMenu, IcClose } from "../../assets/icons";
 import { MenuContainer, AuthorInfo } from "./header";
-import { shouldShowMenu } from "../../helpers/author";
+import { shouldShowAuthorMenu } from "../../helpers";
 import "./HeaderContainer.scss";
 
 const HeaderContainer = ({
@@ -29,6 +29,8 @@ const HeaderContainer = ({
         />
     );
 
+    const shouldShowMenu = () => !author || shouldShowAuthorMenu(author, pages);
+
     return (
         <div className={`page-header__container ${post ? "page-header__container--post" : ""}`}>
             <div id="page-header">
@@ -46,7 +48,7 @@ const HeaderContainer = ({
                         </div>
                     )}
                 </div>
-                { (!author || shouldShowMenu(author, pages)) && (
+                { shouldShowMenu() && (
                     <div className="right">
                         <button
                             className="button button--menu-icon"
@@ -62,7 +64,7 @@ const HeaderContainer = ({
                     </div>
                 )}
             </div>
-            {renderMenu(false)}
+            { shouldShowMenu() && renderMenu(false)}
             {blogPage && (
                 <AuthorInfo author={author} />
             )}

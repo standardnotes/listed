@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-    hasPages,
-    hasCredentials,
-    hasGuestbook,
-    hasNewsletter,
-} from "../../../../helpers/author";
+    authorHasPages,
+    authorHasCredentials,
+    authorHasGuestbook,
+    authorHasNewsletter,
+} from "../../../../helpers";
 import "./AuthorMenu.scss";
 
 const AuthorMenu = ({
@@ -32,7 +32,7 @@ const AuthorMenu = ({
             >
                 Home
             </a>
-            {hasPages(pages) && pages.map((page) => (
+            {authorHasPages(pages) && pages.map((page) => (
                 <a
                     key={page.id}
                     href={page.author_relative_url}
@@ -41,7 +41,7 @@ const AuthorMenu = ({
                     {page.title}
                 </a>
             ))}
-            {hasCredentials(author) && (
+            {authorHasCredentials(author) && (
                 <a
                     href={`${author.url}/tip`}
                     className={`button page-link ${isActiveMenuItem(`${author.url}/tip`) ? "button--active" : "button--no-fill"}`}
@@ -49,7 +49,7 @@ const AuthorMenu = ({
                     Thank
                 </a>
             )}
-            {hasGuestbook(author) && (
+            {authorHasGuestbook(author) && (
                 <a
                     href={authorGuestbookEntriesUrl}
                     className={`button page-link ${currentUrl.includes("guestbook") ? "button--active" : "button--no-fill"}`}
@@ -57,7 +57,7 @@ const AuthorMenu = ({
                     Guestbook
                 </a>
             )}
-            {hasNewsletter(author) && (
+            {authorHasNewsletter(author) && (
                 <a
                     href={`${author.url}/subscribe`}
                     className={`button page-link ${isSubscribeMenuItemActive() ? "button--active" : "button--no-fill"}`}
