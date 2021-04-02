@@ -11,6 +11,10 @@
         &::before {
             background-image: none;
         }
+
+        @include Desktop() {
+            padding: 0 $spacing-8;
+        }
     }
 }
 
@@ -26,7 +30,7 @@
     align-items: center;
 
     @include Desktop() {
-        padding: $spacing-10 $spacing-11-vw;
+        padding: $spacing-10 $spacing-11-vw $spacing-10 calc(#{$spacing-11-vw} - #{$spacing-12});
     }
 }
 
@@ -40,6 +44,12 @@
 
     path {
         fill: var(--header-listed-name);
+    }
+
+    &__container {
+        @include Desktop() {
+            padding: $spacing-2;
+        }
     }
 
     @include Desktop() {
@@ -60,24 +70,17 @@
         line-height: 0;
 
         @include Desktop() {
-            margin: $spacing-16 $spacing-18 0 $spacing-16;
+            margin: $spacing-20 $spacing-10 0 $spacing-8;
         }
     }
 
     .author-name.path-item {
         display: flex;
         align-items: center;
-    
+        color: var(--header-author-name);
+
         @include Desktop() {
-            margin-right: $spacing-16;
-        }
-
-        a {
-            color: var(--header-author-name);
-
-            &::before {
-                background-image: none;
-            }
+            padding: $spacing-2 $spacing-12;
         }
     }
 }
