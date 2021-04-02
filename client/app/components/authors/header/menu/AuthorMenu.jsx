@@ -22,7 +22,7 @@ const AuthorMenu = ({
             return "pages-menu author-pages-menu--desktop pages-menu--desktop";
         }
 
-        return `pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
+        return `pages-menu pages-menu--mobile ${isMobileMenuOpen ? "pages-menu--mobile-visible" : ""}`;
     };
     return (
         <nav className={navClassName()}>

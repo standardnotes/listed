@@ -251,7 +251,7 @@ textarea {
 }
 
 .button--active {
-    color: var(--page-menu-link-color);
+    color: $color-primary;
     position: relative;
     background-image: none;
 
