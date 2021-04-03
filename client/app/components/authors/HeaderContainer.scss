@@ -7,9 +7,20 @@
 
     .listed-logo-link {
         display: flex;
+        padding: 0;
+        margin: 0;
+        @include MenuHover(var(--header-listed-name));
+
+        svg path {
+            fill: var(--header-listed-name);
+        }
 
         &::before {
             background-image: none;
+        }
+
+        @include Desktop() {
+            padding: $spacing-2;
         }
     }
 }
@@ -26,7 +37,7 @@
     align-items: center;
 
     @include Desktop() {
-        padding: $spacing-10 $spacing-11-vw;
+        padding: $spacing-10 $spacing-11-vw $spacing-10 calc(#{$spacing-11-vw} - #{$spacing-2});;
     }
 }
 
@@ -34,13 +45,15 @@
     display: flex;
 }
 
+.website-name {
+    @include Desktop() {
+        padding: 0 $spacing-8 0 0;
+    }
+}
+
 .listed-logo {
     height: 28px;
     width: 28px;
-
-    path {
-        fill: var(--header-listed-name);
-    }
 
     @include Desktop() {
         height: 36px;
@@ -60,23 +73,24 @@
         line-height: 0;
 
         @include Desktop() {
-            margin: $spacing-16 $spacing-18 0 $spacing-16;
+            margin: $spacing-20 $spacing-10 0 $spacing-8;
         }
     }
 
     .author-name.path-item {
         display: flex;
         align-items: center;
-    
-        @include Desktop() {
-            margin-right: $spacing-16;
-        }
 
         a {
-            color: var(--header-author-name);
+            @include MenuHover(var(--header-author-name));
+            padding: 0;
+            margin: 0;
 
             &::before {
                 background-image: none;
+            }
+            @include Desktop() {
+                padding: $spacing-6 $spacing-12;
             }
         }
     }
