@@ -17,4 +17,9 @@ class GuestbookEntry < ApplicationRecord
   def spam_url
     "#{ENV['HOST']}/authors/#{author.id}/guestbook/#{id}/spam?token=#{token}"
   end
+
+  def mark_as_read
+    self.unread = false
+    save
+  end
 end
