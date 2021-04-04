@@ -34,13 +34,13 @@ const Usage = ({ activeAuthors }) => (
                     </li>
                     <li>
                         <p className="p2">
-                            The privacy of writing in the
+                            The privacy of writing in
                             {" "}
                             <a href="https://standardnotes.org" target="_blank" rel="noopener noreferrer">
                                 Standard Notes
                             </a>
                             {" "}
-                            app combined with the ease of publishing on Listed
+                            combined with the ease of publishing on Listed
                             encourages free flow and expansion of thought.
                             You’ll probably publish on Listed more than you do any other platform.
                             It’s not uncommon that Listed authors
