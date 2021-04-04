@@ -22,7 +22,7 @@ const WeeklyDigest = ({ author, posts, unsubscribeUrl }) => {
                     <div className="post-content">
                         <i>{dayjs(post.created_at).format("MMMM D, YYYY")}</i>
                         {/* eslint-disable-next-line react/no-danger */}
-                        <div className="post-body" dangerouslySetInnerHTML={renderedText(post)} />
+                        <p dangerouslySetInnerHTML={renderedText(post)} />
                     </div>
                 </div>
             ))}
@@ -39,7 +39,7 @@ const WeeklyDigest = ({ author, posts, unsubscribeUrl }) => {
             <div className="links-footer" style={{ marginBottom: "20px" }}>
                 <a href={unsubscribeUrl}>Unsubscribe</a>
             </div>
-            <div className="bottom-margin-space" />
+            <div style={{ height: "12px" }} />
         </div>
     );
 };
