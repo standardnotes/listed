@@ -17,6 +17,21 @@
         p:not(:last-child) {
             margin-bottom: $spacing-22;
         }
+
+        pre {
+            padding: $spacing-22;
+            overflow: auto;
+            font-size: 90%;
+        }
+
+        p code {
+            font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+            font-size: 85%;
+            padding: $spacing-4;
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            border-radius: 3px;
+        }
     }
 
     .post-date {
