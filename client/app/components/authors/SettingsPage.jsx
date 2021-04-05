@@ -31,7 +31,15 @@ const SettingsPage = ({
     const [errorToastMessage, setErrorToastMessage] = useState("");
 
     if (scrollToGuestbook) {
-        useEffect(() => {
+    useEffect(() => {
+        if (scrollToGuestbook) {
+            setTimeout(() => {
+                document.getElementById("guestbook-entries").scrollIntoView({
+                    behavior: "smooth",
+                });
+            }, 250);
+        }
+    }, [scrollToGuestbook]);
             setTimeout(() => {
                 document.getElementById("guestbook-entries").scrollIntoView({
                     behavior: "smooth",
