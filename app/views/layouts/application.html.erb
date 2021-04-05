@@ -93,6 +93,12 @@
     </script>
     <!-- End Piwik Code -->
 
+    <script type="text/javascript">
+      if("<%= ENV["RAILS_ENV"] %>" !== "development" && typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
+        window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {}
+      }
+    </script>
+
   </head>
 
   <body>
