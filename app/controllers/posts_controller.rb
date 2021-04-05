@@ -94,6 +94,7 @@ class PostsController < ApplicationController
       return
     end
 
+    @pages = @post.author.pages if @post.author
     @styles = @post.author.css if @post.author.custom_theme_enabled
   end
 
