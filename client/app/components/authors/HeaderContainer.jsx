@@ -26,6 +26,7 @@ const HeaderContainer = ({
             pages={pages}
             authorGuestbookEntriesUrl={authorGuestbookEntriesUrl}
             currentUrl={currentUrl}
+            privatePost={privatePost}
         />
     );
 
