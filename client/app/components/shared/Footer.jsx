@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./Footer.scss";
 
-const Footer = ({ blogPage, author }) => (
+const Footer = ({ blogPage, author, privatePost }) => (
     <div id="footer" className={blogPage ? "footer--blog-page" : ""}>
         <div className="footer__container">
             <p className="p3">Listed Blogging Platform</p>
@@ -12,7 +12,7 @@ const Footer = ({ blogPage, author }) => (
                     {" "}
                     {(new Date()).getFullYear()}
                     {" "}
-                    {author.display_name}
+                    {!privatePost && author.display_name}
                 </p>
             )}
             <p className="p3">
@@ -31,11 +31,13 @@ Footer.propTypes = {
         display_name: PropTypes.string.isRequired,
     }),
     blogPage: PropTypes.bool,
+    privatePost: PropTypes.bool,
 };
 
 Footer.defaultProps = {
     author: null,
     blogPage: false,
+    privatePost: false,
 };
 
 export default (props) => <Footer {...props} />;
