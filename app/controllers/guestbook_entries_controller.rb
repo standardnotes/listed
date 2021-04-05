@@ -8,6 +8,7 @@ class GuestbookEntriesController < ApplicationController
     if @author && @author.custom_theme_enabled
       @styles = @author.css
     end
+    @pages = @author.pages if @author
   end
 
   def index
