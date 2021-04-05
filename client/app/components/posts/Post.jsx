@@ -13,7 +13,11 @@ const Post = ({ truncate = false, post }) => {
     const renderTruncatePost = () => (
         <>
             <div className="post-header">
-                <h5 className="post-title h5">{post.title}</h5>
+                <h5 className="post-title h5">
+                    <a className="post-title" href={post.author_relative_url}>
+                        {post.title}
+                    </a>
+                </h5>
                 {post.page || (
                     <p className="post-date p3">
                         {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
