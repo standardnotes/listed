@@ -34,7 +34,7 @@ const Show = ({
                 </div>
             )}
         </div>
-        {(previous || next) && (
+        {((previous || next) && !post.unlisted) && (
             <div id="single-post-footer">
                 <h3 className="more-from h3">
                     More from
