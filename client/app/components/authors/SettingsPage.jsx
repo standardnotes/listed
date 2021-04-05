@@ -30,7 +30,6 @@ const SettingsPage = ({
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
 
-    if (scrollToGuestbook) {
     useEffect(() => {
         if (scrollToGuestbook) {
             setTimeout(() => {
@@ -40,13 +39,6 @@ const SettingsPage = ({
             }, 250);
         }
     }, [scrollToGuestbook]);
-            setTimeout(() => {
-                document.getElementById("guestbook-entries").scrollIntoView({
-                    behavior: "smooth",
-                });
-            }, 250);
-        }, [scrollToGuestbook]);
-    }
 
     const sections = [
         {
