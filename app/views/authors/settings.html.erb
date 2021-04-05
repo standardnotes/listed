@@ -13,7 +13,7 @@
             :meta_image_url,
             :header_image_url,
             :guestbook_disabled,
-            :newsletter_disabled, 
+            :newsletter_disabled,
             :hide_from_homepage,
             :secret,
             :cover_style,
@@ -48,6 +48,7 @@
             :deletion_url
         ],
     ),
+    scrollToGuestbook: @scroll_to_guestbook,
     posts: @posts.as_json(
         only: [
             :id,

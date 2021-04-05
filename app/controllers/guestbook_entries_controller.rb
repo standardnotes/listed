@@ -25,6 +25,7 @@ class GuestbookEntriesController < ApplicationController
     if @entry.text.contains_url? ||
        @entry.donation_info&.contains_url? ||
        @entry.text == @entry.donation_info
+
       @entry.spam = true
     end
 

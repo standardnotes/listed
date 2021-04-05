@@ -177,6 +177,10 @@ class Author < ApplicationRecord
     self.domain.delete
   end
 
+  def unread_guestbook_entries
+    guestbook_entries.where(unread: true, spam: false)
+  end
+
   def self.email_unread_guestbook_entries
     authors = GuestbookEntry.where(unread: true, spam: false).map(&:author).uniq
     authors.each do |author|

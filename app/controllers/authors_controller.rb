@@ -31,6 +31,10 @@ class AuthorsController < ApplicationController
   end
 
   def settings
+    if params[:read_guestbook]
+      @author.unread_guestbook_entries.each(&:mark_as_read)
+      @scroll_to_guestbook = true
+    end
     @guestbook_entries = @author.guestbook_entries.where(spam: false)
     @posts = @author.posts
   end
@@ -228,24 +232,32 @@ class AuthorsController < ApplicationController
     end
 
     actions.push(
-      {
-        :label => "Open Blog",
-        :url => @author.url,
-        :verb => "show",
-        :context => "Item",
-        :content_types => ["Note"]
-      }
+      :label => "Open Blog",
+      :url => @author.url,
+      :verb => "show",
+      :context => "Item",
+      :content_types => ["Note"]
     )
 
-    actions.push (
-    {
+    actions.push({
       :label => "Settings",
       :url => "#{@author.get_host}/authors/#{@author.id}/settings?secret=#{secret}",
       :verb => "show",
       :context => "Item",
       :content_types => ["Note"]
-    }
-    )
+    })
+
+    unread_entries = @author.unread_guestbook_entries
+    unless unread_entries.empty?
+      guestbook_noun = unread_entries.length == 1 ? 'Entry' : 'Entries'
+      actions.push(
+        label: "🔴 #{unread_entries.length} Unread Guestbook #{guestbook_noun}",
+        url: "#{@author.get_host}/authors/#{@author.id}/settings?secret=#{secret}&read_guestbook=true",
+        verb: 'show',
+        context: 'Item',
+        content_types: ['Note']
+      )
+    end
 
     description = "Publishes to listed.to."
     render :json => {

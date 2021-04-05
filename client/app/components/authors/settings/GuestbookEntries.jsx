@@ -90,19 +90,21 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                                 {dayjs(entry.created_at).format("MMMM D, YYYY")}
                             </span>
                         </p>
-                        {entry.donation_info && entry.donation_info.length > 0 && (
+                        {(entry.signer_email || entry.donation_info) && (
                             <p className="p3 entry__details entry__details--private">
                                 <strong>Only visible to you: </strong>
                                 {entry.signer_email && (
                                     <span className="entry-details__item">
-                                        Author email:
-                                        {entry.signer_email}
+                                        Signer email:
+                                        <strong>{entry.signer_email}</strong>
                                     </span>
                                 )}
-                                <span className="entry-details__item">
-                                    Donation info:
-                                    {entry.donation_info}
-                                </span>
+                                {entry.donation_info && (
+                                    <span className="entry-details__item">
+                                        Donation info:
+                                        <strong>{entry.donation_info}</strong>
+                                    </span>
+                                )}
                             </p>
                         )}
                     </div>

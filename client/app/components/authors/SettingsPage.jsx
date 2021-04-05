@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LeftNavBarPage from "../shared/LeftNavBarPage";
 import {
     General,
@@ -25,10 +25,20 @@ import "./SettingsPage.scss";
 import ErrorToast from "../shared/ErrorToast";
 
 const SettingsPage = ({
-    author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts,
+    author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts, scrollToGuestbook,
 }) => {
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
+
+    useEffect(() => {
+        if (scrollToGuestbook) {
+            setTimeout(() => {
+                document.getElementById("guestbook-entries").scrollIntoView({
+                    behavior: "smooth",
+                });
+            }, 250);
+        }
+    }, [scrollToGuestbook]);
 
     const sections = [
         {
@@ -170,9 +180,14 @@ SettingsPage.propTypes = {
     guestbookEntries: PropTypes.arrayOf(
         PropTypes.shape({}),
     ).isRequired,
+    scrollToGuestbook: PropTypes.bool,
     posts: PropTypes.arrayOf(
         PropTypes.shape({}),
     ).isRequired,
+};
+
+SettingsPage.defaultProps = {
+    scrollToGuestbook: false,
 };
 
 export default (props) => <SettingsPage {...props} />;
