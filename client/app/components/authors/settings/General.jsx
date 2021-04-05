@@ -5,7 +5,6 @@ import axios from "axios";
 import getAuthToken from "../../../utils/getAuthToken";
 import Checkbox from "../../shared/Checkbox";
 import authorType from "../../../types/author";
-import "./General.scss";
 
 const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const {
@@ -182,7 +181,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     <label htmlFor="author-header-image-url" className="label p2">
                         Header image URL
                     </label>
-                    <p className="sublabel p3 sublabel--header-image">
+                    <p className="sublabel p3">
                         The image that will be displayed
                         on top of your blog page (below the description).
                     </p>
