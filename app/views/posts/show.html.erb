@@ -2,15 +2,15 @@
 <% subscription_for_author = @subscriber && @subscriber.subscription_for_author(@post.author).as_json(
     only: [:verified, :verification_sent_at]
 ) %>
+<% private_post = @post.unlisted %>
 
 <%= react_component("PostShow", props: {
     post: @post.as_json(
         only: [:title, :unlisted, :page, :created_at, :word_count],
-        methods: [:author_relative_url, :preview_text, :rendered_text],
-        include: { 
-            author: { 
+        methods: private_post ? [:preview_text, :rendered_text] : [:author_relative_url, :preview_text, :rendered_text],
+        include: private_post ? nil : { author: {
                 only: [:id, :username, :newsletter_disabled],
-                methods: :title 
+                methods: :title
             }
         }
     ),

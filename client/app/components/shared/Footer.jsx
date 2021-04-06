@@ -6,7 +6,7 @@ const Footer = ({ blogPage, author, privatePost }) => (
     <div id="footer" className={blogPage ? "footer--blog-page" : ""}>
         <div className="footer__container">
             <p className="p3">Listed Blogging Platform</p>
-            {author && (
+            {(author || privatePost) && (
                 <p className="p3">
                     Copyright ©
                     {" "}

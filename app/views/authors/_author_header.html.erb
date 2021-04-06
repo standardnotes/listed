@@ -1,14 +1,14 @@
+<% private_post = post && post.unlisted %>
 <% home_url = ENV['HOST'] %>
 <% post = local_assigns[:post] %>
-<% author = @author || @display_author || (post && post.author) %>
-<% private_post = post && post.unlisted %>
-<% pages = @pages %>
-<% author_guestbook_entries_url = author && author_guestbook_entries_path(author) %>
+<% author = @author || @display_author || (post && post.author) if !private_post %>
+<% pages = @pages if !private_post %>
+<% author_guestbook_entries_url = author && author_guestbook_entries_path(author) if !private_post %>
 
 <%= react_component("AuthorHeader", props: {
     homeUrl: home_url,
     post: !!post,
-    author: author.as_json(
+    author: (author if !private_post).as_json(
         only: [:guestbook_disabled, :newsletter_disabled, :bio, :link, :twitter, :header_image_url],
         methods: [:title, :url, :last_word_count, :personal_link],
         include: {
@@ -24,5 +24,5 @@
     ),
     authorGuestbookEntriesUrl: author_guestbook_entries_url,
     currentUrl: request.url,
-    blogPage: @blog_page,
+    blogPage: (@blog_page if !private_post),
 }) %>

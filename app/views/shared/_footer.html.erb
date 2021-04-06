@@ -1,6 +1,6 @@
 <%= react_component("SharedFooter", props: {
     blogPage: @blog_page,
-    author: (@display_author || @author || @post && @post.author).as_json(
+    author: (@display_author || @author || @post && @post.author if !@post || !@post.unlisted).as_json(
         only: :display_name
     ),
     privatePost: @post && @post.unlisted
