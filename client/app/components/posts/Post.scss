@@ -32,6 +32,31 @@
             border: 1px solid #e1e1e8;
             border-radius: 3px;
         }
+
+        img {
+            display: block;
+            margin-top: 30px;
+            max-width: 100%;
+        }
+
+        table {
+            display: block;
+            width: 100%;
+            overflow: auto;
+            border-collapse: collapse;
+            border-spacing: 0px;
+            border-color: grey;
+
+            th,
+            td {
+              padding: 6px 13px;
+              border: 1px solid #dfe2e5;
+            }
+
+            tr:nth-child(2n) {
+              background-color: #f6f6f6;
+            }
+        }
     }
 
     .post-date {
