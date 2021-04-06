@@ -55,7 +55,7 @@ const AuthorMenu = ({
             {authorHasGuestbook(author) && (
                 <a
                     href={authorGuestbookEntriesUrl}
-                    className={getLinkClassName(currentUrl.includes("guestbook"))}
+                    className={getLinkClassName(currentUrl.includes("/guestbook"))}
                 >
                     Guestbook
                 </a>
