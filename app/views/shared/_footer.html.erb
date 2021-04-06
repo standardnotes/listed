@@ -2,7 +2,7 @@
     blogPage: @blog_page,
     author: (@display_author || @author || @post && @post.author if !@post || !@post.unlisted).as_json(
         methods: [:title],
-        only: [:title],
+        only: :title,
     ),
     privatePost: @post && @post.unlisted
 }) %>
