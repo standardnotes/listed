@@ -5,7 +5,7 @@ import SVG from "react-inlinesvg";
 import { IcArrowLong } from "../../assets/icons";
 import "./Post.scss";
 
-const Post = ({ truncate = false, post }) => {
+const Post = ({ truncate, post, isMainPost }) => {
     // HTML has already been sanitized on Rails side
     const previewText = { __html: post.preview_text };
     const renderedText = { __html: post.rendered_text };
@@ -37,6 +37,26 @@ const Post = ({ truncate = false, post }) => {
         </>
     );
 
+    const renderHeading = () => {
+        const content = (
+            <a className="post-title" href={post.author_relative_url}>
+                {post.title}
+            </a>
+        );
+        if (isMainPost) {
+            return (
+                <h1 className="post-title h1">
+                    {content}
+                </h1>
+            );
+        }
+        return (
+            <h2 className="post-title h2">
+                {content}
+            </h2>
+        );
+    };
+
     const renderPost = () => (
         <>
             <div className="post-header">
@@ -44,15 +64,11 @@ const Post = ({ truncate = false, post }) => {
                     <h2 className="post-title h2">{post.title}</h2>
                 ) : (
                     !post.page && (
-                        <h2 className="post-title h2">
-                            <a className="post-title" href={post.author_relative_url}>
-                                {post.title}
-                            </a>
-                        </h2>
+                        renderHeading()
                     )
                 )}
                 {post.page || (
-                    <p className="post-date p3">
+                    <p className={`post-date ${isMainPost ? "p2" : "p3"}`}>
                         {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
                     </p>
                 )}
@@ -81,10 +97,12 @@ Post.propTypes = {
         word_count: PropTypes.number.isRequired,
     }).isRequired,
     truncate: PropTypes.bool,
+    isMainPost: PropTypes.bool,
 };
 
 Post.defaultProps = {
     truncate: false,
+    isMainPost: false,
 };
 
 export default Post;

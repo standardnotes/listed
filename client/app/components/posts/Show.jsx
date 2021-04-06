@@ -10,7 +10,10 @@ const Show = ({
 }) => (
     <div>
         <div className="single-post-show">
-            <Post post={post} />
+            <Post
+                post={post}
+                isMainPost
+            />
             {!post.unlisted && (
                 <div>
                     <hr />
