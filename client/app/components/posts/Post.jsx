@@ -71,7 +71,7 @@ const Post = ({ truncate = false, post }) => {
 
 Post.propTypes = {
     post: PropTypes.shape({
-        author_relative_url: PropTypes.string.isRequired,
+        author_relative_url: PropTypes.string,
         created_at: PropTypes.string.isRequired,
         page: PropTypes.bool,
         preview_text: PropTypes.string.isRequired,

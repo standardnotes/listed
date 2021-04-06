@@ -13,7 +13,7 @@ const MenuContainer = ({
     currentUrl,
 }) => (
     <div className="pages-menu__container">
-        {!author && (
+        {!author && !privatePost && (
             <HomepageMenu isMobileMenuOpen={isMobileMenuOpen} isDesktopMenu={isDesktopMenu} />
         )}
         {author && !privatePost && (
