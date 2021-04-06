@@ -84,7 +84,7 @@ const Post = ({ truncate, post, isMainPost }) => {
                 )}
             </div>
             {/* eslint-disable-next-line react/no-danger */}
-            <div className="post-body p1" dangerouslySetInnerHTML={renderedText} />
+            <div className={`post-body p1 ${!isMainPost ? "post-body__heading--small" : ""}`} dangerouslySetInnerHTML={renderedText} />
         </>
     );
 
