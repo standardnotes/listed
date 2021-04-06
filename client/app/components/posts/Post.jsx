@@ -10,6 +10,16 @@ const Post = ({ truncate, post, isMainPost }) => {
     const previewText = { __html: post.preview_text };
     const renderedText = { __html: post.rendered_text };
 
+    const renderDateAndWordCount = () => (
+        <>
+            {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
+            <span className="post-date__separator">•</span>
+            {post.word_count.toLocaleString()}
+            {" "}
+            words
+        </>
+    );
+
     const renderTruncatePost = () => (
         <>
             <div className="post-header">
@@ -20,7 +30,7 @@ const Post = ({ truncate, post, isMainPost }) => {
                 </h5>
                 {post.page || (
                     <p className="post-date p3">
-                        {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
+                        {renderDateAndWordCount()}
                     </p>
                 )}
             </div>
@@ -69,7 +79,7 @@ const Post = ({ truncate, post, isMainPost }) => {
                 )}
                 {post.page || (
                     <p className={`post-date ${isMainPost ? "p2" : "p3"}`}>
-                        {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
+                        {renderDateAndWordCount()}
                     </p>
                 )}
             </div>

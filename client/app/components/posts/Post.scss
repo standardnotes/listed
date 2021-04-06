@@ -62,6 +62,10 @@
     .post-date {
         margin-top: $spacing-8;
         opacity: 0.86;
+
+        &__separator {
+            margin: 0 $spacing-6;
+        }
     }
 }
 
