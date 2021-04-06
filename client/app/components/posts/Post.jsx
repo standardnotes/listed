@@ -5,10 +5,20 @@ import SVG from "react-inlinesvg";
 import { IcArrowLong } from "../../assets/icons";
 import "./Post.scss";
 
-const Post = ({ truncate = false, post }) => {
+const Post = ({ truncate, post, isMainPost }) => {
     // HTML has already been sanitized on Rails side
     const previewText = { __html: post.preview_text };
     const renderedText = { __html: post.rendered_text };
+
+    const renderDateAndWordCount = () => (
+        <>
+            {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
+            <span className="post-date__separator">•</span>
+            {post.word_count.toLocaleString()}
+            {" "}
+            words
+        </>
+    );
 
     const renderTruncatePost = () => (
         <>
@@ -20,7 +30,7 @@ const Post = ({ truncate = false, post }) => {
                 </h5>
                 {post.page || (
                     <p className="post-date p3">
-                        {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
+                        {renderDateAndWordCount()}
                     </p>
                 )}
             </div>
@@ -37,6 +47,26 @@ const Post = ({ truncate = false, post }) => {
         </>
     );
 
+    const renderHeading = () => {
+        const content = (
+            <a className="post-title" href={post.author_relative_url}>
+                {post.title}
+            </a>
+        );
+        if (isMainPost) {
+            return (
+                <h1 className="post-title h1">
+                    {content}
+                </h1>
+            );
+        }
+        return (
+            <h2 className="post-title h2">
+                {content}
+            </h2>
+        );
+    };
+
     const renderPost = () => (
         <>
             <div className="post-header">
@@ -44,21 +74,17 @@ const Post = ({ truncate = false, post }) => {
                     <h2 className="post-title h2">{post.title}</h2>
                 ) : (
                     !post.page && (
-                        <h2 className="post-title h2">
-                            <a className="post-title" href={post.author_relative_url}>
-                                {post.title}
-                            </a>
-                        </h2>
+                        renderHeading()
                     )
                 )}
                 {post.page || (
-                    <p className="post-date p3">
-                        {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
+                    <p className={`post-date ${isMainPost ? "p2" : "p3"}`}>
+                        {renderDateAndWordCount()}
                     </p>
                 )}
             </div>
             {/* eslint-disable-next-line react/no-danger */}
-            <div className="post-body p1" dangerouslySetInnerHTML={renderedText} />
+            <div className={`post-body p1 ${!isMainPost ? "post-body--small-heading" : ""}`} dangerouslySetInnerHTML={renderedText} />
         </>
     );
 
@@ -81,10 +107,12 @@ Post.propTypes = {
         word_count: PropTypes.number.isRequired,
     }).isRequired,
     truncate: PropTypes.bool,
+    isMainPost: PropTypes.bool,
 };
 
 Post.defaultProps = {
     truncate: false,
+    isMainPost: false,
 };
 
 export default Post;
