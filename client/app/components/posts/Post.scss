@@ -9,32 +9,30 @@
 
     .post-body {
         margin: $spacing-24 0;
+        $base-header-font: 1.5rem;
 
-        &--small-heading {
-            $base-header-font: 1.3rem;
-            h1 {
-                font-size: $base-header-font;
-            }
+        h1 {
+            font-size: $base-header-font;
+        }
 
-            h2 {
-                font-size: $base-header-font - 0.1rem;
-            }
+        h2 {
+            font-size: $base-header-font - 0.1rem;
+        }
 
-            h3 {
-                font-size: $base-header-font - 0.2rem;
-            }
+        h3 {
+            font-size: $base-header-font - 0.2rem;
+        }
 
-            h4 {
-                font-size: $base-header-font - 0.3rem;
-            }
+        h4 {
+            font-size: $base-header-font - 0.3rem;
+        }
 
-            h5 {
-                font-size: $base-header-font - 0.4rem;
-            }
+        h5 {
+            font-size: $base-header-font - 0.4rem;
+        }
 
-            h6 {
-                font-size: $base-header-font - 0.5rem;
-            }
+        h6 {
+            font-size: $base-header-font - 0.5rem;
         }
 
         li:not(:last-child) {
