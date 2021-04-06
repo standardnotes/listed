@@ -15,3 +15,14 @@
 
 @import "stylekit";
 @import "rouge";
+
+#main-container {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+#content-container {
+  height: 100%;
+  flex: 1;
+}
