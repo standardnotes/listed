@@ -12,7 +12,7 @@ const Footer = ({ blogPage, author, privatePost }) => (
                     {" "}
                     {(new Date()).getFullYear()}
                     {" "}
-                    {!privatePost && author.display_name}
+                    {!privatePost && author.title}
                 </p>
             )}
             <p className="p3">
@@ -28,7 +28,7 @@ const Footer = ({ blogPage, author, privatePost }) => (
 
 Footer.propTypes = {
     author: PropTypes.shape({
-        display_name: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
     }),
     blogPage: PropTypes.bool,
     privatePost: PropTypes.bool,
