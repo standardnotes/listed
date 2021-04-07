@@ -1,25 +1,22 @@
 @font-face {
     font-family: "Merriweather";
-    src: local("serif"), url("../fonts/Merriweather-Bold.ttf") format("truetype");
+    src: url("../fonts/Merriweather-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
-    font-display: swap;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: local("sans-serif"), url("../fonts/Roboto-Regular.ttf") format("truetype");
+    src: url("../fonts/Roboto-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: local("sans-serif"), url("../fonts/Roboto-Bold.ttf") format("truetype");
+    src: url("../fonts/Roboto-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
-    font-display: swap;
 }
 
 * {
@@ -56,7 +53,7 @@ a {
         background-image: linear-gradient(to top, var(--link-color) 50%, var(--link-color) 50%);
         background-position: bottom;
         background-repeat: repeat-x;
-        background-size: 100% 4px;    
+        background-size: 100% 4px;
         opacity: 0.16;
     }
 
@@ -189,7 +186,7 @@ textarea {
     background-color: transparent;
     margin: 1px;
     transition: background-position 0.3s ease-in-out;
-    
+
     svg path {
         fill: $color-primary;
     }
@@ -201,7 +198,7 @@ textarea {
 
 .button--primary {
     color: $color-white;
-    background-image: 
+    background-image:
         linear-gradient(to top, $color-black 50%, var(--page-menu-link-color) 50%);
     background-size: 100% 200%;
     background-position: top;
@@ -226,7 +223,7 @@ textarea {
         bottom: 0;
         left: 0;
         border-radius: $border-radius-4;
-        background-image: 
+        background-image:
             linear-gradient(to top, var(--page-menu-link-color) 50%, transparent 50%);
         background-size: 100% 200%;
         background-position: top;
@@ -239,7 +236,7 @@ textarea {
             color: $color-primary;
 
             &::before {
-                background-image: 
+                background-image:
                 linear-gradient(to top, var(--page-menu-link-color) 50%, transparent 50%);
                 background-size: 100% 200%;
                 background-position: top;
