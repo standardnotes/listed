@@ -37,11 +37,6 @@ jobs:
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
-    - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v1
-      with:
-        host: ${{ secrets.LISTED_SSH_SERVER_PROD }}
-        private-key: ${{ secrets.LISTED_SSH_KEY_PROD }}
     - name: Add public IP to AWS security group
       uses: sohelamin/aws-security-group-add-ip-action@master
       with:
@@ -51,6 +46,11 @@ jobs:
         aws-security-group-id: ${{ secrets.AWS_SECURITY_GROUP_ID_PROD }}
         port: '22'
         description: 'GitHub Action'
+    - name: Setup SSH
+      uses: MrSquaare/ssh-setup-action@v1
+      with:
+        host: ${{ secrets.LISTED_SSH_SERVER_PROD }}
+        private-key: ${{ secrets.LISTED_SSH_KEY_PROD }}
     - name: Deploy with Capistrano
       run: bundle exec cap production deploy
       env:
