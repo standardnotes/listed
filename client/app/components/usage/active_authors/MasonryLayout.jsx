@@ -45,6 +45,14 @@ const MasonryLayout = ({ children }) => {
     }, []);
 
     useEffect(() => {
+        setTimeout(() => {
+            /** tmp: correct card heights are not used on load,
+             * heights are correct after small delay */
+            setupLayout();
+        }, 100);
+    }, []);
+
+    useEffect(() => {
         setupLayout();
     }, [children]);
 
