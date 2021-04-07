@@ -37,7 +37,7 @@ const ActiveAuthorItem = ({ author }) => (
                     <div className="active-author__word-count">
                         <SVG src={IcTextRich} className="active-author__icon active-author__icon--word-count" />
                         <p className="p3 active-author__word-count" suppressHydrationWarning>
-                            {`${author.last_word_count.toLocaleString()} words`}
+                            {`${(author.last_word_count || 0).toLocaleString()} words`}
                         </p>
                     </div>
                 </a>
