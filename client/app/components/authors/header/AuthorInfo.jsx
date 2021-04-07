@@ -9,6 +9,13 @@ const AuthorInfo = ({ author }) => {
         document.getElementById("author-posts").scrollIntoView({ behavior: "smooth" });
     };
 
+    const renderWordCount = () => {
+        if (!author.last_word_count) {
+            return 0;
+        }
+        return author.last_word_count.toLocaleString();
+    };
+
     return (
         <div className="header-author-info">
             <div className="header-author-info__items">
@@ -55,7 +62,7 @@ const AuthorInfo = ({ author }) => {
             </div>
             <button className="button word-count__button" type="button" onClick={scrollToPosts}>
                 <p className="p3 word-count" suppressHydrationWarning>
-                    {author.last_word_count.toLocaleString()}
+                    {renderWordCount()}
                     {" "}
                     words
                 </p>
@@ -73,7 +80,7 @@ AuthorInfo.propTypes = {
         personal_link: PropTypes.string,
         title: PropTypes.string.isRequired,
         twitter: PropTypes.string,
-        last_word_count: PropTypes.number.isRequired,
+        last_word_count: PropTypes.number,
     }).isRequired,
 };
 
