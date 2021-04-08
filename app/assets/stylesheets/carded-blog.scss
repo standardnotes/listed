@@ -11,7 +11,7 @@
   margin-bottom: 16px;
   border: 1px solid rgba(24, 24, 24, 0.16);
   border-radius: 4px;
-  background-color: #F8F9FC;
+  background-color: var(--card-post-background-color);
 }
 
 #author-posts .post-body {
