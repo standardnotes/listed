@@ -35,7 +35,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
         hide_from_homepage,
     });
 
-    const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
+    const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
     const submitEditedAuthor = async (event) => {
@@ -57,13 +57,13 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     },
                 });
 
-            setUsernameErrorMessage(null);
+            setErrorMessages({});
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setIsSubmitDisabled(false);
 
             if (err.response.status === 409) {
-                setUsernameErrorMessage(err.response.data.message);
+                setErrorMessages(err.response.data.message);
             } else {
                 setErrorToastMessage("There was an error trying to update your settings. Please try again.");
                 setIsErrorToastDisplayed(true);
@@ -77,6 +77,25 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
         ))
     );
 
+    const fieldHasErrorMessages = (fieldName) => Object.keys(errorMessages).includes(fieldName);
+
+    const renderErrorMessages = (fieldName) => {
+        if (!fieldHasErrorMessages(fieldName)) {
+            return null;
+        }
+        return (
+            <div className="error-message">
+                {errorMessages[fieldName].map((error) => (
+                    <span
+                        key={error}
+                    >
+                        {error}
+                    </span>
+                ))}
+            </div>
+        );
+    };
+
     return (
         <form onSubmit={(e) => submitEditedAuthor(e)}>
             <div className="form-row">
@@ -86,15 +105,11 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     </label>
                     <input
                         id="author-username"
-                        className={`text-field ${usernameErrorMessage ? "text-field--error" : ""}`}
+                        className={`text-field ${fieldHasErrorMessages("username") ? "text-field--error" : ""}`}
                         value={editedAuthor.username}
                         onChange={(e) => editAuthor("username", e.target.value)}
                     />
-                    {usernameErrorMessage && (
-                        <div className="error-message">
-                            {usernameErrorMessage}
-                        </div>
-                    )}
+                    {renderErrorMessages("username")}
                 </div>
                 <div className="form-section">
                     <label htmlFor="author-display-name" className="label p2">
@@ -153,12 +168,13 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     as well as notifies you when someone subscribes to your blog.
                     <input
                         id="author-email"
-                        className="text-field"
+                        className={`text-field ${fieldHasErrorMessages("email") ? "text-field--error" : ""}`}
                         placeholder="Enter your email"
                         value={editedAuthor.email}
                         onChange={(e) => editAuthor("email", e.target.value)}
                     />
                 </p>
+                {renderErrorMessages("email")}
             </div>
             <div className="form-row">
                 <div className="form-section">
