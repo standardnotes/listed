@@ -38,7 +38,11 @@ const HeaderContainer = ({
                 <div className="left">
                     <div className="website-name">
                         <a href={homeUrl} className="listed-logo-link button button--no-fill" aria-label="Listed logo">
-                            <SVG src={IcListed} className="listed-logo" />
+                            <SVG
+                                src={IcListed}
+                                className="listed-logo"
+                                loader={<img src={IcListed} className="listed-logo" alt="Listed Logo" />}
+                            />
                         </a>
                     </div>
                     {author && !privatePost && (
