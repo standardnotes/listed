@@ -273,7 +273,7 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    if @author.username != a_params[:username]
+    if !a_params[:username].empty? && @author.username != a_params[:username]
       existing_username = Author.where.not(username: nil).find_by_username(a_params[:username])
 
       if existing_username

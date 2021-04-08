@@ -28,7 +28,7 @@ const NewPost = ({
             </h3>
             <div className="post-content">
                 {/* eslint-disable-next-line react/no-danger */}
-                <p dangerouslySetInnerHTML={renderedTextHtml} />
+                <div className="post-body" dangerouslySetInnerHTML={renderedTextHtml} />
             </div>
             <hr />
             <div className="post-footer">
@@ -51,11 +51,11 @@ const NewPost = ({
             </div>
             <div className="links-footer" style={{ marginBottom: "20px" }}>
                 {weeklyUrl && (
-                    <a style={{ marginRight: "6px" }} href={weeklyUrl}>Receive Weekly Updates Instead</a>
+                    <a href={weeklyUrl}>Receive Weekly Updates Instead</a>
                 )}
                 <a href={unsubscribeUrl}>Unsubscribe</a>
             </div>
-            <div style={{ height: "12px" }} />
+            <div className="bottom-margin-space" />
         </div>
     );
 };
