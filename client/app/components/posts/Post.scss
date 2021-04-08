@@ -53,8 +53,8 @@
             font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
             font-size: 85%;
             padding: $spacing-4;
-            background-color: #f7f7f9;
-            border: 1px solid #e1e1e8;
+            background-color: var(--post-code-background-color);
+            border: 1px solid var(--post-code-border-color);
             border-radius: 3px;
         }
 
