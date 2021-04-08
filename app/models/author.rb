@@ -3,14 +3,19 @@ class Author < ApplicationRecord
   has_many :subscribers, through: :subscriptions, dependent: :destroy
   has_many :credentials, dependent: :destroy
   validates :username,
-            uniqueness: { case_sensitive: false },
+            uniqueness: {
+              case_sensitive: false,
+              message: "Username %{value} is already taken."
+            },
             allow_nil: true,
             allow_blank: true,
             format: {
               with: /\A[\w]+\z/ ,
               message: 'Only letters, numbers, and underscores are allowed.'
             }
-  validates :email, uniqueness: true, allow_nil: true, allow_blank: true
+  validates :email, uniqueness: {
+    message: "Email %{value} is already in use."
+  }, allow_nil: true, allow_blank: true
   has_many :posts, dependent: :destroy
   has_one :domain, dependent: :destroy
   has_many :guestbook_entries, dependent: :destroy
