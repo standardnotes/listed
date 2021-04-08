@@ -61,7 +61,7 @@
 
     <% if @styles %>
       <style type="text/css" data-turbolinks-track='reload'>
-        <%= @styles %>
+        <%= @styles.html_safe %>
       </style>
     <% end %>
 
