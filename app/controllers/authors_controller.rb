@@ -273,15 +273,6 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    if !a_params[:username].empty? && @author.username != a_params[:username]
-      existing_username = Author.where.not(username: nil).find_by_username(a_params[:username])
-
-      if existing_username
-        render :json => { message: "Username #{a_params[:username]} is already taken." }, :status => :conflict
-        return
-      end
-    end
-
     @author.username = a_params[:username]
     @author.display_name = a_params[:display_name]
     @author.bio = a_params[:bio]
@@ -303,6 +294,11 @@ class AuthorsController < ApplicationController
     @author.custom_theme_enabled = a_params[:custom_theme_enabled]
 
     @author.save
+
+    if @author.errors.any?
+      render :json => { message: @author.errors }, :status => :conflict
+      return
+    end
     redirect_back fallback_location: @author.url, :status => 303
   end
 
