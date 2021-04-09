@@ -11,10 +11,12 @@
         margin: 0;
         @include MenuHover(var(--header-listed-name));
 
-        svg path {
-            fill: var(--header-listed-name);
+        .listed-logo__animated {
+            path {
+                animation: changeColor linear 1.5s;
+                fill: var(--header-listed-name);
+            }
         }
-
         &::before {
             background-image: none;
         }
@@ -58,6 +60,15 @@
     @include Desktop() {
         height: 36px;
         width: 36px;
+    }
+}
+
+@keyframes changeColor {
+    0% {
+        fill: $color-primary;
+    }
+    100% {
+        fill: var(--header-listed-name);
     }
 }
 
