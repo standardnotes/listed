@@ -40,7 +40,7 @@ const HeaderContainer = ({
                         <a href={homeUrl} className="listed-logo-link button button--no-fill" aria-label="Listed logo">
                             <SVG
                                 src={IcListed}
-                                className="listed-logo"
+                                className="listed-logo listed-logo__animated"
                                 loader={<img src={IcListed} className="listed-logo" alt="Listed Logo" />}
                             />
                         </a>
