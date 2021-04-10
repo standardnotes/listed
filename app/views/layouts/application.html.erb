@@ -4,7 +4,6 @@
     <%= csrf_meta_tags %>
 
     <% if @post %>
-      <% @title = @post.title %>
       <% @desc = strip_tags(@post.rendered_text).slice(0, 200) + "..." %>
       <% @canonical = @post.canonical %>
       <% @meta_image = @post.image_url if @post.image_url %>

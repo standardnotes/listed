@@ -80,7 +80,10 @@ class PostsController < ApplicationController
 
     if !@post.unlisted
       @author_posts = @post.author.listed_posts([@post, @next, @previous]).order("created_at DESC")
+      @title = "#{@post.title} | #{@post.author.title}"
       set_meta_images_for_author(@post.author)
+    else
+      @title = @post.title
     end
 
     if @post.metatype

@@ -1,10 +1,15 @@
 class SubscriptionsController < ApplicationController
   include CaptchaHelper
 
+  def index
+    @title = "Subscribe | #{@author.title}"
+  end
+
   def validate
     @subscription = Subscription.find(params[:subscription_id])
     @author = @subscription.author
     @styles = @subscription.author.css if @subscription.author.custom_theme_enabled
+    @title = 'Confirm Your Subscription'
   end
 
   def submit_validate

@@ -18,7 +18,7 @@ class AuthorsMailer < ApplicationMailer
   end
 
   def verify_email(author, email)
-    @display_name = author.display_name
+    @display_name = author.title
     @verification_link = author.email_verification_link
     mail(to: email, subject: 'Verify your Listed author email.')
   end

@@ -12,6 +12,7 @@ class GuestbookEntriesController < ApplicationController
   end
 
   def index
+    @title = "Guestbook | #{@author.title}"
     @entries = @author.public_guestbook_entries
   end
 

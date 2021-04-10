@@ -31,6 +31,7 @@ class AuthorsController < ApplicationController
   end
 
   def settings
+    @title = "#{@display_author.title} Settings"
     if params[:read_guestbook]
       @author.unread_guestbook_entries.each(&:mark_as_read)
       @scroll_to_guestbook = true
@@ -325,6 +326,14 @@ class AuthorsController < ApplicationController
     SslCertificateCreateJob.perform_later(params[:domain])
 
     redirect_back fallback_location: @author.url
+  end
+
+  def subscribe
+    @title = "Subscribe to #{@display_author.title}"
+  end
+
+  def tip
+    @title = "Thank #{@display_author.title}"
   end
 
   def delete_domain
