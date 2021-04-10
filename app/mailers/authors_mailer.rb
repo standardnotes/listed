@@ -17,10 +17,10 @@ class AuthorsMailer < ApplicationMailer
     mail(to: email, subject: 'Invalid Listed Domain')
   end
 
-  def verify_email(author)
-    @author = author
+  def verify_email(author, email)
+    @display_name = author.title
     @verification_link = author.email_verification_link
-    mail(to: author.email, subject: 'Verify your Listed author email.')
+    mail(to: email, subject: 'Verify your Listed author email.')
   end
 
   def unread_guestbook_entries(author_id, entry_ids)

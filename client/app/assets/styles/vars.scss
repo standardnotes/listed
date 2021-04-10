@@ -13,6 +13,8 @@ $color-black-opacity-86: rgba($color-black, 0.86);
 $color-white: #FFFFFF;
 
 $color-gray: #63666B;
+$color-gray-100: #F7F7F9;
+$color-gray-200: #E1E1E8;
 
 $color-success: #1AA772;
 $color-warning: #F28B52;
@@ -97,4 +99,7 @@ $border-default: 1px solid rgba(24, 24, 24, 0.16);
   --twitter-color: var(--link-color);
   --link-color: #{$color-primary};
   --header-border-color: #{$color-primary};
+  --post-code-background-color: #{$color-gray-100};
+  --post-code-border-color: #{$color-gray-200};
+  --card-post-background-color: #{$color-default};
 };

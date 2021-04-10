@@ -6,6 +6,20 @@ import getAuthToken from "../../../utils/getAuthToken";
 import Checkbox from "../../shared/Checkbox";
 import authorType from "../../../types/author";
 
+const fieldTypes = {
+    USERNAME: "username",
+    DISPLAY_NAME: "display_name",
+    BIO: "bio",
+    EMAIL: "email",
+    LINK: "link",
+    TWITTER: "twitter",
+    META_IMAGE_URL: "meta_image_url",
+    HEADER_IMAGE_URL: "header_image_url",
+    GUESTBOOK_DISABLED: "guestbook_disabled",
+    NEWSLETTER_DISABLED: "newsletter_disabled",
+    HIDE_FROM_HOMEPAGE: "hide_from_homepage",
+};
+
 const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
     const {
         username,
@@ -14,6 +28,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
         link,
         twitter,
         email,
+        email_verified,
         meta_image_url,
         header_image_url,
         guestbook_disabled,
@@ -35,7 +50,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
         hide_from_homepage,
     });
 
-    const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
+    const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
     const submitEditedAuthor = async (event) => {
@@ -57,13 +72,13 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     },
                 });
 
-            setUsernameErrorMessage(null);
+            setErrorMessages({});
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setIsSubmitDisabled(false);
 
             if (err.response.status === 409) {
-                setUsernameErrorMessage(err.response.data.message);
+                setErrorMessages(err.response.data.message);
             } else {
                 setErrorToastMessage("There was an error trying to update your settings. Please try again.");
                 setIsErrorToastDisplayed(true);
@@ -77,6 +92,25 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
         ))
     );
 
+    const fieldHasErrorMessages = (fieldType) => Object.keys(errorMessages).includes(fieldType);
+
+    const renderErrorMessages = (fieldType) => {
+        if (!fieldHasErrorMessages(fieldType)) {
+            return null;
+        }
+        return (
+            <div className="error-message">
+                {errorMessages[fieldType].map((error) => (
+                    <span
+                        key={error}
+                    >
+                        {error}
+                    </span>
+                ))}
+            </div>
+        );
+    };
+
     return (
         <form onSubmit={(e) => submitEditedAuthor(e)}>
             <div className="form-row">
@@ -86,15 +120,11 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     </label>
                     <input
                         id="author-username"
-                        className={`text-field ${usernameErrorMessage ? "text-field--error" : ""}`}
+                        className={`text-field ${fieldHasErrorMessages(fieldTypes.USERNAME) ? "text-field--error" : ""}`}
                         value={editedAuthor.username}
-                        onChange={(e) => editAuthor("username", e.target.value)}
+                        onChange={(e) => editAuthor(fieldTypes.USERNAME, e.target.value)}
                     />
-                    {usernameErrorMessage && (
-                        <div className="error-message">
-                            {usernameErrorMessage}
-                        </div>
-                    )}
+                    {renderErrorMessages(fieldTypes.USERNAME)}
                 </div>
                 <div className="form-section">
                     <label htmlFor="author-display-name" className="label p2">
@@ -104,7 +134,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         id="author-display-name"
                         className="text-field"
                         value={editedAuthor.display_name}
-                        onChange={(e) => editAuthor("display_name", e.target.value)}
+                        onChange={(e) => editAuthor(fieldTypes.DISPLAY_NAME, e.target.value)}
                     />
                 </div>
             </div>
@@ -116,7 +146,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     id="author-bio"
                     className="text-field"
                     value={editedAuthor.bio}
-                    onChange={(e) => editAuthor("bio", e.target.value)}
+                    onChange={(e) => editAuthor(fieldTypes.BIO, e.target.value)}
                     rows="4"
                 />
             </div>
@@ -129,7 +159,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         id="author-link"
                         className="text-field"
                         value={editedAuthor.link}
-                        onChange={(e) => editAuthor("link", e.target.value)}
+                        onChange={(e) => editAuthor(fieldTypes.LINK, e.target.value)}
                     />
                 </div>
                 <div className="form-section">
@@ -140,7 +170,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         id="author-twitter"
                         className="text-field"
                         value={editedAuthor.twitter}
-                        onChange={(e) => editAuthor("twitter", e.target.value)}
+                        onChange={(e) => editAuthor(fieldTypes.TWITTER, e.target.value)}
                     />
                 </div>
             </div>
@@ -153,12 +183,19 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                     as well as notifies you when someone subscribes to your blog.
                     <input
                         id="author-email"
-                        className="text-field"
+                        className={`text-field ${fieldHasErrorMessages(fieldTypes.EMAIL) ? "text-field--error" : ""}`}
                         placeholder="Enter your email"
                         value={editedAuthor.email}
-                        onChange={(e) => editAuthor("email", e.target.value)}
+                        onChange={(e) => editAuthor(fieldTypes.EMAIL, e.target.value)}
                     />
                 </p>
+                {editedAuthor.email && !email_verified && (
+                    <p className="error-message p3 sublabel">
+                        Unverified. You will not receive any email notifications until
+                        your email is verified.
+                    </p>
+                )}
+                {renderErrorMessages(fieldTypes.EMAIL)}
             </div>
             <div className="form-row">
                 <div className="form-section">
@@ -174,7 +211,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         className="text-field"
                         placeholder="Meta image URL"
                         value={editedAuthor.meta_image_url}
-                        onChange={(e) => editAuthor("meta_image_url", e.target.value)}
+                        onChange={(e) => editAuthor(fieldTypes.META_IMAGE_URL, e.target.value)}
                     />
                 </div>
                 <div className="form-section">
@@ -190,25 +227,25 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         className="text-field"
                         placeholder="Header image URL"
                         value={editedAuthor.header_image_url}
-                        onChange={(e) => editAuthor("header_image_url", e.target.value)}
+                        onChange={(e) => editAuthor(fieldTypes.HEADER_IMAGE_URL, e.target.value)}
                     />
                 </div>
             </div>
             <Checkbox
                 id="author-guestbook-disabled"
-                onClick={(checked) => editAuthor("guestbook_disabled", checked)}
+                onClick={(checked) => editAuthor(fieldTypes.GUESTBOOK_DISABLED, checked)}
                 checked={editedAuthor.guestbook_disabled}
                 label="Disable guestbook"
             />
             <Checkbox
                 id="author-newsletter-disabled"
-                onClick={(checked) => editAuthor("newsletter_disabled", checked)}
+                onClick={(checked) => editAuthor(fieldTypes.NEWSLETTER_DISABLED, checked)}
                 checked={editedAuthor.newsletter_disabled}
                 label="Disable email subscription and newsletter"
             />
             <Checkbox
                 id="author-hide-from-homepage"
-                onClick={(checked) => editAuthor("hide_from_homepage", checked)}
+                onClick={(checked) => editAuthor(fieldTypes.HIDE_FROM_HOMEPAGE, checked)}
                 checked={editedAuthor.hide_from_homepage}
                 label="Hide profile from the “Listed authors” section in the homepage"
             />

@@ -16,7 +16,7 @@ class Post < ApplicationRecord
 
   after_save do
     author.update_word_count
-    author.update_homepage_status
+    author.update_homepage_status(true)
 
     if metatype == 'css'
       author.update_css(published ? text : nil)
@@ -116,10 +116,10 @@ class Post < ApplicationRecord
     return nil if !self.author
 
     if title
-      prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.has_username ? "" : "/posts")
+      prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.username? ? "" : "/posts")
       if page
         "#{prefix}/#{title.parameterize}"
-      elsif author.has_username
+      elsif author.username?
         "#{prefix}/#{self.id}/#{self.title.parameterize}"
       else
         "#{prefix}/#{self.id}"

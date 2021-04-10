@@ -5,6 +5,7 @@ const type = PropTypes.shape({
     bio: PropTypes.string,
     display_name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
+    email_verified: PropTypes.bool.isRequired,
     guestbook_disabled: PropTypes.bool.isRequired,
     header_image_url: PropTypes.string,
     hide_from_homepage: PropTypes.bool.isRequired,

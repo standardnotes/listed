@@ -3,17 +3,39 @@ class Author < ApplicationRecord
   has_many :subscribers, through: :subscriptions, dependent: :destroy
   has_many :credentials, dependent: :destroy
   validates :username,
-            uniqueness: { case_sensitive: false },
+            uniqueness: {
+              case_sensitive: false,
+              message: "Username %{value} is already taken."
+            },
             allow_nil: true,
             allow_blank: true,
             format: {
               with: /\A[\w]+\z/ ,
               message: 'Only letters, numbers, and underscores are allowed.'
             }
-  validates :email, uniqueness: true, allow_nil: true, allow_blank: true
+  validates :email, uniqueness: {
+    message: "Email %{value} is already in use."
+  }, allow_nil: true, allow_blank: true
   has_many :posts, dependent: :destroy
   has_one :domain, dependent: :destroy
   has_many :guestbook_entries, dependent: :destroy
+
+  before_save do
+    update_homepage_status
+  end
+
+  def update_homepage_status(should_save = false)
+    most_recent_post = listed_posts.where(
+      '(posts.created_at >= ? AND posts.created_at <= ?)',
+      28.days.ago.utc,
+      DateTime.now.utc
+    ).first
+
+    homepage = most_recent_post && last_word_count > 100 && !hide_from_homepage
+    self.homepage_activity = homepage ? most_recent_post.created_at : nil
+
+    save if homepage_activity_changed? && should_save
+  end
 
   def public_guestbook_entries
     guestbook_entries.where(public: true)
@@ -56,8 +78,8 @@ class Author < ApplicationRecord
     "@#{self.username}"
   end
 
-  def has_username
-    return self.username && self.username.length > 0
+  def username?
+    !username.empty?
   end
 
   def email_verification_link
@@ -136,19 +158,6 @@ class Author < ApplicationRecord
     return link if link.include? 'http'
 
     "http://#{link}"
-  end
-
-  def update_homepage_status
-    most_recent_post = listed_posts.where(
-      '(posts.created_at >= ? AND posts.created_at <= ?)',
-      28.days.ago.utc,
-      DateTime.now.utc
-    ).first
-
-    return unless most_recent_post && last_word_count > 100 && username && !hide_from_homepage
-
-    self.homepage_activity = most_recent_post.created_at
-    save
   end
 
   def make_featured

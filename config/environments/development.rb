@@ -55,7 +55,7 @@ Rails.application.configure do
   config.assets.logger = false
   # config.assets.quiet = true
 
-  # config.active_job.queue_adapter = :inline
+  config.active_job.queue_adapter = :async
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
