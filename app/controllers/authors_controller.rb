@@ -281,7 +281,7 @@ class AuthorsController < ApplicationController
       @author.email = a_params[:email]
       @author.email_verified = false
       @author.assign_email_verification_token
-      AuthorsMailer.verify_email(@author).deliver_later
+      AuthorsMailer.verify_email(@author, @author.email).deliver_later
     end
     @author.twitter = a_params[:twitter]
     @author.meta_image_url = a_params[:meta_image_url]

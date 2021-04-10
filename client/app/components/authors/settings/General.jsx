@@ -28,6 +28,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
         link,
         twitter,
         email,
+        email_verified,
         meta_image_url,
         header_image_url,
         guestbook_disabled,
@@ -188,6 +189,12 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         onChange={(e) => editAuthor(fieldTypes.EMAIL, e.target.value)}
                     />
                 </p>
+                {editedAuthor.email && !email_verified && (
+                    <p className="error-message p3 sublabel">
+                        Unverified. You will not receive any email notifications until
+                        your email is verified.
+                    </p>
+                )}
                 {renderErrorMessages(fieldTypes.EMAIL)}
             </div>
             <div className="form-row">

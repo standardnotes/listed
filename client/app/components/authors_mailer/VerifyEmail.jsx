@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-const VerifyEmail = ({ author, verificationLink }) => (
+const VerifyEmail = ({ displayName, verificationLink }) => (
     <div>
         <h3>
             Hey
-            {author.display_name}
+            {displayName}
             ,
         </h3>
         <p>
@@ -16,9 +16,7 @@ const VerifyEmail = ({ author, verificationLink }) => (
 );
 
 VerifyEmail.propTypes = {
-    author: PropTypes.shape({
-        display_name: PropTypes.string.isRequired,
-    }).isRequired,
+    displayName: PropTypes.string.isRequired,
     verificationLink: PropTypes.string.isRequired,
 };
 
