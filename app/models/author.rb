@@ -31,7 +31,7 @@ class Author < ApplicationRecord
       DateTime.now.utc
     ).first
 
-    homepage = most_recent_post && last_word_count > 100 && !hide_from_homepage
+    homepage = most_recent_post && last_word_count > 100 && username? && !hide_from_homepage
     self.homepage_activity = homepage ? most_recent_post.created_at : nil
 
     save if homepage_activity_changed? && should_save
