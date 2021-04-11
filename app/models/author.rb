@@ -79,7 +79,7 @@ class Author < ApplicationRecord
   end
 
   def username?
-    !username.empty?
+    !username&.empty? ? true : false
   end
 
   def email_verification_link
