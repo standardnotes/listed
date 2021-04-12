@@ -1,6 +1,6 @@
 .single-post-show {
     padding: 0 $spacing-16 $spacing-48;
-    background-color: $color-white;
+    background-color: var(--post-background-color);
 
     hr {
         margin-bottom: $spacing-24;

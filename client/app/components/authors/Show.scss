@@ -1,6 +1,6 @@
 #author-profile {
     padding: 0 $spacing-16;
-    background-color: $color-white;
+    background-color: var(--author-posts-background-color);
 
     .older {
         padding: $spacing-48 0;
