@@ -282,7 +282,7 @@ class AuthorsController < ApplicationController
       @author.email = a_params[:email]
       @author.email_verified = false
       @author.assign_email_verification_token
-      AuthorsMailer.verify_email(@author, @author.email).deliver_later
+      should_verify_email = true
     end
     @author.twitter = a_params[:twitter]
     @author.meta_image_url = a_params[:meta_image_url]
@@ -299,6 +299,9 @@ class AuthorsController < ApplicationController
     if @author.errors.any?
       render :json => { message: @author.errors }, :status => :conflict
       return
+    end
+    if should_verify_email
+      AuthorsMailer.verify_email(@author, @author.email).deliver_later
     end
     redirect_back fallback_location: @author.url, :status => 303
   end
