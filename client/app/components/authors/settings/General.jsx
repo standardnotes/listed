@@ -189,7 +189,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                         onChange={(e) => editAuthor(fieldTypes.EMAIL, e.target.value)}
                     />
                 </p>
-                {editedAuthor.email && !email_verified && (
+                {email && email === editedAuthor.email && !email_verified && (
                     <p className="error-message p3 sublabel">
                         Unverified. You will not receive any email notifications until
                         your email is verified.
