@@ -5,6 +5,7 @@ const VerifyEmail = ({ displayName, verificationLink }) => (
     <div>
         <h3>
             Hey
+            {" "}
             {displayName}
             ,
         </h3>
