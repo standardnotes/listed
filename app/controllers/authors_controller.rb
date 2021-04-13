@@ -37,7 +37,7 @@ class AuthorsController < ApplicationController
       @scroll_to_guestbook = true
     end
     @guestbook_entries = @author.guestbook_entries.where(spam: false)
-    @posts = @author.posts
+    @posts = @author.posts.sort { |a, b| b.created_at <=> a.created_at }
   end
 
   POST_LIMIT = 15
