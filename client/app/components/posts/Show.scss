@@ -37,11 +37,15 @@
 }
 
 #single-post-footer {
-    background-color: $color-default;
+    background-color: var(--more-posts-background-color);
     padding: $spacing-48 $spacing-16;
 
     @include Desktop() {
         padding: $spacing-56 $spacing-11-vw;
+    }
+
+    .card {
+        background-color: var(--more-posts-post-background-color);
     }
 }
 
