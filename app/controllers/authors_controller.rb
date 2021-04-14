@@ -40,7 +40,7 @@ class AuthorsController < ApplicationController
     @posts = @author.posts.order(created_at: :desc)
   end
 
-  POST_LIMIT = 15
+  POST_LIMIT = 16
 
   def show
     unless @display_author
@@ -78,13 +78,12 @@ class AuthorsController < ApplicationController
   end
 
   def more_posts
-    limit = 15
     older_than = params[:older_than].to_i
     all_posts = @display_author.listed_posts(nil, false)
     new_posts = all_posts
       .where('created_at < ?', Time.at(older_than).to_datetime || 0)
       .order('created_at DESC')
-      .limit(limit)
+      .limit(POST_LIMIT)
     older_than =
       if all_posts.first.created_at < new_posts.last.created_at
         new_posts.last.created_at.to_i
