@@ -107,4 +107,7 @@ $border-default: 1px solid rgba(24, 24, 24, 0.16);
   --more-posts-background-color: #{$color-default};
   --more-posts-post-background-color: #{$color-white};
   --footer-background-color: #{$color-white};
+  --callout-background-color: #{$color-white};
+  --callout-success-border-color: #{$color-success};
+  --callout-warning-border-color: #{$color-warning};
 };
