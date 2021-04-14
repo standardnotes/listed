@@ -105,7 +105,7 @@ const PaymentDetails = ({
                             <div className="hover-content">
                                 <Dropdown
                                     options={dropdownOptions(credential)}
-                                    isOpen={dropdownOpen && dropdownOpen === credential.id}
+                                    isOpen={!!dropdownOpen && dropdownOpen === credential.id}
                                     onClick={() => setDropdownOpen(credential.id)}
                                 >
                                     <div className="hover-content__icon-container">
