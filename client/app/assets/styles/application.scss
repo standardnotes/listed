@@ -68,7 +68,7 @@ a {
 }
 
 blockquote {
-    border-left: $spacing-2 solid $color-black-opacity-36;
+    border-left: $spacing-2 solid var(--blockquote-border-left-color);
     padding-left: $spacing-20;
     margin-left: 0;
 }
