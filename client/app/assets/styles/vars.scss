@@ -110,4 +110,8 @@ $border-default: 1px solid rgba(24, 24, 24, 0.16);
   --callout-background-color: #{$color-white};
   --callout-success-border-color: #{$color-success};
   --callout-warning-border-color: #{$color-warning};
+  --scroll-to-top-background-color: #{$color-default};
+  --scroll-to-top-border-color: #{$border-default};
+  --scroll-to-top-border-color-hover: #{$color-black};
+  --scroll-to-top-icon-color: #{$color-black};
 };
