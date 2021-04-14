@@ -9,7 +9,7 @@
 #author-posts .author-post {
   padding: 16px;
   margin-bottom: 16px;
-  border: 1px solid rgba(24, 24, 24, 0.16);
+  border: 1px solid var(--card-post-border-color);
   border-radius: 4px;
   background-color: var(--card-post-background-color);
 }

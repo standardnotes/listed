@@ -3,7 +3,7 @@ import React from "react";
 import "./Footer.scss";
 
 const Footer = ({ blogPage, author, privatePost }) => (
-    <div id="footer" className={blogPage ? "footer--blog-page" : ""}>
+    <div id="footer" className={blogPage ? "footer--blog-page" : "footer"}>
         <div className="footer__container">
             <p className="p3">Listed Blogging Platform</p>
             <p className="p3">

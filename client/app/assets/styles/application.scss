@@ -68,7 +68,7 @@ a {
 }
 
 blockquote {
-    border-left: $spacing-2 solid $color-black-opacity-36;
+    border-left: $spacing-2 solid var(--blockquote-border-left-color);
     padding-left: $spacing-20;
     margin-left: 0;
 }
@@ -284,16 +284,20 @@ textarea {
     border: $border-default;
     font-size: $font-size-16;
     line-height: $line-height-24;
-    background-color: $color-white;
+    background-color: var(--callout-background-color);
     display: inline-block;
 }
 
 .callout--success {
-    border-left: 3px solid $color-success;
+    border-left: 3px solid var(--callout-success-border-color);
 }
 
 .callout--warning {
-    border-left: 3px solid $color-warning;
+    border-left: 3px solid var(--callout-warning-border-color);
+}
+
+.callout--info {
+    border-left: 3px solid var(--callout-info-border-color);
 }
 
 .error-message {

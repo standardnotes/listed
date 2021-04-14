@@ -86,7 +86,7 @@ const PaymentDetails = ({
                 {author.credentials.map((credential) => (
                     <div
                         key={credential.id}
-                        className="callout callout--success"
+                        className="callout callout--info"
                     >
                         <div className="payment-details__credential hover-container">
                             <div className="credential__details">
@@ -105,7 +105,7 @@ const PaymentDetails = ({
                             <div className="hover-content">
                                 <Dropdown
                                     options={dropdownOptions(credential)}
-                                    isOpen={dropdownOpen && dropdownOpen === credential.id}
+                                    isOpen={!!dropdownOpen && dropdownOpen === credential.id}
                                     onClick={() => setDropdownOpen(credential.id)}
                                 >
                                     <div className="hover-content__icon-container">
