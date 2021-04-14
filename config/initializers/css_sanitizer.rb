@@ -20,7 +20,24 @@ SANITIZE_CONFIG = Sanitize::Config.merge(
       '--website-color',
       '--twitter-color',
       '--link-color',
-      '--header-border-color'
+      '--header-border-color',
+      '--post-code-background-color',
+      '--post-code-border-color',
+      '--card-post-background-color',
+      '--post-background-color',
+      '--author-posts-background-color',
+      '--more-posts-background-color',
+      '--more-posts-post-background-color',
+      '--footer-background-color',
+      '--callout-background-color',
+      '--callout-success-border-color',
+      '--callout-warning-border-color',
+      '--scroll-to-top-background-color',
+      '--scroll-to-top-border-color',
+      '--scroll-to-top-border-color-hover',
+      '--scroll-to-top-icon-color',
+      '--blockquote-border-left-color',
+      '--guestbook-border-left-color'
     ]
   }
 )
