@@ -296,6 +296,10 @@ textarea {
     border-left: 3px solid var(--callout-warning-border-color);
 }
 
+.callout--info {
+    border-left: 3px solid var(--callout-info-border-color);
+}
+
 .error-message {
     color: $color-error;
     margin-top: $spacing-6;

@@ -157,7 +157,7 @@
 
     .item:not(:last-of-type)::after {
         content: "|";
-        color: $color-black-opacity-16;
+        color: var(--author-header-info-links-separator-color);
         padding: 0 $spacing-12;
     }
 }

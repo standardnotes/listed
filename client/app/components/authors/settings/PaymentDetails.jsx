@@ -86,7 +86,7 @@ const PaymentDetails = ({
                 {author.credentials.map((credential) => (
                     <div
                         key={credential.id}
-                        className="callout callout--success"
+                        className="callout callout--info"
                     >
                         <div className="payment-details__credential hover-container">
                             <div className="credential__details">

@@ -1,7 +1,11 @@
+.footer {
+    background-color: var(--footer-background-color);
+}
+
 #footer {
     .footer__container {
         color: var(--body-text-color);
-        border-top: $border-default;
+        border-top: 1px solid var(--footer-border-top-color);
         margin: 0 $spacing-16;
         padding: $spacing-36 0;
         text-align: center;
@@ -23,5 +27,5 @@
 }
 
 .footer--blog-page {
-    background-color: var(--footer-background-color);
+    background-color: var(--author-footer-background-color);
 }
