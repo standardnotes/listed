@@ -203,7 +203,7 @@ class Author < ApplicationRecord
       AuthorsMailer.unread_guestbook_entries(
         author.id,
         entries.map(&:id)
-      ).deliver_later
+      ).deliver_now
     end
   end
 end
