@@ -95,6 +95,9 @@
 }
 
 .post-preview {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     .post-body {
         margin: $spacing-8 0;
 
@@ -112,6 +115,7 @@
     .read-more-link {
         background: none;
         display: flex;
+        margin-top: auto;
 
         &:hover {
             background: none;
