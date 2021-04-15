@@ -24,8 +24,11 @@ class PostsController < ApplicationController
   def find_page(author, title)
     return unless author
 
-    title = title.gsub('-', ' ')
-    author.pages.where('lower(title) = ?', title.downcase).first
+    _title = title.gsub('-', ' ')
+    if !_title.match(/\A([\w]+[\s]*)+\z/)
+      _title = CGI.unescape(title)
+    end
+    author.pages.where('lower(title) = ?', _title.downcase).first
   end
 
   def find_post
