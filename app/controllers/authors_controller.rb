@@ -37,10 +37,10 @@ class AuthorsController < ApplicationController
       @scroll_to_guestbook = true
     end
     @guestbook_entries = @author.guestbook_entries.where(spam: false)
-    @posts = @author.posts
+    @posts = @author.posts.order(created_at: :desc)
   end
 
-  POST_LIMIT = 15
+  POST_LIMIT = 16
 
   def show
     unless @display_author
@@ -78,13 +78,12 @@ class AuthorsController < ApplicationController
   end
 
   def more_posts
-    limit = 15
     older_than = params[:older_than].to_i
     all_posts = @display_author.listed_posts(nil, false)
     new_posts = all_posts
       .where('created_at < ?', Time.at(older_than).to_datetime || 0)
       .order('created_at DESC')
-      .limit(limit)
+      .limit(POST_LIMIT)
     older_than =
       if all_posts.first.created_at < new_posts.last.created_at
         new_posts.last.created_at.to_i
@@ -282,7 +281,7 @@ class AuthorsController < ApplicationController
       @author.email = a_params[:email]
       @author.email_verified = false
       @author.assign_email_verification_token
-      AuthorsMailer.verify_email(@author, @author.email).deliver_later
+      should_verify_email = true
     end
     @author.twitter = a_params[:twitter]
     @author.meta_image_url = a_params[:meta_image_url]
@@ -299,6 +298,9 @@ class AuthorsController < ApplicationController
     if @author.errors.any?
       render :json => { message: @author.errors }, :status => :conflict
       return
+    end
+    if should_verify_email
+      AuthorsMailer.verify_email(@author, @author.email).deliver_later
     end
     redirect_back fallback_location: @author.url, :status => 303
   end

@@ -28,7 +28,7 @@
 }
 
 .page-header__container--post {
-    background-color: $color-white;
+    background-color: var(--post-background-color);
 }
 
 #page-header {

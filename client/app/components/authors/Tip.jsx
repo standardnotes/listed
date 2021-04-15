@@ -36,7 +36,7 @@ const Tip = ({ displayAuthor, authorGuestbookEntriesUrl }) => (
         </p>
         <div className="tip__credentials">
             {displayAuthor.credentials.map((credential) => (
-                <div className="callout callout--success" key={credential.id}>
+                <div className="callout callout--info" key={credential.id}>
                     <strong>
                         {credential.key}
                         :

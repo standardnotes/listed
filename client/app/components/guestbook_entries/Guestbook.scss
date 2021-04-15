@@ -27,7 +27,7 @@
 }
 
 .guestbook__entry {
-    border-left: 3px solid rgba(24, 24, 24, 0.16);
+    border-left: 3px solid var(--guestbook-border-left-color);
     border-radius: $border-radius-4;
     padding-left: $spacing-16;
 

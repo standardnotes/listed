@@ -10,9 +10,9 @@
     .scroll-to-top__container {
         width: 44px;
         height: 44px;
-        border: $border-default;
+        border: var(--scroll-to-top-border-color);
         border-radius: 22px;
-        background-color: $color-default;
+        background-color: var(--scroll-to-top-background-color);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -25,12 +25,12 @@
             transform: rotate(-90deg);
     
             path {
-                fill: $color-black;
+                fill: var(--scroll-to-top-icon-color);
             }
         }
 
         &:hover {
-            border: 1px solid $color-black;
+            border: 1px solid var(--scroll-to-top-border-color-hover);
         }
     }
 }
