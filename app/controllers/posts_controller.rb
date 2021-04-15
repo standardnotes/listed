@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     return unless author
 
     _title = title.gsub('-', ' ')
-    if !_title.match(/\A([\w]+[\s]*)+\z/)
+    if !_title.match(PostsHelper::POST_TITLE_NO_SYMBOLS_PATTERN)
       _title = CGI.unescape(title)
     end
     author.pages.where('lower(title) = ?', _title.downcase).first
