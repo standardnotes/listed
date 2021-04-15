@@ -191,8 +191,8 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                 </p>
                 {email && email === editedAuthor.email && !email_verified && (
                     <p className="error-message p3 sublabel">
-                        Unverified. You will not receive any email notifications until
-                        your email is verified.
+                        Please check your email for a verification message.
+                        You will not receive any email notifications until your email is verified.
                     </p>
                 )}
                 {renderErrorMessages(fieldTypes.EMAIL)}
