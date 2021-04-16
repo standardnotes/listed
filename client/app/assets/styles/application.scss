@@ -234,6 +234,8 @@ textarea {
 
     @include Desktop() {
         &:hover {
+            color: var(--color-primary);
+
             &::before {
                 background-image:
                 linear-gradient(to top, var(--page-menu-link-color) 50%, transparent 50%);

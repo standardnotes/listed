@@ -25,6 +25,10 @@
         flex-wrap: wrap;
         align-items: center;
         flex-grow: 1;
+
+        svg path {
+            fill: var(--color-contrast);
+        }
     }
 
     .credential__key {
