@@ -118,7 +118,11 @@ class Post < ApplicationRecord
     if title
       prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.username? ? "" : "/posts")
       if page
-        "#{prefix}/#{title.parameterize}"
+        if title.match(PostsHelper::POST_TITLE_NO_SYMBOLS_PATTERN)
+          "#{prefix}/#{title.parameterize}"
+        else
+          "#{prefix}/#{CGI.escape(title)}"
+        end
       elsif author.username?
         "#{prefix}/#{self.id}/#{self.title.parameterize}"
       else
