@@ -1,9 +1,13 @@
 $color-default: #F8F9FC;
+$color-default-dark: #20202A;
 
 $color-primary: rgb(0, 32, 143);
 $color-primary-opacity-8: rgba($color-primary, 0.08);
 $color-primary-opacity-16: rgba($color-primary, 0.16);
 $color-primary-opacity-56: rgba($color-primary, 0.56);
+
+$color-primary-dark: #93C0FF;
+$color-primary-dark-opacity-8: rgba($color-primary-dark, 0.08);
 
 $color-black: rgb(24, 24, 24);
 $color-black-opacity-16: rgba($color-black, 0.16);
@@ -11,6 +15,9 @@ $color-black-opacity-36: rgba($color-black, 0.36);
 $color-black-opacity-86: rgba($color-black, 0.86);
 
 $color-white: #FFFFFF;
+$color-white-opacity-16: rgba($color-white, 0.16);
+$color-white-opacity-36: rgba($color-white, 0.36);
+$color-white-opacity-86: rgba($color-white, 0.86);
 
 $color-gray: #63666B;
 $color-gray-100: #F7F7F9;
@@ -79,7 +86,9 @@ $spacing-11-vw: 11vw;
 $spacing-22-vw: 22vw;
 
 $border-radius-4: 4px;
+
 $border-default: 1px solid rgba(24, 24, 24, 0.16);
+$border-dark: 1px solid $color-white-opacity-16;
 
 :root {
   --dimmed-text-color: #{$color-black-opacity-16};
@@ -121,4 +130,11 @@ $border-default: 1px solid rgba(24, 24, 24, 0.16);
   --guestbook-border-left-color: #{$color-black-opacity-16};
   --author-header-info-links-separator-color: #{$color-black-opacity-16};
   --author-footer-background-color: #{$color-white};
+  --border: #{$border-default};
 };
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border: #{$border-dark};
+  }
+}

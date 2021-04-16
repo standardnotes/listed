@@ -5,10 +5,10 @@
         list-style-type: none;
 
         li {
-            border-bottom: $border-default;
+            border-bottom: var(--border);
 
             &:first-child {
-                border-top: $border-default;
+                border-top: var(--border);
             }
 
             a {
