@@ -1,5 +1,5 @@
 .form-section.radio-button__container {
-  border: 1px solid $color-black-opacity-16;
+  border: var(--border);
   border-radius: $border-radius-4;
   height: 150px;
   width: 155px;
@@ -28,6 +28,10 @@
   margin-right: $spacing-12;
   height: 20px;
   width: 20px;
+
+  svg path {
+    fill: var(--color-primary);
+  }
 }
 
 .radio-button__input-container {

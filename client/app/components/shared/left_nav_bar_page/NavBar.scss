@@ -17,10 +17,10 @@
         }
 
         &:not(.button--active) {
-            color: $color-black-opacity-86;
+            color: var(--color-contrast-opacity-86);
 
             svg path {
-                fill: $color-black;
+                fill: var(--color-contrast);
             }
         }
 
@@ -32,7 +32,7 @@
     .button--active {
         .left-nav-bar__icon {
             path {
-                fill: $color-primary;
+                fill: var(--color-primary);
             }
         }
     }

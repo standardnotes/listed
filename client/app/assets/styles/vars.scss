@@ -91,13 +91,19 @@ $border-default: 1px solid rgba(24, 24, 24, 0.16);
 $border-dark: 1px solid $color-white-opacity-16;
 
 :root {
-  --dimmed-text-color: #{$color-black-opacity-16};
+  --border: #{$border-default};
   --color-default: #{$color-default};
   --color-primary: #{$color-primary};
-  --dimmed-border-color: var(--color-default);
+  --color-primary-opacity-8: #{$color-primary-opacity-8};
+  --color-neutral: #{$color-white};
+  --color-contrast: #{$color-black};
+  --color-contrast-opacity-16: #{$color-black-opacity-16};
+  --color-contrast-opacity-36: #{$color-black-opacity-36};
+  --color-contrast-opacity-86: #{$color-black-opacity-86};
   --background-color: var(--color-default);
-  --body-text-color: #{$color-black};
-  --border: #{$border-default};
+  --dimmed-text-color: var(--color-contrast-opacity-16);
+  --dimmed-border-color: var(--color-default);
+  --body-text-color: var(--color-contrast);
   --post-title-color: var(--body-text-color);
   --post-date-color: var(--body-text-color);
   --post-text-color: var(--body-text-color);
@@ -114,32 +120,41 @@ $border-dark: 1px solid $color-white-opacity-16;
   --post-code-background-color: #{$color-gray-100};
   --post-code-border-color: #{$color-gray-200};
   --card-post-background-color: var(--color-default);
-  --card-border: var(--border);
-  --post-background-color: #{$color-white};
-  --author-posts-background-color: #{$color-white};
+  --card-post-border: var(--border);
+  --post-background-color: var(--color-neutral);
+  --author-posts-background-color: var(--color-neutral);
   --more-posts-background-color: var(--color-default);
-  --more-posts-post-background-color: #{$color-white};
+  --more-posts-post-background-color: var(--color-neutral);
   --footer-background-color: var(--background-color);
-  --footer-border-top-color: #{$color-black-opacity-16};
-  --callout-background-color: #{$color-white};
+  --footer-border-top-color: var(--color-contrast-opacity-16);
+  --callout-background-color: var(--color-neutral);
   --callout-success-border-color: #{$color-success};
   --callout-warning-border-color: #{$color-warning};
   --callout-info-border-color: #{$color-success};
   --scroll-to-top-background-color: var(--color-default);
   --scroll-to-top-border: var(--border);
-  --scroll-to-top-border-color-hover: #{$color-black};
-  --scroll-to-top-icon-color: #{$color-black};
-  --blockquote-border-left-color: #{$color-black-opacity-36};
-  --guestbook-border-left-color: #{$color-black-opacity-16};
-  --author-header-info-links-separator-color: #{$color-black-opacity-16};
-  --author-footer-background-color: #{$color-white};
+  --scroll-to-top-border-color-hover: var(--color-contrast);
+  --author-footer-background-color: var(--color-neutral);
+  --scroll-to-top-icon-color: var(--color-contrast);
+  --blockquote-border-left-color: var(--color-contrast-opacity-36);
+  --guestbook-border-left-color: var(--color-contrast-opacity-16);
+  --author-header-info-links-separator-color: var(--color-contrast-opacity-16);
+  --headline-separator-color: var(--color-contrast-opacity-16);
+  --active-button-background-color: var(--color-primary-opacity-8);
+  --post-details-color: var(--color-contrast-opacity-86);
+  --disabled-button-background-color: var(--color-contrast-opacity-36);
 };
 
-/* todo: put it in a separate file & reorder vars */
 @media (prefers-color-scheme: dark) {
   :root {
     --border: #{$border-dark};
     --color-default: #{$color-default-dark};
     --color-primary: #{$color-primary-dark};
+    --color-primary-opacity-8: #{$color-primary-dark-opacity-8};
+    --color-neutral: #{$color-black};
+    --color-contrast: #{$color-white};
+    --color-contrast-opacity-16: #{$color-white-opacity-16};
+    --color-contrast-opacity-36: #{$color-white-opacity-36};
+    --color-contrast-opacity-86: #{$color-white-opacity-86};
   }
 }
