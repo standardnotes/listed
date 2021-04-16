@@ -62,6 +62,10 @@
     display: flex;
     color: var(--color-contrast);
     font-weight: normal;
+
+    svg path {
+        fill: var(--color-contrast);
+    }
 }
 
 .active-author__icon {
