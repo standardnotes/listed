@@ -189,7 +189,7 @@ textarea {
     transition: background-position 0.3s ease-in-out;
 
     svg path {
-        fill: $color-primary;
+        fill: var(--color-primary);
     }
 
     &:focus {
@@ -410,7 +410,7 @@ textarea {
     -webkit-appearance: none;
 
     &:focus {
-        outline: $color-primary auto 1px;
+        outline: var(--color-primary) auto 1px;
     }
 }
 

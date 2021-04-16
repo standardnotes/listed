@@ -21,11 +21,11 @@
         overflow-wrap: break-word;
 
         &:hover {
-            box-shadow: $spacing-8 $spacing-8 0 $color-primary;
+            box-shadow: $spacing-8 $spacing-8 0 var(--color-primary);
             background-image: none;
     
             .active-author__title {
-                color: $color-primary;
+                color: var(--color-primary);
             }
     
             .active-author__icon--featured {
@@ -34,7 +34,7 @@
                 }
     
                 path {
-                    fill: $color-primary;
+                    fill: var(--color-primary);
                 }
             }
         }

@@ -65,7 +65,7 @@
 
 @keyframes changeColor {
     0% {
-        fill: $color-primary;
+        fill: var(--color-primary);
     }
     100% {
         fill: var(--header-listed-name);
