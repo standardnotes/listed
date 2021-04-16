@@ -28,7 +28,7 @@
     flex-grow: 1;
 
     .entry__details {
-        color: $color-black-opacity-86;
+        color: var(--color-contrast-opacity-86);
         font-weight: normal;
         display: inline-flex;
         align-items: center;
@@ -44,7 +44,7 @@
             margin-right: $spacing-6;
 
             path {
-                fill: $color-black-opacity-86;
+                fill: var(--color-contrast-opacity-86);
             }
         }
     }
