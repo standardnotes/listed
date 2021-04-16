@@ -11,7 +11,7 @@
     }
 
     .active-author__bio {
-        color: $color-black;
+        color: var(--color-contrast);
         font-weight: normal;
         margin-top: $spacing-4;
     }
@@ -51,7 +51,7 @@
 }
 
 .active-author__title {
-    color: $color-black;
+    color: var(--color-contrast);
     display: flex;
     justify-content: space-between;
     transition: color 0.3s ease-in-out;
@@ -60,7 +60,7 @@
 .active-author__word-count {
     margin-top: $spacing-8;
     display: flex;
-    color: $color-black;
+    color: var(--color-contrast);
     font-weight: normal;
 }
 
@@ -80,7 +80,7 @@
     }
 
     path {
-        fill: $color-black;
+        fill: var(--color-contrast);
         transition: fill 0.3s ease-in-out;
     }
 }
@@ -89,7 +89,7 @@
     display: flex;
     align-items: center;
     font-weight: bold;
-    color: $color-black;
+    color: var(--color-contrast);
     margin-top: $spacing-8;
 
     .easter-egg__icon--arrow {
@@ -98,7 +98,7 @@
         margin-left: $spacing-8;
     
         path {
-            fill: $color-black;
+            fill: var(--color-contrast);
         }
     }
 }

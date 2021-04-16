@@ -13,7 +13,7 @@
 
             a {
                 font-weight: normal;
-                color: $color-black;
+                color: var(--color-contrast);
                 padding: $spacing-16 0;
                 display: flex;
                 align-items: center;
