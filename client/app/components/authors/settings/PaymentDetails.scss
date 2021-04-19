@@ -13,7 +13,7 @@
     }
 
     .payment-details__credential {
-        color: $color-black-opacity-86;
+        color: var(--color-contrast-opacity-86);
         font-weight: normal;
         display: flex;
         align-items: center;
@@ -25,6 +25,10 @@
         flex-wrap: wrap;
         align-items: center;
         flex-grow: 1;
+
+        svg path {
+            fill: var(--color-contrast);
+        }
     }
 
     .credential__key {
