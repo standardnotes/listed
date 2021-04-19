@@ -139,10 +139,6 @@ $border-dark: 1px solid $color-white-opacity-16;
   --blockquote-border-left-color: var(--color-contrast-opacity-36);
   --guestbook-border-left-color: var(--color-contrast-opacity-16);
   --author-header-info-links-separator-color: var(--color-contrast-opacity-16);
-  --headline-separator-color: var(--color-contrast-opacity-16);
-  --active-button-background-color: var(--color-primary-opacity-8);
-  --post-details-color: var(--color-contrast-opacity-86);
-  --disabled-button-background-color: var(--color-contrast-opacity-36);
 };
 
 @media (prefers-color-scheme: dark) {
