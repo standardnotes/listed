@@ -130,12 +130,12 @@ const PaymentDetails = ({
                             <ConfirmationModal
                                 text={`Are you sure you want to delete payment details for ${credential.key}?`}
                                 primaryOption={{
-                                    text: "Cancel",
-                                    onClick: () => setConfirmationModalDisplayed(null),
-                                }}
-                                secondaryOption={{
                                     text: "Delete",
                                     onClick: () => deleteCredential(credential),
+                                }}
+                                secondaryOption={{
+                                    text: "Cancel",
+                                    onClick: () => setConfirmationModalDisplayed(null),
                                 }}
                             />
                         )}
