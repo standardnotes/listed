@@ -10,11 +10,13 @@ $color-primary-dark: #93C0FF;
 $color-primary-dark-opacity-8: rgba($color-primary-dark, 0.08);
 
 $color-black: rgb(24, 24, 24);
+$color-black-opacity-8: rgba($color-black, 0.08);
 $color-black-opacity-16: rgba($color-black, 0.16);
 $color-black-opacity-36: rgba($color-black, 0.36);
 $color-black-opacity-86: rgba($color-black, 0.86);
 
 $color-white: #FFFFFF;
+$color-white-opacity-8: rgba($color-white, 0.08);
 $color-white-opacity-16: rgba($color-white, 0.16);
 $color-white-opacity-36: rgba($color-white, 0.36);
 $color-white-opacity-86: rgba($color-white, 0.86);
@@ -96,7 +98,9 @@ $border-dark: 1px solid $color-white-opacity-16;
   --color-primary: #{$color-primary};
   --color-primary-opacity-8: #{$color-primary-opacity-8};
   --color-neutral: #{$color-white};
+  --color-neutral-darker: #{$color-gray-100};
   --color-contrast: #{$color-black};
+  --color-contrast-opacity-8: #{$color-black-opacity-8};
   --color-contrast-opacity-16: #{$color-black-opacity-16};
   --color-contrast-opacity-36: #{$color-black-opacity-36};
   --color-contrast-opacity-86: #{$color-black-opacity-86};
@@ -148,9 +152,13 @@ $border-dark: 1px solid $color-white-opacity-16;
     --color-primary: #{$color-primary-dark};
     --color-primary-opacity-8: #{$color-primary-dark-opacity-8};
     --color-neutral: #{$color-black};
+    --color-neutral-darker: #{$color-default-dark};
     --color-contrast: #{$color-white};
+    --color-contrast-opacity-8: #{$color-white-opacity-8};
     --color-contrast-opacity-16: #{$color-white-opacity-16};
     --color-contrast-opacity-36: #{$color-white-opacity-36};
     --color-contrast-opacity-86: #{$color-white-opacity-86};
+    --post-code-background-color: #{$color-default-dark};
+    --post-code-border-color: #{$color-default-dark};
   }
 }

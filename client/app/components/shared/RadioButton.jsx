@@ -34,8 +34,8 @@ const RadioButton = ({
             aria-checked={selected}
             tabIndex={0}
         >
-            <div className="radio-button__image-container">
-                <img
+            <div className="radio-button__svg-container">
+                <SVG
                     src={image.src}
                     alt={image.alt}
                 />
