@@ -27,6 +27,11 @@
 
         .button--primary {
             margin-left: $spacing-12;
+            background-image: linear-gradient(to top, var(--color-contrast) 50%, $color-error 50%);
+        }
+
+        .button--no-fill {
+            @include MenuHover(var(--color-contrast));
         }
 
         .button--secondary-disabled {
