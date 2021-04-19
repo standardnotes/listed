@@ -17,7 +17,7 @@
         justify-content: space-between;
         align-items: center;
         border-radius: $border-radius-4;
-        border: $border-default;
+        border: var(--border);
     }
 
     .error-toast__message {
@@ -29,7 +29,7 @@
         line-height: 0;
 
         path {
-            fill: $color-black;
+            fill: var(--color-contrast);
         }
     }
 

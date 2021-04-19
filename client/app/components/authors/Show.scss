@@ -34,7 +34,7 @@
     padding: $spacing-48 0;
 
     &:not(:last-child) {
-        border-bottom: $border-default;
+        border-bottom: var(--border);
     }
 
     @include Desktop() {

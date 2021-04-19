@@ -6,16 +6,16 @@
 
 .my-posts__item {
     padding: $spacing-16 0;
-    border-top: $border-default;
+    border-top: var(--border);
     display: flex;
     align-items: center;
 
     &:last-child {
-        border-bottom: $border-default;
+        border-bottom: var(--border);;
     }
 
     a.my-posts__post {
-        color: $color-black;
+        color: var(--color-contrast);
         flex-grow: 1;
 
         &::before {
@@ -27,7 +27,7 @@
         }
     
         .post__details {
-            color: $color-black-opacity-86;
+            color: var(--color-contrast-opacity-86);
             font-weight: normal;
             display: inline-flex;
             align-items: center;
@@ -39,7 +39,7 @@
                 margin-right: $spacing-6;
     
                 path {
-                    fill: $color-black-opacity-86;
+                    fill: var(--color-contrast-opacity-86);
                 }
             }
         }

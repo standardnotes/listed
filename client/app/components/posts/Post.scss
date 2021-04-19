@@ -47,6 +47,7 @@
             padding: $spacing-22;
             overflow: auto;
             font-size: 90%;
+            background-color: var(--post-code-background-color);
         }
 
         p code {
@@ -79,7 +80,7 @@
             }
 
             tr:nth-child(2n) {
-              background-color: #f6f6f6;
+              background-color: var(--color-neutral-darker);
             }
         }
     }
