@@ -20,7 +20,9 @@ const fieldTypes = {
     HIDE_FROM_HOMEPAGE: "hide_from_homepage",
 };
 
-const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
+const General = ({
+    author, setErrorToastMessage, setIsErrorToastDisplayed, handleResponseSuccess,
+}) => {
     const {
         username,
         display_name,
@@ -73,7 +75,7 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                 });
 
             setErrorMessages({});
-            Turbolinks.visit(response.request.responseURL);
+            handleResponseSuccess(response);
         } catch (err) {
             setIsSubmitDisabled(false);
 
@@ -266,6 +268,7 @@ General.propTypes = {
     author: authorType.isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
+    handleResponseSuccess: PropTypes.func.isRequired,
 };
 
 export default (props) => <General {...props} />;

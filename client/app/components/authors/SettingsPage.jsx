@@ -40,6 +40,10 @@ const SettingsPage = ({
         }
     }, [scrollToGuestbook]);
 
+    const onResponseSuccess = (response) => {
+        Turbolinks.visit(response.request.responseURL.replace("&read_guestbook=true", ""));
+    };
+
     const sections = [
         {
             id: "general",
@@ -51,6 +55,7 @@ const SettingsPage = ({
                     author={author}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                    handleResponseSuccess={onResponseSuccess}
                 />
             ),
         },
@@ -64,6 +69,7 @@ const SettingsPage = ({
                     author={author}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                    handleResponseSuccess={onResponseSuccess}
                 />
             ),
         },
@@ -78,6 +84,7 @@ const SettingsPage = ({
                     author={author}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                    handleResponseSuccess={onResponseSuccess}
                 />
             ),
         },
@@ -91,6 +98,7 @@ const SettingsPage = ({
                     guestbookEntries={guestbookEntries}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                    handleResponseSuccess={onResponseSuccess}
                 />
             ),
         },
@@ -105,6 +113,7 @@ const SettingsPage = ({
                     customDomainIP={customDomainIP}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                    handleResponseSuccess={onResponseSuccess}
                 />
             ),
         },
@@ -119,6 +128,7 @@ const SettingsPage = ({
                     authorCredentialsUrl={authorCredentialsUrl}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
+                    handleResponseSuccess={onResponseSuccess}
                 />
             ),
         },

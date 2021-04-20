@@ -10,7 +10,9 @@ import {
 } from "../../../assets/icons";
 import "./GuestbookEntries.scss";
 
-const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorToastDisplayed }) => {
+const GuestbookEntries = ({
+    guestbookEntries, setErrorToastMessage, setIsErrorToastDisplayed, handleResponseSuccess,
+}) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 
@@ -22,7 +24,7 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
             const response = await axios
                 .get(url);
 
-            Turbolinks.visit(response.request.responseURL);
+            handleResponseSuccess(response);
         } catch (err) {
             setErrorToastMessage(`There was an error trying to ${text}. Please try again.`);
             setIsErrorToastDisplayed(true);
@@ -164,6 +166,7 @@ GuestbookEntries.propTypes = {
     ).isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
+    handleResponseSuccess: PropTypes.func.isRequired,
 };
 
 export default GuestbookEntries;
