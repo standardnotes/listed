@@ -115,12 +115,12 @@ const MyPosts = ({
                         <ConfirmationModal
                             text="Are you sure you want to delete this post?"
                             primaryOption={{
-                                text: "Cancel",
-                                onClick: () => setConfirmationModalDisplayed(null),
-                            }}
-                            secondaryOption={{
                                 text: "Delete",
                                 onClick: () => deletePost(post),
+                            }}
+                            secondaryOption={{
+                                text: "Cancel",
+                                onClick: () => setConfirmationModalDisplayed(null),
                             }}
                         />
                     )}

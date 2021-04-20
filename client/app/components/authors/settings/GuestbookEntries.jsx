@@ -132,12 +132,12 @@ const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorTo
                         <ConfirmationModal
                             text="Are you sure you want to delete this guestbook entry?"
                             primaryOption={{
-                                text: "Cancel",
-                                onClick: () => setConfirmationModalDisplayed(null),
-                            }}
-                            secondaryOption={{
                                 text: "Delete",
                                 onClick: () => handleEntryAction(entry.deletion_url, "delete this entry"),
+                            }}
+                            secondaryOption={{
+                                text: "Cancel",
+                                onClick: () => setConfirmationModalDisplayed(null),
                             }}
                         />
                     )}
