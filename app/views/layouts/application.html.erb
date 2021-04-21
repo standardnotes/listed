@@ -20,7 +20,10 @@
       <link rel="canonical" href="<%= @canonical %>"/>
     <% end %>
 
-    <link href="<%= @fav_icon %>" rel="shortcut icon" />
+    <%= favicon_link_tag @meta_image, rel: 'icon', type: 'image/png', sizes: '250x250' %>
+    <%= favicon_link_tag @meta_image, rel: 'apple-touch-icon', type: 'image/png', sizes: '250x250' %>
+    <%= favicon_link_tag @meta_image, rel: 'apple-touch-icon-precomposed', type: 'image/png', sizes: '250x250' %>
+    <%= favicon_link_tag @fav_icon, type: 'image/png', sizes: '32x32' %>
     <!-- Apple -->
     <meta content="<%= @title %>" name="apple-mobile-web-app-title"/>
     <meta content="<%= @title %>" name="application-name"/>
