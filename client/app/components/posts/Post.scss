@@ -1,6 +1,7 @@
 .post-content {
     .post-header .post-title {
         color: var(--post-title-color);
+        word-wrap: break-word;
 
         a::before {
             background-image: none;
@@ -10,6 +11,7 @@
     .post-body {
         margin: $spacing-24 0;
         $base-header-font: 1.6rem;
+        word-wrap: break-word;
 
         h1 {
             font-size: $base-header-font;
