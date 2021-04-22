@@ -20,7 +20,9 @@ const fieldTypes = {
     HIDE_FROM_HOMEPAGE: "hide_from_homepage",
 };
 
-const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
+const General = ({
+    author, setErrorToastMessage, setIsErrorToastDisplayed,
+}) => {
     const {
         username,
         display_name,

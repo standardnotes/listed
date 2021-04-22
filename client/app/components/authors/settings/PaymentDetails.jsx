@@ -12,7 +12,10 @@ import {
 import "./PaymentDetails.scss";
 
 const PaymentDetails = ({
-    author, authorCredentialsUrl, setErrorToastMessage, setIsErrorToastDisplayed,
+    author,
+    authorCredentialsUrl,
+    setErrorToastMessage,
+    setIsErrorToastDisplayed,
 }) => {
     const [editCredentialFormDisplayed, setEditCredentialFormDisplayed] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(null);

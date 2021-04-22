@@ -53,7 +53,9 @@ const optionData = {
     },
 };
 
-const Appearance = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
+const Appearance = ({
+    author, setErrorToastMessage, setIsErrorToastDisplayed,
+}) => {
     const {
         cover_style,
         blog_layout_style,

@@ -302,7 +302,7 @@ class AuthorsController < ApplicationController
     if should_verify_email
       AuthorsMailer.verify_email(@author, @author.email).deliver_later
     end
-    redirect_back fallback_location: @author.url, :status => 303
+    redirect_to_authenticated_settings(@author)
   end
 
   def domain_request
@@ -327,7 +327,7 @@ class AuthorsController < ApplicationController
 
     SslCertificateCreateJob.perform_later(params[:domain])
 
-    redirect_back fallback_location: @author.url
+    redirect_to_authenticated_settings(@author)
   end
 
   def subscribe
@@ -342,7 +342,7 @@ class AuthorsController < ApplicationController
     domain = Domain.find_by_domain(params[:domain])
     domain.delete
 
-    redirect_back fallback_location: @author.url
+    redirect_to_authenticated_settings(@author)
   end
 
   def verify_email

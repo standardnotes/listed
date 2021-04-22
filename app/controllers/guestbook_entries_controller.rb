@@ -51,19 +51,19 @@ class GuestbookEntriesController < ApplicationController
   def approve
     @entry.public = true
     @entry.save
-    redirect_back fallback_location: @entry.author.url
+    redirect_to_authenticated_settings(@entry.author)
   end
 
   def unapprove
     @entry.public = false
     @entry.save
-    redirect_back fallback_location: @entry.author.url
+    redirect_to_authenticated_settings(@entry.author)
   end
 
   def spam
     @entry.spam = true
     @entry.save
-    redirect_back fallback_location: @entry.author.url
+    redirect_to_authenticated_settings(@entry.author)
   end
 
   def delete

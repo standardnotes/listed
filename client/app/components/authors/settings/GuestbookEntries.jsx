@@ -10,7 +10,9 @@ import {
 } from "../../../assets/icons";
 import "./GuestbookEntries.scss";
 
-const GuestbookEntries = ({ guestbookEntries, setErrorToastMessage, setIsErrorToastDisplayed }) => {
+const GuestbookEntries = ({
+    guestbookEntries, setErrorToastMessage, setIsErrorToastDisplayed,
+}) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
 

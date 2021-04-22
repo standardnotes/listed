@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_authenticated_settings(author)
-    redirect_to "#{ENV['HOST']}/authors/#{author.id}/settings/?secret=#{author.secret}", :status => 303
+    redirect_to "#{author.get_host}/authors/#{author.id}/settings/?secret=#{author.secret}", :status => 303
   end
 
   def not_found
