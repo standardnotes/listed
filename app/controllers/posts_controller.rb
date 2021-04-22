@@ -217,7 +217,7 @@ class PostsController < ApplicationController
     post.unlisted = !post.unlisted
     post.save
 
-    redirect_back fallback_location: @author.url
+    redirect_to_authenticated_settings(@author)
   end
 
   def delete
@@ -235,7 +235,7 @@ class PostsController < ApplicationController
     post.delete
 
     @author.update_word_count
-    redirect_back fallback_location: @author.url
+    redirect_to_authenticated_settings(@author)
   end
 
   def post_params

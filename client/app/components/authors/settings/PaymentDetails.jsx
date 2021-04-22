@@ -16,7 +16,6 @@ const PaymentDetails = ({
     authorCredentialsUrl,
     setErrorToastMessage,
     setIsErrorToastDisplayed,
-    handleResponseSuccess,
 }) => {
     const [editCredentialFormDisplayed, setEditCredentialFormDisplayed] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(null);
@@ -34,7 +33,7 @@ const PaymentDetails = ({
                     },
                 });
 
-            handleResponseSuccess(response);
+            Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setErrorToastMessage("There was an error trying to delete the payment detail. Please try again.");
             setIsErrorToastDisplayed(true);
@@ -165,7 +164,6 @@ PaymentDetails.propTypes = {
     authorCredentialsUrl: PropTypes.string.isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
-    handleResponseSuccess: PropTypes.func.isRequired,
 };
 
 export default PaymentDetails;

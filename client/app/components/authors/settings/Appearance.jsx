@@ -54,7 +54,7 @@ const optionData = {
 };
 
 const Appearance = ({
-    author, setErrorToastMessage, setIsErrorToastDisplayed, handleResponseSuccess,
+    author, setErrorToastMessage, setIsErrorToastDisplayed,
 }) => {
     const {
         cover_style,
@@ -86,7 +86,7 @@ const Appearance = ({
                     },
                 });
 
-            handleResponseSuccess(response);
+            Turbolinks.visit(response.request.responseURL);
         } catch (_) {
             setErrorToastMessage("There was an error trying to update your settings. Please try again.");
             setIsErrorToastDisplayed(true);
@@ -145,7 +145,6 @@ Appearance.propTypes = {
     author: authorType.isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
-    handleResponseSuccess: PropTypes.func.isRequired,
 };
 
 export default (props) => <Appearance {...props} />;

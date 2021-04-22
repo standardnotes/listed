@@ -21,7 +21,7 @@ const fieldTypes = {
 };
 
 const General = ({
-    author, setErrorToastMessage, setIsErrorToastDisplayed, handleResponseSuccess,
+    author, setErrorToastMessage, setIsErrorToastDisplayed,
 }) => {
     const {
         username,
@@ -75,7 +75,7 @@ const General = ({
                 });
 
             setErrorMessages({});
-            handleResponseSuccess(response);
+            Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setIsSubmitDisabled(false);
 
@@ -268,7 +268,6 @@ General.propTypes = {
     author: authorType.isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
-    handleResponseSuccess: PropTypes.func.isRequired,
 };
 
 export default (props) => <General {...props} />;

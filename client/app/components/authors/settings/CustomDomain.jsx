@@ -9,7 +9,7 @@ import ErrorToast from "../../shared/ErrorToast";
 import { IcLink, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./CustomDomain.scss";
 
-const CustomDomain = ({ author, customDomainIP, handleResponseSuccess }) => {
+const CustomDomain = ({ author, customDomainIP }) => {
     const [extendedEmail, setExtendedEmail] = useState("");
     const [domain, setDomain] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
@@ -46,7 +46,7 @@ const CustomDomain = ({ author, customDomainIP, handleResponseSuccess }) => {
                 });
 
             setDomainErrorMessage(null);
-            handleResponseSuccess(response);
+            Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setIsSubmitDisabled(false);
 
@@ -74,7 +74,7 @@ const CustomDomain = ({ author, customDomainIP, handleResponseSuccess }) => {
                     },
                 });
 
-            handleResponseSuccess(response);
+            Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setErrorToastMessage(
                 `There was an error trying to delete the ${author.domain.active ? "domain" : "domain request"}. Please try again.`,
@@ -250,7 +250,6 @@ CustomDomain.propTypes = {
         url: PropTypes.string.isRequired,
     }).isRequired,
     customDomainIP: PropTypes.string.isRequired,
-    handleResponseSuccess: PropTypes.func.isRequired,
 };
 
 export default (props) => <CustomDomain {...props} />;

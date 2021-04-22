@@ -12,7 +12,7 @@ import {
 import "./MyPosts.scss";
 
 const MyPosts = ({
-    posts, author, setErrorToastMessage, setIsErrorToastDisplayed, handleResponseSuccess,
+    posts, author, setErrorToastMessage, setIsErrorToastDisplayed,
 }) => {
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [confirmationModalDisplayed, setConfirmationModalDisplayed] = useState(null);
@@ -28,7 +28,7 @@ const MyPosts = ({
                     },
                 });
 
-            handleResponseSuccess(response);
+            Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setErrorToastMessage("There was an error trying to change the post's privacy. Please try again.");
             setIsErrorToastDisplayed(true);
@@ -47,7 +47,7 @@ const MyPosts = ({
                     },
                 });
 
-            handleResponseSuccess(response);
+            Turbolinks.visit(response.request.responseURL);
         } catch (err) {
             setErrorToastMessage("There was an error trying to delete the post. Please try again.");
             setIsErrorToastDisplayed(true);
@@ -147,7 +147,6 @@ MyPosts.propTypes = {
     ).isRequired,
     setErrorToastMessage: PropTypes.func.isRequired,
     setIsErrorToastDisplayed: PropTypes.func.isRequired,
-    handleResponseSuccess: PropTypes.func.isRequired,
 };
 
 export default MyPosts;
