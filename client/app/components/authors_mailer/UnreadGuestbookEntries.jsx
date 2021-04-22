@@ -6,6 +6,7 @@ const UnreadGuestbookEntries = ({ author, entries }) => (
     <div>
         <h3>
             Hey
+            {" "}
             {author.display_name}
             ,
         </h3>
