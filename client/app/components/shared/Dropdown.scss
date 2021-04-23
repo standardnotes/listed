@@ -24,7 +24,7 @@
     &.dropdown__list--open {
         opacity: 1;
         visibility: visible;
-        box-shadow: $spacing-8 $spacing-8 0 $color-primary;
+        box-shadow: $spacing-8 $spacing-8 0 var(--color-primary);
     }
 }
 
@@ -36,7 +36,7 @@
     }
 
     &:hover {
-        background-color: $color-primary-opacity-8;
+        background-color: var(--color-primary-opacity-8);
     }
 
     .option__button {
@@ -52,7 +52,7 @@
         height: 20px;
 
         path {
-            fill: $color-black-opacity-86;
+            fill: var(--color-contrast-opacity-86);
         }
     }
 }

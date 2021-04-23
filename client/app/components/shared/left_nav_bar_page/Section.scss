@@ -32,6 +32,9 @@
 
 .section__collapse-icon {
     margin-left: $spacing-16;
+    path {
+        fill: var(--color-contrast);
+    }
 }
 
 .section__content {

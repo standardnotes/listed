@@ -10,4 +10,8 @@
     margin-right: $spacing-12;
     height: 18px;
     width: 18px;
+
+    svg path {
+        fill: var(--color-primary);
+    }
 }

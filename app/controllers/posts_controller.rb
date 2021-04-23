@@ -24,8 +24,11 @@ class PostsController < ApplicationController
   def find_page(author, title)
     return unless author
 
-    title = title.gsub('-', ' ')
-    author.pages.where('lower(title) = ?', title.downcase).first
+    _title = title.gsub('-', ' ')
+    if !_title.match(PostsHelper::POST_TITLE_NO_SYMBOLS_PATTERN)
+      _title = CGI.unescape(title)
+    end
+    author.pages.where('lower(title) = ?', _title.downcase).first
   end
 
   def find_post
@@ -214,7 +217,7 @@ class PostsController < ApplicationController
     post.unlisted = !post.unlisted
     post.save
 
-    redirect_back fallback_location: @author.url
+    redirect_to_authenticated_settings(@author)
   end
 
   def delete
@@ -232,7 +235,7 @@ class PostsController < ApplicationController
     post.delete
 
     @author.update_word_count
-    redirect_back fallback_location: @author.url
+    redirect_to_authenticated_settings(@author)
   end
 
   def post_params

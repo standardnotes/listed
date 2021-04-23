@@ -20,7 +20,9 @@ const fieldTypes = {
     HIDE_FROM_HOMEPAGE: "hide_from_homepage",
 };
 
-const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => {
+const General = ({
+    author, setErrorToastMessage, setIsErrorToastDisplayed,
+}) => {
     const {
         username,
         display_name,
@@ -191,8 +193,8 @@ const General = ({ author, setErrorToastMessage, setIsErrorToastDisplayed }) => 
                 </p>
                 {email && email === editedAuthor.email && !email_verified && (
                     <p className="error-message p3 sublabel">
-                        Unverified. You will not receive any email notifications until
-                        your email is verified.
+                        Please check your email for a verification message.
+                        You will not receive any email notifications until your email is verified.
                     </p>
                 )}
                 {renderErrorMessages(fieldTypes.EMAIL)}

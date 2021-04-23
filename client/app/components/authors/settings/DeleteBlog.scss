@@ -17,7 +17,7 @@
         width: 100%;
     
         &.button--primary {
-            background-image: linear-gradient(to top, $color-black 50%, $color-error 50%);
+            background-image: linear-gradient(to top, var(--color-contrast) 50%, $color-error 50%);
         }
 
         @include Desktop() {

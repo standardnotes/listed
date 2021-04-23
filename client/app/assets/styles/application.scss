@@ -179,6 +179,7 @@ textarea {
     padding: $spacing-6 $spacing-12;
     border-radius: $border-radius-4;
     border: none;
+    color: var(--color-contrast);
     cursor: pointer;
     text-decoration: none;
     outline: none;
@@ -188,7 +189,7 @@ textarea {
     transition: background-position 0.3s ease-in-out;
 
     svg path {
-        fill: $color-primary;
+        fill: var(--color-primary);
     }
 
     &:focus {
@@ -197,9 +198,9 @@ textarea {
 }
 
 .button--primary {
-    color: $color-white;
+    color: var(--color-neutral);
     background-image:
-        linear-gradient(to top, $color-black 50%, var(--page-menu-link-color) 50%);
+        linear-gradient(to top, var(--color-contrast) 50%, var(--page-menu-link-color) 50%);
     background-size: 100% 200%;
     background-position: top;
 
@@ -233,7 +234,7 @@ textarea {
 
     @include Desktop() {
         &:hover {
-            color: $color-primary;
+            color: var(--color-primary);
 
             &::before {
                 background-image:
@@ -248,7 +249,7 @@ textarea {
 }
 
 .button--active {
-    color: $color-primary;
+    color: var(--color-primary);
     position: relative;
     background-image: none;
 
@@ -260,28 +261,28 @@ textarea {
         bottom: 0;
         left: 0;
         border-radius: $border-radius-4;
-        background-color: $color-primary-opacity-8;
+        background-color: var(--color-primary-opacity-8);
         background-image: none;
     }
 }
 
 .button--disabled {
-    background-color: $color-black-opacity-36;
-    color: $color-white;
+    background-color: var(--color-contrast-opacity-36);
+    color: var(--color-neutral);
 }
 
 .card {
-    background-color: $color-white;
+    background-color: var(--color-neutral);
     padding: $spacing-16;
     border-radius: $border-radius-4;
-    border: $border-default;
+    border: var(--border);
     text-align: left;
 }
 
 .callout {
     padding: $spacing-12;
     border-radius: $border-radius-4;
-    border: $border-default;
+    border: var(--border);
     font-size: $font-size-16;
     line-height: $line-height-24;
     background-color: var(--callout-background-color);
@@ -333,7 +334,7 @@ textarea {
 
 .headline-separator {
     height: 3px;
-    background-color: $color-black-opacity-16;
+    background-color: var(--color-contrast-opacity-16);
     flex: 1;
     margin-left: $spacing-16;
 
@@ -358,9 +359,9 @@ textarea {
     .hover-content__icon-container {
         width: 28px;
         height: 28px;
-        border: $border-default;
+        border: var(--border);
         border-radius: 14px;
-        background-color: $color-white;
+        background-color: var(--color-neutral);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -371,7 +372,7 @@ textarea {
         height: 16px;
 
         path {
-            fill: $color-black;
+            fill: var(--color-contrast);
         }
     }
 }
@@ -400,8 +401,10 @@ textarea {
 
 .text-field {
     padding: $spacing-6 0 $spacing-6 $spacing-12;
+    background-color: var(--color-neutral);
     border-radius: $border-radius-4;
-    border: $border-default;
+    border: var(--border);
+    color: var(--color-contrast);
     font-family: $font-family-default;
     font-size: $font-size-16;
     line-height: $line-height-24;
@@ -409,7 +412,7 @@ textarea {
     -webkit-appearance: none;
 
     &:focus {
-        outline: $color-primary auto 1px;
+        outline: var(--color-primary) auto 1px;
     }
 }
 

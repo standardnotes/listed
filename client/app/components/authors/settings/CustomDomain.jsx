@@ -220,12 +220,12 @@ const CustomDomain = ({ author, customDomainIP }) => {
                         ? `Are you sure you want to delete custom domain ${author.domain.domain}?`
                         : `Are you sure you want to delete the request for custom domain ${author.domain.domain}?`}
                     primaryOption={{
-                        text: "Cancel",
-                        onClick: () => setShowConfirmationModal(false),
-                    }}
-                    secondaryOption={{
                         text: "Delete",
                         onClick: () => deleteDomain(author.domain.domain),
+                    }}
+                    secondaryOption={{
+                        text: "Cancel",
+                        onClick: () => setShowConfirmationModal(false),
                     }}
                 />
             )}

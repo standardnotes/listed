@@ -46,6 +46,8 @@
 
     .card {
         background-color: var(--more-posts-post-background-color);
+        flex: 1;
+        min-width: 50%;
     }
 }
 

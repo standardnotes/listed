@@ -1,7 +1,7 @@
-import CardedBlogImage from "./carded-blog.png";
-import CondensedCoverImage from "./condensed-cover.png";
-import FullCoverImage from "./full-cover.png";
-import VerticalBlogImage from "./vertical-blog.png";
+import CardedBlogImage from "./carded-blog.svg";
+import CondensedCoverImage from "./condensed-cover.svg";
+import FullCoverImage from "./full-cover.svg";
+import VerticalBlogImage from "./vertical-blog.svg";
 
 export {
     CardedBlogImage,

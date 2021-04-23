@@ -1,16 +1,25 @@
 $color-default: #F8F9FC;
+$color-default-dark: #20202A;
 
 $color-primary: rgb(0, 32, 143);
 $color-primary-opacity-8: rgba($color-primary, 0.08);
 $color-primary-opacity-16: rgba($color-primary, 0.16);
 $color-primary-opacity-56: rgba($color-primary, 0.56);
 
+$color-primary-dark: #93C0FF;
+$color-primary-dark-opacity-8: rgba($color-primary-dark, 0.08);
+
 $color-black: rgb(24, 24, 24);
+$color-black-opacity-8: rgba($color-black, 0.08);
 $color-black-opacity-16: rgba($color-black, 0.16);
 $color-black-opacity-36: rgba($color-black, 0.36);
 $color-black-opacity-86: rgba($color-black, 0.86);
 
 $color-white: #FFFFFF;
+$color-white-opacity-8: rgba($color-white, 0.08);
+$color-white-opacity-16: rgba($color-white, 0.16);
+$color-white-opacity-36: rgba($color-white, 0.36);
+$color-white-opacity-86: rgba($color-white, 0.86);
 
 $color-gray: #63666B;
 $color-gray-100: #F7F7F9;
@@ -79,46 +88,77 @@ $spacing-11-vw: 11vw;
 $spacing-22-vw: 22vw;
 
 $border-radius-4: 4px;
+
 $border-default: 1px solid rgba(24, 24, 24, 0.16);
+$border-dark: 1px solid $color-white-opacity-16;
 
 :root {
-  --dimmed-text-color: #{$color-black-opacity-16};
-  --dimmed-border-color: #{$color-default};
-  --background-color: #{$color-default};
-  --body-text-color: #{$color-black};
+  --border: #{$border-default};
+  --color-default: #{$color-default};
+  --color-primary: #{$color-primary};
+  --color-primary-opacity-8: #{$color-primary-opacity-8};
+  --color-neutral: #{$color-white};
+  --color-neutral-darker: #{$color-gray-100};
+  --color-contrast: #{$color-black};
+  --color-contrast-opacity-8: #{$color-black-opacity-8};
+  --color-contrast-opacity-16: #{$color-black-opacity-16};
+  --color-contrast-opacity-36: #{$color-black-opacity-36};
+  --color-contrast-opacity-86: #{$color-black-opacity-86};
+  --background-color: var(--color-default);
+  --dimmed-text-color: var(--color-contrast-opacity-16);
+  --dimmed-border-color: var(--color-default);
+  --body-text-color: var(--color-contrast);
   --post-title-color: var(--body-text-color);
   --post-date-color: var(--body-text-color);
   --post-text-color: var(--body-text-color);
   --page-menu-link-color: var(--link-color);
-  --header-author-name: #{$color-primary};
-  --header-listed-name: #{$color-primary};
+  --header-author-name: var(--color-primary);
+  --header-listed-name: var(--color-primary);
   --more-from-border-color: var(--dimmed-border-color);
   --bio-color: var(--body-text-color);
-  --wordcount-color: #{$color-primary};
+  --wordcount-color: var(--color-primary);
   --website-color: var(--link-color);
   --twitter-color: var(--link-color);
-  --link-color: #{$color-primary};
-  --header-border-color: #{$color-primary};
+  --link-color: var(--color-primary);
+  --header-border-color: var(--color-primary);
   --post-code-background-color: #{$color-gray-100};
   --post-code-border-color: #{$color-gray-200};
-  --card-post-background-color: #{$color-default};
-  --card-post-border-color: #{$color-black-opacity-16};
-  --post-background-color: #{$color-white};
-  --author-posts-background-color: #{$color-white};
-  --more-posts-background-color: #{$color-default};
-  --more-posts-post-background-color: #{$color-white};
+  --card-post-background-color: var(--color-default);
+  --card-post-border: var(--border);
+  --post-background-color: var(--color-neutral);
+  --author-posts-background-color: var(--color-neutral);
+  --more-posts-background-color: var(--color-default);
+  --more-posts-post-background-color: var(--color-neutral);
   --footer-background-color: var(--background-color);
-  --footer-border-top-color: #{$color-black-opacity-16};
-  --callout-background-color: #{$color-white};
+  --footer-border-top-color: var(--color-contrast-opacity-16);
+  --callout-background-color: var(--color-neutral);
   --callout-success-border-color: #{$color-success};
   --callout-warning-border-color: #{$color-warning};
   --callout-info-border-color: #{$color-success};
-  --scroll-to-top-background-color: #{$color-default};
-  --scroll-to-top-border-color: #{$border-default};
-  --scroll-to-top-border-color-hover: #{$color-black};
-  --scroll-to-top-icon-color: #{$color-black};
-  --blockquote-border-left-color: #{$color-black-opacity-36};
-  --guestbook-border-left-color: #{$color-black-opacity-16};
-  --author-header-info-links-separator-color: #{$color-black-opacity-16};
-  --author-footer-background-color: #{$color-white};
+  --scroll-to-top-background-color: var(--color-default);
+  --scroll-to-top-border: var(--border);
+  --scroll-to-top-border-color-hover: var(--color-contrast);
+  --author-footer-background-color: var(--color-neutral);
+  --scroll-to-top-icon-color: var(--color-contrast);
+  --blockquote-border-left-color: var(--color-contrast-opacity-36);
+  --guestbook-border-left-color: var(--color-contrast-opacity-16);
+  --author-header-info-links-separator-color: var(--color-contrast-opacity-16);
 };
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border: #{$border-dark};
+    --color-default: #{$color-default-dark};
+    --color-primary: #{$color-primary-dark};
+    --color-primary-opacity-8: #{$color-primary-dark-opacity-8};
+    --color-neutral: #{$color-black};
+    --color-neutral-darker: #{$color-default-dark};
+    --color-contrast: #{$color-white};
+    --color-contrast-opacity-8: #{$color-white-opacity-8};
+    --color-contrast-opacity-16: #{$color-white-opacity-16};
+    --color-contrast-opacity-36: #{$color-white-opacity-36};
+    --color-contrast-opacity-86: #{$color-white-opacity-86};
+    --post-code-background-color: #{$color-default-dark};
+    --post-code-border-color: #{$color-default-dark};
+  }
+}

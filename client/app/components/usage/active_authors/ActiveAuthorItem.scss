@@ -11,7 +11,7 @@
     }
 
     .active-author__bio {
-        color: $color-black;
+        color: var(--color-contrast);
         font-weight: normal;
         margin-top: $spacing-4;
     }
@@ -21,11 +21,11 @@
         overflow-wrap: break-word;
 
         &:hover {
-            box-shadow: $spacing-8 $spacing-8 0 $color-primary;
+            box-shadow: $spacing-8 $spacing-8 0 var(--color-primary);
             background-image: none;
     
             .active-author__title {
-                color: $color-primary;
+                color: var(--color-primary);
             }
     
             .active-author__icon--featured {
@@ -34,7 +34,7 @@
                 }
     
                 path {
-                    fill: $color-primary;
+                    fill: var(--color-primary);
                 }
             }
         }
@@ -51,7 +51,7 @@
 }
 
 .active-author__title {
-    color: $color-black;
+    color: var(--color-contrast);
     display: flex;
     justify-content: space-between;
     transition: color 0.3s ease-in-out;
@@ -60,8 +60,12 @@
 .active-author__word-count {
     margin-top: $spacing-8;
     display: flex;
-    color: $color-black;
+    color: var(--color-contrast);
     font-weight: normal;
+
+    svg path {
+        fill: var(--color-contrast);
+    }
 }
 
 .active-author__icon {
@@ -80,7 +84,7 @@
     }
 
     path {
-        fill: $color-black;
+        fill: var(--color-contrast);
         transition: fill 0.3s ease-in-out;
     }
 }
@@ -89,7 +93,7 @@
     display: flex;
     align-items: center;
     font-weight: bold;
-    color: $color-black;
+    color: var(--color-contrast);
     margin-top: $spacing-8;
 
     .easter-egg__icon--arrow {
@@ -98,7 +102,7 @@
         margin-left: $spacing-8;
     
         path {
-            fill: $color-black;
+            fill: var(--color-contrast);
         }
     }
 }
