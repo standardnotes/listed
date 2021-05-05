@@ -146,13 +146,13 @@ GEM
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
     newrelic_rpm (7.0.0)
-    nio4r (2.5.2)
+    nio4r (2.5.7)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     nokogumbo (2.0.2)
       nokogiri (~> 1.8, >= 1.8.4)
     public_suffix (4.0.5)
-    puma (4.3.5)
+    puma (4.3.7)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-cors (1.1.1)
@@ -289,7 +289,7 @@ DEPENDENCIES
   lograge (~> 0.11.2)
   mini_racer
   mysql2
-  newrelic_rpm
+  newrelic_rpm (~> 7.0)
   puma (~> 4.3)
   rack-cors
   rails (~> 5.0.2)
