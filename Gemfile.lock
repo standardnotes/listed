@@ -92,7 +92,6 @@ GEM
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crass (1.0.6)
-    dogstatsd-ruby (4.8.1)
     dotenv (2.1.2)
     dotenv-rails (2.1.2)
       dotenv (= 2.1.2)
@@ -284,7 +283,6 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano-sidekiq
-  dogstatsd-ruby (~> 4.8)
   dotenv-rails (~> 2.1.1)
   haml-rails
   listen (~> 3.0.5)

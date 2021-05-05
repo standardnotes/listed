@@ -47,7 +47,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mini_racer', platforms: :ruby
 
-gem "dogstatsd-ruby", "~> 4.8"
 
 gem "rails-letsencrypt", "~> 0.9.0"
 
