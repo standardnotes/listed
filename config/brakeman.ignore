@@ -1,0 +1,57 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "cff7d4c44a3a6be57f18126b095b76cc7cf09a961e6f262d7ff440d48c6883c2",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/layouts/application.html.erb",
+      "line": 67,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "(Domain.find_by(:domain => request.host).author or (Author.find(params[:id]) or Author.find_author_from_path(request.path))).css",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "AuthorsController",
+          "method": "create",
+          "line": 31,
+          "file": "app/controllers/authors_controller.rb",
+          "rendered": {
+            "name": "layouts/application",
+            "file": "app/views/layouts/application.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "layouts/application"
+      },
+      "user_input": "Domain.find_by(:domain => request.host).author",
+      "confidence": "Weak",
+      "note": "This is the intended behavior."
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "d9bbc9935c0f4c0f1fe49d001a763b6a3d83588c87081253950b4893863d9cdc",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/posts_controller.rb",
+      "line": 74,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Author.find_author_from_path(request.path).url)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PostsController",
+        "method": "show"
+      },
+      "user_input": "Author.find_author_from_path(request.path).url",
+      "confidence": "High",
+      "note": "This is the intended behavior."
+    }
+  ],
+  "updated": "2021-05-07 00:47:14 -0400",
+  "brakeman_version": "5.0.1"
+}
