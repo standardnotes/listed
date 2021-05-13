@@ -102,8 +102,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                 Before submitting this form,
                 please create an &quot;A&quot; record with your DNS provider with
                 value
-                {" "}
-                {customDomainIP}
+                {customDomainIP && ` ${customDomainIP}`}
                 .
             </p>
             <form onSubmit={(e) => submitDomainRequest(e)}>
