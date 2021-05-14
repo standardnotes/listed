@@ -5,13 +5,13 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.0.2'
+gem 'rails', '= 5.2.5'
 gem 'mysql2'
 gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'safe_yaml'
-gem 'dotenv-rails', '~> 2.1.1'
+gem 'dotenv-rails', '~> 2.7.6'
 gem 'sanitize'
 gem 'rouge'
 gem 'haml-rails'
