@@ -4,7 +4,7 @@ class AuthorsController < ApplicationController
   CONDENSED_COVER_STYLE = "condensed"
 
   # Allow API acess for actions inside "only"
-  skip_before_filter :verify_authenticity_token, :only => [:extension]
+  skip_before_action :verify_authenticity_token, :only => [:extension]
 
   before_action {
     domain = Domain.find_by(domain: request.host)

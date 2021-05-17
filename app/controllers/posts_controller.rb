@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   FRONT_MATTER_CONTENT_PATTERN = /^(?<metadata>---\s*\n.*?\n?)^(---\s*$\n?)/m.freeze
 
   # Allow API acess for actions inside "only"
-  skip_before_filter :verify_authenticity_token, :only => [
+  skip_before_action :verify_authenticity_token, :only => [
     :create,
     :unpublish,
     :newsletter
