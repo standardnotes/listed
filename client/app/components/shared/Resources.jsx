@@ -19,7 +19,7 @@ const Resources = () => {
         },
         {
             text: "How do I manage my blog settings, like username and domain?",
-            href: "https://standardnotes.org/help/63/how-do-i-manage-my-blog-settings-like-username-and-domain",
+            href: "https://standardnotes.org/help/63/how-do-i-manage-my-blog-settings-like-username-and-custom-domain",
         },
         {
             text: "How do I email my subscribers about new articles and updates?",
