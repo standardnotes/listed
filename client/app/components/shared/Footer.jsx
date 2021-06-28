@@ -16,7 +16,7 @@ const Footer = ({ blogPage, author, privatePost }) => (
             <p className="p3">
                 By
                 {" "}
-                <a href="https://standardnotes.org" target="_blank" rel="noopener noreferrer">
+                <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
                     Standard Notes
                 </a>
             </p>

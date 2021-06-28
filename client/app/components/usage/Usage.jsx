@@ -14,7 +14,7 @@ const Usage = ({ activeAuthors }) => (
                     a public journal published directly from your notes.
                     This unique approach to keeping a public blog on the internet using just a
                     {" "}
-                    <a href="https://standardnotes.org" target="_blank" rel="noopener noreferrer">
+                    <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
                         notes app
                     </a>
                     {" "}
@@ -36,7 +36,7 @@ const Usage = ({ activeAuthors }) => (
                         <p className="p2">
                             The privacy of writing in
                             {" "}
-                            <a href="https://standardnotes.org" target="_blank" rel="noopener noreferrer">
+                            <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
                                 Standard Notes
                             </a>
                             {" "}
