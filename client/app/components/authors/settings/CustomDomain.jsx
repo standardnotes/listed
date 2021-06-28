@@ -92,7 +92,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
             <p className="p2 custom-domain__info">
                 Custom domains are available for Standard Notes
                 {" "}
-                <a href="https://standardnotes.org/extended" target="blank" rel="noopener noreferrer">Extended</a>
+                <a href="https://standardnotes.com/features" target="blank" rel="noopener noreferrer">Extended</a>
                 {" "}
                 members with an active one year or five year plan.
                 Domains include an HTTPS certificate,
