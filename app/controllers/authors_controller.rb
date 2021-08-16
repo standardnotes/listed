@@ -79,13 +79,13 @@ class AuthorsController < ApplicationController
 
   def more_posts
     older_than = params[:older_than].to_i
-    all_posts = @display_author.listed_posts(nil, false)
+    all_posts = @display_author.listed_posts(nil, true)
     new_posts = all_posts
       .where('created_at < ?', Time.at(older_than).to_datetime || 0)
       .order('created_at DESC')
       .limit(POST_LIMIT)
     older_than =
-      if all_posts.first.created_at < new_posts.last.created_at
+      if all_posts.last.created_at < new_posts.last.created_at
         new_posts.last.created_at.to_i
       end
 

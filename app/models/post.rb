@@ -49,6 +49,13 @@ class Post < ApplicationRecord
     end
   end
 
+  def canonical
+    explicit = self[:canonical]
+    return explicit if explicit
+
+    return author_relative_url if author.has_custom_domain
+  end
+
   def tokenized_url
     "#{self.author.get_host}/p/#{self.token}"
   end
