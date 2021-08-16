@@ -85,7 +85,7 @@ class AuthorsController < ApplicationController
       .order('created_at DESC')
       .limit(POST_LIMIT)
     older_than =
-      if all_posts.last.created_at < new_posts.last.created_at
+      if all_posts.last.id != new_posts.last.id
         new_posts.last.created_at.to_i
       end
 
