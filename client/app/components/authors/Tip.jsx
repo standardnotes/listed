@@ -28,7 +28,7 @@ const Tip = ({ displayAuthor, authorGuestbookEntriesUrl }) => (
                 {" "}
                 {displayAuthor.display_name}
             </strong>
-            , be sure to signal their
+            , be sure to sign their
             {" "}
             <a href={authorGuestbookEntriesUrl}>guestbook</a>
             {" "}
