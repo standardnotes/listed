@@ -14,7 +14,7 @@ const Footer = ({ blogPage, author, privatePost }) => (
                 {(author && !privatePost) && author.title}
             </p>
             <p className="p3">
-                By
+                Via
                 {" "}
                 <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
                     Standard Notes
