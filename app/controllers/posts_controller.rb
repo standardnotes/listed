@@ -43,16 +43,15 @@ class PostsController < ApplicationController
       author = domain&.author
     end
 
-    if @post && @post.unlisted == true
-      not_found
-      return
-    end
-
     if params[:id]
       if params[:id].is_integer?
         @post = Post.find_by_id(params[:id])
       else
         @post = find_page(author, params[:id])
+      end
+      if @post && @post.unlisted == true
+        not_found
+        return
       end
     elsif params[:custom_path]
       @post = author&.posts.find_by_custom_path(params[:custom_path]) ||
