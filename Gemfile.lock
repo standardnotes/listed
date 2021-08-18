@@ -132,6 +132,7 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
+    libv8-node (15.14.0.1-x86_64-darwin-18)
     libv8-node (15.14.0.1-x86_64-linux)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -159,6 +160,8 @@ GEM
     net-ssh (6.1.0)
     newrelic_rpm (7.0.0)
     nio4r (2.5.7)
+    nokogiri (1.11.3-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.11.3-x86_64-linux)
       racc (~> 1.4)
     nokogumbo (2.0.5)
@@ -282,6 +285,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-18
 
 DEPENDENCIES
   aws-sdk-acm (~> 1.34)

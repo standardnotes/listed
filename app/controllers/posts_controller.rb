@@ -39,8 +39,13 @@ class PostsController < ApplicationController
         Author.includes(:domain, :credentials).find_author_from_path(request.path)
       end
     unless author
-      domain = Domain.find_by(domain: request.host)
+      domain = Domain.find_by(domain: request.host, active: true)
       author = domain&.author
+    end
+
+    if @post && @post.unlisted == true
+      not_found
+      return
     end
 
     if params[:id]
@@ -49,14 +54,13 @@ class PostsController < ApplicationController
       else
         @post = find_page(author, params[:id])
       end
-
-      if @post && @post.unlisted == true
-        not_found
-        return
-      end
+    elsif params[:custom_path]
+      @post = author&.posts.find_by_custom_path(params[:custom_path]) ||
+              find_page(author, params[:custom_path])
     elsif params[:post_token]
       @post = Post.find_by_token(params[:post_token]) ||
-              find_page(author, params[:post_token])
+              find_page(author, params[:post_token]) ||
+              author&.posts&.find_by_custom_path(params[:post_token])
     end
 
     domain = Domain.find_by(domain: request.host)
@@ -135,7 +139,9 @@ class PostsController < ApplicationController
       :image_url,
       :hidden,
       :pinned,
-      :page
+      :page,
+      :custom_path,
+      :desc
     ]
     if has_frontmatter && (yaml_hash = SafeYAML.load(raw_text)) && yaml_hash.is_a?(Hash)
       frontmatter = ActionController::Parameters.new(yaml_hash)
