@@ -166,7 +166,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                             {" "}
                             and will send you an email when your integration is ready
                             {" "}
-                            typically up to 1 hour).
+                            (typically up to 1 hour).
                         </div>
                         <div className="hover-content">
                             <Dropdown
