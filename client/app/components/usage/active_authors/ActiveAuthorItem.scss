@@ -59,6 +59,7 @@
     display: flex;
     justify-content: space-between;
     transition: color 0.3s ease-in-out;
+    height: 24px;
 }
 
 .active-author__word-count {
@@ -66,6 +67,7 @@
     display: flex;
     color: var(--color-contrast);
     font-weight: normal;
+    height: 20px;
 
     svg path {
         fill: var(--color-contrast);
