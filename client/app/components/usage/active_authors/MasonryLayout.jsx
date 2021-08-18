@@ -18,9 +18,15 @@ const MasonryLayout = ({ children }) => {
         for (let i = 0; i < children.length; i += 1) {
             const colIndex = colHeights.indexOf(Math.min(...colHeights));
             const child = container.children[i];
+            const childHeight = (
+                child.getBoundingClientRect
+                && child.getBoundingClientRect().height
+            )
+                ? child.getBoundingClientRect().height
+                : child.offsetHeight;
 
             child.style.order = colIndex + 1;
-            colHeights[colIndex] += child.getBoundingClientRect().height + MARGIN;
+            colHeights[colIndex] += childHeight + MARGIN;
         }
 
         for (let i = 0; i < cols - 1; i += 1) {
