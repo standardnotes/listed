@@ -20,7 +20,7 @@ const MasonryLayout = ({ children }) => {
             const child = container.children[i];
 
             child.style.order = colIndex + 1;
-            colHeights[colIndex] += child.offsetHeight + MARGIN;
+            colHeights[colIndex] += child.getBoundingClientRect().height + MARGIN;
         }
 
         for (let i = 0; i < cols - 1; i += 1) {
@@ -42,14 +42,6 @@ const MasonryLayout = ({ children }) => {
     useEffect(() => {
         window.addEventListener("resize", setupLayout);
         return () => window.removeEventListener("resize", setupLayout);
-    }, []);
-
-    useEffect(() => {
-        setTimeout(() => {
-            /** tmp: correct card heights are not used on load,
-             * heights are correct after small delay */
-            setupLayout();
-        }, 100);
     }, []);
 
     useEffect(() => {
