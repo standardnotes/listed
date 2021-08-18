@@ -12,7 +12,6 @@ const HeaderContainer = ({
     post,
     privatePost,
     pages,
-    authorGuestbookEntriesUrl,
     currentUrl,
     blogPage,
 }) => {
@@ -24,7 +23,6 @@ const HeaderContainer = ({
             isDesktopMenu={isDesktopMenu}
             author={author}
             pages={pages}
-            authorGuestbookEntriesUrl={authorGuestbookEntriesUrl}
             currentUrl={currentUrl}
             privatePost={privatePost}
         />
@@ -86,7 +84,6 @@ HeaderContainer.propTypes = {
         title: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
     }),
-    authorGuestbookEntriesUrl: PropTypes.string,
     blogPage: PropTypes.bool,
     currentUrl: PropTypes.string.isRequired,
     homeUrl: PropTypes.string.isRequired,
@@ -99,7 +96,6 @@ HeaderContainer.propTypes = {
 
 HeaderContainer.defaultProps = {
     author: null,
-    authorGuestbookEntriesUrl: null,
     blogPage: false,
     pages: null,
     privatePost: false,

@@ -9,7 +9,6 @@ const MenuContainer = ({
     author,
     pages,
     privatePost,
-    authorGuestbookEntriesUrl,
     currentUrl,
 }) => (
     <div className="pages-menu__container">
@@ -22,7 +21,6 @@ const MenuContainer = ({
                 isDesktopMenu={isDesktopMenu}
                 author={author}
                 pages={pages}
-                authorGuestbookEntriesUrl={authorGuestbookEntriesUrl}
                 currentUrl={currentUrl}
             />
         )}
@@ -31,7 +29,6 @@ const MenuContainer = ({
 
 MenuContainer.propTypes = {
     author: PropTypes.shape({}),
-    authorGuestbookEntriesUrl: PropTypes.string,
     currentUrl: PropTypes.string.isRequired,
     isDesktopMenu: PropTypes.bool.isRequired,
     isMobileMenuOpen: PropTypes.bool.isRequired,
@@ -43,7 +40,6 @@ MenuContainer.propTypes = {
 
 MenuContainer.defaultProps = {
     author: null,
-    authorGuestbookEntriesUrl: "",
     pages: null,
     privatePost: false,
 };

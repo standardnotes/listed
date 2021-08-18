@@ -1,14 +1,11 @@
-<% author_guestbook_entries_url = author_guestbook_entries_path(@display_author) %>
-
 <%= react_component("AuthorTip", props: {
     displayAuthor: @display_author.as_json(
-        only: :display_name,
-        methods: :title,
+        only: [:display_name],
+        methods: [:title, :url],
         include: {
             credentials: {
                 only: [:id, :key, :value]
             }
         }
-    ),
-    authorGuestbookEntriesUrl: author_guestbook_entries_url
+    )
 }) %>

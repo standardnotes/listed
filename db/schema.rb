@@ -10,170 +10,173 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210326223431) do
+ActiveRecord::Schema.define(version: 2021_08_18_164947) do
 
-  create_table "authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "secret"
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
-    t.string   "username"
-    t.string   "display_name"
-    t.text     "bio",                      limit: 65535
-    t.string   "link"
-    t.string   "email"
-    t.string   "twitter"
-    t.integer  "last_word_count"
-    t.boolean  "featured",                                  default: false
-    t.boolean  "show_tip_option",                           default: true
-    t.string   "meta_image_url"
-    t.string   "header_image_url"
-    t.boolean  "hide_from_homepage",                        default: false
-    t.boolean  "guestbook_disabled",                        default: false
-    t.boolean  "email_verified",                            default: false
-    t.string   "email_verification_token"
-    t.boolean  "newsletter_disabled",                       default: false
-    t.string   "cover_style",                               default: "full"
-    t.string   "blog_layout_style",                         default: "vertical"
-    t.boolean  "custom_theme_enabled",                      default: false
-    t.datetime "homepage_activity"
-    t.text     "css",                      limit: 16777215
-    t.index ["hide_from_homepage"], name: "index_authors_on_hide_from_homepage", using: :btree
-    t.index ["homepage_activity"], name: "index_authors_on_homepage_activity", using: :btree
-  end
-
-  create_table "credentials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "author_id"
-    t.string   "key"
-    t.text     "value",      limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  create_table "domains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "author_id"
-    t.string   "domain"
-    t.string   "extended_email"
-    t.boolean  "approved",       default: false
-    t.boolean  "active",         default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
-
-  create_table "guestbook_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "author_id"
-    t.text     "text",          limit: 65535
-    t.string   "signer_email"
-    t.text     "donation_info", limit: 65535
-    t.boolean  "public",                      default: false
-    t.string   "token"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.boolean  "unread",                      default: false
-    t.boolean  "spam",                        default: false
-    t.index ["unread"], name: "index_guestbook_entries_on_unread", using: :btree
-  end
-
-  create_table "letsencrypt_certificates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "domain",              limit: 180
-    t.text     "certificate",         limit: 65535
-    t.text     "intermediaries",      limit: 65535
-    t.text     "key",                 limit: 65535
-    t.datetime "expires_at"
-    t.datetime "renew_after"
-    t.string   "verification_path"
-    t.string   "verification_string"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.index ["domain"], name: "index_letsencrypt_certificates_on_domain", using: :btree
-    t.index ["renew_after"], name: "index_letsencrypt_certificates_on_renew_after", using: :btree
-  end
-
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "token"
-    t.string   "item_uuid"
-    t.string   "title"
-    t.text     "text",            limit: 16777215
-    t.integer  "author_id"
-    t.boolean  "unlisted",                                                  default: false
-    t.boolean  "published",                                                 default: true
-    t.datetime "created_at",                                                                null: false
-    t.datetime "updated_at",                                                                null: false
-    t.integer  "word_count"
-    t.string   "canonical"
-    t.string   "metatype"
-    t.string   "image_url"
-    t.datetime "email_sent_date"
-    t.boolean  "hidden",                                                    default: false
-    t.boolean  "pinned",                                                    default: false
-    t.boolean  "paid"
-    t.decimal  "price",                            precision: 10, scale: 2
-    t.text     "paid_content",    limit: 16777215
-    t.boolean  "page",                                                      default: false
-    t.boolean  "author_show",                                               default: false
-    t.boolean  "author_page",                                               default: false
-    t.index ["author_page"], name: "index_posts_on_author_page", using: :btree
-    t.index ["author_show", "created_at"], name: "index_posts_on_author_show_and_created_at", using: :btree
-    t.index ["author_show"], name: "index_posts_on_author_show", using: :btree
-    t.index ["created_at"], name: "index_posts_on_created_at", using: :btree
-    t.index ["metatype"], name: "index_posts_on_metatype", using: :btree
-    t.index ["unlisted", "hidden", "published"], name: "index_posts_on_unlisted_and_hidden_and_published", using: :btree
-    t.index ["unlisted"], name: "index_posts_on_unlisted", using: :btree
-  end
-
-  create_table "purchases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "post_id"
-    t.string   "buyer_email"
-    t.decimal  "price_paid",    precision: 10, scale: 2
-    t.boolean  "emailed",                                default: false
-    t.string   "cus_stripe_id"
-    t.string   "tx_stripe_id"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
-    t.boolean  "paid_out",                               default: false
-  end
-
-  create_table "simple_captcha_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key",        limit: 40
-    t.string   "value",      limit: 6
+  create_table "authors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "secret", collation: "latin1_swedish_ci"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["key"], name: "idx_key", using: :btree
+    t.string "username", collation: "utf8mb4_0900_ai_ci"
+    t.string "display_name", collation: "utf8mb4_0900_ai_ci"
+    t.text "bio", collation: "utf8mb4_0900_ai_ci"
+    t.string "link", collation: "latin1_swedish_ci"
+    t.string "email", collation: "latin1_swedish_ci"
+    t.string "twitter", collation: "latin1_swedish_ci"
+    t.integer "last_word_count"
+    t.boolean "featured", default: false
+    t.boolean "show_tip_option", default: true
+    t.string "meta_image_url", collation: "latin1_swedish_ci"
+    t.string "header_image_url", collation: "latin1_swedish_ci"
+    t.boolean "hide_from_homepage", default: false
+    t.boolean "guestbook_disabled", default: false
+    t.boolean "email_verified", default: false
+    t.string "email_verification_token", collation: "latin1_swedish_ci"
+    t.boolean "newsletter_disabled", default: false
+    t.datetime "homepage_activity"
+    t.text "css", limit: 16777215
+    t.string "cover_style", default: "full", collation: "latin1_swedish_ci"
+    t.string "blog_layout_style", default: "vertical", collation: "latin1_swedish_ci"
+    t.boolean "custom_theme_enabled", default: false
+    t.index ["hide_from_homepage"], name: "index_authors_on_hide_from_homepage"
+    t.index ["homepage_activity"], name: "index_authors_on_homepage_activity"
   end
 
-  create_table "subscribers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email"
+  create_table "credentials", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "author_id"
+    t.string "key"
+    t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "author_id"
-    t.integer  "subscriber_id"
-    t.string   "token"
-    t.boolean  "verified"
-    t.string   "frequency",            default: "daily"
+  create_table "domains", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "author_id"
+    t.string "domain"
+    t.string "extended_email"
+    t.boolean "approved", default: false
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "guestbook_entries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "author_id"
+    t.text "text"
+    t.string "signer_email"
+    t.text "donation_info"
+    t.boolean "public", default: false
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "unread", default: false
+    t.boolean "spam", default: false
+    t.index ["unread"], name: "index_guestbook_entries_on_unread"
+  end
+
+  create_table "letsencrypt_certificates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "domain"
+    t.text "certificate"
+    t.text "intermediaries"
+    t.text "key"
+    t.datetime "expires_at"
+    t.datetime "renew_after"
+    t.string "verification_path"
+    t.string "verification_string"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain"], name: "index_letsencrypt_certificates_on_domain"
+    t.index ["renew_after"], name: "index_letsencrypt_certificates_on_renew_after"
+  end
+
+  create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "token"
+    t.string "item_uuid"
+    t.string "title", collation: "utf8mb4_0900_ai_ci"
+    t.text "text", limit: 4294967295, collation: "utf8mb4_0900_ai_ci"
+    t.integer "author_id"
+    t.boolean "unlisted", default: false
+    t.boolean "published", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "word_count"
+    t.string "canonical"
+    t.string "metatype"
+    t.string "image_url"
+    t.datetime "email_sent_date"
+    t.boolean "hidden", default: false
+    t.boolean "pinned", default: false
+    t.boolean "paid"
+    t.decimal "price", precision: 10, scale: 2
+    t.text "paid_content", limit: 16777215
+    t.boolean "page", default: false
+    t.boolean "author_show", default: false
+    t.boolean "author_page", default: false
+    t.string "desc"
+    t.string "custom_path"
+    t.index ["author_id", "custom_path"], name: "index_posts_on_author_id_and_custom_path"
+    t.index ["author_page"], name: "index_posts_on_author_page"
+    t.index ["author_show", "created_at"], name: "index_posts_on_author_show_and_created_at"
+    t.index ["author_show"], name: "index_posts_on_author_show"
+    t.index ["created_at"], name: "index_posts_on_created_at"
+    t.index ["metatype"], name: "index_posts_on_metatype"
+    t.index ["unlisted", "hidden", "published"], name: "index_posts_on_unlisted_and_hidden_and_published"
+    t.index ["unlisted"], name: "index_posts_on_unlisted"
+  end
+
+  create_table "purchases", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "post_id"
+    t.string "buyer_email"
+    t.decimal "price_paid", precision: 10, scale: 2
+    t.boolean "emailed", default: false
+    t.string "cus_stripe_id"
+    t.string "tx_stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "paid_out", default: false
+  end
+
+  create_table "simple_captcha_data", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "key", limit: 40
+    t.string "value", limit: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["key"], name: "idx_key"
+  end
+
+  create_table "subscribers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "author_id"
+    t.integer "subscriber_id"
+    t.string "token"
+    t.boolean "verified"
+    t.string "frequency", default: "daily"
     t.datetime "last_mailing"
-    t.boolean  "unsubscribed",         default: false
+    t.boolean "unsubscribed", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "verification_sent_at"
-    t.index ["author_id"], name: "index_subscriptions_on_author_id", using: :btree
-    t.index ["frequency"], name: "index_subscriptions_on_frequency", using: :btree
-    t.index ["subscriber_id"], name: "index_subscriptions_on_subscriber_id", using: :btree
-    t.index ["unsubscribed"], name: "index_subscriptions_on_unsubscribed", using: :btree
-    t.index ["verified"], name: "index_subscriptions_on_verified", using: :btree
+    t.index ["author_id"], name: "index_subscriptions_on_author_id"
+    t.index ["frequency"], name: "index_subscriptions_on_frequency"
+    t.index ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
+    t.index ["unsubscribed"], name: "index_subscriptions_on_unsubscribed"
+    t.index ["verified"], name: "index_subscriptions_on_verified"
   end
 
-  create_table "tips", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "author_id"
-    t.string   "tipper_email"
-    t.decimal  "amount",                      precision: 10, scale: 2
-    t.string   "cus_stripe_id"
-    t.string   "tx_stripe_id"
-    t.text     "message",       limit: 65535
-    t.boolean  "paid_out",                                             default: false
-    t.datetime "created_at",                                                           null: false
-    t.datetime "updated_at",                                                           null: false
+  create_table "tips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "author_id"
+    t.string "tipper_email"
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "cus_stripe_id"
+    t.string "tx_stripe_id"
+    t.text "message"
+    t.boolean "paid_out", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

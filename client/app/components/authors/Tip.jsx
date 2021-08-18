@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./Tip.scss";
 
-const Tip = ({ displayAuthor, authorGuestbookEntriesUrl }) => (
+const Tip = ({ displayAuthor }) => (
     <div id="tip" className="page-container">
         <h1 className="h1">Thank</h1>
         <p className="p1">
@@ -30,7 +30,7 @@ const Tip = ({ displayAuthor, authorGuestbookEntriesUrl }) => (
             </strong>
             , be sure to sign their
             {" "}
-            <a href={authorGuestbookEntriesUrl}>guestbook</a>
+            <a href={`${displayAuthor.url}/guestbook`}>guestbook</a>
             {" "}
             to let them know!
         </p>
@@ -50,7 +50,6 @@ const Tip = ({ displayAuthor, authorGuestbookEntriesUrl }) => (
 );
 
 Tip.propTypes = {
-    authorGuestbookEntriesUrl: PropTypes.string.isRequired,
     displayAuthor: PropTypes.shape({
         credentials: PropTypes.arrayOf(
             PropTypes.shape({
@@ -59,6 +58,7 @@ Tip.propTypes = {
                 value: PropTypes.string.isRequired,
             }),
         ).isRequired,
+        url: PropTypes.string.isRequired,
         display_name: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
     }).isRequired,

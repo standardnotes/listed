@@ -8,7 +8,7 @@ import "./ActiveAuthorItem.scss";
 const ActiveAuthorItem = ({ author }) => (
     <li className="author active-author">
         {author.id === "easter-egg" ? (
-            <StartWriting className="card">
+            <StartWriting className="easter-egg card">
                 <div className="active-author__title">
                     <h5 className="h5">
                         {author.title}

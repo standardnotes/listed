@@ -4,7 +4,7 @@
     <%= csrf_meta_tags %>
 
     <% if @post %>
-      <% @desc = strip_tags(@post.rendered_text).slice(0, 200) + "..." %>
+      <% @desc = @post.desc || strip_tags(@post.rendered_text).slice(0, 200) + "..." %>
       <% @canonical = @post.canonical %>
       <% @meta_image = @post.image_url if @post.image_url %>
       <% @twitter_style = "summary_large_image" if @post.image_url %>
