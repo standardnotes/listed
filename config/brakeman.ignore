@@ -34,6 +34,37 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 2,
+      "fingerprint": "8350a4586071a403ab23628e5f6aea1bee69b54fe2916e0da665db53261f5dd6",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/layouts/application.html.erb",
+      "line": 67,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "(((Author.find((params[:author_id] or params[:id])) or Author.find(params[:author_id])) or Author.includes(:domain, :credentials).find_author_from_path(request.path)) or Domain.find_by(:domain => request.host).author).css",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "GuestbookEntriesController",
+          "method": "destroy",
+          "line": 59,
+          "file": "app/controllers/guestbook_entries_controller.rb",
+          "rendered": {
+            "name": "layouts/application",
+            "file": "app/views/layouts/application.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "layouts/application"
+      },
+      "user_input": "Author.find((params[:author_id] or params[:id]))",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
       "fingerprint": "cff7d4c44a3a6be57f18126b095b76cc7cf09a961e6f262d7ff440d48c6883c2",
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
@@ -63,44 +94,13 @@
       "note": "This is the intended behavior."
     },
     {
-      "warning_type": "Cross-Site Scripting",
-      "warning_code": 2,
-      "fingerprint": "d0fd1f0909f5e41cb278cfca8d8b7483dc2b65a20d65ff9abaf53cd47917eedc",
-      "check_name": "CrossSiteScripting",
-      "message": "Unescaped model attribute",
-      "file": "app/views/layouts/application.html.erb",
-      "line": 67,
-      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "(((Author.find((params[:author_id] or params[:id])) or Author.find(params[:author_id])) or Author.includes(:domain, :credentials).find_author_from_path(request.path)) or Domain.find_by(:domain => request.host).author).css",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "GuestbookEntriesController",
-          "method": "destroy",
-          "line": 49,
-          "file": "app/controllers/guestbook_entries_controller.rb",
-          "rendered": {
-            "name": "layouts/application",
-            "file": "app/views/layouts/application.html.erb"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "layouts/application"
-      },
-      "user_input": "Author.find((params[:author_id] or params[:id]))",
-      "confidence": "Weak",
-      "note": "Model attribute is sanitized."
-    },
-    {
       "warning_type": "Redirect",
       "warning_code": 18,
       "fingerprint": "d9bbc9935c0f4c0f1fe49d001a763b6a3d83588c87081253950b4893863d9cdc",
       "check_name": "Redirect",
       "message": "Possible unprotected redirect",
       "file": "app/controllers/posts_controller.rb",
-      "line": 74,
+      "line": 77,
       "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
       "code": "redirect_to(Author.find_author_from_path(request.path).url)",
       "render_path": null,
@@ -114,6 +114,6 @@
       "note": "This is the intended behavior."
     }
   ],
-  "updated": "2021-05-13 23:37:33 -0400",
-  "brakeman_version": "5.0.1"
+  "updated": "2021-08-18 14:33:38 -0500",
+  "brakeman_version": "5.1.1"
 }
