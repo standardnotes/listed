@@ -71,7 +71,7 @@
       "file": "app/views/layouts/application.html.erb",
       "line": 67,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "(Author.find((params[:author_id] or params[:id])) or Author.find(params[:author_id])).css",
+      "code": "(((Author.find((params[:author_id] or params[:id])) or Author.find(params[:author_id])) or Author.includes(:domain, :credentials).find_author_from_path(request.path)) or Domain.find_by(:domain => request.host).author).css",
       "render_path": [
         {
           "type": "controller",
