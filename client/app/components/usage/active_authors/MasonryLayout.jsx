@@ -47,13 +47,12 @@ const MasonryLayout = ({ children }) => {
 
     useEffect(() => {
         window.addEventListener("resize", setupLayout);
-        window.addEventListener("load", setupLayout);
-
-        return () => {
-            window.removeEventListener("resize", setupLayout);
-            window.removeEventListener("load", setupLayout);
-        };
+        return () => window.removeEventListener("resize", setupLayout);
     }, []);
+
+    useEffect(() => {
+        setupLayout();
+    }, [children]);
 
     return (
         <ul
