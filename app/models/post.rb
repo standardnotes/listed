@@ -53,7 +53,11 @@ class Post < ApplicationRecord
     explicit = self[:canonical]
     return explicit if explicit
 
-    return author_relative_url if author.has_custom_domain
+    if unlisted
+      return nil
+    end
+
+    author_relative_url
   end
 
   def tokenized_url
@@ -121,6 +125,14 @@ class Post < ApplicationRecord
 
   def path
     return nil if !self.author
+
+    if custom_path
+      if author.has_custom_domain
+        return "/#{custom_path}"
+      else
+        return "/#{author.url_segment}/#{custom_path}"
+      end
+    end
 
     if title
       prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.username? ? "" : "/posts")

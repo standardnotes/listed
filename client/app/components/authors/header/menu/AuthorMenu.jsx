@@ -9,7 +9,7 @@ import {
 import "./AuthorMenu.scss";
 
 const AuthorMenu = ({
-    isMobileMenuOpen, isDesktopMenu, author, pages, authorGuestbookEntriesUrl, currentUrl,
+    isMobileMenuOpen, isDesktopMenu, author, pages, currentUrl,
 }) => {
     const isActiveMenuItem = (url) => url === currentUrl;
 
@@ -54,7 +54,7 @@ const AuthorMenu = ({
             )}
             {authorHasGuestbook(author) && (
                 <a
-                    href={authorGuestbookEntriesUrl}
+                    href={`${author.url}/guestbook`}
                     className={getLinkClassName(currentUrl.includes("/guestbook"))}
                 >
                     Guestbook
@@ -83,7 +83,6 @@ AuthorMenu.propTypes = {
         newsletter_disabled: PropTypes.bool.isRequired,
         url: PropTypes.string.isRequired,
     }).isRequired,
-    authorGuestbookEntriesUrl: PropTypes.string.isRequired,
     currentUrl: PropTypes.string.isRequired,
     isDesktopMenu: PropTypes.bool.isRequired,
     isMobileMenuOpen: PropTypes.bool.isRequired,

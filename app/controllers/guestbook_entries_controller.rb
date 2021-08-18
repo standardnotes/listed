@@ -2,10 +2,20 @@ class GuestbookEntriesController < ApplicationController
   include CaptchaHelper
 
   before_action do
-    @author = Author.find(params[:author_id]) if params[:author_id]
+    if params[:author_id]
+      @author = Author.find(params[:author_id]) if params[:author_id]
+    else
+      @author = Author.includes(:domain, :credentials).find_author_from_path(request.path)
+    end
+
+    unless @author
+      domain = Domain.find_by(domain: request.host)
+      @author = domain&.author
+    end
+
     @entry = GuestbookEntry.find(params[:id]) if params[:id]
 
-    if @author && @author.custom_theme_enabled
+    if @author&.custom_theme_enabled
       @styles = @author.css
     end
     @pages = @author.pages if @author

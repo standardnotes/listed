@@ -3,7 +3,6 @@
 <% post = local_assigns[:post] %>
 <% author = @author || @display_author || (post && post.author) if !private_post %>
 <% pages = @pages if !private_post %>
-<% author_guestbook_entries_url = author && author_guestbook_entries_path(author) if !private_post %>
 
 <%= react_component("AuthorHeader", props: {
     homeUrl: home_url,
@@ -22,7 +21,6 @@
         only: [:id, :title],
         methods: [:author_relative_url]
     ),
-    authorGuestbookEntriesUrl: author_guestbook_entries_url,
     currentUrl: request.url,
     blogPage: (@blog_page if !private_post),
 }) %>

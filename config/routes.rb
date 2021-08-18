@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get 'settings'
       get 'tip'
       get 'subscribe'
+      get 'guestbook' => 'guestbook_entries#index'
       get 'verify_email'
       get 'more_posts'
       post 'email_subscribe', as: 'email_subscribe'
@@ -53,10 +54,11 @@ Rails.application.routes.draw do
     get 'feed' => 'authors#feed', :format => 'rss'
     get 'tip' => 'authors#tip'
     get 'subscribe' => 'authors#subscribe'
+    get 'guestbook' => 'guestbook_entries#index'
     post 'email_subscribe' => 'authors#email_subscribe'
     get '/p/:post_token' => 'posts#show'
     get ':id/:slug' => 'posts#show'
-    get ':id' => 'posts#show', constraint: { id: /^[0-9]*$/ }
+    get ':id' => 'posts#show', constraints: { id: /[0-9]+/ }
     get ':post_token' => 'posts#show'
     root to: 'authors#show'
   end
@@ -69,7 +71,9 @@ Rails.application.routes.draw do
   get ':username/feed' => 'authors#feed', :format => 'rss', :constraints => {:username => un_regex}
   get ':username/tip' => 'authors#tip', :constraints => {:username => un_regex}
   get ':username/subscribe' => 'authors#subscribe', :constraints => {:username => un_regex}
-  get ':username/:id' => 'posts#show', :constraints => {:username => un_regex}, as: 'single_post'
+  get ':username/guestbook' => 'guestbook_entries#index', :constraints => {:username => un_regex}
+  get ':username/:id' => 'posts#show', :constraints => {:username => un_regex, id: /[0-9]+/ }, as: 'single_post'
+  get ':username/:custom_path' => 'posts#show', :constraints => {:username => un_regex}
   get ':username/:id/:slug' => 'posts#show', :constraints => {:username => un_regex}, as: 'slugged_post'
   get ':username' => 'authors#show', :constraints => {:username => un_regex}
 
