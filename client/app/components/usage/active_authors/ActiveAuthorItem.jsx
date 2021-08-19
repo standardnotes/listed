@@ -29,8 +29,11 @@ const ActiveAuthorItem = ({ author }) => (
                         <h5 className="h5">
                             {author.title}
                         </h5>
-                        {author.featured
-                                && <SVG src={IcStarCircleFilled} className="active-author__icon active-author__icon--featured" />}
+                        {author.featured && (
+                            <div className="active_author__icon-container">
+                                <SVG src={IcStarCircleFilled} className="active-author__icon active-author__icon--featured" />
+                            </div>
+                        )}
                     </div>
                     {author.bio
                             && <p className="bio active-author__bio p2">{author.bio}</p>}
