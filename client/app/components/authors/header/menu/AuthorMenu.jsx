@@ -35,15 +35,22 @@ const AuthorMenu = ({
             >
                 Home
             </a>
-            {authorHasPages(pages) && pages.map((page) => (
-                <a
-                    key={page.id}
-                    href={page.author_relative_url}
-                    className={getLinkClassName(isActiveMenuItem(page.author_relative_url))}
-                >
-                    {page.title}
-                </a>
-            ))}
+            {authorHasPages(pages) && pages.map((page) => {
+                const linkAttrs = page.link ? {
+                    target: "_blank",
+                    rel: "noreferrer",
+                } : {};
+                return (
+                    <a
+                        key={page.id}
+                        href={page.link || page.author_relative_url}
+                        {...linkAttrs}
+                        className={getLinkClassName(isActiveMenuItem(page.author_relative_url))}
+                    >
+                        {page.title}
+                    </a>
+                );
+            })}
             {authorHasCredentials(author) && (
                 <a
                     href={`${author.url}/tip`}

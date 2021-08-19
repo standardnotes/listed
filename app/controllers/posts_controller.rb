@@ -140,7 +140,8 @@ class PostsController < ApplicationController
       :pinned,
       :page,
       :custom_path,
-      :desc
+      :desc,
+      :link
     ]
     if has_frontmatter && (yaml_hash = SafeYAML.load(raw_text)) && yaml_hash.is_a?(Hash)
       frontmatter = ActionController::Parameters.new(yaml_hash)
