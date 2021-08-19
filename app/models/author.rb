@@ -53,7 +53,7 @@ class Author < ApplicationRecord
   end
 
   def pages
-    posts.where(author_page: true)
+    posts.where(author_page: true).order(:page_sort)
   end
 
   def code

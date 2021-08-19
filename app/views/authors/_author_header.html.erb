@@ -18,7 +18,7 @@
     ),
     privatePost: private_post,
     pages: pages.as_json(
-        only: [:id, :title],
+        only: [:id, :title, :page_link],
         methods: [:author_relative_url]
     ),
     currentUrl: request.url,
