@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2021_08_19_133742) do
     t.string "desc"
     t.string "custom_path"
     t.string "link"
+    t.integer "page_sort", default: 0
     t.index ["author_id", "custom_path"], name: "index_posts_on_author_id_and_custom_path"
     t.index ["author_page"], name: "index_posts_on_author_page"
     t.index ["author_show", "created_at"], name: "index_posts_on_author_show_and_created_at"
