@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_164947) do
+ActiveRecord::Schema.define(version: 2021_08_19_133742) do
 
   create_table "authors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "secret", collation: "latin1_swedish_ci"
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 2021_08_18_164947) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "domains", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "domains", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "author_id"
-    t.string "domain"
-    t.string "extended_email"
+    t.string "domain", collation: "latin1_swedish_ci"
+    t.string "extended_email", collation: "latin1_swedish_ci"
     t.boolean "approved", default: false
     t.boolean "active", default: false
     t.datetime "created_at", null: false
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2021_08_18_164947) do
     t.boolean "author_page", default: false
     t.string "desc"
     t.string "custom_path"
+    t.string "page_link"
+    t.integer "page_sort", default: 0
     t.index ["author_id", "custom_path"], name: "index_posts_on_author_id_and_custom_path"
     t.index ["author_page"], name: "index_posts_on_author_page"
     t.index ["author_show", "created_at"], name: "index_posts_on_author_show_and_created_at"
@@ -167,13 +169,13 @@ ActiveRecord::Schema.define(version: 2021_08_18_164947) do
     t.index ["verified"], name: "index_subscriptions_on_verified"
   end
 
-  create_table "tips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "tips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "author_id"
-    t.string "tipper_email"
+    t.string "tipper_email", collation: "latin1_swedish_ci"
     t.decimal "amount", precision: 10, scale: 2
-    t.string "cus_stripe_id"
-    t.string "tx_stripe_id"
-    t.text "message"
+    t.string "cus_stripe_id", collation: "latin1_swedish_ci"
+    t.string "tx_stripe_id", collation: "latin1_swedish_ci"
+    t.text "message", collation: "latin1_swedish_ci"
     t.boolean "paid_out", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
