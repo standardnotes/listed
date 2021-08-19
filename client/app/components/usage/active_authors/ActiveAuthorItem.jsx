@@ -30,7 +30,7 @@ const ActiveAuthorItem = ({ author }) => (
                             {author.title}
                         </h5>
                         {author.featured && (
-                            <div className="active_author__icon-container">
+                            <div className="active-author__icon-container">
                                 <SVG src={IcStarCircleFilled} className="active-author__icon active-author__icon--featured" />
                             </div>
                         )}

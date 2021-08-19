@@ -47,12 +47,21 @@ const MasonryLayout = ({ children }) => {
 
     useEffect(() => {
         window.addEventListener("resize", setupLayout);
-        return () => window.removeEventListener("resize", setupLayout);
+        window.addEventListener("load", setupLayout);
+
+        return () => {
+            window.removeEventListener("resize", setupLayout);
+            window.removeEventListener("load", setupLayout);
+        };
     }, []);
 
     useEffect(() => {
-        setupLayout();
-    }, [children]);
+        setTimeout(() => {
+            /** tmp: correct card heights are not used on load,
+             * heights are correct after small delay */
+            setupLayout();
+        }, 100);
+    }, []);
 
     return (
         <ul
