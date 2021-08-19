@@ -36,14 +36,14 @@ const AuthorMenu = ({
                 Home
             </a>
             {authorHasPages(pages) && pages.map((page) => {
-                const linkAttrs = page.link ? {
+                const linkAttrs = page.page_link ? {
                     target: "_blank",
                     rel: "noreferrer",
                 } : {};
                 return (
                     <a
                         key={page.id}
-                        href={page.link || page.author_relative_url}
+                        href={page.page_link || page.author_relative_url}
                         {...linkAttrs}
                         className={getLinkClassName(isActiveMenuItem(page.author_relative_url))}
                     >
