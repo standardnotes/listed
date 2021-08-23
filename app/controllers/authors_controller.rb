@@ -73,24 +73,32 @@ class AuthorsController < ApplicationController
       if all_posts.count > POST_LIMIT && all_posts.last.created_at < @posts.last.created_at
         @posts.last.created_at.to_i
       end
+    @last_post_id = @posts.last.id
     @should_show_condensed_cover = @display_author.cover_style == CONDENSED_COVER_STYLE
     @should_show_carded_blog = @display_author.blog_layout_style == CARDS_BLOG_LAYOUT_STYLE
   end
 
   def more_posts
     older_than = params[:older_than].to_i
+    last_post_id = params[:last_post_id].to_i
     all_posts = @display_author.listed_posts(nil, true)
     new_posts = all_posts
-      .where('created_at < ?', Time.at(older_than).to_datetime || 0)
-      .order('created_at DESC')
+      .where('created_at <= ?', Time.at(older_than).to_datetime || 0)
+      .where('id != ?', last_post_id)
+      .order('created_at DESC, id DESC')
       .limit(POST_LIMIT)
     older_than =
       if all_posts.last.id != new_posts.last.id
         new_posts.last.created_at.to_i
       end
+    last_post_id =
+      if all_posts.last.id != new_posts.last.id
+        new_posts.last.id
+      end
 
     render :json => {
       older_than: older_than,
+      last_post_id: last_post_id,
       posts: new_posts.as_json(
         only: [:id, :title, :unlisted, :page, :created_at, :word_count],
         methods: [:author_relative_url, :preview_text, :rendered_text]
