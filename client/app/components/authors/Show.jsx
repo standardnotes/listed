@@ -9,9 +9,12 @@ import getAuthToken from "../../utils/getAuthToken";
 import { IcChevronDown } from "../../assets/icons";
 import "./Show.scss";
 
-const Show = ({ posts, olderThan, displayAuthor }) => {
+const Show = ({
+    posts, olderThan, displayAuthor, lastPostId,
+}) => {
     const [visiblePosts, setVisiblePosts] = useState(posts);
     const [loadMorePostsDate, setLoadMorePostsDate] = useState(olderThan);
+    const [loadMorePostsLastId, setLoadMorePostsLastId] = useState(lastPostId);
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
 
@@ -19,17 +22,25 @@ const Show = ({ posts, olderThan, displayAuthor }) => {
         setIsErrorToastDisplayed(false);
 
         try {
-            const response = await axios
-                .get(`/authors/${displayAuthor.id}/more_posts?older_than=${loadMorePostsDate}`, null, {
+            const response = await axios.get(
+                `/authors/${displayAuthor.id}/more_posts?older_than=${loadMorePostsDate}&last_post_id=${loadMorePostsLastId}`,
+                null,
+                {
                     headers: {
                         "X-CSRF-Token": getAuthToken(),
                     },
-                });
+                },
+            );
 
-            const { older_than: newOlderThan, posts: newPosts } = response.data;
+            const {
+                older_than: newOlderThan,
+                last_post_id: newLastPostId,
+                posts: newPosts,
+            } = response.data;
 
             setVisiblePosts([...visiblePosts, ...newPosts]);
             setLoadMorePostsDate(newOlderThan);
+            setLoadMorePostsLastId(newLastPostId);
         } catch (err) {
             setErrorToastMessage("There was an error trying to load more posts. Please try again.");
             setIsErrorToastDisplayed(true);
@@ -73,6 +84,7 @@ Show.propTypes = {
         id: PropTypes.number.isRequired,
     }).isRequired,
     olderThan: PropTypes.number,
+    lastPostId: PropTypes.number,
     posts: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
@@ -82,6 +94,7 @@ Show.propTypes = {
 
 Show.defaultProps = {
     olderThan: null,
+    lastPostId: null,
 };
 
 export default (props) => <Show {...props} />;
