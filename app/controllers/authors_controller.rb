@@ -66,14 +66,17 @@ class AuthorsController < ApplicationController
 
     @posts = @posts.limit(POST_LIMIT).sort { |a, b| b.created_at <=> a.created_at }
     @newer_than =
-      if all_posts.count > POST_LIMIT && all_posts.first.created_at > @posts.first.created_at
+      if all_posts.count > POST_LIMIT && all_posts.first.id != @posts.first.id
         @posts.first.created_at.to_i
       end
     @older_than =
-      if all_posts.count > POST_LIMIT && all_posts.last.created_at < @posts.last.created_at
+      if all_posts.count > POST_LIMIT && all_posts.last.id != @posts.last.id
         @posts.last.created_at.to_i
       end
-    @last_post_id = @posts.last.id
+    @last_post_id =
+      if all_posts.count > POST_LIMIT && all_posts.last.id != @posts.last.id
+        @posts.last.id
+      end
     @should_show_condensed_cover = @display_author.cover_style == CONDENSED_COVER_STYLE
     @should_show_carded_blog = @display_author.blog_layout_style == CARDS_BLOG_LAYOUT_STYLE
   end
