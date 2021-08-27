@@ -1,8 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/environment")
-
-set :output, Rails.root.join('log', 'cron.log').to_s
-
-job_type :rake_verbose, "cd :path && :environment_variable=:environment :bundle_command rake :task :output"
+set :output, {:error => 'error.log', :standard => 'cron.log'}
 
 every 1.week do
   runner 'Subscription.send_weekly_emails'
@@ -13,5 +9,5 @@ every 1.day do
 end
 
 every 10.minute do
-  rake_verbose 'ssl:renew'
+  rake 'ssl:renew'
 end
