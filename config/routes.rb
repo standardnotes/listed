@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       get 'settings'
       get 'tip'
       get 'subscribe'
-      get 'guestbook' => 'guestbook_entries#index'
       get 'verify_email'
       get 'more_posts'
       post 'email_subscribe', as: 'email_subscribe'
@@ -16,6 +15,8 @@ Rails.application.routes.draw do
       post 'delete_domain'
       post 'delete_all_data'
     end
+
+    get ':author_id/guestbook' => 'guestbook_entries#index'
 
     resources :guestbook_entries, path: :guestbook do
       member do
