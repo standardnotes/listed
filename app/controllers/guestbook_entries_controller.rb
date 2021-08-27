@@ -1,7 +1,10 @@
 class GuestbookEntriesController < ApplicationController
   include CaptchaHelper
 
-  before_action do
+  before_action :find_author
+  before_action :find_entry, only: [:destroy, :approve, :unapprove, :spam, :delete]
+
+  def find_author
     if params[:author_id]
       @author = Author.find(params[:author_id]) if params[:author_id]
     else
@@ -13,12 +16,14 @@ class GuestbookEntriesController < ApplicationController
       @author = domain&.author
     end
 
-    @entry = GuestbookEntry.find(params[:id]) if params[:id]
-
     if @author&.custom_theme_enabled
       @styles = @author.css
     end
     @pages = @author.pages if @author
+  end
+
+  def find_entry
+    @entry = GuestbookEntry.find(params[:id]) if params[:id]
   end
 
   def index
