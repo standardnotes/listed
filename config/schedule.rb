@@ -1,4 +1,4 @@
-set :output, {:error => 'error.log', :standard => 'cron.log'}
+set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
 
 job_type :rake_verbose, "cd :path && :environment_variable=:environment :bundle_command rake :task :output"
 
