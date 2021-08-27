@@ -1,5 +1,7 @@
 set :output, {:error => 'error.log', :standard => 'cron.log'}
 
+job_type :rake_verbose, "cd :path && :environment_variable=:environment :bundle_command rake :task :output"
+
 every 1.week do
   runner 'Subscription.send_weekly_emails'
 end
@@ -9,5 +11,5 @@ every 1.day do
 end
 
 every 10.minute do
-  rake 'ssl:renew'
+  rake_verbose 'ssl:renew'
 end
