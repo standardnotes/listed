@@ -17,8 +17,6 @@ set :rails_env, 'production'
 
 set :keep_releases, 2
 
-Rake::Task["whenever:update_crontab"].clear_actions
-
 # role-based syntax
 # ==================
 
