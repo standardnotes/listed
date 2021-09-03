@@ -7,6 +7,16 @@ class SSLCertificate < LetsEncrypt::Certificate
     !renew_after.present? || renew_after <= Time.zone.now
   end
 
+  def renew
+    validation_result = validate
+
+    return validation_result if validation_result != 'valid'
+
+    issue
+
+    'valid'
+  end
+
   # rails-letsencrypt does not return error value on `verify` method, so we can't differentiate
   # between a rate limiting error and an invalid domain. Use this method to custom validate
   # whether a domain's DNS records are correctly configured.

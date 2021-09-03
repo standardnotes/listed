@@ -40,7 +40,17 @@ namespace :ssl do
           end
 
           Rails.logger.info 'Renewing certificate'
-          certificate.renew
+          result = certificate.renew
+
+          if result == 'invalid'
+            Rails.logger.info 'Certificate is not valid. Removing certificate.'
+
+            Domain.find_by_domain(certificate.domain).author.invalid_domain
+
+            certificate.delete
+
+            next
+          end
 
           dump_certificate_to_files(certificate)
         rescue StandardError => e
@@ -58,16 +68,6 @@ namespace :ssl do
 
         unless existing_domain
           Rails.logger.info 'There is no domain entry. Skipped domain validation.'
-
-          next
-        end
-
-        if certificate.validate == 'invalid'
-          Rails.logger.info 'Certificate is not valid. Removing certificate.'
-
-          existing_domain.author.invalid_domain
-
-          certificate.delete
 
           next
         end
