@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import React from "react";
-import ActiveAuthors from "./active_authors/ActiveAuthors";
+import AuthorsList from "./authors_list/AuthorsList";
 import StartWriting from "../shared/StartWriting";
 import "./Usage.scss";
 
-const Usage = ({ activeAuthors }) => (
+const Usage = ({ activeAuthors, featuredAuthors }) => (
     <div className="usage page-container">
         <div className="usage__column-layout">
             <div className="usage__column">
@@ -51,12 +51,16 @@ const Usage = ({ activeAuthors }) => (
             </div>
         </div>
         <StartWriting className="button--start-writing" />
-        <ActiveAuthors activeAuthors={activeAuthors} />
+        <AuthorsList featuredAuthors={featuredAuthors} />
+        <AuthorsList activeAuthors={activeAuthors} />
     </div>
 );
 
 Usage.propTypes = {
     activeAuthors: PropTypes.arrayOf(
+        PropTypes.shape({}),
+    ).isRequired,
+    featuredAuthors: PropTypes.arrayOf(
         PropTypes.shape({}),
     ).isRequired,
 };
