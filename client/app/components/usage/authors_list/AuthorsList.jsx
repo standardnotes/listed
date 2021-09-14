@@ -4,15 +4,12 @@ import MasonryLayout from "./MasonryLayout";
 import AuthorListItem from "./AuthorListItem";
 import "./AuthorsList.scss";
 
-const AuthorsList = ({ activeAuthors, featuredAuthors }) => {
-    const isFeatured = featuredAuthors.length > 0;
-    const authors = isFeatured ? featuredAuthors : activeAuthors;
-    const type = isFeatured ? "featured" : "recent";
+const AuthorsList = ({ authors, type }) => {
     const getItems = (isDesktop) => authors.map((author) => (
         <AuthorListItem key={`${author.id}${isDesktop ? "-desktop" : "-mobile"}${type}`} author={author} />
     ));
 
-    const header = isFeatured ? "Featured authors" : "Recent authors";
+    const header = type === "featured" ? "Featured authors" : "Recent authors";
 
     return (
         <div className="active-authors">
@@ -31,27 +28,15 @@ const AuthorsList = ({ activeAuthors, featuredAuthors }) => {
 };
 
 AuthorsList.propTypes = {
-    activeAuthors: PropTypes.arrayOf(
+    authors: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.number,
             ]).isRequired,
         }),
-    ),
-    featuredAuthors: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.number,
-            ]).isRequired,
-        }),
-    ),
-};
-
-AuthorsList.defaultProps = {
-    activeAuthors: [],
-    featuredAuthors: [],
+    ).isRequired,
+    type: PropTypes.string.isRequired,
 };
 
 export default AuthorsList;

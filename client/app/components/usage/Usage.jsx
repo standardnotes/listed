@@ -51,8 +51,8 @@ const Usage = ({ activeAuthors, featuredAuthors }) => (
             </div>
         </div>
         <StartWriting className="button--start-writing" />
-        <AuthorsList featuredAuthors={featuredAuthors} />
-        <AuthorsList activeAuthors={activeAuthors} />
+        <AuthorsList authors={featuredAuthors} type="featured" />
+        <AuthorsList authors={activeAuthors} type="recent" />
     </div>
 );
 
