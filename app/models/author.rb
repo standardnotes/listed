@@ -32,15 +32,20 @@ class Author < ApplicationRecord
     ).first
 
     has_bio = bio && bio.length > 0
-    default_criteria =
+    post_criteria =
       most_recent_post &&
       last_word_count > 100 &&
       username? &&
       !hide_from_homepage &&
       has_bio
 
-    homepage = featured || default_criteria
-    self.homepage_activity = homepage ? most_recent_post.created_at : nil
+      if featured
+        self.homepage_activity = DateTime.now
+      elsif post_criteria
+        self.homepage_activity = most_recent_post.created_at
+      else
+        self.homepage_activity = nil
+      end
 
     save if homepage_activity_changed? && should_save
   end
