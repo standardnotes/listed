@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import "./MasonryLayout.scss";
 
-const MasonryLayout = ({ children }) => {
+const MasonryLayout = ({ elementId, children }) => {
     const MARGIN = 24;
     const THREE_COLUMN_BREAKPOINT = 1312;
 
@@ -13,7 +13,7 @@ const MasonryLayout = ({ children }) => {
     const setupLayout = () => {
         const cols = getCols(window.innerWidth);
         const colHeights = new Array(cols).fill(0);
-        const container = document.getElementById("masonry-layout-container");
+        const container = document.getElementById(elementId);
 
         for (let i = 0; i < children.length; i += 1) {
             const colIndex = colHeights.indexOf(Math.min(...colHeights));
@@ -65,7 +65,7 @@ const MasonryLayout = ({ children }) => {
 
     return (
         <ul
-            id="masonry-layout-container"
+            id={elementId}
             className={`masonry-layout ${containerVisible ? "masonry-layout--visible" : ""}`}
         >
             {children}
@@ -74,6 +74,7 @@ const MasonryLayout = ({ children }) => {
 };
 
 MasonryLayout.propTypes = {
+    elementId: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
 };
 
