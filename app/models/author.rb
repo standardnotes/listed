@@ -31,7 +31,15 @@ class Author < ApplicationRecord
       DateTime.now.utc
     ).first
 
-    homepage = most_recent_post && last_word_count > 100 && username? && !hide_from_homepage
+    has_bio = bio && bio.length > 0
+    default_criteria =
+      most_recent_post &&
+      last_word_count > 100 &&
+      username? &&
+      !hide_from_homepage &&
+      has_bio
+
+    homepage = featured || default_criteria
     self.homepage_activity = homepage ? most_recent_post.created_at : nil
 
     save if homepage_activity_changed? && should_save
@@ -79,7 +87,7 @@ class Author < ApplicationRecord
   end
 
   def username?
-    !username&.empty? ? true : false
+    username && username.length > 0 ? true : false
   end
 
   def email_verification_link

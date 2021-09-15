@@ -2,5 +2,9 @@
     activeAuthors: @active_authors.as_json(
         only: [:id, :featured, :bio, :title, :last_word_count],
         methods: [:url, :title]
+    ),
+    featuredAuthors: @featured_authors.as_json(
+        only: [:id, :featured, :bio, :title, :last_word_count],
+        methods: [:url, :title]
     )
 }) %>

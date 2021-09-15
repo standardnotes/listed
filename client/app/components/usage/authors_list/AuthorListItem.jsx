@@ -3,9 +3,9 @@ import React from "react";
 import SVG from "react-inlinesvg";
 import StartWriting from "../../shared/StartWriting";
 import { IcStarCircleFilled, IcTextRich, IcArrowLong } from "../../../assets/icons";
-import "./ActiveAuthorItem.scss";
+import "./AuthorListItem.scss";
 
-const ActiveAuthorItem = ({ author }) => (
+const AuthorListItem = ({ author }) => (
     <li className="author active-author">
         {author.id === "easter-egg" ? (
             <StartWriting className="easter-egg card">
@@ -49,7 +49,7 @@ const ActiveAuthorItem = ({ author }) => (
     </li>
 );
 
-ActiveAuthorItem.propTypes = {
+AuthorListItem.propTypes = {
     author: PropTypes.shape({
         bio: PropTypes.string,
         featured: PropTypes.bool.isRequired,
@@ -63,4 +63,4 @@ ActiveAuthorItem.propTypes = {
     }).isRequired,
 };
 
-export default ActiveAuthorItem;
+export default AuthorListItem;

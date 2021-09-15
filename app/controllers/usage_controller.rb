@@ -2,11 +2,11 @@
 
 class UsageController < ApplicationController
   def index
-    active_authors = Author
+    active_authors_query = Author
                      .includes(:domain)
                      .where.not(homepage_activity: nil)
                      .order(homepage_activity: :desc)
-                     .to_a
+    active_authors = active_authors_query.to_a
     easter_egg_index = active_authors.size.positive? ? rand(1..active_authors.size) : 0
     easter_egg = {
       id: 'easter-egg',
@@ -16,6 +16,7 @@ class UsageController < ApplicationController
     }
     active_authors.insert(easter_egg_index, easter_egg)
     @active_authors = active_authors
+    @featured_authors = active_authors_query.where(featured: true)
   end
 
   def new_author
