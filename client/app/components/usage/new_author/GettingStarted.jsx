@@ -55,14 +55,20 @@ const GettingStarted = ({ secretUrl }) => {
                     web or desktop app.
                 </li>
                 <li className="p2">
-                    <strong>Click Extensions</strong>
+                    <strong>Click Preferences icon</strong>
                     {" "}
                     in the lower left corner of the app.
                 </li>
                 <li className="p2">
+                    <strong>Open General</strong>
+                    {" "}
+                    section and expand
+                    <strong>Advanced Settings.</strong>
+                </li>
+                <li className="p2">
                     <strong>Paste your author code</strong>
                     {" "}
-                    in the input box that appears, then press enter.
+                    in the input box, then press enter.
                     <img src={GettingStartedGif} className="new-author__gif" alt="" />
                 </li>
             </ol>
