@@ -55,7 +55,7 @@ const GettingStarted = ({ secretUrl }) => {
                     web or desktop app.
                 </li>
                 <li className="p2">
-                    <strong>Click Preferences icon</strong>
+                    <strong>Click the Preferences icon</strong>
                     {" "}
                     in the lower left corner of the app.
                 </li>
