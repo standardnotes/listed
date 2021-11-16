@@ -60,7 +60,7 @@ const GettingStarted = ({ secretUrl }) => {
                     in the lower left corner of the app.
                 </li>
                 <li className="p2">
-                    <strong>Open General</strong>
+                    <strong>Open the General</strong>
                     {" "}
                     section and expand
                     <strong>Advanced Settings.</strong>
