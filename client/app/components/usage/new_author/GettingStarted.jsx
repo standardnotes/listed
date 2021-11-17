@@ -48,7 +48,7 @@ const GettingStarted = ({ secretUrl }) => {
                 </li>
                 <li className="p2">
                     <strong>Open the </strong>
-                    <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
+                    <a href="https://app.standardnotes.com" target="_blank" rel="noopener noreferrer">
                         Standard Notes
                     </a>
                     {" "}
