@@ -48,11 +48,11 @@ const GettingStarted = ({ secretUrl }) => {
                 </li>
                 <li className="p2">
                     <strong>Open the </strong>
-                    <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
-                        Standard Notes
+                    <a href="https://app.standardnotes.com" target="_blank" rel="noopener noreferrer">
+                        web app
                     </a>
                     {" "}
-                    web or desktop app.
+                    or desktop app.
                 </li>
                 <li className="p2">
                     <strong>Click the Preferences icon</strong>
@@ -63,6 +63,7 @@ const GettingStarted = ({ secretUrl }) => {
                     <strong>Open the General</strong>
                     {" "}
                     section and expand
+                    {" "}
                     <strong>Advanced Settings.</strong>
                 </li>
                 <li className="p2">
