@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React, { useState, useRef } from "react";
-import { GettingStartedGif } from "../../../assets/gifs";
 import "./GettingStarted.scss";
 
 const GettingStarted = ({ secretUrl }) => {
@@ -70,7 +69,6 @@ const GettingStarted = ({ secretUrl }) => {
                     <strong>Paste your author code</strong>
                     {" "}
                     in the input box, then press enter.
-                    <img src={GettingStartedGif} className="new-author__gif" alt="" />
                 </li>
             </ol>
             <p className="p2">
