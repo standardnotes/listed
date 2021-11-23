@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React, { useState, useRef } from "react";
-import { GettingStartedGif } from "../../../assets/gifs";
 import "./GettingStarted.scss";
 
 const GettingStarted = ({ secretUrl }) => {
@@ -48,22 +47,28 @@ const GettingStarted = ({ secretUrl }) => {
                 </li>
                 <li className="p2">
                     <strong>Open the </strong>
-                    <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
-                        Standard Notes
+                    <a href="https://app.standardnotes.com" target="_blank" rel="noopener noreferrer">
+                        web app
                     </a>
                     {" "}
-                    web or desktop app.
+                    or desktop app.
                 </li>
                 <li className="p2">
-                    <strong>Click Extensions</strong>
+                    <strong>Click the Preferences icon</strong>
                     {" "}
                     in the lower left corner of the app.
                 </li>
                 <li className="p2">
+                    <strong>Open the General</strong>
+                    {" "}
+                    section and expand
+                    {" "}
+                    <strong>Advanced Settings.</strong>
+                </li>
+                <li className="p2">
                     <strong>Paste your author code</strong>
                     {" "}
-                    in the input box that appears, then press enter.
-                    <img src={GettingStartedGif} className="new-author__gif" alt="" />
+                    in the input box, then press enter.
                 </li>
             </ol>
             <p className="p2">
