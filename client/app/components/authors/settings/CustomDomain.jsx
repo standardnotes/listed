@@ -90,11 +90,10 @@ const CustomDomain = ({ author, customDomainIP }) => {
     return (
         <div className="custom-domain">
             <p className="p2 custom-domain__info">
-                Custom domains are available for Standard Notes
+                Custom domains are available for Standard Notes members with an active Plus or Pro
                 {" "}
-                <a href="https://standardnotes.com/features" target="blank" rel="noopener noreferrer">Extended</a>
-                {" "}
-                members with an active one year or five year plan.
+                <a href="https://standardnotes.com/plans" target="blank" rel="noopener noreferrer">plan</a>
+                .
                 Domains include an HTTPS certificate,
                 and require only a simple DNS record on your end.
             </p>
@@ -186,7 +185,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
                 <div className="callout callout--warning">
                     Your domain is not currently active.
                     {" "}
-                    Ensure your Extended subscription is not expired.
+                    Ensure your subscription is not expired.
                 </div>
             )}
             {author.domain && author.domain.active && (
