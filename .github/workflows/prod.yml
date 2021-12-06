@@ -59,15 +59,13 @@ jobs:
         LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER_PROD }}
         LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO_PROD }}
 
-  notify_slack:
+  notify_discord:
     needs: deploy
 
     runs-on: ubuntu-latest
 
     steps:
-    - name: Notify slack
-      uses: pullreminders/slack-action@master
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    - name: Run Discord Webhook
+      uses: johnnyhuy/actions-discord-git-webhook@main
       with:
-        args: '{ \"channel\": \"${{ secrets.SLACK_NOTIFICATION_CHANNEL }}\", \"blocks\": [{\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Successfully deployed <https://listed.standardnotes.org|[PROD] Listed>\"}}, {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Changes: <https://github.com/standardnotes/listed/commit/${{ github.sha }}|${{ github.sha }}>\"}, \"accessory\": {\"type\": \"image\", \"image_url\": \"https://website-dev.standardnotes.org/assets/icon.png\", \"alt_text\": \"Standard Notes\"}}, { \"type\": \"section\", \"fields\": [{\"type\": \"mrkdwn\", \"text\": \"<https://github.com/standardnotes/listed/actions/runs/${{ github.run_id }}|Build details>\"}]}]}'
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
