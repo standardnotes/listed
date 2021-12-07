@@ -320,8 +320,8 @@ DEPENDENCIES
   lograge (~> 0.11.2)
   mini_racer
   mysql2
-  newrelic-infinite_tracing (~> 8.2)
-  newrelic_rpm (~> 8.2.0)
+  newrelic-infinite_tracing (= 8.2.0)
+  newrelic_rpm (= 8.2.0)
   puma (~> 4.3)
   rack-cors
   rails (= 5.2.5)
