@@ -58,4 +58,6 @@ gem "lograge", "~> 0.11.2"
 
 gem "aws-sdk-route53", "~> 1.40"
 
-gem "newrelic_rpm", "~> 7.0"
+gem "newrelic_rpm", "~> 8.2.0"
+
+gem "newrelic-infinite_tracing", "~> 8.2"
