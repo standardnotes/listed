@@ -297,6 +297,7 @@ GEM
       chronic (>= 0.6.3)
 
 PLATFORMS
+  ruby
   x86_64-darwin-20
 
 DEPENDENCIES
