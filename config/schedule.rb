@@ -10,6 +10,6 @@ every 1.day do
   runner 'Author.email_unread_guestbook_entries'
 end
 
-every 10.minute do
+every 1.hour do
   rake_verbose 'ssl:renew'
 end
