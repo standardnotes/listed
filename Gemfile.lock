@@ -154,7 +154,6 @@ GEM
     jmespath (1.4.0)
     libv8-node (16.10.0.0-x86_64-darwin)
     libv8-node (16.10.0.0-x86_64-linux)
-    libv8-node (16.10.0.0-x86_64-linux-musl)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -305,6 +304,7 @@ GEM
       chronic (>= 0.6.3)
 
 PLATFORMS
+  x86_64-darwin-18
   x86_64-darwin-20
   x86_64-linux
 
