@@ -18,9 +18,6 @@ const All = ({ posts }) => (
 );
 
 All.propTypes = {
-    displayAuthor: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-    }).isRequired,
     posts: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
