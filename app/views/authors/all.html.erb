@@ -1,8 +1,4 @@
 <%= react_component("AuthorAll", props: {
-    displayAuthor: @display_author.as_json(
-        only: [:display_name],
-        methods: [:title, :url],
-    ),
     posts: @posts.as_json(
         only: [:id, :title, :unlisted, :page, :created_at, :word_count],
         methods: [:author_relative_url, :preview_text, :rendered_text]
