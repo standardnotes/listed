@@ -2,6 +2,7 @@ import ReactOnRails from "react-on-rails";
 import AdminMailerNewDomainRequest from "../components/admin_mailer/NewDomainRequest";
 import AuthorHeader from "../components/authors/HeaderContainer";
 import AuthorSettings from "../components/authors/SettingsPage";
+import AuthorAll from "../components/authors/All";
 import AuthorShow from "../components/authors/Show";
 import AuthorSubscribe from "../components/authors/Subscribe";
 import AuthorTip from "../components/authors/Tip";
@@ -31,6 +32,7 @@ ReactOnRails.register({
     AdminMailerNewDomainRequest,
     AuthorHeader,
     AuthorSettings,
+    AuthorAll,
     AuthorShow,
     AuthorSubscribe,
     AuthorTip,

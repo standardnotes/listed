@@ -10,7 +10,7 @@
         methods: private_post ? [:preview_text, :rendered_text] : [:author_relative_url, :preview_text, :rendered_text],
         include: private_post ? nil : { author: {
                 only: [:id, :username, :newsletter_disabled],
-                methods: :title
+                methods: [:title, :url]
             }
         }
     ),

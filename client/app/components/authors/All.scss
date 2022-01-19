@@ -1,0 +1,7 @@
+#author-all {
+    padding: 0 $spacing-16;
+
+    @include Desktop() {
+        padding: 0 $spacing-11-vw;
+    }
+}
