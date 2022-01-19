@@ -42,6 +42,8 @@ class AuthorsController < ApplicationController
 
   def all
     @posts = @display_author.listed_posts(nil, true)
+    @title = "All posts from #{@display_author.title}"
+    @desc = @display_author.bio || 'Via Standard Notes.'
   end
 
   POST_LIMIT = 16
