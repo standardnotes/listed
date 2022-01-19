@@ -44,6 +44,12 @@ const Show = ({
                     {" "}
                     {post.author.title}
                     <div className="headline-separator" />
+                    <a
+                        href={`${post.author.url}/all`}
+                        className="all-posts"
+                    >
+                        All posts
+                    </a>
                 </h3>
                 <div className="previous-next-container">
                     {previous && (
@@ -69,6 +75,7 @@ Show.propTypes = {
         author: PropTypes.shape({
             newsletter_disabled: PropTypes.bool.isRequired,
             title: PropTypes.string.isRequired,
+            url: PropTypes.string.isRequired,
         }).isRequired,
         page: PropTypes.bool.isRequired,
         unlisted: PropTypes.bool.isRequired,

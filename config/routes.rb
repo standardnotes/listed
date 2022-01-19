@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :authors do
     member do
+      get 'all'
       get 'settings'
       get 'tip'
       get 'subscribe'
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
   end
 
   constraints CustomDomainConstraint do
+    get 'all' => 'authors#all'
     get 'feed' => 'authors#feed', :format => 'rss'
     get 'tip' => 'authors#tip'
     get 'subscribe' => 'authors#subscribe'
@@ -69,6 +71,7 @@ Rails.application.routes.draw do
 
   un_regex = /@.[^\/]*/
 
+  get ':username/all' => 'authors#all', :constraints => {:username => un_regex}
   get ':username/feed' => 'authors#feed', :format => 'rss', :constraints => {:username => un_regex}
   get ':username/tip' => 'authors#tip', :constraints => {:username => un_regex}
   get ':username/subscribe' => 'authors#subscribe', :constraints => {:username => un_regex}

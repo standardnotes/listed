@@ -40,6 +40,10 @@ class AuthorsController < ApplicationController
     @posts = @author.posts.order(created_at: :desc)
   end
 
+  def all
+    @posts = @display_author.listed_posts(nil, true)
+  end
+
   POST_LIMIT = 16
 
   def show

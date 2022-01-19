@@ -34,6 +34,11 @@
 .more-from {
     display: flex;
     align-items: center;
+
+    .all-posts {
+        margin-left: $spacing-20;
+        font-size: $font-size-16;;
+    }
 }
 
 #single-post-footer {
