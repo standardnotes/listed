@@ -11,6 +11,12 @@ const Subscribe = ({
         {(!subscribedToAuthor || !subscriptionForAuthor.verification_sent_at) && (
             <p className="p1">
                 You&apos;ll only receive email when the author publishes something new.
+                {" "}
+                Your subscription is anonymous and
+                {" "}
+                { displayAuthor.title }
+                {" "}
+                will not be able to see your email.
             </p>
         )}
         <div id="subscription-form">
@@ -35,6 +41,7 @@ const Subscribe = ({
 Subscribe.propTypes = {
     displayAuthor: PropTypes.shape({
         rss_url: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
     }).isRequired,
     subscribedToAuthor: PropTypes.bool.isRequired,
     subscriptionForAuthor: PropTypes.shape({
