@@ -68,7 +68,17 @@ const GettingStarted = ({ secretUrl }) => {
                 <li className="p2">
                     <strong>Paste your author code</strong>
                     {" "}
-                    in the input box, then press enter.
+                    in the
+                    {" "}
+                    <strong>Install Custom Extensions</strong>
+                    {" "}
+                    box, then press Enter
+                    {" "}
+                    on your keyboard, or click on the
+                    {" "}
+                    <strong>Install</strong>
+                    {" "}
+                    button.
                 </li>
             </ol>
             <p className="p2">
