@@ -65,3 +65,5 @@ gem "newrelic-infinite_tracing", "= 8.2.0"
 gem "shoryuken", "~> 5.3"
 
 gem "capistrano-shoryuken", "~> 0.1.5"
+
+gem "aws-sdk-sqs", "~> 1.48"
