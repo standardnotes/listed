@@ -67,3 +67,5 @@ gem "shoryuken", "~> 5.3"
 gem "capistrano-shoryuken", "~> 0.1.5"
 
 gem "aws-sdk-sqs", "~> 1.48"
+
+gem "aws-sdk-sns", "~> 1.49"
