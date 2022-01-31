@@ -1,3 +1,3 @@
 concurrency: 20
 queues:
-  - <%= ENV["SQS_QUEUE_NAME"] %>
+  - <%= ENV["SQS_QUEUE_URL"] %>
