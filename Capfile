@@ -22,7 +22,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano/passenger'
-# require 'capistrano/sidekiq'
+require 'capistrano/shoryuken'
 require 'capistrano/git-submodule-strategy'
 require "whenever/capistrano" # Update crontab on deploy
 
