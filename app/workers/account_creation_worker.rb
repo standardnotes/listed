@@ -6,14 +6,14 @@ class AccountCreationWorker
   shoryuken_options queue: ENV.fetch('SQS_QUEUE_URL'), auto_delete: true
 
   def perform(sqs_msg, body)
-    decompressed_message = decompress_message(body[:Message])
+    decompressed_message = decompress_message(body.Message)
 
     Rails.logger.info "Received event #{decompressed_message}"
 
     author = Author.new
     secret = EncryptionHelper.generate_random_key
     author.secret = secret
-    author.email = decompressed_message[:payload][:userEmail]
+    author.email = decompressed_message.payload.userEmail
     author.save
   end
 
