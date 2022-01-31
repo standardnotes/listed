@@ -6,7 +6,8 @@ class AccountCreationWorker
   shoryuken_options queue: ENV.fetch('SQS_QUEUE_URL'), auto_delete: true
 
   def perform(sqs_msg, body)
-    decompressed_message = decompress_message(body.Message)
+    parsed_body = JSON.parse(body)
+    decompressed_message = decompress_message(parsed_body.Message)
 
     Rails.logger.info "Received event #{decompressed_message}"
 
