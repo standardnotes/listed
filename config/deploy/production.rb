@@ -17,7 +17,6 @@ set :rails_env, 'production'
 
 set :keep_releases, 2
 
-set :shoryuken_queues, [ENV.fetch('SQS_QUEUE_NAME')]
 set :shoryuken_requires, ['./app/workers']
 
 # role-based syntax
