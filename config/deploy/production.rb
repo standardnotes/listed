@@ -17,7 +17,7 @@ set :rails_env, 'production'
 
 set :keep_releases, 2
 
-set :shoryuken_queues, [CAP_CONFIG['production']['sqs_queue']]
+set :shoryuken_queues, [ENV.fetch('SQS_QUEUE_NAME')]
 
 # role-based syntax
 # ==================
