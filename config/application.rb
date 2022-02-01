@@ -30,5 +30,7 @@ module Listed
       :authentication => 'login',
       :enable_starttls_auto => true # detects and uses STARTTLS
     }
+
+    Shoryuken.logger.level = Logger::INFO
   end
 end

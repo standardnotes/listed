@@ -17,6 +17,8 @@ set :rails_env, 'production'
 
 set :keep_releases, 2
 
+set :shoryuken_requires, ['./app/workers']
+
 # role-based syntax
 # ==================
 

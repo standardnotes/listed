@@ -1,0 +1,3 @@
+concurrency: 20
+queues:
+  - <%= ENV["SQS_QUEUE_URL"] %>
