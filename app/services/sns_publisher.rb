@@ -5,6 +5,7 @@ class SnsPublisher
   attr_accessor :sns_client, :topic_arn
 
   LISTED_ACCOUNT_CREATED = 'LISTED_ACCOUNT_CREATED'.freeze
+  LISTED_ACCOUNT_DELETED = 'LISTED_ACCOUNT_DELETED'.freeze
 
   def initialize
     @sns_client = Aws::SNS::Client.new(
@@ -16,6 +17,18 @@ class SnsPublisher
   def publish_listed_account_created_event(user_id, user_email, user_name, secret)
     publish_event(
       LISTED_ACCOUNT_CREATED,
+      {
+        userId: user_id,
+        userName: user_name,
+        userEmail: user_email,
+        secret: secret
+      }
+    )
+  end
+
+  def publish_listed_account_deleted_event(user_id, user_email, user_name, secret)
+    publish_event(
+      LISTED_ACCOUNT_DELETED,
       {
         userId: user_id,
         userName: user_name,

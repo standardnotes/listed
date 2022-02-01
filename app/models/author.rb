@@ -21,6 +21,7 @@ class Author < ApplicationRecord
   has_many :guestbook_entries, dependent: :destroy
 
   after_create :handle_post_create_actions
+  after_destroy :handle_post_destroy_actions
 
   before_save do
     update_homepage_status
@@ -226,6 +227,17 @@ class Author < ApplicationRecord
     publisher = SnsPublisher.new
 
     publisher.publish_listed_account_created_event(
+      id,
+      email,
+      username,
+      secret
+    )
+  end
+
+  def handle_post_destroy_actions
+    publisher = SnsPublisher.new
+
+    publisher.publish_listed_account_deleted_event(
       id,
       email,
       username,
