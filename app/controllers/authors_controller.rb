@@ -256,9 +256,10 @@ class AuthorsController < ApplicationController
       :content_types => ["Note"]
     )
 
+    settings_url = "#{@author.get_host}/authors/#{@author.id}/settings?secret=#{secret}"
     actions.push({
       :label => "Settings",
-      :url => "#{@author.get_host}/authors/#{@author.id}/settings?secret=#{secret}",
+      :url => settings_url,
       :verb => "show",
       :context => "Item",
       :content_types => ["Note"]
@@ -285,7 +286,10 @@ class AuthorsController < ApplicationController
       :description => description,
       :deletion_warning => "WARNING: Uninstalling Listed will result in loss of access to your blog. Ensure your Listed author key is backed up before uninstalling.",
       :supported_types => supported_types,
-      :actions => actions
+      :actions => actions,
+      display_name: @author.title,
+      author_url: @author.url,
+      settings_url: settings_url
     }
   end
 
