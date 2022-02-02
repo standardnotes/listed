@@ -61,7 +61,7 @@ bundle exec rails db:migrate
 bundle exec rails db:seed
 gem install bundler && bundle install
 yarn build:dev
-yarn start:dev
+rails s -p 3009
 ```
 
 Now the application should be running on http://localhost:3009 and webpack-dev-server should be watching source files and recompiling as you make changes in your code to allow live reloading.
