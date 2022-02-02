@@ -146,11 +146,7 @@ class Author < ApplicationRecord
   end
 
   def accessible_via
-    if ENV['ALT_HOST']
-      [url, "#{ENV['ALT_HOST']}/#{url_segment}"]
-    else
       [url]
-    end
   end
 
   def update_word_count
