@@ -21,7 +21,8 @@ class SnsPublisher
         userId: user_id,
         userName: user_name,
         userEmail: user_email,
-        secret: secret
+        secret: secret,
+        hostUrl: ENV.fetch('HOST')
       }
     )
   end
@@ -33,7 +34,8 @@ class SnsPublisher
         userId: user_id,
         userName: user_name,
         userEmail: user_email,
-        secret: secret
+        secret: secret,
+        hostUrl: ENV.fetch('HOST')
       }
     )
   end
