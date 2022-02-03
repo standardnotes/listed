@@ -1,6 +1,6 @@
-<%= react_component("SubscriptionMailerConfirmSubscription", props: {
+<%= react_component("SubscriptionMailerSubscriptionSuccess", props: {
     authorUrl: @author_url,
-    confirmUrl: @confirm_url,
+    unsubscribeUrl: @unsubscribe_url,
     author: @author.as_json(
         only: [],
         methods: :title

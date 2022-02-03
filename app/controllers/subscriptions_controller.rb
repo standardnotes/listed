@@ -19,31 +19,17 @@ class SubscriptionsController < ApplicationController
     is_valid_captcha = captcha_verification["success"]
 
     if is_valid_subscription && is_valid_captcha
-      SubscriptionMailer.confirm_subscription(@subscription).deliver_later
-      @subscription.verification_sent_at = DateTime.now
-      @subscription.save
-
-      redirect_to author_path(@subscription.author)
-    else
-      redirect_back(fallback_location: root_path)
-    end
-  end
-
-  def confirm
-    @subscription = Subscription.find_by_token(params[:t])
-    if @subscription
-      # Don't notify the author more than once in case the user clicks on this link twice
-      existing = @subscription.verified
       @subscription.verified = true
       @subscription.save
+      SubscriptionMailer.subscription_success(@subscription).deliver_later
 
-      if !existing && @subscription.author.email
+      if @subscription.author.email
         SubscriptionMailer.new_subscription(@subscription).deliver_later
       end
 
       redirect_to author_path(@subscription.author)
     else
-      @error = true
+      redirect_back(fallback_location: root_path)
     end
   end
 

@@ -1,9 +1,9 @@
 class SubscriptionMailer < ApplicationMailer
-  def confirm_subscription(subscription)
+  def subscription_success(subscription)
     @author = subscription.author
     @author_url = @author.url
-    @confirm_url = "#{@author.get_host}/subscriptions/#{subscription.id}/confirm?t=#{subscription.token}"
-    mail(to: subscription.subscriber.email, subject: "Confirm your subscription to #{subscription.author.title} on Listed")
+    @unsubscribe_url = "#{@author.get_host}/subscriptions/#{subscription.id}/unsubscribe?t=#{subscription.token}"
+    mail(to: subscription.subscriber.email, subject: "You are now subscribed to #{subscription.author.title} on Listed")
   end
 
   def new_post(post, subscriber)

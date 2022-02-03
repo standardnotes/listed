@@ -1,9 +1,11 @@
 import React from "react";
 
 const Confirm = () => (
-    <p>
-        Unable to find subscription.
-    </p>
+    <div className="page-container">
+        <p>
+            Unable to find subscription.
+        </p>
+    </div>
 );
 
 export default Confirm;

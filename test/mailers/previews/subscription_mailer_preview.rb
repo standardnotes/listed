@@ -6,8 +6,8 @@ class SubscriptionMailerPreview < ActionMailer::Preview
     SubscriptionMailer.new_post(post, Subscriber.last)
   end
 
-  def confirm_subscription
-    SubscriptionMailer.confirm_subscription(Subscription.last)
+  def subscription_success
+    SubscriptionMailer.subscription_success(Subscription.last)
   end
 
   def new_subscription
