@@ -18,7 +18,7 @@ import PostShow from "../components/posts/Show";
 import Posts from "../components/posts/Posts";
 import SharedFooter from "../components/shared/Footer";
 import SubscriptionConfirm from "../components/subscriptions/Confirm";
-import SubscriptionMailerConfirmSubscription from "../components/subscription_mailer/ConfirmSubscription";
+import SubscriptionMailerSubscriptionSuccess from "../components/subscription_mailer/SubscriptionSuccess";
 import SubscriptionMailerNewPost from "../components/subscription_mailer/NewPost";
 import SubscriptionMailerNewSubscription from "../components/subscription_mailer/NewSubscription";
 import SubscriptionMailerWeeklyDigest from "../components/subscription_mailer/WeeklyDigest";
@@ -48,7 +48,7 @@ ReactOnRails.register({
     Posts,
     SharedFooter,
     SubscriptionConfirm,
-    SubscriptionMailerConfirmSubscription,
+    SubscriptionMailerSubscriptionSuccess,
     SubscriptionMailerNewPost,
     SubscriptionMailerNewSubscription,
     SubscriptionMailerWeeklyDigest,

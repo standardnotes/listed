@@ -2,13 +2,15 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const UpdateFrequency = ({ subscription }) => (
-    <p>
-        Success. You will now only receive updates from
-        {" "}
-        {subscription.author.title}
-        {" "}
-        once a week, if any new content is available.
-    </p>
+    <div className="page-container">
+        <p>
+            Success. You will now only receive updates from
+            {" "}
+            {subscription.author.title}
+            {" "}
+            once a week, if any new content is available.
+        </p>
+    </div>
 );
 
 UpdateFrequency.propTypes = {
