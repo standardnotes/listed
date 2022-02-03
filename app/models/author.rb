@@ -13,9 +13,6 @@ class Author < ApplicationRecord
               with: /\A[\w]+\z/ ,
               message: 'Only letters, numbers, and underscores are allowed.'
             }
-  validates :email, uniqueness: {
-    message: "The email address %{value} is already in use."
-  }, allow_nil: true, allow_blank: true
   has_many :posts, dependent: :destroy
   has_one :domain, dependent: :destroy
   has_many :guestbook_entries, dependent: :destroy
