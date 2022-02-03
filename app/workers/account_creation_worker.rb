@@ -16,6 +16,8 @@ class AccountCreationWorker
     author.secret = secret
     author.email = decompressed_message['payload']['userEmail']
     author.save
+
+    AuthorsMailer.verify_email(author, author.email).deliver_later
   end
 
   private
