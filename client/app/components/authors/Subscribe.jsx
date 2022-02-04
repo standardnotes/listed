@@ -12,8 +12,6 @@ const Subscribe = ({
             <p className="p1">
                 You&apos;ll only receive email when the author publishes something new.
                 {" "}
-                Your subscription is anonymous and
-                {" "}
                 { displayAuthor.title }
                 {" "}
                 will not be able to see your email.
