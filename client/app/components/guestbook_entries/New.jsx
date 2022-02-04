@@ -74,7 +74,8 @@ const New = ({ author, hCaptchaSiteKey }) => {
                             Your message
                         </label>
                         <p className="p3">
-                            This will be visible to everyone.
+                            Your message is private by default.
+                            The author can choose to publish your entry to their guestbook.
                         </p>
                         <textarea
                             id="guestbook-entry-text"

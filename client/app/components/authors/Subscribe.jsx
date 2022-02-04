@@ -9,15 +9,15 @@ const Subscribe = ({
     <div id="subscribe-page" className="page-container">
         <h1 className="h1">Subscribe</h1>
         {(!subscribedToAuthor || !subscriptionForAuthor.verification_sent_at) && (
-            <p className="p1">
-                You&apos;ll only receive email when the author publishes something new.
-                {" "}
-                Your subscription is anonymous and
-                {" "}
-                { displayAuthor.title }
-                {" "}
-                will not be able to see your email.
-            </p>
+            <>
+                <p className="p1">
+                    You&apos;ll only receive email when the author publishes something new.
+                    {" "}
+                    { displayAuthor.title }
+                    {" "}
+                    will not be able to see your email.
+                </p>
+            </>
         )}
         <div id="subscription-form">
             <SubscriptionForm
