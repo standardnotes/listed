@@ -155,14 +155,17 @@ const General = ({
             <div className="form-section--row">
                 <div className="form-section">
                     <label htmlFor="author-link" className="label p2">
-                        Link
+                        Website
                     </label>
+                    <p className="p3 sublabel">
+                    Show your website on your profile.
                     <input
                         id="author-link"
                         className="text-field"
                         value={editedAuthor.link}
                         onChange={(e) => editAuthor(fieldTypes.LINK, e.target.value)}
                     />
+                    </p>
                 </div>
                 <div className="form-section">
                     <label htmlFor="author-twitter" className="label p2">
