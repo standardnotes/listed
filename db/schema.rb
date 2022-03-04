@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_133742) do
+ActiveRecord::Schema.define(version: 2022_03_04_012050) do
 
   create_table "authors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "secret", collation: "latin1_swedish_ci"
@@ -115,6 +115,9 @@ ActiveRecord::Schema.define(version: 2021_08_19_133742) do
     t.string "custom_path"
     t.string "page_link"
     t.integer "page_sort", default: 0
+    t.string "author_name"
+    t.string "author_link"
+    t.index ["author_id", "author_name"], name: "index_posts_on_author_id_and_author_name"
     t.index ["author_id", "custom_path"], name: "index_posts_on_author_id_and_custom_path"
     t.index ["author_page"], name: "index_posts_on_author_page"
     t.index ["author_show", "created_at"], name: "index_posts_on_author_show_and_created_at"
