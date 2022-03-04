@@ -6,7 +6,7 @@
 
 <%= react_component("PostShow", props: {
     post: @post.as_json(
-        only: [:title, :unlisted, :page, :created_at, :word_count],
+        only: [:title, :unlisted, :page, :created_at, :word_count, :author_name, :author_link],
         methods: private_post ? [:preview_text, :rendered_text] : [:author_relative_url, :preview_text, :rendered_text],
         include: private_post ? nil : { author: {
                 only: [:id, :username, :newsletter_disabled],

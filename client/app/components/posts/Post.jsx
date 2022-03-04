@@ -12,6 +12,18 @@ const Post = ({ truncate, post, isMainPost }) => {
 
     const renderDateAndWordCount = () => (
         <>
+            {post.author_name && (
+                <>
+                    {post.author_link ? (
+                        <a className="button--no-fill" href={post.author_link}>{post.author_name}</a>
+                    ) : (
+                        <>
+                            {post.author_name}
+                        </>
+                    )}
+                    <span className="post-date__separator">•</span>
+                </>
+            )}
             {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
             <span className="post-date__separator">•</span>
             {post.word_count.toLocaleString()}
@@ -105,6 +117,8 @@ Post.propTypes = {
         title: PropTypes.string.isRequired,
         unlisted: PropTypes.bool.isRequired,
         word_count: PropTypes.number.isRequired,
+        author_name: PropTypes.number,
+        author_link: PropTypes.number,
     }).isRequired,
     truncate: PropTypes.bool,
     isMainPost: PropTypes.bool,
