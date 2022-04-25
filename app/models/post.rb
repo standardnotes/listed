@@ -4,6 +4,16 @@ class CustomRender < Redcarpet::Render::HTML
   require 'rouge'
   require 'rouge/plugins/redcarpet'
   include Rouge::Plugins::Redcarpet
+
+  def list_item(text, list_type)
+    if text.start_with?("[ ] ")
+      %(<li class="task-list-item"><input type="checkbox" disabled>#{text[4, text.length]}</li>)
+    elsif text.start_with?("[x] ")
+      %(<li class="task-list-item"><input type="checkbox" disabled checked>#{text[4, text.length]}</li>)
+    else
+      %(<li>#{text}</li>)
+    end
+  end
 end
 
 class Post < ApplicationRecord
@@ -106,7 +116,8 @@ class Post < ApplicationRecord
       lax_spacing: true,
       tables: true,
       footnotes: true,
-      highlight: true
+      highlight: true,
+      strikethrough: true
     }
 
     renderer = CustomRender.new(options)
