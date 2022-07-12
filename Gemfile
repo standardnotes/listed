@@ -40,19 +40,18 @@ group :development, :test do
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '~> 3.0.5'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rb-readline'
-  # Deployment tools
-  gem 'capistrano'
+  gem 'brakeman'
   gem 'capistrano-bundler'
+  gem 'capistrano-git-submodule-strategy', '~> 0.1.22'
   gem 'capistrano-passenger', '>= 0.2.0'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-sidekiq'
-  gem 'capistrano-git-submodule-strategy', '~> 0.1.22'
+  gem 'capistrano'
+  gem 'listen', '~> 3.0.5'
+  gem 'rb-readline'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring'
+  gem 'web-console', '>= 3.3.0'
 end
 
