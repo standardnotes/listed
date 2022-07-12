@@ -1,4 +1,4 @@
-FROM ruby:2.7.4-slim-stretch
+FROM ruby:2.7.6-slim-buster
 
 ARG USERNAME=listed
 ARG UID=1001
