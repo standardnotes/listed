@@ -1,11 +1,9 @@
 FROM ruby:2.7.4-alpine3.14
 
-ARG UID=1000
-ARG GID=1000
-
-RUN addgroup --system listed -g $GID && adduser --disabled-password --system listed -g $GID -u $UID
-
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+ARG USERNAME=listed
+ARG UID=1001
+ARG GID=$UID
+RUN addgroup -S $USERNAME -g $GID && adduser -D -S $USERNAME -G $USERNAME -u $UID
 
 RUN apt-get update \
     && apt-get install -y git build-essential libmariadb-dev curl imagemagick python \
