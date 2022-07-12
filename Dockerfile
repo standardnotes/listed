@@ -3,7 +3,8 @@ FROM ruby:2.7.6-slim-buster
 ARG USERNAME=listed
 ARG UID=1001
 ARG GID=$UID
-RUN addgroup -S $USERNAME -g $GID && adduser -D -S $USERNAME -G $USERNAME -u $UID
+
+RUN addgroup --system $USERNAME --gid $GID && adduser --disabled-password --system $USERNAME --gid $GID --uid $UID
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
