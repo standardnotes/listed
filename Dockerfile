@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-slim-stretch
+FROM ruby:2.7.4-alpine3.14
 
 ARG UID=1000
 ARG GID=1000
@@ -13,7 +13,7 @@ RUN apt-get update \
 
 RUN mkdir -p /usr/local/nvm
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 10.20.1
+ENV NODE_VERSION 16.15.1
 ENV NVM_INSTALL_PATH $NVM_DIR/versions/node/v$NODE_VERSION
 ENV WEBPACKER_NODE_MODULES_BIN_PATH=value
 
