@@ -15,7 +15,6 @@ const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
         <nav className={navClassName()}>
             <a
                 href="https://listed.to/@Listed/5063/what-will-you-write-about"
-                target="_blank"
                 rel="noreferrer"
                 className="button button--no-fill"
             >
@@ -23,7 +22,6 @@ const HomepageMenu = ({ isMobileMenuOpen, isDesktopMenu }) => {
             </a>
             <a
                 href="https://listed.to/@Listed/5202/100-day-writing-challenge"
-                target="_blank"
                 rel="noreferrer"
                 className="button button--no-fill"
             >

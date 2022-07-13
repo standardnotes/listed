@@ -2,13 +2,11 @@ name: PR
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [ master ]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Runs Brakeman vulnerability scanner

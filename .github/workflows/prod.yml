@@ -6,28 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker_publish:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: standardnotes/listed
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "stable,${{ github.sha }}"
-
   deploy:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6
     - uses: actions/cache@v2
       with:
         path: vendor/bundle
@@ -59,14 +43,3 @@ jobs:
         LISTED_SSH_USER: ${{ secrets.LISTED_SSH_USER_PROD }}
         LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER_PROD }}
         LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO_PROD }}
-
-  notify_discord:
-    needs: deploy
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Run Discord Webhook
-      uses: johnnyhuy/actions-discord-git-webhook@main
-      with:
-        webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
