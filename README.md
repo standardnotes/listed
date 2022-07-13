@@ -65,14 +65,3 @@ rails s -p 3009
 ```
 
 Now the application should be running on http://localhost:3009 and webpack-dev-server should be watching source files and recompiling as you make changes in your code to allow live reloading.
-
-
-### How to run locally with Docker
-
-To run the application locally you have to install Docker and type the following:
-```
-cp .env.sample .env
-docker-compose up -d
-```
-
-Now the application should be running on http://localhost:3000
