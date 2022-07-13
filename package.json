@@ -6,7 +6,7 @@
     "@babel/preset-env": "^7.10.1",
     "@babel/preset-react": "^7.10.1",
     "@hcaptcha/react-hcaptcha": "^0.2.1",
-    "@rails/webpacker": "5.4.3",
+    "@rails/webpacker": "4.2.2",
     "axios": "^0.19.2",
     "dayjs": "^1.10.4",
     "eslint": "^5.16.0",
@@ -29,11 +29,7 @@
     "turbolinks": "^5.2.0",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^4.2.2",
-    "node-sass": "7.0.1"
-  },
-  "resolutions": {
-    "node-sass": "7.0.1"
+    "webpack-merge": "^4.2.2"
   },
   "scripts": {
     "start:dev": "bin/webpack-dev-server & bundle exec rails server -p 3009",
