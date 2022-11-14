@@ -13,7 +13,7 @@ RUN apt-get update \
 
 RUN mkdir -p /usr/local/nvm
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 10.20.1
+ENV NODE_VERSION 14.18.2
 ENV NVM_INSTALL_PATH $NVM_DIR/versions/node/v$NODE_VERSION
 ENV WEBPACKER_NODE_MODULES_BIN_PATH=value
 
