@@ -7,16 +7,11 @@ const Footer = ({ blogPage, author, privatePost }) => (
         <div className="footer__container">
             <p className="p3">Listed Blogging Platform</p>
             <p className="p3">
-                Copyright ©
-                {" "}
-                {(new Date()).getFullYear()}
-                {" "}
-                {(author && !privatePost) && author.title}
+                Copyright © {new Date().getFullYear()} {author && !privatePost && author.title}
             </p>
             <p className="p3">
-                Via
-                {" "}
-                <a href="https://standardnotes.com" target="_blank" rel="noopener noreferrer">
+                Via{" "}
+                <a href="https://standardnotes.com" target="_blank" rel="noopener">
                     Standard Notes
                 </a>
             </p>

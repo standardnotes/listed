@@ -24,6 +24,11 @@ class Author < ApplicationRecord
     update_homepage_status
   end
 
+  def string_has_restrictions(string, restrictions)
+    return false if !string || string.empty?
+    restrictions.any? { |word| string.downcase.include?(word.downcase) }
+  end
+
   def update_homepage_status(should_save = false)
     most_recent_post = listed_posts.where(
       '(posts.created_at >= ? AND posts.created_at <= ?)',
@@ -39,13 +44,20 @@ class Author < ApplicationRecord
       !hide_from_homepage &&
       has_bio
 
-      if featured
-        self.homepage_activity = DateTime.now
-      elsif post_criteria
-        self.homepage_activity = most_recent_post.created_at
-      else
+    if featured
+      self.homepage_activity = DateTime.now
+    elsif post_criteria
+      restricted_words = (ENV['RESTRICTED_KEYWORDS'] || '').split(',')
+      if string_has_restrictions(bio, restricted_words) ||
+         string_has_restrictions(display_name, restricted_words) ||
+         string_has_restrictions(personal_link, restricted_words)
         self.homepage_activity = nil
+      else
+        self.homepage_activity = most_recent_post.created_at
       end
+    else
+      self.homepage_activity = nil
+    end
 
     save if homepage_activity_changed? && should_save
   end

@@ -16,9 +16,7 @@ const AuthorInfo = ({ author }) => {
                     {author.header_image_url ? (
                         <div style={{ backgroundImage: `url(${author.header_image_url})` }} className="header-image" />
                     ) : (
-                        <p className="header-author-capital">
-                            {author.title[0]}
-                        </p>
+                        <p className="header-author-capital">{author.title[0]}</p>
                     )}
                 </div>
                 <div>
@@ -30,20 +28,19 @@ const AuthorInfo = ({ author }) => {
                                 <a
                                     href={`https://twitter.com/${author.twitter}`}
                                     target="_blank"
-                                    rel="noopener noreferrer"
+                                    rel="noopener nofollow"
                                     className="link author-twitter"
                                 >
                                     {`@${author.twitter}`}
                                 </a>
                             </span>
-
                         )}
                         {author.personal_link && (
                             <span className="item">
                                 <a
                                     href={author.personal_link}
                                     target="_blank"
-                                    rel="noopener noreferrer"
+                                    rel="noopener nofollow"
                                     className="p2 link author-link"
                                 >
                                     {author.link}
@@ -55,9 +52,7 @@ const AuthorInfo = ({ author }) => {
             </div>
             <button className="button word-count__button" type="button" onClick={scrollToPosts}>
                 <p className="p3 word-count" suppressHydrationWarning>
-                    {(author.last_word_count || 0).toLocaleString()}
-                    {" "}
-                    words
+                    {(author.last_word_count || 0).toLocaleString()} words
                 </p>
                 <SVG src={IcArrowLong} className="word-count__icon" />
             </button>

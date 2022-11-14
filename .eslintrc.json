@@ -16,14 +16,15 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react", "prettier"],
     "rules": {
         "indent": ["error", 4],
-        "jsx-a11y/label-has-associated-control": ["error", {
-            "labelAttributes": ["htmlFor"]
-          }],
+        "jsx-a11y/label-has-associated-control": [
+            "error",
+            {
+                "labelAttributes": ["htmlFor"]
+            }
+        ],
         "quotes": ["error", "double"],
         "react/jsx-indent": [2, 4],
         "react/jsx-indent-props": [2, 4],

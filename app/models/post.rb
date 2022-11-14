@@ -185,7 +185,7 @@ class Post < ApplicationRecord
           elements: ['a', 'a img'],
           attributes: {'a' => ['href']},
           add_attributes: {
-            'a' => {'rel' => "noopener", 'target' => "_blank"}
+            'a' => {'rel' => "noopener nofollow", 'target' => "_blank"}
           }
         }
       ) unless node_url.host.include? author_url.host

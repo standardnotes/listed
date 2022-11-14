@@ -38,7 +38,7 @@ const AuthorMenu = ({
             {authorHasPages(pages) && pages.map((page) => {
                 const linkAttrs = page.page_link ? {
                     target: "_blank",
-                    rel: "noreferrer",
+                    rel: "noreferrer nofollow",
                 } : {};
                 return (
                     <a

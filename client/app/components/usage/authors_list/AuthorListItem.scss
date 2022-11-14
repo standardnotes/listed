@@ -14,6 +14,10 @@
         color: var(--color-contrast);
         font-weight: normal;
         margin-top: $spacing-4;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
     }
 
     .easter-egg {
@@ -27,16 +31,16 @@
         &:hover {
             box-shadow: $spacing-8 $spacing-8 0 var(--color-primary);
             background-image: none;
-    
+
             .active-author__title {
                 color: var(--color-primary);
             }
-    
+
             .active-author__icon--featured {
                 g {
                     opacity: 1;
                 }
-    
+
                 path {
                     fill: var(--color-primary);
                 }
@@ -49,7 +53,7 @@
         margin-bottom: $spacing-24;
 
         @media (max-width: 1311px) {
-            width: calc((100% - #{$spacing-24} * 2) / 3)
+            width: calc((100% - #{$spacing-24} * 2) / 3);
         }
     }
 }
@@ -110,7 +114,7 @@
         height: 16px;
         width: 16px;
         margin-left: $spacing-8;
-    
+
         path {
             fill: var(--color-contrast);
         }

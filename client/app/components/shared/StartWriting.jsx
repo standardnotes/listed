@@ -13,14 +13,7 @@ const StartWriting = ({ className, children = null }) => {
         setIsErrorToastDisplayed(false);
 
         try {
-            const response = await axios
-                .post("/authors", null, {
-                    headers: {
-                        "X-CSRF-Token": getAuthToken(),
-                    },
-                });
-
-            Turbolinks.visit(response.request.responseURL);
+            Turbolinks.visit("new-author");
         } catch (err) {
             setErrorToastMessage("There was an error trying to generate a new author token for you. Please try again.");
             setIsErrorToastDisplayed(true);
@@ -34,9 +27,7 @@ const StartWriting = ({ className, children = null }) => {
                 className={`${children ? "button" : "button button--primary"} ${className}`}
                 type="button"
             >
-                {children || (
-                    "Start writing"
-                )}
+                {children || "Start writing"}
             </button>
             <ErrorToast
                 message={errorToastMessage}

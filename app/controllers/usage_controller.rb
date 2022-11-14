@@ -21,10 +21,5 @@ class UsageController < ApplicationController
 
   def new_author
     @title = 'New Author | Listed'
-    if params[:secret_url]
-      @secret_url = Base64.encode64(params[:secret_url])
-    else
-      redirect_to '/'
-    end
   end
 end
