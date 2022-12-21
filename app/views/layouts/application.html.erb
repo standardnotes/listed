@@ -8,6 +8,11 @@
       <% @canonical = @post.canonical %>
       <% @meta_image = @post.image_url if @post.image_url %>
       <% @twitter_style = "summary_large_image" if @post.image_url %>
+
+      <% if @post.unlisted %>
+        <meta name="robots" content="noindex">
+      <% end %>
+
     <% elsif !@title && !@desc %>
       <% @title = "Listed" %>
       <% @desc = "Listed allows you to create an online publication with automatic email newsletters delivered to your readers, directly from Standard Notes. It's ideal for creating a public journal, or sharing domain-specific knowledge."%>
@@ -68,33 +73,9 @@
       </style>
     <% end %>
 
-    <!-- Piwik -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u="//matomo.standardnotes.org/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', '6']);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-      })();
-      (function() {
-        var previousPageUrl = null;
-        addEventListener("turbolinks:load", function(event) {
-          if (previousPageUrl) {
-            _paq.push(["setReferrerUrl", previousPageUrl]);
-            _paq.push(["setCustomUrl", window.location.href]);
-            _paq.push(["setDocumentTitle", document.title]);
-            _paq.push(["trackPageView"]);
-          }
-          previousPageUrl = window.location.href;
-        });
-      })();
-    </script>
-    <!-- End Piwik Code -->
+    <!-- Plausible -->
+    <script defer data-domain="listed.to" src="https://plausible.standardnotes.com/js/plausible.js"></script>
+    <!-- End Plausible Code -->
 
   </head>
 

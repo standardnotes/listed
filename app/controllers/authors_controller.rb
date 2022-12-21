@@ -18,6 +18,7 @@ class AuthorsController < ApplicationController
 
     @pages = @display_author.pages if @display_author
     @styles = @display_author.css if @display_author && @display_author.custom_theme_enabled
+    @canonical = @display_author.url if @display_author
 
     set_meta_images_for_author(@display_author)
   }

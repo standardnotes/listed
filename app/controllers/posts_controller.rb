@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     }[metatype]
   end
 
-  before_action :find_post, except: [:unpublish, :change_privacy, :delete]
+  before_action :find_post, only: [:show]
 
   def find_page(author, title)
     return unless author
@@ -50,7 +50,6 @@ class PostsController < ApplicationController
         @post = find_page(author, params[:id])
       end
       if @post && @post.unlisted == true
-        not_found
         return
       end
     elsif params[:custom_path]
@@ -64,21 +63,13 @@ class PostsController < ApplicationController
 
     domain = Domain.find_by(domain: request.host)
     if domain && @post && @post.author != domain.author
-      not_found
       return
     end
   end
 
   def show
     if !@post || !@post.published
-      author = Author.find_author_from_path(request.path)
-      # Go to author page
-      if author
-        redirect_to author.url
-      else
-        not_found
-      end
-      return
+      return not_found
     end
 
     @next = @post.next

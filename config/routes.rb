@@ -90,5 +90,7 @@ Rails.application.routes.draw do
   get '/:post_token' => 'posts#show'
   get '/p/:post_token' => 'posts#show'
 
+  get '404', :to => 'application#page_not_found'
+
   root 'usage#index'
 end
