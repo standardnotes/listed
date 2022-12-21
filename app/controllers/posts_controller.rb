@@ -69,14 +69,7 @@ class PostsController < ApplicationController
 
   def show
     if !@post || !@post.published
-      author = Author.find_author_from_path(request.path)
-      # Go to author page
-      if author
-        redirect_to author.url
-        return
-      else
-        return not_found
-      end
+      return not_found
     end
 
     @next = @post.next
