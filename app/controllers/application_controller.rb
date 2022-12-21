@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    redirect_to "#{ENV['HOST']}/"
+    render :file => "#{Rails.root}/public/404.html",  :status => 404
   end
 
 end
