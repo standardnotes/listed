@@ -8,6 +8,11 @@
       <% @canonical = @post.canonical %>
       <% @meta_image = @post.image_url if @post.image_url %>
       <% @twitter_style = "summary_large_image" if @post.image_url %>
+
+      <% if @post.unlisted %>
+        <meta name="robots" content="noindex">
+      <% end %>
+
     <% elsif !@title && !@desc %>
       <% @title = "Listed" %>
       <% @desc = "Listed allows you to create an online publication with automatic email newsletters delivered to your readers, directly from Standard Notes. It's ideal for creating a public journal, or sharing domain-specific knowledge."%>
