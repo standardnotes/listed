@@ -9,7 +9,7 @@
       <% @meta_image = @post.image_url if @post.image_url %>
       <% @twitter_style = "summary_large_image" if @post.image_url %>
 
-      <% if @post.unlisted %>
+      <% if @post.unlisted || @post.author.is_restricted || @display_author&.is_restricted %>
         <meta name="robots" content="noindex">
       <% end %>
 
