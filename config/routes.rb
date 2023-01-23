@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     get 'subscribe' => 'authors#subscribe'
     get 'guestbook' => 'guestbook_entries#index'
     post 'email_subscribe' => 'authors#email_subscribe'
+    get 'sitemap.xml', :to => 'sitemap#index', :defaults => {:format => 'xml'}
     get '/p/:post_token' => 'posts#show'
     get ':id/:slug' => 'posts#show'
     get ':id' => 'posts#show', constraints: { id: /[0-9]+/ }
