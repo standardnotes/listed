@@ -45,6 +45,7 @@ class AuthorsController < ApplicationController
     @posts = @display_author.listed_posts(nil, true)
     @title = "All posts from #{@display_author.title}"
     @desc = @display_author.bio || 'Via Standard Notes.'
+    @canonical = "#{@display_author.url}/all"
   end
 
   POST_LIMIT = 16
@@ -354,10 +355,12 @@ class AuthorsController < ApplicationController
 
   def subscribe
     @title = "Subscribe to #{@display_author.title}"
+    @canonical = "#{@display_author.url}/subscribe"
   end
 
   def tip
     @title = "Thank #{@display_author.title}"
+    @canonical = "#{@display_author.url}/tip"
   end
 
   def delete_domain

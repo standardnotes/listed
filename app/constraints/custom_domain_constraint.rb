@@ -4,6 +4,6 @@ class CustomDomainConstraint
   end
 
   def self.matching_blog? request
-    Domain.where(:domain => request.host).any?
+    Domain.where(:domain => request.host, active: true).any?
   end
 end

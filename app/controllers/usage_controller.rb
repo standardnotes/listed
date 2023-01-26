@@ -17,6 +17,7 @@ class UsageController < ApplicationController
     active_authors.insert(easter_egg_index, easter_egg)
     @active_authors = active_authors
     @featured_authors = active_authors_query.where(featured: true)
+    @canonical = ENV['HOST']
   end
 
   def new_author

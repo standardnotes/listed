@@ -4,8 +4,12 @@ class SitemapController < ApplicationController
   AUTHORS_PER_PAGE = 1000
 
   before_action {
-    domain = Domain.find_by(domain: request.host, active: true)
-    @domain_author = domain&.author
+    domain = Domain.find_by(domain: request.host)
+    if domain && !domain.active
+      render :file => "#{Rails.root}/public/404.html", :status => 404
+    else
+      @domain_author = domain&.author
+    end
   }
 
   def index
