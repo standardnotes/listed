@@ -68,12 +68,10 @@ const Post = ({ truncate, post, isMainPost, isAuthorPreview }) => {
                 /* eslint-disable-next-line react/no-danger */
                 dangerouslySetInnerHTML={previewText}
             />
-            {!post.unlisted && (
-                <a className="block read-more-link" href={post.author_relative_url}>
-                    Read post
-                    <SVG src={IcArrowLong} className="read-more-link__icon" />
-                </a>
-            )}
+            <a className="block read-more-link" href={post.author_relative_url}>
+                Read post
+                <SVG src={IcArrowLong} className="read-more-link__icon" />
+            </a>
         </>
     );
 
