@@ -5,7 +5,7 @@ import SVG from "react-inlinesvg";
 import { IcArrowLong } from "../../assets/icons";
 import "./Post.scss";
 
-const Post = ({ truncate, post, isMainPost }) => {
+const Post = ({ truncate, post, isMainPost, isAuthorPreview }) => {
     // HTML has already been sanitized on Rails side
     const previewText = { __html: post.preview_text };
     const renderedText = { __html: post.rendered_text };
@@ -15,47 +15,21 @@ const Post = ({ truncate, post, isMainPost }) => {
             {post.author_name && (
                 <>
                     {post.author_link ? (
-                        <a className="button--no-fill" href={post.author_link}>{post.author_name}</a>
-                    ) : (
-                        <>
+                        <a className="button--no-fill" href={post.author_link}>
                             {post.author_name}
-                        </>
+                        </a>
+                    ) : (
+                        <>{post.author_name}</>
                     )}
                     <span className="post-date__separator">•</span>
                 </>
             )}
             {`${dayjs(post.created_at).format("MMMM D, YYYY")}`}
             <span className="post-date__separator">•</span>
-            {post.word_count.toLocaleString()}
-            {" "}
-            words
-        </>
-    );
-
-    const renderTruncatePost = () => (
-        <>
-            <div className="post-header">
-                <h5 className="post-title h5">
-                    <a className="post-title" href={post.author_relative_url}>
-                        {post.title}
-                    </a>
-                </h5>
-                {post.page || (
-                    <p className="post-date p3">
-                        {renderDateAndWordCount()}
-                    </p>
-                )}
-            </div>
-            <div className="post-body p2">
-                {/* eslint-disable-next-line react/no-danger */}
-                <div className="post-preview-body" dangerouslySetInnerHTML={previewText} />
-            </div>
-            {!post.unlisted && (
-                <a className="block read-more-link" href={post.author_relative_url}>
-                    Read post
-                    <SVG src={IcArrowLong} className="read-more-link__icon" />
-                </a>
-            )}
+            <span>
+                {post.word_count.toLocaleString()}
+                {" words"}
+            </span>
         </>
     );
 
@@ -66,34 +40,48 @@ const Post = ({ truncate, post, isMainPost }) => {
             </a>
         );
         if (isMainPost) {
-            return (
-                <h1 className="post-title h1">
-                    {content}
-                </h1>
-            );
+            return <h1 className="post-title h1">{content}</h1>;
         }
-        return (
-            <h2 className="post-title h2">
-                {content}
-            </h2>
-        );
+        return <h2 className="post-title h2">{content}</h2>;
     };
+
+    const renderTruncatePost = () => (
+        <>
+            <div className="post-header">
+                {isAuthorPreview ? (
+                    <h3 className="post-title h3">
+                        <a className="post-title" href={post.author_relative_url}>
+                            {post.title}
+                        </a>
+                    </h3>
+                ) : (
+                    <h5 className="post-title h5">
+                        <a className="post-title" href={post.author_relative_url}>
+                            {post.title}
+                        </a>
+                    </h5>
+                )}
+                {post.page || <p className="post-date p3">{renderDateAndWordCount()}</p>}
+            </div>
+            <div
+                className={`post-body ${isAuthorPreview ? "p1" : "p2 post-preview-body"}`}
+                /* eslint-disable-next-line react/no-danger */
+                dangerouslySetInnerHTML={previewText}
+            />
+            {!post.unlisted && (
+                <a className="block read-more-link" href={post.author_relative_url}>
+                    Read post
+                    <SVG src={IcArrowLong} className="read-more-link__icon" />
+                </a>
+            )}
+        </>
+    );
 
     const renderPost = () => (
         <>
             <div className="post-header">
-                {post.unlisted ? (
-                    <h2 className="post-title h2">{post.title}</h2>
-                ) : (
-                    !post.page && (
-                        renderHeading()
-                    )
-                )}
-                {post.page || (
-                    <p className={`post-date ${isMainPost ? "p2" : "p3"}`}>
-                        {renderDateAndWordCount()}
-                    </p>
-                )}
+                {post.unlisted ? <h2 className="post-title h2">{post.title}</h2> : !post.page && renderHeading()}
+                {post.page || <p className={`post-date ${isMainPost ? "p2" : "p3"}`}>{renderDateAndWordCount()}</p>}
             </div>
             {/* eslint-disable-next-line react/no-danger */}
             <div className="post-body p1" dangerouslySetInnerHTML={renderedText} />
@@ -122,11 +110,13 @@ Post.propTypes = {
     }).isRequired,
     truncate: PropTypes.bool,
     isMainPost: PropTypes.bool,
+    isAuthorPreview: PropTypes.bool,
 };
 
 Post.defaultProps = {
     truncate: false,
     isMainPost: false,
+    isAuthorPreview: false,
 };
 
 export default Post;

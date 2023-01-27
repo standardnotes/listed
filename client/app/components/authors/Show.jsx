@@ -52,7 +52,7 @@ const Show = ({
             <div id="author-posts">
                 {visiblePosts.map((post) => (
                     <div key={post.id} className="author-post">
-                        <Post post={post} />
+                        <Post post={post} truncate isAuthorPreview />
                     </div>
                 ))}
                 {loadMorePostsDate && (

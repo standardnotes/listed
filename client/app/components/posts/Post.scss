@@ -97,6 +97,12 @@
     }
 }
 
+.author-post {
+    .read-more-link {
+        margin-top: 10px;
+    }
+}
+
 .post-preview {
     height: 100%;
     display: flex;
@@ -118,7 +124,6 @@
     .read-more-link {
         background: none;
         display: flex;
-        margin-top: auto;
 
         &:hover {
             background: none;

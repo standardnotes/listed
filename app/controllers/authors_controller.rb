@@ -47,7 +47,7 @@ class AuthorsController < ApplicationController
     @desc = @display_author.bio || 'Via Standard Notes.'
   end
 
-  POST_LIMIT = 16
+  POST_LIMIT = 30
 
   def show
     unless @display_author
