@@ -141,6 +141,16 @@ class Author < ApplicationRecord
     "#{url}/feed"
   end
 
+  def bio_without_newlines
+    return nil unless bio
+
+    bio.gsub(/\n\s+/, ' ')
+  end
+
+  def meta_desc
+    (bio_without_newlines || 'Via Standard Notes.')
+  end
+
   def custom_domain
     self.domain.domain
   end

@@ -21,7 +21,7 @@ const AuthorInfo = ({ author }) => {
                 </div>
                 <div>
                     <h1 className="h1">{author.title}</h1>
-                    <p className="bio p1">{author.bio}</p>
+                    <h2 className="bio p1">{author.bio}</h2>
                     <p className="p2 header-author-links">
                         {author.twitter && (
                             <span className="item">

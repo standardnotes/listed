@@ -4,12 +4,12 @@
     <%= csrf_meta_tags %>
 
     <% if @post %>
-      <% @desc = @post.desc || strip_tags(@post.rendered_text).slice(0, 200) + "..." %>
+      <% @desc = @post.desc || strip_tags(@post.rendered_text).slice(0, 160) + "..." %>
       <% @canonical = @post.canonical %>
       <% @meta_image = @post.image_url if @post.image_url %>
       <% @twitter_style = "summary_large_image" if @post.image_url %>
     <% elsif !@title && !@desc %>
-      <% @title = "Listed" %>
+      <% @title = "Listed — Welcome to your new public journal." %>
       <% @desc = "Listed allows you to create an online publication with automatic email newsletters delivered to your readers, directly from Standard Notes. It's ideal for creating a public journal, or sharing domain-specific knowledge."%>
     <% end %>
 

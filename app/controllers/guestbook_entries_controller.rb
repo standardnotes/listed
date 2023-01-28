@@ -29,6 +29,8 @@ class GuestbookEntriesController < ApplicationController
   def index
     @title = "Guestbook | #{@author.title}"
     @entries = @author.public_guestbook_entries
+    @canonical = "#{@author.url}/guestbook"
+    @desc = "Sign #{@author.title}'s to let them know what you think of their writing."
   end
 
   def new

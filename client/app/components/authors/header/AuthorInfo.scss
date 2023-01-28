@@ -8,7 +8,7 @@
         padding: $spacing-16 0 0;
         position: relative;
         min-width: 60vw;
-    
+
         &::before {
             content: "";
             position: absolute;
@@ -20,14 +20,14 @@
             border-radius: 50%;
             min-height: 60vw;
             min-width: 60vw;
-            background-image: 
+            background-image:
                 linear-gradient(to top, var(--wordcount-color) 50%, var(--wordcount-color) 50%);
             transition: all 0.5s ease-in-out;
         }
-    
+
         @include Desktop() {
             padding: $spacing-56 $spacing-22-vw;
-    
+
             &:hover {
                 &::before {
                     top: 0;
@@ -35,20 +35,20 @@
                 }
             }
         }
-    
+
         .word-count {
             color: var(--wordcount-color);
             font-weight: bold;
             margin-bottom: $spacing-8;
         }
-        
+
         .word-count__icon {
             display: block;
             margin: auto;
             height: 24px;
             width: 24px;
             transform: rotate(90deg);
-        
+
             path {
                 fill: var(--wordcount-color);
             }
@@ -79,6 +79,7 @@
 .bio {
     color: var(--bio-color);
     white-space: pre-wrap;
+    font-weight: normal;
 }
 
 .header-author-info__items {

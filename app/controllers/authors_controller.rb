@@ -44,11 +44,12 @@ class AuthorsController < ApplicationController
   def all
     @posts = @display_author.listed_posts(nil, true)
     @title = "All posts from #{@display_author.title}"
-    @desc = @display_author.bio || 'Via Standard Notes.'
+    @desc = @display_author.meta_desc
     @canonical = "#{@display_author.url}/all"
   end
 
   POST_LIMIT = 30
+  MAX_TITLE_LENGTH = 60
 
   def show
     unless @display_author
@@ -57,7 +58,12 @@ class AuthorsController < ApplicationController
     end
 
     @title = @display_author.title
-    @desc = @display_author.bio || 'Via Standard Notes.'
+    if @title.length < MAX_TITLE_LENGTH && @display_author.bio
+      @title += " — #{@display_author.bio}"
+      @title = @title[0..MAX_TITLE_LENGTH] + "..." if @title.length > 60
+    end
+
+    @desc = @display_author.meta_desc
     @blog_page = true
 
     all_posts = @display_author.listed_posts(nil, true)
@@ -361,6 +367,7 @@ class AuthorsController < ApplicationController
   def tip
     @title = "Thank #{@display_author.title}"
     @canonical = "#{@display_author.url}/tip"
+    @desc = "Thank or tip #{@display_author.title} to encourage the author to continue doing their best work."
   end
 
   def delete_domain

@@ -67,6 +67,7 @@ class PostsController < ApplicationController
     end
   end
 
+  MAX_TITLE_LENGTH = 60
   def show
     if !@post || !@post.published
       return not_found
@@ -78,13 +79,19 @@ class PostsController < ApplicationController
     if !@post.unlisted
       @author_posts = @post.author.listed_posts([@post, @next, @previous]).order("created_at DESC")
       @title = "#{@post.title} | #{@post.author.title}"
+
+      if @title.length < MAX_TITLE_LENGTH && @post.author.bio
+        @title += " — #{@post.author.bio_without_newlines}"
+        @title = "#{@title[0..MAX_TITLE_LENGTH]}..." if @title.length > 60
+      end
+
       set_meta_images_for_author(@post.author)
     else
       @title = @post.title
     end
 
     if @post.metatype
-      if @post.metatype == "html"
+      if @post.metatype == 'html'
         text = @post.rendered_text
       else
         text = @post.text
