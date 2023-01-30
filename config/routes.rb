@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'tip'
       get 'subscribe'
       get 'verify_email'
+      get 'feed' => 'authors#feed', :format => 'rss'
       get 'more_posts'
       post 'email_subscribe', as: 'email_subscribe'
       post 'domain_request'
