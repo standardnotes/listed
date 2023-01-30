@@ -134,8 +134,8 @@ class Post < ApplicationRecord
       end
     end
 
+    prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.username? ? "" : "/posts")
     if title
-      prefix = (author.has_custom_domain) ? "" : "/#{author.url_segment}" + (author.username? ? "" : "/posts")
       if page
         if title.match(PostsHelper::POST_TITLE_NO_SYMBOLS_PATTERN)
           "#{prefix}/#{title.parameterize}"
@@ -148,7 +148,7 @@ class Post < ApplicationRecord
         "#{prefix}/#{self.id}"
       end
     else
-      "/#{author.url_segment}/#{self.id}/"
+      "#{prefix}/#{self.id}"
     end
   end
 
