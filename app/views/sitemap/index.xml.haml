@@ -15,7 +15,7 @@
   %sitemapindex{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
     - for page in @post_pages
       %sitemap
-        %loc= "#{ENV['HOST']}/sitemap-posts-#{page}.xml"
+        %loc= "#{ENV['HOST']}/posts-sitemap-#{page}.xml"
     - for page in @author_pages
       %sitemap
-        %loc= "#{ENV['HOST']}/sitemap-authors-#{page}.xml"
+        %loc= "#{ENV['HOST']}/authors-sitemap-#{page}.xml"

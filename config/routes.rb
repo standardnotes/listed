@@ -84,8 +84,8 @@ Rails.application.routes.draw do
   get ':username' => 'authors#show', :constraints => {:username => un_regex}
 
   get 'sitemap.xml', :to => 'sitemap#index', :defaults => {:format => 'xml'}
-  get 'sitemap-authors-:page.xml', :to => 'sitemap#authors', :defaults => {:format => 'xml'}
-  get 'sitemap-posts-:page.xml', :to => 'sitemap#posts', :defaults => {:format => 'xml'}
+  get 'authors-sitemap-:page.xml', :to => 'sitemap#authors', :defaults => {:format => 'xml'}
+  get 'posts-sitemap-:page.xml', :to => 'sitemap#posts', :defaults => {:format => 'xml'}
 
   get '/help' => 'help#index'
 
