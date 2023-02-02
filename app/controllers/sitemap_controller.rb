@@ -18,6 +18,10 @@ class SitemapController < ApplicationController
 
   MAX_ENTRIES_PER_PAGE = 10_000
 
+  def custom_domain
+    @posts = @domain_author.listed_posts
+  end
+
   def index
     headers['Content-Type'] = 'application/xml'
 
