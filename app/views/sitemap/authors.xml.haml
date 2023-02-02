@@ -1,0 +1,7 @@
+!!! XML
+%urlset{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
+  - for author in @authors
+    %url
+      %loc= author.url
+      %changefreq weekly
+      %priority 0.75

@@ -1,10 +1,5 @@
 !!! XML
 %urlset{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
-  %url
-    %loc= @author.url
-    %changefreq weekly
-    %priority 0.75
-
   - for post in @posts
     %url
       %loc= post.author_relative_url

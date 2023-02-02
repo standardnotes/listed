@@ -1,22 +1,22 @@
 class SitemapController < ApplicationController
   layout nil
 
-  AUTHORS_PER_PAGE = 1000
-
-  before_action {
+  before_action do
     domain = Domain.find_by(domain: request.host)
     if domain
       if !domain.active
-        render :file => "#{Rails.root}/public/404.html", :status => 404
+        render file: "#{Rails.root}/public/404.html", status: 404
       else
         @domain_author = domain.author
       end
     else
-      if !["https://#{request.host}", "http://#{request.host}"].include?(ENV['HOST'])
-        render :file => "#{Rails.root}/public/404.html", :status => 404
+      unless ["https://#{request.host}", "http://#{request.host}:#{request.port}"].include?(ENV['HOST'])
+        render file: "#{Rails.root}/public/404.html", status: 404
       end
     end
-  }
+  end
+
+  MAX_ENTRIES_PER_PAGE = 10_000
 
   def index
     headers['Content-Type'] = 'application/xml'
@@ -24,33 +24,33 @@ class SitemapController < ApplicationController
     if @domain_author
       @posts = @domain_author.listed_posts
     else
-      num_authors = Author.last.id
-      num_pages = (num_authors / AUTHORS_PER_PAGE).ceil + 1
-      @pages = [*0...num_pages]
-    end
+      num_posts = Post.last.id
+      num_post_pages = (num_posts / MAX_ENTRIES_PER_PAGE).ceil + 1
+      @post_pages = [*0...num_post_pages]
 
-    respond_to do |format|
-      format.xml
+      num_authors = Author.last.id
+      num_pages = (num_authors / MAX_ENTRIES_PER_PAGE).ceil + 1
+      @author_pages = [*0...num_pages]
     end
   end
 
-  def authors_page
-    min_author_range = params[:page].to_i * AUTHORS_PER_PAGE
-    max_author_range = min_author_range + AUTHORS_PER_PAGE
+  def authors
+    min_author_range = params[:page].to_i * MAX_ENTRIES_PER_PAGE
+    max_author_range = min_author_range + MAX_ENTRIES_PER_PAGE
 
-    @authors = Author.where('id >= ? AND id < ?', min_author_range, max_author_range).select do |author|
+    @authors = Author.includes(:domain).where('id >= ? AND id < ?', min_author_range,
+                            max_author_range).select do |author|
       !author.has_custom_domain
     end
   end
 
-  def author_posts
-    @author = Author.find(params[:author_id])
+  def posts
+    min_post_range = params[:page].to_i * MAX_ENTRIES_PER_PAGE
+    max_post_range = min_post_range + MAX_ENTRIES_PER_PAGE
 
-    if @author.has_custom_domain
-      render :file => "#{Rails.root}/public/404.html", :status => 404
-      return
+    @posts = Post.includes(:author).where('id >= ? AND id < ?', min_post_range,
+                        max_post_range).where(author_show: true).reject do |post|
+      !post.author || post.author.is_restricted
     end
-
-    @posts = @author.listed_posts
   end
 end
