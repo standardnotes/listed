@@ -39,7 +39,7 @@ class SitemapController < ApplicationController
     max_author_range = min_author_range + MAX_ENTRIES_PER_PAGE
 
     @authors = Author.includes(:domain).where('id >= ? AND id < ?', min_author_range,
-                            max_author_range).select do |author|
+                                              max_author_range).select do |author|
       !author.has_custom_domain
     end
   end
@@ -48,9 +48,9 @@ class SitemapController < ApplicationController
     min_post_range = params[:page].to_i * MAX_ENTRIES_PER_PAGE
     max_post_range = min_post_range + MAX_ENTRIES_PER_PAGE
 
-    @posts = Post.includes(:author).where('id >= ? AND id < ?', min_post_range,
-                        max_post_range).where(author_show: true).reject do |post|
-      !post.author || post.author.is_restricted
+    @posts = Post.includes(author: [:domain]).where('id >= ? AND id < ?', min_post_range,
+                                                    max_post_range).where(author_show: true).reject do |post|
+      !post.author || post.author.is_restricted || post.author.has_custom_domain
     end
   end
 end
