@@ -60,8 +60,8 @@ Rails.application.routes.draw do
     get 'subscribe' => 'authors#subscribe'
     get 'guestbook' => 'guestbook_entries#index'
     post 'email_subscribe' => 'authors#email_subscribe'
-    get 'sitemap.xml', :to => 'sitemap#custom_domain', :defaults => {:format => 'xml'}
     get 'author-sitemap.xml', :to => 'sitemap#custom_domain', :defaults => {:format => 'xml'}
+    get 'robots.txt' => 'robots#index', :defaults => {:format => 'txt'}
     get '/p/:post_token' => 'posts#show'
     get ':id/:slug' => 'posts#show'
     get ':id' => 'posts#show', constraints: { id: /[0-9]+/ }
@@ -87,6 +87,7 @@ Rails.application.routes.draw do
   get 'sitemap.xml', :to => 'sitemap#index', :defaults => {:format => 'xml'}
   get 'authors-sitemap-:page.xml', :to => 'sitemap#authors', :defaults => {:format => 'xml'}
   get 'posts-sitemap-:page.xml', :to => 'sitemap#posts', :defaults => {:format => 'xml'}
+  get 'robots.txt' => 'robots#index', :defaults => {:format => 'txt'}
 
   get '/help' => 'help#index'
 
