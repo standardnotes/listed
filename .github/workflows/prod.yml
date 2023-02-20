@@ -59,14 +59,3 @@ jobs:
         LISTED_SSH_USER: ${{ secrets.LISTED_SSH_USER_PROD }}
         LISTED_SSH_SERVER: ${{ secrets.LISTED_SSH_SERVER_PROD }}
         LISTED_SSH_DEPLOY_TO: ${{ secrets.LISTED_SSH_DEPLOY_TO_PROD }}
-
-  notify_discord:
-    needs: deploy
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Run Discord Webhook
-      uses: johnnyhuy/actions-discord-git-webhook@main
-      with:
-        webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
