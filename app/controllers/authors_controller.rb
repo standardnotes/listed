@@ -352,8 +352,6 @@ class AuthorsController < ApplicationController
     @author.domain.active = false
     @author.domain.save
 
-    AdminMailer.new_domain_request(@author).deliver_later
-
     SslCertificateCreateJob.perform_later(params[:domain])
 
     redirect_to_authenticated_settings(@author)

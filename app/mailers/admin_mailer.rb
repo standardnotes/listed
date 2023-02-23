@@ -6,7 +6,7 @@ class AdminMailer < ApplicationMailer
     @domain = author.domain.domain
     @email = author.domain.extended_email
 
-    mail(to: "admin@standardnotes.org", subject: "New Listed domain request")
+    mail(to: "admin@standardnotes.com", subject: "New Listed domain request")
   end
 
 end
