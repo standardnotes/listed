@@ -4,6 +4,7 @@
         only: :display_name
     ),
     post: @post.as_json(
-        only: [:id, :title, :url]
+        only: [:id, :title],
+        methods: [:url]
     ),
 }) %>
