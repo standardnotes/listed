@@ -1,4 +1,5 @@
 AllCops:
+  NewCops: enable
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
@@ -9,6 +10,14 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Enabled: false
 Layout/LineLength:
-  Max: 100
+  Max: 120
 Style/ConditionalAssignment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/CyclomaticComplexity:
   Enabled: false

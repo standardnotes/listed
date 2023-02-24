@@ -33,4 +33,16 @@ class AuthorsMailer < ApplicationMailer
       subject: "You have #{@entries.length} unread guestbook entries"
     )
   end
+
+  def new_reaction(reaction_id)
+    @reaction = Reaction.find(reaction_id)
+    @post = @reaction.post
+    @author = @post.author
+    return if @post.author.email_verified == false
+
+    mail(
+      to: @author.email,
+      subject: "New reaction to your post \"#{@post.title}\""
+    )
+  end
 end

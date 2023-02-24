@@ -3,19 +3,31 @@ class SubscriptionMailer < ApplicationMailer
     @author = subscription.author
     @author_url = @author.url
     @unsubscribe_url = "#{@author.get_host}/subscriptions/#{subscription.id}/unsubscribe?t=#{subscription.token}"
-    mail(to: subscription.subscriber.email, subject: "You are now subscribed to #{subscription.author.title} on Listed")
+    mail(to: subscription.subscriber.email,
+         subject: "You are now subscribed to #{subscription.author.title} on Listed")
   end
 
   def new_post(post, subscriber)
     @post = post
     subscription = subscriber.subscription_for_author(post.author)
+    reaction_creation_token = subscriber.reaction_creation_token(post)
+
+    @reaction_links = Reaction::REACTIONS.map do |reaction|
+      {
+        reaction: reaction,
+        url: "#{post.author.get_host}/authors/#{post.author.id}/posts/#{post.id}/reactions/create-via-email?reaction=#{reaction}&creation_token=#{reaction_creation_token}&subscriber_id=#{subscriber.id}"
+      }
+    end
+
     @unsubscribe_url = "#{@post.author.get_host}/subscriptions/#{subscription.id}/unsubscribe?t=#{subscription.token}"
-    if subscription.frequency == "daily"
+    if subscription.frequency == 'daily'
       @weekly_url = "#{@post.author.get_host}/subscriptions/#{subscription.id}/update_frequency?f=weekly&t=#{subscription.token}"
     end
+
     @post_url = "#{@post.author.get_host}#{post.path}"
     @rendered_text = post.rendered_text
-    mail(to: subscriber.email, subject: "#{post.title} — a new post by #{post.author.title}", reply_to: post.author.email)
+    mail(to: subscriber.email, subject: "#{post.title} — a new post by #{post.author.title}",
+         reply_to: post.author.email)
   end
 
   def weekly_digest(sub_id)

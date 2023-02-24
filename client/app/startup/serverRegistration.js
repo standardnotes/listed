@@ -11,6 +11,7 @@ import AuthorsMailerDomainInvalid from "../components/authors_mailer/DomainInval
 import AuthorsMailerFeatured from "../components/authors_mailer/Featured";
 import AuthorsMailerUnreadGuestbookEntries from "../components/authors_mailer/UnreadGuestbookEntries";
 import AuthorsMailerVerifyEmail from "../components/authors_mailer/VerifyEmail";
+import AuthorsMailerNewReaction from "../components/authors_mailer/NewReaction";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -27,6 +28,8 @@ import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequ
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import Usage from "../components/usage/Usage";
 import UsageNewAuthor from "../components/usage/NewAuthor";
+import ReactionSuccess from "../components/reactions/ReactionSuccess";
+import NewReaction from "../components/reactions/New";
 
 ReactOnRails.register({
     AdminMailerNewDomainRequest,
@@ -41,11 +44,14 @@ ReactOnRails.register({
     AuthorsMailerFeatured,
     AuthorsMailerUnreadGuestbookEntries,
     AuthorsMailerVerifyEmail,
+    AuthorsMailerNewReaction,
     Guestbook,
     GuestbookNew,
     Help,
+    NewReaction,
     PostShow,
     Posts,
+    ReactionSuccess,
     SharedFooter,
     SubscriptionConfirm,
     SubscriptionMailerSubscriptionSuccess,

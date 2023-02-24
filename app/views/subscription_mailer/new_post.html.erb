@@ -1,5 +1,6 @@
 <%= react_component("SubscriptionMailerNewPost", props: {
     hiddenText: @post.text.html_safe.slice(0, 100) + "...",
+    reactionLinks: @reaction_links,
     post: @post.as_json(
         only: :title,
         methods: :url,

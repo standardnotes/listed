@@ -91,8 +91,8 @@ SubscriptionForm.propTypes = {
     }).isRequired,
     subscribedToAuthor: PropTypes.bool,
     subscriptionForAuthor: PropTypes.shape({
-        verification_sent_at: PropTypes.string.isRequired,
-        verified: PropTypes.bool.isRequired,
+        verification_sent_at: PropTypes.string,
+        verified: PropTypes.bool,
     }),
     subscriptionSuccess: PropTypes.bool,
 };

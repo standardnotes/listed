@@ -158,13 +158,13 @@ const General = ({
                         Website
                     </label>
                     <p className="p3 sublabel">
-                    Show your website on your profile.
-                    <input
-                        id="author-link"
-                        className="text-field"
-                        value={editedAuthor.link}
-                        onChange={(e) => editAuthor(fieldTypes.LINK, e.target.value)}
-                    />
+                        Show your website on your profile.
+                        <input
+                            id="author-link"
+                            className="text-field"
+                            value={editedAuthor.link}
+                            onChange={(e) => editAuthor(fieldTypes.LINK, e.target.value)}
+                        />
                     </p>
                 </div>
                 <div className="form-section">

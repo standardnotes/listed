@@ -6,15 +6,7 @@ import { MenuContainer, AuthorInfo } from "./header";
 import { shouldShowAuthorMenu } from "../../helpers";
 import "./HeaderContainer.scss";
 
-const HeaderContainer = ({
-    homeUrl,
-    author,
-    post,
-    privatePost,
-    pages,
-    currentUrl,
-    blogPage,
-}) => {
+const HeaderContainer = ({ homeUrl, author, post, privatePost, pages, currentUrl, blogPage, isAccessoryPage }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const renderMenu = (isDesktopMenu) => (
@@ -31,7 +23,7 @@ const HeaderContainer = ({
     const shouldShowMenu = () => !author || shouldShowAuthorMenu(author, pages);
 
     return (
-        <div className={`page-header__container ${post ? "page-header__container--post" : ""}`}>
+        <div className={`page-header__container ${post && !isAccessoryPage ? "page-header__container--post" : ""}`}>
             <div id="page-header">
                 <div className="left">
                     <div className="website-name">
@@ -47,15 +39,13 @@ const HeaderContainer = ({
                         <div className="author-name__container">
                             <div className="author-name path-item">
                                 <a href={author.url} className="button button--no-fill">
-                                    <div className="h4">
-                                        {author.title}
-                                    </div>
+                                    <div className="h4">{author.title}</div>
                                 </a>
                             </div>
                         </div>
                     )}
                 </div>
-                { shouldShowMenu() && (
+                {shouldShowMenu() && (
                     <div className="right">
                         <button
                             className="button button--menu-icon"
@@ -63,18 +53,18 @@ const HeaderContainer = ({
                             aria-controls="navigation"
                             type="button"
                         >
-                            {isMobileMenuOpen
-                                ? <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
-                                : <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />}
+                            {isMobileMenuOpen ? (
+                                <SVG src={IcClose} onClick={() => setIsMobileMenuOpen(false)} />
+                            ) : (
+                                <SVG src={IcMenu} onClick={() => setIsMobileMenuOpen(true)} />
+                            )}
                         </button>
                         {renderMenu(true)}
                     </div>
                 )}
             </div>
-            { shouldShowMenu() && renderMenu(false)}
-            {blogPage && (
-                <AuthorInfo author={author} />
-            )}
+            {shouldShowMenu() && renderMenu(false)}
+            {blogPage && <AuthorInfo author={author} />}
         </div>
     );
 };
@@ -87,11 +77,10 @@ HeaderContainer.propTypes = {
     blogPage: PropTypes.bool,
     currentUrl: PropTypes.string.isRequired,
     homeUrl: PropTypes.string.isRequired,
-    pages: PropTypes.arrayOf(
-        PropTypes.shape({}),
-    ),
+    pages: PropTypes.arrayOf(PropTypes.shape({})),
     post: PropTypes.bool.isRequired,
     privatePost: PropTypes.bool,
+    isAccessoryPage: PropTypes.bool.isRequired,
 };
 
 HeaderContainer.defaultProps = {

@@ -18,6 +18,8 @@ import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequ
 import SubscriptionValidate from "../components/subscriptions/Validate";
 import Usage from "../components/usage/Usage";
 import UsageNewAuthor from "../components/usage/NewAuthor";
+import ReactionSuccess from "../components/reactions/ReactionSuccess";
+import NewReaction from "../components/reactions/New";
 
 import "../assets/styles/application.scss";
 
@@ -33,8 +35,10 @@ ReactOnRails.register({
     Guestbook,
     GuestbookNew,
     Help,
+    NewReaction,
     PostShow,
     Posts,
+    ReactionSuccess,
     SharedFooter,
     SubscriptionConfirm,
     SubscriptionUnsubscribe,

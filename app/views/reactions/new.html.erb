@@ -1,0 +1,16 @@
+<% hcaptcha_site_key = ENV["HCAPTCHA_SITE_KEY"] %>
+<% private_post = @post.unlisted %>
+
+<%= react_component("NewReaction", props: {
+    reactionString: @reaction_string,
+    post: @post.as_json(
+        only: [:id, :title, :unlisted, :page, :created_at, :word_count, :author_name, :author_link],
+        methods: private_post ? [:preview_text, :rendered_text] : [:author_relative_url, :preview_text, :rendered_text, :url],
+        include: private_post ? nil : { author: {
+                only: [:id, :username],
+                methods: [:title, :url]
+            }
+        }
+    ),
+    hCaptchaSiteKey: hcaptcha_site_key
+}) %>

@@ -6,25 +6,37 @@ import ScrollToTopButton from "../shared/ScrollToTopButton";
 import "./Show.scss";
 
 const Show = ({
-    post, previous, next, subscribedToAuthor, subscriptionForAuthor, subscriptionSuccess,
+    post,
+    previous,
+    next,
+    subscribedToAuthor,
+    subscriptionForAuthor,
+    subscriptionSuccess,
+    reactionLinks,
 }) => (
     <div>
         <div className="single-post-show">
-            <Post
-                post={post}
-                isMainPost
-            />
+            <Post post={post} isMainPost reactionLinks={reactionLinks} />
             {!post.unlisted && (
                 <div>
+                    <div className="reaction-links">
+                        <div className="header h4">React to this post</div>
+                        {reactionLinks.map((link) => (
+                            <a key={link.url} className="reaction-link" href={link.url}>
+                                {link.reaction}
+                            </a>
+                        ))}
+                    </div>
                     <hr />
                     {!post.author.newsletter_disabled && (
                         <div id="subscription-form">
                             <label htmlFor="email" className="h4">
-                                Subscribe to the author&apos;s posts
+                                Subscribe to the author
                             </label>
-                            {(!subscribedToAuthor || !subscriptionForAuthor.verification_sent_at)
-                            && (
-                                <p className="sublabel p2">You&apos;ll only receive email when they publish something new.</p>
+                            {(!subscribedToAuthor || !subscriptionForAuthor.verification_sent_at) && (
+                                <p className="sublabel p2">
+                                    You&apos;ll only receive email when they publish something new.
+                                </p>
                             )}
                             <SubscriptionForm
                                 subscribedToAuthor={subscribedToAuthor}
@@ -37,17 +49,12 @@ const Show = ({
                 </div>
             )}
         </div>
-        {((previous || next) && !post.unlisted) && (
+        {(previous || next) && !post.unlisted && (
             <div id="single-post-footer">
                 <h3 className="more-from h3">
-                    More from
-                    {" "}
-                    {post.author.title}
+                    More from {post.author.title}
                     <div className="headline-separator" />
-                    <a
-                        href={`${post.author.url}/all`}
-                        className="all-posts"
-                    >
+                    <a href={`${post.author.url}/all`} className="all-posts">
                         All posts
                     </a>
                 </h3>
@@ -79,6 +86,10 @@ Show.propTypes = {
         }).isRequired,
         page: PropTypes.bool.isRequired,
         unlisted: PropTypes.bool.isRequired,
+    }).isRequired,
+    reactionLinks: PropTypes.arrayOf({
+        reaction: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
     }).isRequired,
     previous: Post.propTypes.post.isRequired,
     subscribedToAuthor: PropTypes.bool.isRequired,
