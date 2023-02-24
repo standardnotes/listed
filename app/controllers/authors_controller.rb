@@ -289,7 +289,7 @@ class AuthorsController < ApplicationController
     if reactions_string
       actions.unshift(
         label: reactions_string,
-        url: post.author_relative_url,
+        url: "#{post.author_relative_url}?reactions",
         verb: 'show',
         context: 'Item',
         content_types: ['Note']
