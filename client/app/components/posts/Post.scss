@@ -53,7 +53,7 @@
         }
 
         p code {
-            font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
             font-size: 85%;
             padding: $spacing-4;
             background-color: var(--post-code-background-color);
@@ -77,12 +77,12 @@
 
             th,
             td {
-              padding: 6px 13px;
-              border: 1px solid #dfe2e5;
+                padding: 6px 13px;
+                border: 1px solid #dfe2e5;
             }
 
             tr:nth-child(2n) {
-              background-color: var(--color-neutral-darker);
+                background-color: var(--color-neutral-darker);
             }
         }
     }

@@ -9,6 +9,7 @@ end
 class Post < ApplicationRecord
   include Tokenable
   belongs_to :author
+  has_many :reactions, dependent: :destroy
 
   before_save do
     update_author_show_status
@@ -194,4 +195,11 @@ class Post < ApplicationRecord
     end
   end
 
+  def reactions_string
+    reactions = self.reactions
+
+    return nil if reactions.length.zero?
+
+    Reaction.reactions_to_string(reactions)
+  end
 end

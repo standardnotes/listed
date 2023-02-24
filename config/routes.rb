@@ -35,6 +35,12 @@ Rails.application.routes.draw do
         post 'newsletter'
         post 'change_privacy'
         post 'delete'
+
+        resources :reactions do
+          collection do
+            get 'create-via-email', :as => 'create_via_email'
+          end
+        end
       end
     end
 

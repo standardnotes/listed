@@ -21,52 +21,6 @@ class PostsController < ApplicationController
 
   before_action :find_post, only: [:show]
 
-  def find_page(author, title)
-    return unless author
-
-    _title = title.gsub('-', ' ')
-    if !_title.match(PostsHelper::POST_TITLE_NO_SYMBOLS_PATTERN)
-      _title = CGI.unescape(title)
-    end
-    author.pages.where('lower(title) = ?', _title.downcase).first
-  end
-
-  def find_post
-    author =
-      if params[:author_id]
-        Author.includes(:domain, :credentials).find(params[:author_id])
-      else
-        Author.includes(:domain, :credentials).find_author_from_path(request.path)
-      end
-    unless author
-      domain = Domain.find_by(domain: request.host, active: true)
-      author = domain&.author
-    end
-
-    if params[:id]
-      if params[:id].is_integer?
-        @post = Post.find_by_id(params[:id])
-      else
-        @post = find_page(author, params[:id])
-      end
-      if @post && @post.unlisted == true
-        return
-      end
-    elsif params[:custom_path]
-      @post = author&.posts.find_by_custom_path(params[:custom_path]) ||
-              find_page(author, params[:custom_path])
-    elsif params[:post_token]
-      @post = Post.find_by_token(params[:post_token]) ||
-              find_page(author, params[:post_token]) ||
-              author&.posts&.find_by_custom_path(params[:post_token])
-    end
-
-    domain = Domain.find_by(domain: request.host)
-    if domain && @post && @post.author != domain.author
-      return
-    end
-  end
-
   MAX_TITLE_LENGTH = 60
   def show
     if !@post || !@post.published
@@ -103,6 +57,14 @@ class PostsController < ApplicationController
 
     @pages = @post.author.pages if @post.author
     @styles = @post.author.css if @post.author.custom_theme_enabled
+    @is_accessory_page = false
+
+    @reaction_links = Reaction::REACTIONS.map do |reaction|
+      {
+        reaction: reaction,
+        url: "#{@post.author.get_host}/authors/#{@post.author.id}/posts/#{@post.id}/reactions/new?reaction=#{reaction}"
+      }
+    end
   end
 
   def index

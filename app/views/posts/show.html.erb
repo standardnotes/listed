@@ -5,6 +5,7 @@
 <% private_post = @post.unlisted %>
 
 <%= react_component("PostShow", props: {
+    reactionLinks: @reaction_links,
     post: @post.as_json(
         only: [:title, :unlisted, :page, :created_at, :word_count, :author_name, :author_link],
         methods: private_post ? [:preview_text, :rendered_text] : [:author_relative_url, :preview_text, :rendered_text],

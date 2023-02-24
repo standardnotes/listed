@@ -285,6 +285,17 @@ class AuthorsController < ApplicationController
       )
     end
 
+    reactions_string = post&.reactions_string
+    if reactions_string
+      actions.unshift(
+        label: reactions_string,
+        url: post.author_relative_url,
+        verb: 'show',
+        context: 'Item',
+        content_types: ['Note']
+      )
+    end
+
     description = "Publishes to listed.to."
     render :json => {
       :identifier => "org.standardnotes.listed",

@@ -25,6 +25,10 @@
                 "labelAttributes": ["htmlFor"]
             }
         ],
+        "react/no-unescaped-entities": "off",
+        "react/jsx-one-expression-per-line": "off",
+        "max-len": ["warn", { "code": 120 }],
+        "object-curly-newline": "off",
         "quotes": ["error", "double"],
         "react/jsx-indent": [2, 4],
         "react/jsx-indent-props": [2, 4],
