@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import axios from "axios";
 import ErrorToast from "./ErrorToast";
-import getAuthToken from "../../utils/getAuthToken";
 
 const StartWriting = ({ className, children = null }) => {
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);

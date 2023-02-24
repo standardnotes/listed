@@ -28,7 +28,7 @@ const AuthorInfo = ({ author }) => {
                                 <a
                                     href={`https://twitter.com/${author.twitter}`}
                                     target="_blank"
-                                    rel="noopener nofollow"
+                                    rel="noopener nofollow noreferrer"
                                     className="link author-twitter"
                                 >
                                     {`@${author.twitter}`}
@@ -40,7 +40,7 @@ const AuthorInfo = ({ author }) => {
                                 <a
                                     href={author.personal_link}
                                     target="_blank"
-                                    rel="noopener nofollow"
+                                    rel="noopener nofollow noreferrer"
                                     className="p2 link author-link"
                                 >
                                     {author.link}

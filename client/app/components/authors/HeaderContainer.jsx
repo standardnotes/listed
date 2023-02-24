@@ -80,7 +80,7 @@ HeaderContainer.propTypes = {
     pages: PropTypes.arrayOf(PropTypes.shape({})),
     post: PropTypes.bool.isRequired,
     privatePost: PropTypes.bool,
-    isAccessoryPage: PropTypes.bool,
+    isAccessoryPage: PropTypes.bool.isRequired,
 };
 
 HeaderContainer.defaultProps = {
