@@ -138,6 +138,10 @@ class AuthorsController < ApplicationController
  end
 
   def email_subscribe
+    if @display_author.newsletter_disabled
+      return redirect_to @display_author.url
+    end
+
     email = params[:email]
     @subscriber = Subscriber.find_or_create_by(email: email)
     session[:subscriber_id] = @subscriber.id
@@ -369,6 +373,8 @@ class AuthorsController < ApplicationController
   end
 
   def subscribe
+    return not_found if @display_author.newsletter_disabled
+
     @title = "Subscribe to #{@display_author.title}"
     @canonical = "#{@display_author.url}/subscribe"
   end
