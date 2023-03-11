@@ -27,6 +27,8 @@ class GuestbookEntriesController < ApplicationController
   end
 
   def index
+    return not_found if @author.guestbook_disabled
+
     @title = "Guestbook | #{@author.title}"
     @entries = @author.public_guestbook_entries
     @canonical = "#{@author.url}/guestbook"
@@ -39,6 +41,10 @@ class GuestbookEntriesController < ApplicationController
   end
 
   def create
+    if @author.guestbook_disabled
+      return redirect_to @author.url
+    end
+
     @entry = @author.guestbook_entries.new(entry_params)
     @entry.unread = true
     if @entry.text.contains_url? ||
