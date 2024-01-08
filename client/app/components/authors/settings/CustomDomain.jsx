@@ -90,7 +90,7 @@ const CustomDomain = ({ author, customDomainIP }) => {
     return (
         <div className="custom-domain">
             <p className="p2 custom-domain__info">
-                Custom domains are available for Standard Notes members with an active Plus or Pro
+                Custom domains are available for Standard Notes members with an active Productivity or Professional
                 {" "}
                 <a href="https://standardnotes.com/plans" target="blank" rel="noopener noreferrer">plan</a>
                 .
@@ -108,14 +108,14 @@ const CustomDomain = ({ author, customDomainIP }) => {
                 <div className="form-row">
                     <div className="form-section">
                         <label htmlFor="extended_email" className="label label--required p2">
-                            Extended email address
+                            Standard Notes account email address
                         </label>
                         <input
                             id="extended-email"
                             type="email"
                             className="text-field"
                             required="required"
-                            placeholder="Extended email"
+                            placeholder="Account email"
                             value={extendedEmail}
                             onChange={(e) => setExtendedEmail(e.target.value)}
                         />
