@@ -70,23 +70,25 @@ class ApplicationController < ActionController::Base
 
     if params[:id]
       if params[:id].is_integer?
-        @post = Post.find_by_id(params[:id])
+        candidate_post = Post.find_by_id(params[:id])
       else
-        @post = find_page(author, params[:id])
+        candidate_post = find_page(author, params[:id])
       end
-      return if @post && @post.unlisted == true
+      return if candidate_post && candidate_post.unlisted == true
     elsif params[:custom_path]
-      @post = author&.posts&.find_by_custom_path(params[:custom_path]) ||
+      candidate_post = author&.posts&.find_by_custom_path(params[:custom_path]) ||
               find_page(author, params[:custom_path])
     elsif params[:post_token]
-      @post = Post.find_by_token(params[:post_token]) ||
+      candidate_post = Post.find_by_token(params[:post_token]) ||
               find_page(author, params[:post_token]) ||
               author&.posts&.find_by_custom_path(params[:post_token])
     end
 
-    domain = Domain.find_by(domain: request.host)
-    return unless domain && @post && @post.author != domain.author
+    return if author && author.id != candidate_post.author.id
 
-    nil
+    domain = Domain.find_by(domain: request.host)
+    return if domain && candidate_post && candidate_post.author != domain.author
+
+    @post = candidate_post
   end
 end
