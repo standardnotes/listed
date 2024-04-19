@@ -1,5 +1,6 @@
 # Listed
 
+
 _Listed_ is a minimal blogging platform ideal for publishing a public journal or sharing domain specific knowledge. Writers can publish directly from the comforts of [Standard Notes](https://standardnotes.com) and readers can subscribe to new articles via email.
 
 Listed is unopinionated about fonts, widths, and colors, and instead defers to the reader's system settings to provide a familiar experience.
