@@ -26,6 +26,8 @@
 
 # Ignore ENV variables config
 .env
+.env.*
+!.env.sample
 .ssh
 
 dump.rdb

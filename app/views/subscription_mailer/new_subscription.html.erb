@@ -4,5 +4,8 @@
         methods: :verified_subscriptions.as_json(
             only: :id
         )
-    )
+    ),
+    subscriber: @subscriber.as_json(
+        only: :email
+    ),
 }) %>
