@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2023_02_24_140201) do
 
-  create_table "authors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "authors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "secret", collation: "latin1_swedish_ci"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username", collation: "utf8mb4_0900_ai_ci"
-    t.string "display_name", collation: "utf8mb4_0900_ai_ci"
-    t.text "bio", collation: "utf8mb4_0900_ai_ci"
+    t.string "username", collation: "utf8mb4_general_ci"
+    t.string "display_name", collation: "utf8mb4_general_ci"
+    t.text "bio", collation: "utf8mb4_general_ci"
     t.string "link", collation: "latin1_swedish_ci"
     t.string "email", collation: "latin1_swedish_ci"
     t.string "twitter", collation: "latin1_swedish_ci"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.string "email_verification_token", collation: "latin1_swedish_ci"
     t.boolean "newsletter_disabled", default: false
     t.datetime "homepage_activity"
-    t.text "css", limit: 16777215, collation: "utf8mb4_0900_ai_ci"
+    t.text "css", limit: 16777215, collation: "utf8mb4_general_ci"
     t.string "cover_style", default: "full", collation: "latin1_swedish_ci"
     t.string "blog_layout_style", default: "vertical", collation: "latin1_swedish_ci"
     t.boolean "custom_theme_enabled", default: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.index ["homepage_activity"], name: "index_authors_on_homepage_activity"
   end
 
-  create_table "credentials", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "credentials", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "author_id"
     t.string "key"
     t.text "value"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "domains", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "domains", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "author_id"
     t.string "domain"
     t.string "extended_email"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "guestbook_entries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "guestbook_entries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "author_id"
     t.text "text"
     t.string "signer_email"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.index ["unread"], name: "index_guestbook_entries_on_unread"
   end
 
-  create_table "letsencrypt_certificates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "letsencrypt_certificates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "domain", limit: 180
     t.text "certificate"
     t.text "intermediaries"
@@ -88,11 +88,11 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.index ["renew_after"], name: "index_letsencrypt_certificates_on_renew_after"
   end
 
-  create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "token"
     t.string "item_uuid"
-    t.string "title", collation: "utf8mb4_0900_ai_ci"
-    t.text "text", limit: 4294967295, collation: "utf8mb4_0900_ai_ci"
+    t.string "title", collation: "utf8mb4_general_ci"
+    t.text "text", limit: 4294967295, collation: "utf8mb4_general_ci"
     t.integer "author_id"
     t.boolean "unlisted", default: false
     t.boolean "published", default: true
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.index ["unlisted"], name: "index_posts_on_unlisted"
   end
 
-  create_table "purchases", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "purchases", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "post_id"
     t.string "buyer_email"
     t.decimal "price_paid", precision: 10, scale: 2
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.boolean "paid_out", default: false
   end
 
-  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "subscriber_id"
     t.string "reaction_string", null: false
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simple_captcha_data", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "simple_captcha_data", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "key", limit: 40
     t.string "value", limit: 6
     t.datetime "created_at", null: false
@@ -158,13 +158,13 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.index ["key"], name: "idx_key"
   end
 
-  create_table "subscribers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "subscribers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "subscriptions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "subscriptions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "author_id"
     t.integer "subscriber_id"
     t.string "token"
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.index ["verified"], name: "index_subscriptions_on_verified"
   end
 
-  create_table "tips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "tips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "author_id"
     t.string "tipper_email"
     t.decimal "amount", precision: 10, scale: 2

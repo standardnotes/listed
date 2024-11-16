@@ -4,12 +4,12 @@ services:
     build:
       context: .
     entrypoint: ["./wait-for.sh", "db", "3306", "./docker/entrypoint.sh", "start-local"]
-    env_file: .env
+    env_file: .env.docker
     restart: unless-stopped
     environment:
       DB_HOST: db
     ports:
-      - ${PORT}:3000
+      - "${PORT:-3000}:3000"
     volumes:
       - .:/listed
   db:

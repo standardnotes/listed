@@ -46,5 +46,8 @@
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^4.2.1"
+  },
+  "resolutions": {
+    "node-sass": "npm:sass@^1.69.0"
   }
 }

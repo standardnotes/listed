@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-slim-stretch
+FROM ruby:2.6.5-slim-buster
 
 ARG UID=1000
 ARG GID=1000
@@ -8,7 +8,7 @@ RUN addgroup --system listed --gid $GID && adduser --disabled-password --system 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update \
-    && apt-get install -y git build-essential libmariadb-dev curl imagemagick python \
+    && apt-get install -y git build-essential default-libmysqlclient-dev curl imagemagick python netcat \
     && apt-get -y autoclean
 
 RUN mkdir -p /usr/local/nvm
@@ -39,7 +39,7 @@ COPY --chown=$UID:$GID package.json yarn.lock Gemfile Gemfile.lock /listed/
 
 RUN yarn install --pure-lockfile
 
-RUN gem install bundler && bundle install
+RUN gem install bundler:2.4.22 && bundle install
 
 COPY --chown=$UID:$GID . /listed
 
