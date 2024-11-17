@@ -4,7 +4,7 @@ services:
     build:
       context: .
     entrypoint: ["./wait-for.sh", "db", "3306", "./docker/entrypoint.sh", "start-local"]
-    env_file: .env.docker
+    env_file: .env
     restart: unless-stopped
     environment:
       DB_HOST: db
@@ -13,15 +13,21 @@ services:
     volumes:
       - .:/listed
   db:
-    image: mysql:5.6
+    image: mariadb:10.6
+    platform: linux/arm64/v8
     environment:
+      MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWORD}'
       MYSQL_DATABASE: '${DB_DATABASE}'
       MYSQL_USER: '${DB_USERNAME}'
       MYSQL_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWORD}'
     ports:
       - 3306
     restart: unless-stopped
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci
     volumes:
       - ./data:/var/lib/mysql
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"

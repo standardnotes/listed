@@ -1,4 +1,6 @@
 Rails.application.configure do
+  puts "Loading development environment configuration..."
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -59,9 +61,12 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
+  config.action_mailer.delivery_method = :smtp
+
+  puts "Configuring mail settings for Docker environment"
   config.action_mailer.smtp_settings = {
-    :address => ENV['SMTP_HOST'],
-    :port => ENV['SMTP_PORT'],
+    address: 'mailcatcher',
+    port: 1025
   }
 
   # Raises error for missing translations
