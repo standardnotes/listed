@@ -16,7 +16,7 @@ const PrivacyUpdate = ({ subscriber, author, unsubscribeUrl }) => (
         <p>We're writing to inform you about an important update to Listed's privacy policy.</p>
 
         <p>
-            Starting next week, blog authors will be able to see the email addresses of their subscribers. Learn more about this update at{" "}
+            Starting December 1st, blog authors will be able to see the email addresses of their subscribers. Learn more about this update at{" "}
             <a href="https://listed.to/@Listed/56444/unlocking-subscriber-portability">
                 https://listed.to/@Listed/56444/unlocking-subscriber-portability
             </a>
@@ -38,7 +38,7 @@ const PrivacyUpdate = ({ subscriber, author, unsubscribeUrl }) => (
         </p>
 
         <div className="links-footer">
-            <a href={unsubscribeUrl}>Unsubscribe</a>
+            <a href={unsubscribeUrl}>Unsubscribe from {author.title}'s blog</a>
         </div>
     </div>
 );
