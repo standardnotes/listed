@@ -76,3 +76,30 @@ docker-compose up -d
 ```
 
 Now the application should be running on http://localhost:3000
+
+### Seeding data
+
+```
+TRUNCATE TABLE subscriptions;
+TRUNCATE TABLE subscribers;
+TRUNCATE TABLE authors;
+
+INSERT INTO authors (secret, email, email_verified, created_at, updated_at)
+VALUES
+('secret1', 'author1@example.com', true, NOW(), NOW()),
+('secret2', 'author2@example.com', true, NOW(), NOW()),
+('secret3', 'author3@example.com', true, NOW(), NOW());
+
+INSERT INTO subscribers (email, created_at, updated_at)
+VALUES
+('sub1@example.com', NOW(), NOW()),
+('sub2@example.com', NOW(), NOW()),
+('sub3@example.com', NOW(), NOW());
+
+INSERT INTO subscriptions (author_id, subscriber_id, token, verified, frequency, created_at, updated_at)
+VALUES
+(1, 1, 'token1', true, 'daily', NOW(), NOW()),
+(2, 2, 'token2', true, 'daily', NOW(), NOW()),
+(3, 3, 'token3', true, 'daily', NOW(), NOW());
+
+```

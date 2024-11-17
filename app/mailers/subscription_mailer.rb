@@ -58,4 +58,15 @@ class SubscriptionMailer < ApplicationMailer
 
     mail(to: subscription.author.email, subject: "New subscriber to #{subscription.author.title}")
   end
+
+  def privacy_policy_update(subscription)
+    @subscriber = subscription.subscriber
+    @author = subscription.author
+    @unsubscribe_url = "#{@author.get_host}/subscriptions/#{subscription.id}/unsubscribe?t=#{subscription.token}"
+
+    mail(
+      to: subscription.subscriber.email,
+      subject: 'Listed Email Privacy Policy Update'
+    )
+  end
 end

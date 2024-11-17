@@ -1,0 +1,10 @@
+<%= react_component("SubscriptionMailerPrivacyUpdate", props: {
+    subscriber: @subscriber.as_json(
+        only: :email
+    ),
+    author: @author.as_json(
+        only: [],
+        methods: [:title, :url]
+    ),
+    unsubscribeUrl: @unsubscribe_url
+}) %>

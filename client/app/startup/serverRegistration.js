@@ -30,6 +30,7 @@ import Usage from "../components/usage/Usage";
 import UsageNewAuthor from "../components/usage/NewAuthor";
 import ReactionSuccess from "../components/reactions/ReactionSuccess";
 import NewReaction from "../components/reactions/New";
+import SubscriptionMailerPrivacyUpdate from "../components/subscription_mailer/PrivacyUpdate";
 
 ReactOnRails.register({
     AdminMailerNewDomainRequest,
@@ -63,4 +64,5 @@ ReactOnRails.register({
     SubscriptionValidate,
     Usage,
     UsageNewAuthor,
+    SubscriptionMailerPrivacyUpdate,
 });
