@@ -71,7 +71,7 @@ class Author < ApplicationRecord
   end
 
   def verified_subscriptions
-    subscriptions.where(verified: true)
+    subscriptions.where(verified: true, unsubscribed: false)
   end
 
   def listed_posts(exclude_posts = nil, sort = true)
