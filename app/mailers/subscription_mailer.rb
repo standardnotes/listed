@@ -52,7 +52,6 @@ class SubscriptionMailer < ApplicationMailer
 
   def new_subscription(subscription)
     @author = subscription.author
-    @subscriber = subscription.subscriber
 
     return if @author.email_verified == false
 
