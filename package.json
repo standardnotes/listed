@@ -7,7 +7,7 @@
     "@babel/preset-react": "^7.10.1",
     "@hcaptcha/react-hcaptcha": "^0.2.1",
     "@rails/webpacker": "4.2.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "dayjs": "^1.10.4",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^18.2.1",
