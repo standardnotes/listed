@@ -25,7 +25,7 @@ import "./SettingsPage.scss";
 import ErrorToast from "../shared/ErrorToast";
 
 const SettingsPage = ({
-    author, authorCredentialsUrl, customDomainIP, guestbookEntries, posts, scrollToGuestbook,
+    author, authorCredentialsUrl, guestbookEntries, posts, scrollToGuestbook,
 }) => {
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
@@ -94,7 +94,7 @@ const SettingsPage = ({
                 />
             ),
         },
-        {
+        ...(author.domain ? [{
             id: "custom-domain",
             title: "Custom domain",
             icon: IcEarth,
@@ -102,12 +102,11 @@ const SettingsPage = ({
             renderContent: () => (
                 <CustomDomain
                     author={author}
-                    customDomainIP={customDomainIP}
                     setErrorToastMessage={setErrorToastMessage}
                     setIsErrorToastDisplayed={setIsErrorToastDisplayed}
                 />
             ),
-        },
+        }] : []),
         {
             id: "payment-details",
             title: "Payment details",
@@ -174,9 +173,13 @@ SettingsPage.propTypes = {
         accessible_via: PropTypes.arrayOf(
             PropTypes.string,
         ).isRequired,
+        domain: PropTypes.shape({
+            domain: PropTypes.string.isRequired,
+            approved: PropTypes.bool.isRequired,
+            active: PropTypes.bool.isRequired,
+        }),
     }).isRequired,
     authorCredentialsUrl: PropTypes.string.isRequired,
-    customDomainIP: PropTypes.string.isRequired,
     guestbookEntries: PropTypes.arrayOf(
         PropTypes.shape({}),
     ).isRequired,

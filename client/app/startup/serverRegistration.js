@@ -1,5 +1,4 @@
 import ReactOnRails from "react-on-rails";
-import AdminMailerNewDomainRequest from "../components/admin_mailer/NewDomainRequest";
 import AuthorHeader from "../components/authors/HeaderContainer";
 import AuthorSettings from "../components/authors/SettingsPage";
 import AuthorAll from "../components/authors/All";
@@ -33,7 +32,6 @@ import NewReaction from "../components/reactions/New";
 import SubscriptionMailerPrivacyUpdate from "../components/subscription_mailer/PrivacyUpdate";
 
 ReactOnRails.register({
-    AdminMailerNewDomainRequest,
     AuthorHeader,
     AuthorSettings,
     AuthorAll,
