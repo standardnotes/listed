@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import SVG from "react-inlinesvg";
 import getAuthToken from "../../../utils/getAuthToken";
@@ -9,11 +9,7 @@ import ErrorToast from "../../shared/ErrorToast";
 import { IcLink, IcMoreHorizontal, IcTrash } from "../../../assets/icons";
 import "./CustomDomain.scss";
 
-const CustomDomain = ({ author, customDomainIP }) => {
-    const [extendedEmail, setExtendedEmail] = useState("");
-    const [domain, setDomain] = useState("");
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-    const [domainErrorMessage, setDomainErrorMessage] = useState(null);
+const CustomDomain = ({ author }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
@@ -26,38 +22,6 @@ const CustomDomain = ({ author, customDomainIP }) => {
             action: () => setShowConfirmationModal(true),
         },
     ];
-
-    const submitDomainRequest = async (event) => {
-        event.preventDefault();
-        setIsSubmitDisabled(true);
-        setIsErrorToastDisplayed(false);
-        setShowConfirmationModal(false);
-
-        try {
-            const response = await axios
-                .post(`/authors/${author.id}/domain_request?secret=${author.secret}`, null, {
-                    headers: {
-                        "X-CSRF-Token": getAuthToken(),
-                    },
-                    data: {
-                        extended_email: extendedEmail,
-                        domain,
-                    },
-                });
-
-            setDomainErrorMessage(null);
-            Turbolinks.visit(response.request.responseURL);
-        } catch (err) {
-            setIsSubmitDisabled(false);
-
-            if (err.response.status === 409) {
-                setDomainErrorMessage(err.response.data.message);
-            } else {
-                setErrorToastMessage("There was an error trying to submit the domain request. Please try again.");
-                setIsErrorToastDisplayed(true);
-            }
-        }
-    };
 
     const deleteDomain = async () => {
         setIsErrorToastDisplayed(false);
@@ -83,78 +47,8 @@ const CustomDomain = ({ author, customDomainIP }) => {
         }
     };
 
-    useEffect(() => {
-        setIsSubmitDisabled(!extendedEmail || !domain);
-    }, [extendedEmail, domain]);
-
     return (
         <div className="custom-domain">
-            <p className="p2 custom-domain__info">
-                Custom domains are available for Standard Notes members with an active Productivity or Professional
-                {" "}
-                <a href="https://standardnotes.com/plans" target="blank" rel="noopener noreferrer">plan</a>
-                .
-                Domains include an HTTPS certificate,
-                and require only a simple DNS record on your end.
-            </p>
-            <p className="p2 custom-domain__info">
-                Before submitting this form,
-                please create an &quot;A&quot; record with your DNS provider with
-                value
-                {customDomainIP && ` ${customDomainIP}`}
-                .
-            </p>
-            <form onSubmit={(e) => submitDomainRequest(e)}>
-                <div className="form-row">
-                    <div className="form-section">
-                        <label htmlFor="extended_email" className="label label--required p2">
-                            Standard Notes account email address
-                        </label>
-                        <input
-                            id="extended-email"
-                            type="email"
-                            className="text-field"
-                            required="required"
-                            placeholder="Account email"
-                            value={extendedEmail}
-                            onChange={(e) => setExtendedEmail(e.target.value)}
-                        />
-                    </div>
-                    <div className="form-section">
-                        <label htmlFor="domain" className="label label--required p2">
-                            Your domain
-                        </label>
-                        <input
-                            id="domain"
-                            className={`text-field ${domainErrorMessage ? "text-field--error" : ""}`}
-                            required="required"
-                            placeholder="Your domain"
-                            value={domain}
-                            onChange={(e) => setDomain(e.target.value)}
-                        />
-                    </div>
-                    <div className="form-section">
-                        <button
-                            type="submit"
-                            className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
-                            disabled={isSubmitDisabled}
-                        >
-                            Submit
-                        </button>
-                    </div>
-                </div>
-                <div className="form-row form-row--error">
-                    <div className="form-section" />
-                    <div className="form-section">
-                        {domainErrorMessage && (
-                            <div className="error-message">
-                                {domainErrorMessage}
-                            </div>
-                        )}
-                    </div>
-                    <div className="form-section" />
-                </div>
-            </form>
             {author.domain && !author.domain.approved && (
                 <div className="callout callout--warning">
                     <div className="hover-container">
@@ -248,7 +142,6 @@ CustomDomain.propTypes = {
         secret: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
     }).isRequired,
-    customDomainIP: PropTypes.string.isRequired,
 };
 
 export default (props) => <CustomDomain {...props} />;
