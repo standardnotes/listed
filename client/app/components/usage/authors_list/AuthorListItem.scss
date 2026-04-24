@@ -2,7 +2,8 @@
     display: block;
     margin-bottom: $spacing-16;
 
-    a::before {
+    a::before,
+    a:hover::before {
         background-image: none;
     }
 
