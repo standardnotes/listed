@@ -1,4 +1,5 @@
 class CredentialsController < ApplicationController
+  before_action :require_authenticated_author
 
   def new
     @credential = Credential.new
@@ -12,18 +13,33 @@ class CredentialsController < ApplicationController
 
   def edit
     @credential = Credential.find(params[:id])
+    return render_unauthorized if @credential.author != @author
   end
 
   def update
     @credential = Credential.find(params[:id])
+    return render_unauthorized if @credential.author != @author
+
     @credential.update(credential_params)
     redirect_to_authenticated_settings(@author)
   end
 
   def destroy
     @credential = Credential.find(params[:id])
+    return render_unauthorized if @credential.author != @author
+
     @credential.destroy
     redirect_to_authenticated_settings(@author)
+  end
+
+  private
+
+  def require_authenticated_author
+    render_unauthorized unless @author
+  end
+
+  def render_unauthorized
+    render :json => {:error => "Unauthorized"}, status: :unauthorized
   end
 
   def credential_params
