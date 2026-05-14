@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_24_140201) do
+ActiveRecord::Schema.define(version: 2026_05_13_120000) do
 
   create_table "authors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "secret", collation: "latin1_swedish_ci"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_140201) do
     t.string "cover_style", default: "full", collation: "latin1_swedish_ci"
     t.string "blog_layout_style", default: "vertical", collation: "latin1_swedish_ci"
     t.boolean "custom_theme_enabled", default: false
+    t.boolean "reactions_disabled", default: false
     t.index ["hide_from_homepage"], name: "index_authors_on_hide_from_homepage"
     t.index ["homepage_activity"], name: "index_authors_on_homepage_activity"
   end

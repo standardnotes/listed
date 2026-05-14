@@ -2,6 +2,7 @@ class ReactionsController < ApplicationController
   include CaptchaHelper
 
   before_action :find_post
+  before_action :ensure_reactions_enabled
 
   def create_via_email
     creation_token = params[:creation_token]
@@ -37,5 +38,13 @@ class ReactionsController < ApplicationController
     else
       render json: { error: captcha_verification['error'] }
     end
+  end
+
+  private
+
+  def ensure_reactions_enabled
+    return unless @post&.author&.reactions_disabled
+
+    not_found
   end
 end

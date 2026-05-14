@@ -59,12 +59,17 @@ class PostsController < ApplicationController
     @styles = @post.author.css if @post.author.custom_theme_enabled
     @is_accessory_page = false
 
-    @reaction_links = Reaction::REACTIONS.map do |reaction|
-      {
-        reaction: reaction,
-        url: "#{@post.author.get_host}/authors/#{@post.author.id}/posts/#{@post.id}/reactions/new?reaction=#{reaction}"
-      }
-    end
+    @reaction_links =
+      if @post.author.reactions_disabled
+        []
+      else
+        Reaction::REACTIONS.map do |reaction|
+          {
+            reaction: reaction,
+            url: "#{@post.author.get_host}/authors/#{@post.author.id}/posts/#{@post.id}/reactions/new?reaction=#{reaction}"
+          }
+        end
+      end
   end
 
   def index

@@ -12,12 +12,17 @@ class SubscriptionMailer < ApplicationMailer
     subscription = subscriber.subscription_for_author(post.author)
     reaction_creation_token = subscriber.reaction_creation_token(post)
 
-    @reaction_links = Reaction::REACTIONS.map do |reaction|
-      {
-        reaction: reaction,
-        url: "#{post.author.get_host}/authors/#{post.author.id}/posts/#{post.id}/reactions/create-via-email?reaction=#{reaction}&creation_token=#{reaction_creation_token}&subscriber_id=#{subscriber.id}"
-      }
-    end
+    @reaction_links =
+      if post.author.reactions_disabled
+        []
+      else
+        Reaction::REACTIONS.map do |reaction|
+          {
+            reaction: reaction,
+            url: "#{post.author.get_host}/authors/#{post.author.id}/posts/#{post.id}/reactions/create-via-email?reaction=#{reaction}&creation_token=#{reaction_creation_token}&subscriber_id=#{subscriber.id}"
+          }
+        end
+      end
 
     @unsubscribe_url = "#{@post.author.get_host}/subscriptions/#{subscription.id}/unsubscribe?t=#{subscription.token}"
     if subscription.frequency == 'daily'
