@@ -9,11 +9,14 @@ module CaptchaHelper
     uri = URI.parse(verify_url)
     response = Net::HTTP.post_form(uri, 'secret' => secret_key, 'response' => token, 'sitekey' => site_key)
     json = JSON.parse(response.body)
-    
+
     if json['success'] == true
-      ApplicationController.render :json => { success: true}
+      ApplicationController.render :json => { success: true }
     else
-      ApplicationController.render :json => { success: false, error: "Please try again."}
+      Rails.logger.warn(
+        "hCaptcha verification failed: error_codes=#{json['error-codes']} hostname=#{json['hostname']} challenge_ts=#{json['challenge_ts']}"
+      )
+      ApplicationController.render :json => { success: false, error: "Please try again." }
     end
   end
 end

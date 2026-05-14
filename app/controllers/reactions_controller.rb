@@ -35,7 +35,9 @@ class ReactionsController < ApplicationController
 
       AuthorsMailer.new_reaction(reaction.id).deliver_now
     else
-      render json: { error: captcha_verification['error'] }
+      render json: {
+        error: captcha_verification['error']
+      }, status: :bad_request
     end
   end
 end
