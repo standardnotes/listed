@@ -290,7 +290,7 @@ class AuthorsController < ApplicationController
     end
 
     reactions_string = post&.reactions_string
-    if reactions_string
+    if reactions_string && !@author.reactions_disabled
       actions.unshift(
         label: reactions_string,
         url: "#{post.author_relative_url}?reactions",
@@ -333,6 +333,7 @@ class AuthorsController < ApplicationController
     @author.hide_from_homepage = a_params[:hide_from_homepage]
     @author.guestbook_disabled = a_params[:guestbook_disabled]
     @author.newsletter_disabled = a_params[:newsletter_disabled]
+    @author.reactions_disabled = a_params[:reactions_disabled]
     @author.cover_style = a_params[:cover_style]
     @author.blog_layout_style = a_params[:blog_layout_style]
     @author.custom_theme_enabled = a_params[:custom_theme_enabled]
@@ -417,7 +418,7 @@ class AuthorsController < ApplicationController
   def a_params
     params.require(:author).permit(:username, :display_name, :bio, :link, :email,
       :secret, :twitter, :meta_image_url, :guestbook_disabled, :header_image_url, :hide_from_homepage,
-    :newsletter_disabled, :cover_style, :blog_layout_style, :custom_theme_enabled)
+    :newsletter_disabled, :reactions_disabled, :cover_style, :blog_layout_style, :custom_theme_enabled)
   end
 
 end
