@@ -10,7 +10,7 @@ module CaptchaHelper
     response = Net::HTTP.post_form(uri, 'secret' => secret_key, 'response' => token, 'sitekey' => site_key)
     json = JSON.parse(response.body)
     
-    if response.body["success"]
+    if json['success'] == true
       ApplicationController.render :json => { success: true}
     else
       ApplicationController.render :json => { success: false, error: "Please try again."}
