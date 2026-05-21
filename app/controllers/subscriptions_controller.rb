@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
   def submit_validate
     @subscription = Subscription.find(params[:subscription_id])
     is_valid_subscription = @subscription && !@subscription.verified && !@subscription.verification_sent_at
-    captcha_verification = JSON.parse(CaptchaHelper.verify_hcaptcha(params[:token]))
+    captcha_verification = JSON.parse(CaptchaHelper.verify_token(params[:token]))
     is_valid_captcha = captcha_verification["success"]
 
     if is_valid_subscription && is_valid_captcha

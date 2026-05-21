@@ -4,7 +4,7 @@ import New from "./New";
 import "./Guestbook.scss";
 
 const Guestbook = ({
-    sent, author, entries, hCaptchaSiteKey,
+    sent, author, entries, captchaUIUrl,
 }) => {
     const [showNewEntryForm, setShowNewEntryForm] = useState(false);
 
@@ -13,7 +13,7 @@ const Guestbook = ({
             return (
                 <New
                     author={author}
-                    hCaptchaSiteKey={hCaptchaSiteKey}
+                    captchaUIUrl={captchaUIUrl}
                 />
             );
         }
@@ -74,11 +74,12 @@ Guestbook.propTypes = {
             text: PropTypes.string.isRequired,
         }),
     ).isRequired,
-    hCaptchaSiteKey: PropTypes.string.isRequired,
+    captchaUIUrl: PropTypes.string,
     sent: PropTypes.bool,
 };
 
 Guestbook.defaultProps = {
+    captchaUIUrl: "",
     sent: false,
 };
 
