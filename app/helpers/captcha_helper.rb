@@ -1,22 +1,33 @@
 module CaptchaHelper
-  require 'net/https'
+  require "net/http"
+  require "json"
+  require "uri"
 
-  def self.verify_hcaptcha(token)
-    verify_url = Rails.application.config.hcaptcha_verify_url
-    secret_key = Rails.application.config.hcaptcha_secret_key
-    site_key = Rails.application.config.hcaptcha_site_key
+  def self.verify_token(token)
+    server_url = Rails.application.config.captcha_server_url
 
-    uri = URI.parse(verify_url)
-    response = Net::HTTP.post_form(uri, 'secret' => secret_key, 'response' => token, 'sitekey' => site_key)
+    if server_url.blank?
+      return ApplicationController.render json: { success: true }
+    end
+
+    if token.blank?
+      return ApplicationController.render json: { success: false, error: "Please complete the captcha." }
+    end
+
+    uri = URI.parse("#{server_url.chomp('/')}/verify")
+    uri.query = URI.encode_www_form(token: token)
+
+    response = Net::HTTP.get_response(uri)
     json = JSON.parse(response.body)
 
-    if json['success'] == true
-      ApplicationController.render :json => { success: true }
+    if json["status"] == "pass"
+      ApplicationController.render json: { success: true }
     else
-      Rails.logger.warn(
-        "hCaptcha verification failed: error_codes=#{json['error-codes']} hostname=#{json['hostname']} challenge_ts=#{json['challenge_ts']}"
-      )
-      ApplicationController.render :json => { success: false, error: "Please try again." }
+      Rails.logger.warn("Captcha verification failed: #{json}")
+      ApplicationController.render json: { success: false, error: "Please try again." }
     end
+  rescue StandardError => e
+    Rails.logger.error("Captcha verification error: #{e}")
+    ApplicationController.render json: { success: false, error: "Please try again." }
   end
 end

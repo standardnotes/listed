@@ -55,7 +55,7 @@ class GuestbookEntriesController < ApplicationController
     end
 
 
-    captcha_verification = JSON.parse(CaptchaHelper.verify_hcaptcha(params[:token]))
+    captcha_verification = JSON.parse(CaptchaHelper.verify_token(params[:token]))
     is_valid_captcha = captcha_verification["success"]
 
     if is_valid_captcha

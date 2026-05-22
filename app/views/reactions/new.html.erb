@@ -1,4 +1,4 @@
-<% hcaptcha_site_key = ENV["HCAPTCHA_SITE_KEY"] %>
+<% captcha_ui_url = ENV["CAPTCHA_UI_URL"] %>
 <% private_post = @post.unlisted %>
 
 <%= react_component("NewReaction", props: {
@@ -12,5 +12,5 @@
             }
         }
     ),
-    hCaptchaSiteKey: hcaptcha_site_key
+    captchaUIUrl: captcha_ui_url
 }) %>

@@ -1,21 +1,27 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import axios from "axios";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
+import Captcha from "../shared/Captcha";
 import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./Validate.scss";
 
-const Validate = ({ subscription, hCaptchaSiteKey }) => {
-    const [captchaToken, setCaptchaToken] = useState("");
-    const [showCaptcha, setShowCaptcha] = useState(false);
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+const Validate = ({ subscription, captchaUIUrl }) => {
+    const [captchaResetKey, setCaptchaResetKey] = useState(0);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
+    const isSubmittingRef = useRef(false);
 
-    const submitValidate = async (event) => {
-        event.preventDefault();
-        setIsSubmitDisabled(true);
+    const captchaRequired = Boolean(captchaUIUrl);
+
+    const submitValidation = useCallback(async (token) => {
+        if (isSubmittingRef.current) {
+            return;
+        }
+
+        isSubmittingRef.current = true;
+        setIsSubmitting(true);
         setIsErrorToastDisplayed(false);
 
         try {
@@ -25,54 +31,59 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
                         "X-CSRF-Token": getAuthToken(),
                     },
                     data: {
-                        token: captchaToken,
+                        token: token || "",
                     },
                 });
 
             Turbolinks.visit(response.request.responseURL);
         } catch (err) {
-            setIsSubmitDisabled(false);
+            setCaptchaResetKey((key) => key + 1);
             setErrorToastMessage("There was an error trying to validate your subscription. Please try again.");
             setIsErrorToastDisplayed(true);
+            isSubmittingRef.current = false;
+            setIsSubmitting(false);
         }
-    };
+    }, [subscription.id]);
+
+    const handleCaptchaVerify = useCallback((token) => {
+        if (!token || isSubmittingRef.current) {
+            return;
+        }
+
+        submitValidation(token);
+    }, [submitValidation]);
 
     useEffect(() => {
-        setShowCaptcha(true);
-    }, []);
-
-    useEffect(() => {
-        setIsSubmitDisabled(!captchaToken);
-    }, [captchaToken]);
+        if (!captchaRequired) {
+            submitValidation("");
+        }
+    }, [captchaRequired, submitValidation]);
 
     return (
         <div className="validate-page page-container">
             <h1 className="h1">Subscribe</h1>
             <p className="p1">
-                Please complete the captcha below to finalize your subscription to
-                {" "}
-                <strong>{subscription.author.title}</strong>
-                .
+                {isSubmitting
+                    ? "Verifying your subscription…"
+                    : (
+                        <>
+                            Please complete the captcha below to finalize your subscription to
+                            {" "}
+                            <strong>{subscription.author.title}</strong>
+                            .
+                        </>
+                    )}
             </p>
             <div id="captcha-form">
-                <form onSubmit={(e) => submitValidate(e)}>
-                    <div className="form-section" suppressHydrationWarning>
-                        {showCaptcha && (
-                            <HCaptcha
-                                id="hcaptcha"
-                                sitekey={hCaptchaSiteKey}
-                                onVerify={(token) => setCaptchaToken(token)}
-                            />
-                        )}
-                    </div>
-                    <button
-                        type="submit"
-                        className={`button ${isSubmitDisabled ? "button--disabled" : "button--primary"}`}
-                        disabled={isSubmitDisabled}
-                    >
-                        Verify Subscription
-                    </button>
-                </form>
+                {captchaRequired ? (
+                    <Captcha
+                        captchaUIUrl={captchaUIUrl}
+                        onVerify={handleCaptchaVerify}
+                        resetKey={captchaResetKey}
+                    />
+                ) : (
+                    isSubmitting && <p className="p1">Verifying…</p>
+                )}
             </div>
             <ErrorToast
                 message={errorToastMessage}
@@ -84,13 +95,17 @@ const Validate = ({ subscription, hCaptchaSiteKey }) => {
 };
 
 Validate.propTypes = {
-    hCaptchaSiteKey: PropTypes.string.isRequired,
+    captchaUIUrl: PropTypes.string,
     subscription: PropTypes.shape({
         author: PropTypes.shape({
             title: PropTypes.string.isRequired,
         }),
         id: PropTypes.number.isRequired,
     }).isRequired,
+};
+
+Validate.defaultProps = {
+    captchaUIUrl: "",
 };
 
 export default (props) => <Validate {...props} />;

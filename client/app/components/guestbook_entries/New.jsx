@@ -1,24 +1,25 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
+import Captcha from "../shared/Captcha";
 import ErrorToast from "../shared/ErrorToast";
 import getAuthToken from "../../utils/getAuthToken";
 import "./New.scss";
 
-const New = ({ author, hCaptchaSiteKey }) => {
+const New = ({ author, captchaUIUrl }) => {
     const [guestbookEntry, setGuestbookEntry] = useState({
         text: "",
         signer_email: "",
         donation_info: "",
     });
     const [captchaToken, setCaptchaToken] = useState("");
+    const [captchaResetKey, setCaptchaResetKey] = useState(0);
     const [captchaErrorMessage, setCaptchaErrorMessage] = useState("");
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const [isErrorToastDisplayed, setIsErrorToastDisplayed] = useState(false);
     const [errorToastMessage, setErrorToastMessage] = useState("");
 
-    const captcha = useRef(null);
+    const captchaRequired = Boolean(captchaUIUrl);
 
     const submitEntry = async (event) => {
         event.preventDefault();
@@ -37,7 +38,8 @@ const New = ({ author, hCaptchaSiteKey }) => {
                 });
 
             if (response.data.error) {
-                captcha.current.resetCaptcha();
+                setCaptchaToken("");
+                setCaptchaResetKey((key) => key + 1);
                 setCaptchaErrorMessage(response.data.error);
                 setIsSubmitDisabled(false);
             } else {
@@ -59,8 +61,8 @@ const New = ({ author, hCaptchaSiteKey }) => {
     );
 
     useEffect(() => {
-        setIsSubmitDisabled(!guestbookEntry.text || !captchaToken);
-    }, [guestbookEntry.text, captchaToken]);
+        setIsSubmitDisabled(!guestbookEntry.text || (captchaRequired && !captchaToken));
+    }, [guestbookEntry.text, captchaToken, captchaRequired]);
 
     return (
         <div className="card guestbook-entry-form__container">
@@ -114,10 +116,10 @@ const New = ({ author, hCaptchaSiteKey }) => {
                         />
                     </div>
                     <div className="form-section">
-                        <HCaptcha
-                            ref={captcha}
-                            sitekey={hCaptchaSiteKey}
-                            onVerify={(token) => setCaptchaToken(token)}
+                        <Captcha
+                            captchaUIUrl={captchaUIUrl}
+                            onVerify={setCaptchaToken}
+                            resetKey={captchaResetKey}
                         />
                         {captchaErrorMessage && (
                             <div className="error-message">
@@ -152,7 +154,11 @@ New.propTypes = {
     author: PropTypes.shape({
         id: PropTypes.number.isRequired,
     }).isRequired,
-    hCaptchaSiteKey: PropTypes.string.isRequired,
+    captchaUIUrl: PropTypes.string,
+};
+
+New.defaultProps = {
+    captchaUIUrl: "",
 };
 
 export default (props) => <New {...props} />;

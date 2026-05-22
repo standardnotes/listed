@@ -1,4 +1,4 @@
-<% hcaptcha_site_key = ENV["HCAPTCHA_SITE_KEY"] %>
+<% captcha_ui_url = ENV["CAPTCHA_UI_URL"] %>
 
 <%= react_component("SubscriptionValidate", props: {
     subscription: @subscription.as_json(
@@ -10,5 +10,5 @@
             }
         }
     ),
-    hCaptchaSiteKey: hcaptcha_site_key
+    captchaUIUrl: captcha_ui_url
 }) %>

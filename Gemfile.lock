@@ -183,12 +183,6 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    nokogiri (1.12.5-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-linux)
-      racc (~> 1.4)
     public_suffix (4.0.6)
     puma (4.3.10)
       nio4r (~> 2.0)
@@ -313,6 +307,7 @@ PLATFORMS
   aarch64-linux
   arm64-darwin-21
   arm64-darwin-22
+  arm64-darwin-24
   x86_64-darwin-18
   x86_64-darwin-20
   x86_64-linux
@@ -359,4 +354,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   2.4.22
+   2.3.25
