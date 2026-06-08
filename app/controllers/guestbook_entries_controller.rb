@@ -3,6 +3,7 @@ class GuestbookEntriesController < ApplicationController
 
   before_action :find_author
   before_action :find_entry, only: [:destroy, :approve, :unapprove, :spam, :delete]
+  before_action :require_valid_entry_token, only: [:destroy, :approve, :unapprove, :spam, :delete]
 
   def find_author
     if params[:author_id]
@@ -104,5 +105,16 @@ class GuestbookEntriesController < ApplicationController
       :signer_email,
       :donation_info
     )
+  end
+
+  def require_valid_entry_token
+    head :not_found unless entry_token_valid?
+  end
+
+  def entry_token_valid?
+    return false unless @entry&.token.present? && params[:token].present?
+    return false unless @author && @entry.author_id == @author.id
+
+    ActiveSupport::SecurityUtils.secure_compare(@entry.token, params[:token].to_s)
   end
 end
