@@ -350,6 +350,8 @@ class AuthorsController < ApplicationController
   end
 
   def domain_request
+    return render_unauthorized unless @author
+
     existing_domain = Domain.find_by_domain(params[:domain])
     if existing_domain
       render :json => { message: "Domain #{params[:domain]} is already taken." }, :status => :conflict
@@ -386,7 +388,11 @@ class AuthorsController < ApplicationController
   end
 
   def delete_domain
-    domain = Domain.find_by_domain(params[:domain])
+    return render_unauthorized unless @author
+
+    domain = @author.domain
+    return render :json => { :error => "Domain not found." }, status: :not_found unless domain
+
     domain.delete
 
     redirect_to_authenticated_settings(@author)
@@ -413,6 +419,10 @@ class AuthorsController < ApplicationController
   end
 
   private
+
+  def render_unauthorized
+    render :json => {:error => "Unauthorized"}, status: :unauthorized
+  end
 
   def a_params
     params.require(:author).permit(:username, :display_name, :bio, :link, :email,
