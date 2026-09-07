@@ -3,10 +3,27 @@
     border-bottom: 1px solid rgba($color-warning, 0.35);
     padding: $spacing-12 $spacing-16;
     text-align: center;
+    color: $color-black;
 
     &__message {
         margin: 0;
-        color: var(--body-text-color);
+        color: inherit;
         font-weight: bold;
+    }
+
+    &__link {
+        color: $color-primary;
+
+        &::before {
+            background-image: linear-gradient(to top, $color-primary 50%, $color-primary 50%);
+        }
+
+        &:hover {
+            color: $color-black;
+
+            &::before {
+                background-image: linear-gradient(to top, $color-black 50%, $color-black 50%);
+            }
+        }
     }
 }
