@@ -11,6 +11,7 @@ import AuthorsMailerFeatured from "../components/authors_mailer/Featured";
 import AuthorsMailerUnreadGuestbookEntries from "../components/authors_mailer/UnreadGuestbookEntries";
 import AuthorsMailerVerifyEmail from "../components/authors_mailer/VerifyEmail";
 import AuthorsMailerNewReaction from "../components/authors_mailer/NewReaction";
+import AuthorsMailerSunsettingAnnouncement from "../components/authors_mailer/SunsettingAnnouncement";
 import Guestbook from "../components/guestbook_entries/Guestbook";
 import GuestbookNew from "../components/guestbook_entries/New";
 import Help from "../components/help/Help";
@@ -45,6 +46,7 @@ ReactOnRails.register({
     AuthorsMailerUnreadGuestbookEntries,
     AuthorsMailerVerifyEmail,
     AuthorsMailerNewReaction,
+    AuthorsMailerSunsettingAnnouncement,
     Guestbook,
     GuestbookNew,
     Help,

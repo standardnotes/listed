@@ -17,6 +17,16 @@ class Author < ApplicationRecord
   has_one :domain, dependent: :destroy
   has_many :guestbook_entries, dependent: :destroy
 
+  scope :with_published_posts, -> {
+    joins(:posts)
+      .where(posts: { published: true })
+      .distinct
+  }
+
+  scope :emailable, -> {
+    where(email_verified: true).where.not(email: [nil, ''])
+  }
+
   after_create :handle_post_create_actions
   after_destroy :handle_post_destroy_actions
 

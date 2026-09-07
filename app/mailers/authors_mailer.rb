@@ -45,4 +45,12 @@ class AuthorsMailer < ApplicationMailer
       subject: "New reaction to your post \"#{@post.title}\""
     )
   end
+
+  def sunsetting_announcement(author)
+    return if author.nil? || author.email_verified == false
+
+    @author = author
+    @preview = 'Listed will retire at the end of 2026 as we focus on Standard Notes improvements'
+    mail(to: author.email, subject: 'An update on Listed and Standard Notes')
+  end
 end
