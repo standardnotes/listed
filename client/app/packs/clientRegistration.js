@@ -12,6 +12,7 @@ import Help from "../components/help/Help";
 import PostShow from "../components/posts/Show";
 import Posts from "../components/posts/Posts";
 import SharedFooter from "../components/shared/Footer";
+import SunsettingBanner from "../components/shared/SunsettingBanner";
 import SubscriptionConfirm from "../components/subscriptions/Confirm";
 import SubscriptionUnsubscribe from "../components/subscriptions/Unsubscribe";
 import SubscriptionUpdateFrequency from "../components/subscriptions/UpdateFrequency";
@@ -40,6 +41,7 @@ ReactOnRails.register({
     Posts,
     ReactionSuccess,
     SharedFooter,
+    SunsettingBanner,
     SubscriptionConfirm,
     SubscriptionUnsubscribe,
     SubscriptionUpdateFrequency,

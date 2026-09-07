@@ -1,0 +1,12 @@
+.sunsetting-banner {
+    background-color: $color-warning-light;
+    border-bottom: 1px solid rgba($color-warning, 0.35);
+    padding: $spacing-12 $spacing-16;
+    text-align: center;
+
+    &__message {
+        margin: 0;
+        color: var(--body-text-color);
+        font-weight: bold;
+    }
+}

@@ -30,6 +30,7 @@ import UsageNewAuthor from "../components/usage/NewAuthor";
 import ReactionSuccess from "../components/reactions/ReactionSuccess";
 import NewReaction from "../components/reactions/New";
 import SubscriptionMailerPrivacyUpdate from "../components/subscription_mailer/PrivacyUpdate";
+import SunsettingBanner from "../components/shared/SunsettingBanner";
 
 ReactOnRails.register({
     AuthorHeader,
@@ -52,6 +53,7 @@ ReactOnRails.register({
     Posts,
     ReactionSuccess,
     SharedFooter,
+    SunsettingBanner,
     SubscriptionConfirm,
     SubscriptionMailerSubscriptionSuccess,
     SubscriptionMailerNewPost,
