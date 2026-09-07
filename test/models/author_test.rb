@@ -53,6 +53,20 @@ class AuthorTest < ActiveSupport::TestCase
     assert_not_includes Author.with_published_posts, author
   end
 
+  test 'with_email includes author with email regardless of verification' do
+    verified_author = create_author(email_verified: true, email: 'verified@example.com')
+    unverified_author = create_author(email_verified: false, email: 'unverified@example.com')
+
+    assert_includes Author.with_email, verified_author
+    assert_includes Author.with_email, unverified_author
+  end
+
+  test 'with_email excludes author without email' do
+    author = create_author(email: '', email_verified: true)
+
+    assert_not_includes Author.with_email, author
+  end
+
   test 'emailable includes verified author with email' do
     author = create_author(email_verified: true, email: 'verified@example.com')
 
@@ -65,7 +79,7 @@ class AuthorTest < ActiveSupport::TestCase
     assert_not_includes Author.emailable, author
   end
 
-  test 'with_published_posts emailable matches rake task audience' do
+  test 'with_published_posts with_email matches rake task audience' do
     published_author = create_author(email: 'published@example.com', email_verified: true)
     create_post(published_author)
 
@@ -76,10 +90,15 @@ class AuthorTest < ActiveSupport::TestCase
     create_post(unverified_author)
     unverified_author.update!(email_verified: false)
 
-    audience = Author.with_published_posts.emailable
+    no_email_author = create_author(email: 'hasemail@example.com', email_verified: true)
+    create_post(no_email_author)
+    no_email_author.update!(email: '')
+
+    audience = Author.with_published_posts.with_email
 
     assert_includes audience, published_author
+    assert_includes audience, unverified_author
     assert_not_includes audience, unpublished_author
-    assert_not_includes audience, unverified_author
+    assert_not_includes audience, no_email_author
   end
 end

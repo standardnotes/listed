@@ -11,17 +11,17 @@ class AuthorsMailerTest < ActionMailer::TestCase
     assert_nil AuthorsMailer.new.sunsetting_announcement(nil)
   end
 
-  test 'sunsetting_announcement returns before mail for unverified author' do
+  test 'sunsetting_announcement returns before mail for blank email author' do
     author = Author.create!(
       secret: SecureRandom.hex(10),
-      email: 'unverified@example.com',
+      email: '',
       email_verified: false
     )
 
     assert_nil AuthorsMailer.new.sunsetting_announcement(author)
   end
 
-  test 'sunsetting_announcement does not deliver to unverified author' do
+  test 'sunsetting_announcement delivers to unverified author' do
     author = Author.create!(
       secret: SecureRandom.hex(10),
       email: 'unverified@example.com',
@@ -30,8 +30,10 @@ class AuthorsMailerTest < ActionMailer::TestCase
 
     email = AuthorsMailer.sunsetting_announcement(author)
 
-    assert_no_emails do
+    assert_emails 1 do
       email.deliver_now
     end
+
+    assert_equal ['unverified@example.com'], email.to
   end
 end

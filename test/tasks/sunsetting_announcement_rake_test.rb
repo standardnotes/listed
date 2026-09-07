@@ -105,7 +105,7 @@ class SunsettingAnnouncementRakeTest < ActiveSupport::TestCase
     AuthorAudienceStub.audience_ids = nil
   end
 
-  test 'announce_sunsetting delivers to emailable published authors' do
+  test 'announce_sunsetting delivers to published authors with email' do
     eligible_author = create_author(email: 'eligible@example.com')
     create_post(eligible_author)
 
@@ -119,14 +119,15 @@ class SunsettingAnnouncementRakeTest < ActiveSupport::TestCase
     with_audience(eligible_author, unverified_author) do
       output = capture_io { @task.invoke }.join
 
-      assert_equal [eligible_author.id], self.class.recorded_deliveries.map(&:id)
-      assert_match(/Sending to 1 authors/, output)
-      assert_match(/Completed sunsetting announcement emails. Sent 1, failed 0./, output)
+      assert_equal [eligible_author.id, unverified_author.id], self.class.recorded_deliveries.map(&:id)
+      assert_match(/Sending to 2 authors/, output)
+      assert_match(/Completed sunsetting announcement emails. Sent 2, failed 0./, output)
       assert_match(/Log written to #{Regexp.escape(@log_path.to_s)}/, output)
 
       log_contents = File.read(@log_path)
-      assert_match(/=== Sent \(1\) ===/, log_contents)
+      assert_match(/=== Sent \(2\) ===/, log_contents)
       assert_match(/author_id=#{eligible_author.id} email=eligible@example.com/, log_contents)
+      assert_match(/author_id=#{unverified_author.id} email=unverified@example.com/, log_contents)
       assert_match(/=== Failed \(0\) ===/, log_contents)
     end
   end

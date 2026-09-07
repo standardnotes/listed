@@ -3,7 +3,7 @@ namespace :authors do
 
   desc 'Send sunsetting announcement email to authors who have published at least once'
   task announce_sunsetting: :environment do
-    authors = Author.with_published_posts.emailable
+    authors = Author.with_published_posts.with_email
     authors = authors.where(id: ENV['AUTHOR_ID']) if ENV['AUTHOR_ID'].present?
 
     total = authors.count

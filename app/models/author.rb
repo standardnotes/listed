@@ -23,8 +23,12 @@ class Author < ApplicationRecord
       .distinct
   }
 
+  scope :with_email, -> {
+    where.not(email: [nil, ''])
+  }
+
   scope :emailable, -> {
-    where(email_verified: true).where.not(email: [nil, ''])
+    with_email.where(email_verified: true)
   }
 
   after_create :handle_post_create_actions

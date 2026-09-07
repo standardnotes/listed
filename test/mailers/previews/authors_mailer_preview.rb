@@ -27,12 +27,12 @@ class AuthorsMailerPreview < ActionMailer::Preview
   end
 
   def sunsetting_announcement
-    AuthorsMailer.sunsetting_announcement(Author.with_published_posts.emailable.first)
+    AuthorsMailer.sunsetting_announcement(Author.with_published_posts.with_email.first)
   end
 
   def sunsetting_announcement_custom_domain
     author = Author.joins(:domain).where(domains: { active: true }).first ||
-             Author.with_published_posts.emailable.first
+             Author.with_published_posts.with_email.first
 
     AuthorsMailer.sunsetting_announcement(author)
   end

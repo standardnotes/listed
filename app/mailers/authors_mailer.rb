@@ -47,7 +47,7 @@ class AuthorsMailer < ApplicationMailer
   end
 
   def sunsetting_announcement(author)
-    return if author.nil? || author.email_verified == false
+    return if author.nil? || author.email.blank?
 
     @author = author
     @preview = 'Listed will retire at the end of 2026 as we focus on Standard Notes improvements'
