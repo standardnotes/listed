@@ -38,7 +38,7 @@ class AuthorsMailer < ApplicationMailer
     @reaction = Reaction.find(reaction_id)
     @post = @reaction.post
     @author = @post.author
-    return if @post.author.email_verified == false
+    return if @author.email_verified == false || @author.reactions_disabled
 
     mail(
       to: @author.email,

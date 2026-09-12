@@ -19,15 +19,19 @@ const Show = ({
             <Post post={post} isMainPost reactionLinks={reactionLinks} />
             {!post.unlisted && (
                 <div>
-                    <div className="reaction-links">
-                        <div className="header h4">React to this post</div>
-                        {reactionLinks.map((link) => (
-                            <a key={link.url} className="reaction-link" href={link.url}>
-                                {link.reaction}
-                            </a>
-                        ))}
-                    </div>
-                    <hr />
+                    {reactionLinks.length > 0 && (
+                        <>
+                            <div className="reaction-links">
+                                <div className="header h4">React to this post</div>
+                                {reactionLinks.map((link) => (
+                                    <a key={link.url} className="reaction-link" href={link.url}>
+                                        {link.reaction}
+                                    </a>
+                                ))}
+                            </div>
+                            <hr />
+                        </>
+                    )}
                     {!post.author.newsletter_disabled && (
                         <div id="subscription-form">
                             <label htmlFor="email" className="h4">

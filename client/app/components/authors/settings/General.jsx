@@ -17,6 +17,7 @@ const fieldTypes = {
     HEADER_IMAGE_URL: "header_image_url",
     GUESTBOOK_DISABLED: "guestbook_disabled",
     NEWSLETTER_DISABLED: "newsletter_disabled",
+    REACTIONS_DISABLED: "reactions_disabled",
     HIDE_FROM_HOMEPAGE: "hide_from_homepage",
 };
 
@@ -35,6 +36,7 @@ const General = ({
         header_image_url,
         guestbook_disabled,
         newsletter_disabled,
+        reactions_disabled,
         hide_from_homepage,
     } = author;
 
@@ -49,6 +51,7 @@ const General = ({
         header_image_url: header_image_url || "",
         guestbook_disabled,
         newsletter_disabled,
+        reactions_disabled,
         hide_from_homepage,
     });
 
@@ -122,7 +125,9 @@ const General = ({
                     </label>
                     <input
                         id="author-username"
-                        className={`text-field ${fieldHasErrorMessages(fieldTypes.USERNAME) ? "text-field--error" : ""}`}
+                        className={`text-field ${
+                            fieldHasErrorMessages(fieldTypes.USERNAME) ? "text-field--error" : ""
+                        }`}
                         value={editedAuthor.username}
                         onChange={(e) => editAuthor(fieldTypes.USERNAME, e.target.value)}
                     />
@@ -247,6 +252,12 @@ const General = ({
                 onClick={(checked) => editAuthor(fieldTypes.NEWSLETTER_DISABLED, checked)}
                 checked={editedAuthor.newsletter_disabled}
                 label="Disable email subscription and newsletter"
+            />
+            <Checkbox
+                id="author-reactions-disabled"
+                onClick={(checked) => editAuthor(fieldTypes.REACTIONS_DISABLED, checked)}
+                checked={editedAuthor.reactions_disabled}
+                label="Disable post reactions"
             />
             <Checkbox
                 id="author-hide-from-homepage"

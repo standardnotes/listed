@@ -51,14 +51,18 @@ const NewPost = ({ hiddenText, post, renderedText, weeklyUrl, unsubscribeUrl, re
                     </p>
                 )}
 
-                <p>Share your anonymous reaction to this post with the author—it would mean a lot to them!</p>
-                <div className="reaction-links">
-                    {reactionLinks.map((link) => (
-                        <a className="reaction-link" href={link.url}>
-                            {link.reaction}
-                        </a>
-                    ))}
-                </div>
+                {reactionLinks.length > 0 && (
+                    <>
+                        <p>Share your anonymous reaction to this post with the author—it would mean a lot to them!</p>
+                        <div className="reaction-links">
+                            {reactionLinks.map((link) => (
+                                <a className="reaction-link" href={link.url}>
+                                    {link.reaction}
+                                </a>
+                            ))}
+                        </div>
+                    </>
+                )}
 
                 <div className="links-footer" style={{ marginBottom: "20px" }}>
                     {weeklyUrl && <a href={weeklyUrl}>Receive Weekly Updates Instead</a>}

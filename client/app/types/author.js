@@ -13,6 +13,7 @@ const type = PropTypes.shape({
     link: PropTypes.string,
     meta_image_url: PropTypes.string,
     newsletter_disabled: PropTypes.bool.isRequired,
+    reactions_disabled: PropTypes.bool.isRequired,
     secret: PropTypes.string.isRequired,
     twitter: PropTypes.string,
     username: PropTypes.string.isRequired,
